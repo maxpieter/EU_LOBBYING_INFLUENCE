@@ -8,6 +8,54 @@ import re
 from typing import Any, Optional
 
 
+def normalize_location(location: str) -> str:
+    """Normalize meeting location to clean city name."""
+    if not location:
+        return location
+
+    loc = location.strip()
+    loc_lower = loc.lower()
+
+    # Brussels variants
+    brussels_keywords = ("brussels", "bruxelles", "berlaymont", "berl")
+    is_brussels = any(k in loc_lower for k in brussels_keywords)
+    online_keywords = ("online", "video", "vtc", "vc", "webex", "hybrid", "call", "virtual", "visio")
+    is_online = any(k in loc_lower for k in online_keywords)
+
+    if is_brussels and is_online:
+        return "Brussels (Online)"
+    if is_brussels:
+        return "Brussels"
+    if is_online and not any(c.isalpha() and c.isupper() for c in loc.split(",")[0] if c.isalpha()):
+        return "Online"
+    if loc_lower in ("online", "videoconference", "video-conference", "vtc",
+                     "video meeting", "videocall", "virtual", "on-line call",
+                     "video conference", "phone call", "webex", "hybrid",
+                     "virtual meeting", "video", "on-line", "online meeting"):
+        return "Online"
+
+    # Strip ", Country" suffix
+    loc = re.sub(
+        r",\s*(Switzerland|Germany|Italy|France|Denmark|Sweden|Greece|Spain|"
+        r"Portugal|Austria|Finland|Ireland|Netherlands|Poland|Belgium|Norway|"
+        r"United Kingdom|UK|USA|US|United States|Japan|China|India|Canada|"
+        r"United States of America|Czech Republic|Hungary|Romania|Bulgaria|"
+        r"Croatia|Slovenia|Slovakia|Latvia|Lithuania|Estonia|Cyprus|Malta|"
+        r"Luxembourg|Serbia|Turkey|Ukraine|Georgia|Morocco|Brazil|Mexico|"
+        r"Australia|South Africa|Singapore|Qatar|UAE|Israel|Egypt|Korea|"
+        r"Argentina|Colombia|Chile|Jordan|Tunisia|Philippines|Uzbekistan|"
+        r"Albania|Montenegro|North Macedonia|Bosnia|Kosovo|Moldova)\s*$",
+        "", loc, flags=re.IGNORECASE,
+    ).strip().rstrip(".")
+
+    # Fix common typos/variants
+    fixes = {"Tokio": "Tokyo", "NY": "New York", "Brussles": "Brussels"}
+    if loc in fixes:
+        loc = fixes[loc]
+
+    return loc
+
+
 def normalize_org_name(name: str) -> str:
     """Normalize organization name for matching."""
     name = name.strip().lower()
@@ -53,11 +101,22 @@ def parse_organizations_from_raw(orgs_raw: str) -> list[str]:
         part = part.strip()
         if not part or len(part) < 2:
             continue
+        # Strip surrounding quotes: "Org Name" → Org Name
+        part = part.strip('"\'""''')
         # Skip pure abbreviation entries like "(IIEA)", "(Bosch)", "(ST)"
         if re.match(r"^\([^)]+\)$", part):
             continue
+        # Skip garbage prefixes: (-), (/), (#...) as standalone entries
+        if re.match(r"^\([#/\-][^)]*\)$", part):
+            continue
+        # Strip leading (ACRONYM) prefix: "(ACEA)BMW AG" → "BMW AG"
+        stripped = re.sub(r"^\([^)]+\)\s*", "", part).strip()
+        if stripped:
+            part = stripped
         # Strip trailing abbreviation: "Org Name (ABBREV)" → "Org Name"
         clean = re.sub(r"\s*\([^)]{1,30}\)\s*$", "", part).strip()
+        # Strip any remaining surrounding quotes after other cleanup
+        clean = clean.strip('"\'""''')
         if clean and len(clean) > 1:
             result.append(clean)
 
@@ -154,9 +213,11 @@ def match_by_name(
         if normalized in orgs_by_normalized_name:
             org = orgs_by_normalized_name[normalized]
             if org["id"] not in already_matched_ids:
+                # Use canonical name from organizations table, not raw scraped name
+                canonical_name = org.get("name", org.get("official_name", name))
                 matches.append({
                     "organization_id": org["id"],
-                    "organization_name": name,
+                    "organization_name": canonical_name,
                     "eu_transparency_register_id": org.get("eu_transparency_register_id"),
                     "match_method": "name_exact",
                 })
@@ -206,6 +267,15 @@ def process_commission_meetings(
             f"{len(orgs_by_normalized_name)} by name"
         )
 
+    # Build commissioner name → actor_id lookup from bronze data itself
+    # (some meetings have actor_id, some don't — fill gaps from known mappings)
+    name_to_actor_id: dict[str, str] = {}
+    for raw in bronze_data:
+        name = raw.get("commissioner_name")
+        actor_id = raw.get("actor_id")
+        if name and actor_id:
+            name_to_actor_id[name] = actor_id
+
     meetings = []
     meeting_orgs = []
     matched_by_tr = 0
@@ -214,15 +284,18 @@ def process_commission_meetings(
 
     for raw in bronze_data:
         # Build the meeting record
+        # Resolve actor_id: use from raw data, or fall back to name lookup
+        actor_id = raw.get("actor_id") or name_to_actor_id.get(raw.get("commissioner_name"))
+
         meeting = {
             "id": raw["id"],
-            "actor_id": raw.get("actor_id"),
+            "actor_id": actor_id,
             "commissioner_name": raw["commissioner_name"],
             "commissioner_portfolio": raw.get("commissioner_portfolio"),
             "host_id": raw.get("host_id"),
             "meeting_type": raw.get("meeting_type", "commissioner"),
             "meeting_date": raw.get("meeting_date"),
-            "location": raw.get("location"),
+            "location": normalize_location(raw.get("location", "")),
             "subject": raw.get("minutes_subject") or raw.get("subject"),
             "commission_representatives": raw.get("commission_representatives", []),
             "organizations_raw": raw.get("organizations_raw"),

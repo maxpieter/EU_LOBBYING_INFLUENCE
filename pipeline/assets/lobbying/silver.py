@@ -8,6 +8,7 @@ This stage:
 """
 
 import hashlib
+import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -22,6 +23,27 @@ from pipeline.models.lobbying_models import (
     Organization,
     OrganizationType,
 )
+
+
+def clean_org_name(name: str) -> str:
+    """Strip person names and noise from organization name.
+
+    Handles patterns like:
+    - "TotalEnergies Mr. Eric Quenet, M. Giovanni Butelli"
+    - "ECSA, Mr. Marc du Moulin"
+    - "Name1|Name2|Name3" (takes first part)
+    """
+    # Take first pipe-separated segment
+    if "|" in name:
+        name = name.split("|")[0].strip()
+    # Remove everything from person title onward
+    name = re.split(
+        r"\s*(?:,\s*)?(?:Mr\.?|Mrs\.?|Ms\.?|Dr\.?|Prof\.?|M\.\s|Mme\.?\s)\s",
+        name,
+    )[0]
+    # Remove trailing comma + capitalized name pattern
+    name = re.sub(r"\s*,\s*[A-Z][a-z]+\s+[A-Z][a-z]+(?:,.*)?$", "", name)
+    return name.rstrip(", ").strip()
 
 
 def process_transparency_data(
@@ -177,6 +199,10 @@ def process_meetings(
     orgs_by_normalized_name = {normalize_org_name_for_id(org.name): org for org in existing_orgs}
     # Index by org ID
     orgs_by_id = {org.id: org for org in existing_orgs}
+    # Index by acronym (lowered)
+    orgs_by_acronym = {
+        org.acronym.lower(): org for org in existing_orgs if org.acronym
+    }
 
     # Track new orgs we create to avoid duplicates within this batch
     new_orgs_by_name = {}
@@ -196,7 +222,7 @@ def process_meetings(
         if transparency_id and transparency_id in orgs_by_transparency_id:
             org = orgs_by_transparency_id[transparency_id]
 
-        # Strategy 2: Try by normalized name (fuzzy match)
+        # Strategy 2: Try by normalized name
         elif normalize_org_name_for_id(org_name) in orgs_by_normalized_name:
             org = orgs_by_normalized_name[normalize_org_name_for_id(org_name)]
             # If we found org by name and meeting has transparency_id, update it
@@ -204,6 +230,37 @@ def process_meetings(
                 org.eu_transparency_register_id = transparency_id
                 # Re-index with new ID
                 orgs_by_transparency_id[transparency_id] = org
+
+        # Strategy 2b: Clean name (strip person names, pipe segments) and retry
+        else:
+            cleaned = clean_org_name(org_name)
+            if cleaned != org_name:
+                cleaned_norm = normalize_org_name_for_id(cleaned)
+                if cleaned_norm in orgs_by_normalized_name:
+                    org = orgs_by_normalized_name[cleaned_norm]
+                elif cleaned.lower() in orgs_by_acronym:
+                    org = orgs_by_acronym[cleaned.lower()]
+
+        # Strategy 2c: Try acronym match (for short names like "IFAW")
+        if org is None and org_name.lower() in orgs_by_acronym:
+            org = orgs_by_acronym[org_name.lower()]
+
+        # Strategy 2d: Try parenthetical match — "FEAP (Federation of...)" or "Federation of... (FEAP)"
+        if org is None:
+            paren_match = re.match(r"^(.*?)\s*\(([^)]+)\)\s*$", org_name)
+            if paren_match:
+                outer, inner = paren_match.group(1).strip(), paren_match.group(2).strip()
+                for part in [outer, inner]:
+                    norm = normalize_org_name_for_id(part)
+                    if norm in orgs_by_normalized_name:
+                        org = orgs_by_normalized_name[norm]
+                        break
+                    if part.lower() in orgs_by_acronym:
+                        org = orgs_by_acronym[part.lower()]
+                        break
+
+        if org is not None:
+            pass  # Already matched above
 
         # Strategy 3: Check if we already created it in this batch
         elif org_name.lower() in new_orgs_by_name:
