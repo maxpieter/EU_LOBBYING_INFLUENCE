@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+*.egg
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Dagster
+/dagster_home/
+.dagster/
+.tmp_dagster_home_*/
+
+# Data (large/generated files)
+data/
+
+# Selenium / browser drivers
+*.log
+geckodriver.log
+chromedriver.log
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MCP config (contains local paths/keys)
+.mcp.json
