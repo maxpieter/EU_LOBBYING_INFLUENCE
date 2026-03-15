@@ -586,11 +586,11 @@ def scrape_meetings_progressive(
             soup = BeautifulSoup(driver.page_source, "html.parser")
             meeting_divs = soup.find_all("div", class_="es_document")
 
-            # Stop if page is empty (website pagination bug)
+            # EP website sometimes returns empty pages mid-stream — skip, don't stop
             if not meeting_divs:
                 if logger:
-                    logger.info(f"Page {page_num} is empty, stopping pagination")
-                break
+                    logger.warning(f"Page {page_num} is empty, skipping (EP pagination bug)")
+                continue
 
             page_meetings = parse_meeting_html_elements(meeting_divs, logger)
 
@@ -635,16 +635,92 @@ def scrape_meetings_progressive(
         browser_pool.return_driver(driver)
 
 
+def _scrape_mep_meetings_requests(
+    mep_id: str,
+    from_date: str,
+    to_date: str,
+    expected_count: int,
+    mep_lookup: Dict[str, str],
+    logger: Optional[Any] = None,
+) -> List[Dict[str, Any]]:
+    """Scrape all meetings for a single MEP using requests (no Selenium).
+
+    Per-MEP pagination avoids the EP site's ~500-result global pagination cap.
+    """
+    f_from = from_date.replace("/", "%2F")
+    f_to = to_date.replace("/", "%2F")
+    base_url = (
+        f"https://www.europarl.europa.eu/meps/en/search-meetings?"
+        f"textualSearch=&fromDate={f_from}&toDate={f_to}&memberIds={mep_id}"
+    )
+
+    all_meetings = []
+    results_per_page = 10
+    num_pages = (expected_count + results_per_page - 1) // results_per_page
+
+    for page in range(num_pages):
+        page_url = base_url if page == 0 else f"{base_url}&page={page}"
+        try:
+            resp = requests.get(
+                page_url,
+                headers={"User-Agent": "Parl8/1.0 (academic research)"},
+                timeout=30,
+            )
+            if resp.status_code == 400:
+                break  # Past end of results
+            resp.raise_for_status()
+
+            soup = BeautifulSoup(resp.text, "html.parser")
+
+            # On first page, get actual total to adjust pagination
+            if page == 0:
+                counter = soup.find(id="meetingSearchResultCounterText")
+                if counter:
+                    import re as _re
+                    m = _re.search(r"of\s+(\d+)", counter.text)
+                    actual_total = int(m.group(1)) if m else expected_count
+                    num_pages = (actual_total + results_per_page - 1) // results_per_page
+
+            meeting_divs = soup.find_all("div", class_="es_document")
+            if not meeting_divs:
+                break
+
+            page_meetings = parse_meeting_html_elements(meeting_divs, logger)
+
+            # Tag each meeting with the MEP ID from facets
+            for meeting in page_meetings:
+                if not meeting.get("member_id"):
+                    meeting["member_id"] = mep_id
+                    # Also try name-based lookup for consistency
+                    if meeting.get("member_name") and mep_lookup:
+                        raw_name = meeting["member_name"]
+                        normalized = " ".join(sorted(raw_name.lower().split()))
+                        matched_id = mep_lookup.get(normalized)
+                        if matched_id:
+                            meeting["member_id"] = matched_id
+
+            all_meetings.extend(page_meetings)
+            time.sleep(0.15)
+
+        except requests.RequestException as e:
+            if logger:
+                logger.warning(f"Page {page} error for MEP {mep_id}: {e}")
+            time.sleep(1)
+            continue
+
+    return all_meetings
+
+
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 def fetch_meetings_scraped(
     from_date: str,
     to_date: str,
     logger: Optional[Any] = None,
 ) -> Tuple[List[Dict[str, Any]], int]:
-    """Fetch lobbying meetings from EU Parliament search-meetings endpoint via web-scraping.
+    """Fetch lobbying meetings from EU Parliament search-meetings endpoint.
 
-    Uses progressive Selenium-based scraping with batching to handle large datasets (1500+ meetings).
-    Automatically handles date ranges larger than 31 days by splitting requests.
+    Uses per-MEP requests-based scraping to avoid the EP site's ~500-result
+    global pagination cap. No Selenium required — pages are server-rendered.
 
     Endpoint: https://www.europarl.europa.eu/meps/en/search-meetings
 
@@ -656,7 +732,10 @@ def fetch_meetings_scraped(
     Returns:
         Tuple of (list of meeting dictionaries, total expected meetings count)
     """
-    # Parse dates to check range
+    if logger:
+        logger.info(f"Scraping meetings from {from_date} to {to_date} (per-MEP)")
+
+    # Convert dates for facets API (needs YYYY-MM-DD)
     try:
         start_dt = datetime.strptime(from_date, "%d/%m/%Y")
         end_dt = datetime.strptime(to_date, "%d/%m/%Y")
@@ -665,64 +744,55 @@ def fetch_meetings_scraped(
             logger.error(f"Invalid date format: {e}")
         raise
 
-    # If range > 31 days, split into monthly chunks
-    if (end_dt - start_dt).days > 31:
-        all_meetings = []
-        total_expected_sum = 0
-        current_start = start_dt
+    from_iso = start_dt.strftime("%Y-%m-%d")
+    to_iso = end_dt.strftime("%Y-%m-%d")
 
-        while current_start <= end_dt:
-            # Chunk size of ~1 month (30 days)
-            current_end = min(current_start + timedelta(days=30), end_dt)
-
-            chunk_from = current_start.strftime("%d/%m/%Y")
-            chunk_to = current_end.strftime("%d/%m/%Y")
-
-            if logger:
-                logger.info(f"Processing chunk: {chunk_from} to {chunk_to}")
-
-            # Recursive call for the chunk
-            chunk_meetings, chunk_expected = fetch_meetings_scraped(chunk_from, chunk_to, logger)
-            all_meetings.extend(chunk_meetings)
-            total_expected_sum += chunk_expected
-
-            current_start = current_end + timedelta(days=1)
-
-        return all_meetings, total_expected_sum
-
-    # Base case: scrape single chunk using progressive scraping
-    if logger:
-        logger.info(f"Scraping meetings from {from_date} to {to_date}")
-
-    all_meetings = []
-
+    # Get MEP list from facets
+    pool = get_browser_pool()
+    facets_driver = pool.get_driver()
     try:
-        # Use progressive scraping generator
-        gen = scrape_meetings_progressive(from_date, to_date, batch_size=100, logger=logger)
+        meps_with_counts = get_active_meps_from_facets(facets_driver, from_iso, to_iso, logger)
+    finally:
+        pool.return_driver(facets_driver)
 
-        # First yielded value is always total_expected (int)
-        total_expected = next(gen)
-        if not isinstance(total_expected, int):
-            # Fallback if protocol mismatch, though shouldn't happen
-            total_expected = 0
+    total_expected = sum(c for _, c, _ in meps_with_counts)
 
-        for batch in gen:
-            all_meetings.extend(batch)
+    if logger:
+        logger.info(f"Found {len(meps_with_counts)} MEPs with {total_expected} expected meetings")
 
-            if logger:
-                logger.info(
-                    f"Collected batch of {len(batch)} meetings (total so far: {len(all_meetings)})"
-                )
+    if total_expected == 0:
+        return [], 0
 
-        if logger:
-            logger.info(f"Scraping complete. Total meetings: {len(all_meetings)}")
+    # Build name lookup
+    mep_lookup = {}
+    for mep_id, _, name in meps_with_counts:
+        normalized = " ".join(sorted(name.lower().split()))
+        mep_lookup[normalized] = mep_id
 
-        return all_meetings, total_expected
+    # Scrape per MEP (sequential to be gentle on the EP server)
+    all_meetings = []
+    for i, (mep_id, count, name) in enumerate(meps_with_counts):
+        if count == 0:
+            continue
 
-    except Exception as e:
-        if logger:
-            logger.error(f"Error scraping meetings: {e}")
-        raise
+        mep_meetings = _scrape_mep_meetings_requests(
+            mep_id, from_date, to_date, count, mep_lookup, logger
+        )
+        all_meetings.extend(mep_meetings)
+
+        if logger and (i + 1) % 25 == 0:
+            logger.info(
+                f"  Scraped {i+1}/{len(meps_with_counts)} MEPs "
+                f"({len(all_meetings)} meetings so far)"
+            )
+
+    if logger:
+        logger.info(
+            f"Scraping complete. {len(all_meetings)} meetings "
+            f"(expected {total_expected}, delta {len(all_meetings) - total_expected})"
+        )
+
+    return all_meetings, total_expected
 
 
 def _sanitize_xml(xml_content: bytes) -> str:

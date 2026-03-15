@@ -259,6 +259,18 @@ def process_meetings(
                         org = orgs_by_acronym[part.lower()]
                         break
 
+        # Strategy 2e: Prefix match — "Toyota" → "TOYOTA MOTOR EUROPE"
+        # Only for names long enough to avoid false positives
+        if org is None and len(org_name) >= 5:
+            cleaned = clean_org_name(org_name)
+            name_lower = cleaned.lower()
+            candidates = [
+                v for k, v in orgs_by_normalized_name.items()
+                if k.startswith(normalize_org_name_for_id(cleaned))
+            ]
+            if len(candidates) == 1:
+                org = candidates[0]
+
         if org is not None:
             pass  # Already matched above
 
@@ -322,11 +334,14 @@ def process_meetings(
                     logger.warning(f"Could not parse member_id: {mep_id_str}")
 
         if not mep_id:
-            continue  # Skip meetings without valid MEP ID
+            if logger:
+                logger.debug(f"Meeting without MEP ID: {meeting_row.get('title', '')[:60]}")
 
         # Generate deterministic meeting ID
         # Include org_name in hash to ensure unique IDs when same meeting has multiple orgs
-        id_key = f"{meeting_date}_{mep_id}_{org.id}_{org_name}"
+        # Use member_name as fallback when mep_id is missing
+        mep_key = str(mep_id) if mep_id else meeting_row.get("member_name", "unknown")
+        id_key = f"{meeting_date}_{mep_key}_{org.id}_{org_name}"
         meeting_id = hashlib.sha256(id_key.encode("utf-8")).hexdigest()
 
         # Determine meeting type from title

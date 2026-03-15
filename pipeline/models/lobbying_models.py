@@ -147,7 +147,7 @@ class Organization(BaseModel):
 
 class LobbyingMeeting(BaseModel):
     id: Optional[str] = None
-    mep_id: int
+    mep_id: Optional[int] = None
     organization_id: Optional[str] = None
 
     meeting_date: Optional[date] = None

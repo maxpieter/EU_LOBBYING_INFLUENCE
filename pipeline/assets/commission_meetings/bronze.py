@@ -28,6 +28,10 @@ PRESIDENT_URL = "https://commission.europa.eu/about/organisation/president_en"
 MEETINGS_BASE = "https://ec.europa.eu/transparencyinitiative/meetings/meeting.do"
 MINUTES_BASE = "https://ec.europa.eu/transparencyinitiative/meetings/exportmeetings.do"
 
+# EP9 (2019-2024) Commission — different domain
+EP9_COLLEGE_URL = "https://commissioners.ec.europa.eu/college-commissioners-2019-2024_en"
+EP9_BASE = "https://commissioners.ec.europa.eu"
+
 USER_AGENT = "EU-Lobby-Pipeline/1.0 (EU Parliament Transparency Research)"
 REQUEST_DELAY = 1.0  # seconds between requests
 
@@ -189,6 +193,44 @@ def get_host_uuids_from_url(session: requests.Session, url: str, logger=None) ->
     if logger:
         logger.debug(f"Found {len(hosts)} host UUIDs from {url}")
     return hosts
+
+
+def discover_ep9_commissioners(session: requests.Session, logger=None) -> list[dict]:
+    """Discover 2019-2024 commissioners from commissioners.ec.europa.eu."""
+    if logger:
+        logger.info("Discovering EP9 (2019-2024) commissioners...")
+    resp = _get(session, EP9_COLLEGE_URL)
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    commissioners = []
+    seen_slugs = set()
+
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+        if not href.endswith("_en") or href.endswith("2019-2024_en"):
+            continue
+        if "commissioners.ec.europa.eu" not in href and not href.startswith("/"):
+            continue
+
+        match = re.search(r"/([a-z-]+)_en$", href)
+        if not match:
+            continue
+
+        slug = match.group(1)
+        if slug in seen_slugs or slug in ("college-commissioners-2019-2024",):
+            continue
+
+        name = link.get_text(strip=True)
+        if not name or len(name) < 3:
+            continue
+
+        seen_slugs.add(slug)
+        full_url = f"{EP9_BASE}/{slug}_en" if href.startswith("/") else href
+        commissioners.append({"slug": slug, "name": name, "url": full_url})
+
+    if logger:
+        logger.info(f"  Found {len(commissioners)} EP9 commissioners")
+    return commissioners
 
 
 def _extract_org_names(cell) -> list[str]:
@@ -591,8 +633,55 @@ def scrape_commission_meetings(context, actors: list[dict]) -> list[dict]:
         f"{commissioner_count} commissioner, {cabinet_count} cabinet"
     )
 
+    return _scrape_meetings_from_targets(session, scrape_targets, logger)
+
+
+def scrape_ep9_commission_meetings(context) -> list[dict]:
+    """Scrape EP9 (2019-2024) commission meetings via commissioner discovery.
+
+    No actors table needed — discovers commissioners from the EP9 college page.
+    """
+    logger = context.log
+    session = _make_session()
+
+    # Step 1: Discover EP9 commissioners
+    commissioners = discover_ep9_commissioners(session, logger)
+
+    # Step 2: Get host UUIDs for each
+    logger.info("Finding EP9 meeting page UUIDs...")
+    scrape_targets = []
+    for comm in commissioners:
+        hosts = get_host_uuids_from_url(session, comm["url"], logger)
+        if hosts:
+            for h in hosts:
+                scrape_targets.append({
+                    "actor_id": None,
+                    "name": comm["name"],
+                    "portfolio": None,
+                    "slug": comm["slug"],
+                    **h,
+                })
+            types = [h["meeting_type"] for h in hosts]
+            logger.info(f"  {comm['name']}: {', '.join(types)}")
+        else:
+            logger.info(f"  {comm['name']}: no meeting pages found")
+
+    commissioner_count = sum(1 for t in scrape_targets if t["meeting_type"] == "commissioner")
+    cabinet_count = sum(1 for t in scrape_targets if t["meeting_type"] == "cabinet")
+    logger.info(
+        f"EP9 targets: {len(scrape_targets)} "
+        f"({commissioner_count} commissioner, {cabinet_count} cabinet)"
+    )
+
+    return _scrape_meetings_from_targets(session, scrape_targets, logger)
+
+
+def _scrape_meetings_from_targets(
+    session: requests.Session, scrape_targets: list[dict], logger
+) -> list[dict]:
+    """Shared logic: scrape meetings from targets and download minutes PDFs."""
     # Step 3: Scrape meetings for each target
-    logger.info("Step 3: Scraping meetings...")
+    logger.info("Scraping meetings...")
     all_meetings = []
     for target in scrape_targets:
         label = f"{target['name']} ({target['meeting_type']})"
@@ -647,7 +736,7 @@ def scrape_commission_meetings(context, actors: list[dict]) -> list[dict]:
             to_download.append(meeting)
 
     logger.info(
-        f"Step 4: PDF minutes — {minutes_cached} cached, "
+        f"PDF minutes — {minutes_cached} cached, "
         f"{len(to_download)} to download, {minutes_skipped} no URL"
     )
 

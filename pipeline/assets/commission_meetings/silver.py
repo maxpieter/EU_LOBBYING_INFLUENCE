@@ -223,6 +223,24 @@ def match_by_name(
                 })
                 already_matched_ids.add(org["id"])
         else:
+            # Try prefix match: "Toyota" → "TOYOTA MOTOR EUROPE"
+            if len(normalized) >= 5:
+                candidates = [
+                    v for k, v in orgs_by_normalized_name.items()
+                    if k.startswith(normalized)
+                ]
+                if len(candidates) == 1:
+                    org = candidates[0]
+                    if org["id"] not in already_matched_ids:
+                        canonical_name = org.get("name", org.get("official_name", name))
+                        matches.append({
+                            "organization_id": org["id"],
+                            "organization_name": canonical_name,
+                            "eu_transparency_register_id": org.get("eu_transparency_register_id"),
+                            "match_method": "name_prefix",
+                        })
+                        already_matched_ids.add(org["id"])
+                        continue
             # Unmatched — still record the org name for the junction table
             matches.append({
                 "organization_id": None,

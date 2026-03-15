@@ -6,11 +6,18 @@ Data source: EC Transparency Initiative + Meeting Minutes PDFs.
 Bronze: Scrape commissioner pages → meetings → parse PDFs
 Silver: Entity resolution (org names → organizations table)
 Diamond: Upload to Supabase
+
+Supports both EP9 (2019-2024) and EP10 (2024-2029) commissions.
 """
 
-from dagster import AssetIn, asset
+from dagster import AssetIn, Config, asset
 
 from pipeline.resources.supabase import SupabaseResource
+
+
+class CommissionMeetingsBronzeConfig(Config):
+    """Configuration for commission meetings bronze asset."""
+    terms: list[str] = ["EP9", "EP10"]
 
 
 @asset(
@@ -19,22 +26,43 @@ from pipeline.resources.supabase import SupabaseResource
     compute_kind="scraper",
     deps=["eu_actors_diamond"],
     required_resource_keys={"supabase"},
-    description="Scrape Commission meetings from EC Transparency Initiative + parse minutes PDFs",
+    description="Scrape Commission meetings from EC Transparency Initiative + parse minutes PDFs (EP9 + EP10)",
 )
-def eu_commission_meetings_bronze(context):
-    from .bronze import scrape_commission_meetings
+def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfig):
+    from .bronze import scrape_commission_meetings, scrape_ep9_commission_meetings
 
-    supabase: SupabaseResource = context.resources.supabase
+    all_meetings = []
 
-    # Fetch actors (commissioners) from DB — uses profile_url to find meeting pages
-    result = supabase.select(
-        "actors",
-        columns="actor_id,\"fullName\",portfolio,profile_url,actor_type",
-    )
-    actors = [a for a in (result.data or []) if a.get("profile_url")]
-    context.log.info(f"Loaded {len(actors)} actors with profile URLs")
+    # EP10 (2024-2029): actor-based discovery
+    if "EP10" in config.terms:
+        supabase: SupabaseResource = context.resources.supabase
+        result = supabase.select(
+            "actors",
+            columns="actor_id,\"fullName\",portfolio,profile_url,actor_type",
+        )
+        actors = [a for a in (result.data or []) if a.get("profile_url")]
+        context.log.info(f"EP10: Loaded {len(actors)} actors with profile URLs")
+        ep10_meetings = scrape_commission_meetings(context, actors=actors)
+        all_meetings.extend(ep10_meetings)
+        context.log.info(f"EP10: {len(ep10_meetings)} meetings")
 
-    return scrape_commission_meetings(context, actors=actors)
+    # EP9 (2019-2024): direct commissioner discovery
+    if "EP9" in config.terms:
+        ep9_meetings = scrape_ep9_commission_meetings(context)
+        all_meetings.extend(ep9_meetings)
+        context.log.info(f"EP9: {len(ep9_meetings)} meetings")
+
+    # Deduplicate by meeting ID (in case of overlap)
+    seen_ids = set()
+    unique = []
+    for m in all_meetings:
+        mid = m.get("id")
+        if mid and mid not in seen_ids:
+            seen_ids.add(mid)
+            unique.append(m)
+
+    context.log.info(f"Total unique meetings: {len(unique)} (from {len(all_meetings)} raw)")
+    return unique
 
 
 @asset(
