@@ -22,9 +22,8 @@ class CommissionMeetingsBronzeConfig(Config):
 
 @asset(
     name="eu_commission_meetings_bronze",
-    group_name="commission_meetings",
+    group_name="eu_bronze",
     compute_kind="scraper",
-    deps=["eu_actors_diamond"],
     required_resource_keys={"supabase"},
     description="Scrape Commission meetings from EC Transparency Initiative + parse minutes PDFs (EP9 + EP10)",
 )
@@ -67,7 +66,7 @@ def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfi
 
 @asset(
     name="eu_commission_meetings_silver",
-    group_name="commission_meetings",
+    group_name="eu_silver",
     compute_kind="python",
     ins={"bronze_data": AssetIn("eu_commission_meetings_bronze")},
     required_resource_keys={"supabase"},
@@ -98,7 +97,7 @@ def eu_commission_meetings_silver(context, bronze_data: list[dict]):
 
 @asset(
     name="eu_commission_meetings_diamond",
-    group_name="commission_meetings",
+    group_name="eu_diamond",
     compute_kind="supabase",
     ins={"silver_data": AssetIn("eu_commission_meetings_silver")},
     required_resource_keys={"supabase"},
