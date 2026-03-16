@@ -62,23 +62,34 @@ PDFTOTEXT = "/opt/homebrew/bin/pdftotext"
 # ---------------------------------------------------------------------------
 
 AI_PROVIDER: str | None = None
-AI_RATE_SLEEP: float = 0.1
-AI_MAX_WORKERS: int = 40
+AI_RATE_SLEEP: float = 0.5
+AI_MAX_WORKERS: int = 3  # Conservative for CLI subprocess calls
 
-GEMINI_PRIMARY = "gemini-2.5-flash"
-GEMINI_FALLBACK = "gemini-2.5-flash-lite"
-_gemini_dead_models: set[str] = set()
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 
 def configure_ai_provider() -> None:
-    """Detect which AI provider is available and configure the module global."""
-    global AI_PROVIDER
+    """Detect which AI provider is available and configure the module global.
 
-    if os.getenv("GEMINI_API_KEY"):
+    Priority: claude-cli > groq > anthropic > openai
+    """
+    global AI_PROVIDER, AI_MAX_WORKERS, AI_RATE_SLEEP
+    import shutil
+
+    # Prefer claude CLI (uses OAuth, no API key needed, best model quality)
+    if shutil.which("claude"):
+        AI_PROVIDER = "claude-cli"
+        AI_MAX_WORKERS = 3   # Subprocess overhead, keep low
+        AI_RATE_SLEEP = 0.5
+        return
+
+    if os.getenv("GROQ_API_KEY"):
         try:
-            from google import genai  # noqa: F401
+            from openai import OpenAI  # noqa: F401
 
-            AI_PROVIDER = "gemini"
+            AI_PROVIDER = "groq"
+            AI_MAX_WORKERS = 5
+            AI_RATE_SLEEP = 2.0
             return
         except ImportError:
             pass
@@ -88,6 +99,8 @@ def configure_ai_provider() -> None:
             import anthropic  # noqa: F401
 
             AI_PROVIDER = "anthropic"
+            AI_MAX_WORKERS = 10
+            AI_RATE_SLEEP = 0.5
             return
         except ImportError:
             pass
@@ -97,6 +110,8 @@ def configure_ai_provider() -> None:
             import openai  # noqa: F401
 
             AI_PROVIDER = "openai"
+            AI_MAX_WORKERS = 10
+            AI_RATE_SLEEP = 0.5
             return
         except ImportError:
             pass
@@ -117,8 +132,10 @@ def ai_complete(prompt: str, system: str = "", json_mode: bool = False) -> str:
         )
 
     try:
-        if AI_PROVIDER == "gemini":
-            return _ai_gemini(prompt, system)
+        if AI_PROVIDER == "claude-cli":
+            return _ai_claude_cli(prompt, system)
+        if AI_PROVIDER == "groq":
+            return _ai_groq(prompt, system)
         if AI_PROVIDER == "anthropic":
             return _ai_anthropic(prompt, system)
         if AI_PROVIDER == "openai":
@@ -129,27 +146,40 @@ def ai_complete(prompt: str, system: str = "", json_mode: bool = False) -> str:
     return ""
 
 
-def _ai_gemini(prompt: str, system: str) -> str:
-    from google import genai
-    from google.genai import types
+def _ai_claude_cli(prompt: str, system: str) -> str:
+    """Call the claude CLI in pipe mode (uses OAuth, no API key needed)."""
+    import subprocess
 
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-    config = types.GenerateContentConfig(system_instruction=system if system else None)
+    full_prompt = f"{system}\n\n{prompt}" if system else prompt
+    result = subprocess.run(
+        ["claude", "-p", "--model", "sonnet"],
+        input=full_prompt,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"claude CLI failed: {result.stderr[:200]}")
+    return result.stdout.strip()
 
-    primary = GEMINI_PRIMARY if GEMINI_PRIMARY not in _gemini_dead_models else GEMINI_FALLBACK
-    try:
-        response = client.models.generate_content(model=primary, contents=prompt, config=config)
-        return response.text or ""
-    except Exception as exc:
-        exc_str = str(exc)
-        if "no longer available" in exc_str or "NOT_FOUND" in exc_str:
-            _gemini_dead_models.add(primary)
-        elif "RESOURCE_EXHAUSTED" not in exc_str and "429" not in exc_str:
-            raise
 
-    fallback = GEMINI_FALLBACK if primary != GEMINI_FALLBACK else GEMINI_PRIMARY
-    response = client.models.generate_content(model=fallback, contents=prompt, config=config)
-    return response.text or ""
+def _ai_groq(prompt: str, system: str) -> str:
+    from openai import OpenAI
+
+    client = OpenAI(
+        api_key=os.environ["GROQ_API_KEY"],
+        base_url="https://api.groq.com/openai/v1",
+    )
+    messages: list[dict[str, str]] = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=messages,
+        temperature=0.3,
+    )
+    return response.choices[0].message.content or ""
 
 
 def _ai_anthropic(prompt: str, system: str) -> str:
@@ -1874,17 +1904,113 @@ def step8_generate_report(
         "directional_alignment": alignment,
     }
 
-    out_dir = output_dir or ANALYSIS_OUTPUT_DIR
-    out_dir.mkdir(parents=True, exist_ok=True)
-    pid_safe = re.sub(r"[/()]+", "_", procedure_id).strip("_")
-    output_path = out_dir / f"influence_report_{pid_safe}.json"
+    # Write to analysis/{procedure_id}/influence_report.json
+    # Replace / with : for macOS-safe directory names (Finder shows : as /)
+    pid_dir_name = procedure_id.replace("/", ":")
+    proc_dir = (output_dir or ANALYSIS_OUTPUT_DIR) / pid_dir_name
+    proc_dir.mkdir(parents=True, exist_ok=True)
+    output_path = proc_dir / "influence_report.json"
     output_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False, default=str),
         encoding="utf-8",
     )
     _log(f"JSON report written to: {output_path}")
 
+    # Generate one-pager (md + pdf) if AI is available
+    if AI_PROVIDER is not None:
+        try:
+            _generate_one_pager(report, proc_dir, logger=logger)
+        except Exception as exc:
+            _log(f"One-pager generation failed (non-fatal): {exc}")
+
     return report
+
+
+def _generate_one_pager(
+    report: dict[str, Any],
+    proc_dir: Path,
+    logger: Any = None,
+) -> None:
+    """Generate a think-tank style one-pager from the report JSON."""
+    _log = logger.info if logger else print
+
+    prompt_path = Path(__file__).parent / "one_pager_prompt.md"
+    if not prompt_path.exists():
+        _log("one_pager_prompt.md not found, skipping one-pager generation")
+        return
+
+    prompt_template = prompt_path.read_text(encoding="utf-8")
+
+    # Trim report for token efficiency
+    report_trimmed = {k: v for k, v in report.items() if k != "org_influence"}
+    if "org_influence" in report:
+        top_orgs = dict(
+            sorted(
+                report["org_influence"].items(),
+                key=lambda x: x[1].get("meetings_count", 0),
+                reverse=True,
+            )[:30]
+        )
+        report_trimmed["org_influence_top30"] = top_orgs
+    if "directional_alignment" in report_trimmed:
+        for mep, data in report_trimmed["directional_alignment"].items():
+            if "theme_scores" in data:
+                for theme, scores in data["theme_scores"].items():
+                    if "pair_details" in scores:
+                        scores["pair_details"] = scores["pair_details"][:5]
+
+    report_json = json.dumps(report_trimmed, indent=2, ensure_ascii=False, default=str)
+    user_prompt = prompt_template.split("```json")[0] + "```json\n" + report_json + "\n```"
+
+    system = (
+        "You are a policy analyst at a European transparency think tank. "
+        "You write concise, evidence-based briefings about lobbying influence on EU legislation. "
+        "Your tone is factual and measured — you present data patterns without sensationalising them."
+    )
+
+    _log("Generating one-pager via AI ...")
+    md = ai_complete(f"{system}\n\n{user_prompt}")
+
+    # Strip markdown code fences if the model wrapped it
+    if md.startswith("```markdown"):
+        md = md[len("```markdown"):].strip()
+    if md.startswith("```"):
+        md = md[3:].strip()
+    if md.endswith("```"):
+        md = md[:-3].strip()
+
+    if not md or len(md) < 200:
+        _log("One-pager generation returned insufficient content, skipping")
+        return
+
+    md_path = proc_dir / "one_pager.md"
+    md_path.write_text(md, encoding="utf-8")
+    _log(f"One-pager markdown written to: {md_path}")
+
+    # Convert to PDF via pandoc if available
+    import subprocess
+    import shutil
+
+    pandoc = shutil.which("pandoc")
+    if not pandoc:
+        _log("pandoc not found, skipping PDF generation")
+        return
+
+    pdflatex = shutil.which("pdflatex") or "/Library/TeX/texbin/pdflatex"
+    pdf_path = proc_dir / "one_pager.pdf"
+    try:
+        subprocess.run(
+            [
+                pandoc, str(md_path), "-o", str(pdf_path),
+                f"--pdf-engine={pdflatex}",
+                "-V", "geometry:margin=1in",
+                "-V", "fontsize=11pt",
+            ],
+            capture_output=True, text=True, check=True, timeout=30,
+        )
+        _log(f"One-pager PDF written to: {pdf_path}")
+    except Exception as exc:
+        _log(f"PDF generation failed: {exc}")
 
 
 # ---------------------------------------------------------------------------
@@ -1932,32 +2058,45 @@ def run_influence_pipeline(
     else:
         _log("AI disabled (no_ai=True).")
 
-    # Step 1
+    from concurrent.futures import ThreadPoolExecutor, Future
+
+    # Step 1 — collect all data from Supabase
     data = step1_collect_data(procedure_id, client, logger=logger)
 
-    # Step 2
-    taxonomy = step2_generate_taxonomy(
-        procedure_id, data, no_ai=no_ai, regen=regen_taxonomy, logger=logger
-    )
+    # Steps 2 + 3 in parallel (taxonomy generation + amendment fetching)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        future_taxonomy: Future = pool.submit(
+            step2_generate_taxonomy,
+            procedure_id, data, no_ai, regen_taxonomy, logger,
+        )
+        future_amendments: Future = pool.submit(
+            step3_parse_amendments,
+            procedure_id, client, logger,
+        )
+        taxonomy = future_taxonomy.result()
+        amendments = future_amendments.result()
+
     compiled_patterns = compile_taxonomy_patterns(taxonomy)
 
-    # Step 3
-    amendments = step3_parse_amendments(procedure_id, client, logger=logger)
+    # Steps 4 + 5 in parallel (classify amendments + extract positions)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        future_classified: Future = pool.submit(
+            step4_classify_amendments,
+            amendments, taxonomy, no_ai, logger,
+        )
+        future_positions: Future = pool.submit(
+            step5_extract_positions,
+            data["commission"], taxonomy, compiled_patterns, no_ai, logger,
+        )
+        amendments = future_classified.result()
+        positions = future_positions.result()
 
-    # Step 4
-    amendments = step4_classify_amendments(amendments, taxonomy, no_ai=no_ai, logger=logger)
-
-    # Step 5
-    positions = step5_extract_positions(
-        data["commission"], taxonomy, compiled_patterns, no_ai=no_ai, logger=logger
-    )
-
-    # Step 6
+    # Step 6 — quantitative analysis (needs classified amendments + positions)
     quant = step6_quantitative_analysis(
         data, amendments, taxonomy, compiled_patterns, logger=logger
     )
 
-    # Step 7
+    # Step 7 — directional alignment (needs quant + positions + amendments)
     alignment = step7_directional_alignment(
         quant, positions, amendments, taxonomy, no_ai=no_ai, logger=logger
     )

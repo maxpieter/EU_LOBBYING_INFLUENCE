@@ -40,6 +40,11 @@ You MUST follow these rules strictly. Violating them undermines the credibility 
 - If p >= 0.05: "No statistically significant association was found"
 - NEVER say "proves" — say "is consistent with" or "suggests"
 
+**For numerical claims:**
+- ALWAYS verify superlatives ("highest", "lowest", "most") against the actual numbers before writing them. If MEP A has 0.56 and MEP B has 0.39, MEP A has the higher score — do not state otherwise.
+- The alignment fraction is: toward / total_pairs. Compute it from the numbers given. Do not invent or misstate fractions.
+- If toward < away for an MEP, do NOT call that "high alignment" — that MEP's amendments move AGAINST lobby positions more often than toward them.
+
 **General:**
 - Always mention sample size (n=X MEPs) when discussing statistical results
 - Always note that the analysis is based on disclosed meetings only — informal contacts are unobservable
