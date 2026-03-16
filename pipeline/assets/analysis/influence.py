@@ -53,7 +53,7 @@ except ImportError:
 _MODULE_DIR = Path(__file__).parent
 PROJECT_ROOT = _MODULE_DIR.parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-ANALYSIS_OUTPUT_DIR = PROJECT_ROOT / "data" / "analysis"
+ANALYSIS_OUTPUT_DIR = PROJECT_ROOT / "analysis"
 TAXONOMY_CACHE_DIR = DATA_DIR / "theme_taxonomies"
 PDFTOTEXT = "/opt/homebrew/bin/pdftotext"
 

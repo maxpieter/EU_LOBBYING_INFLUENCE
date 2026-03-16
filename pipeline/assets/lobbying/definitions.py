@@ -236,9 +236,38 @@ def eu_lobbying_diamond(
     return results
 
 
+@asset(
+    name="eu_lobbying_org_dedup",
+    group_name="eu_silver",
+    compute_kind="dedup",
+    required_resource_keys={"supabase"},
+    description=(
+        "Deduplicate stub organisations by relinking lobbying meetings to canonical "
+        "Transparency Register entries. Three passes: TR ID extraction from name, "
+        "case-insensitive name match, acronym match."
+    ),
+)
+def eu_lobbying_org_dedup(context: AssetExecutionContext):
+    from .org_dedup import run_org_dedup
+
+    supabase: SupabaseResource = context.resources.supabase
+    client = supabase.get_client()
+
+    stats = run_org_dedup(client, logger=context.log)
+
+    context.add_output_metadata({
+        "tr_id_relinked": stats["tr_id_relinked"],
+        "name_relinked": stats["name_relinked"],
+        "acronym_relinked": stats["acronym_relinked"],
+        "total_relinked": stats["total"],
+    })
+    return stats
+
+
 lobbying_assets = [
     eu_lobbying_bronze_meetings,
     eu_lobbying_bronze_organizations,
     eu_lobbying_silver,
     eu_lobbying_diamond,
+    eu_lobbying_org_dedup,
 ]
