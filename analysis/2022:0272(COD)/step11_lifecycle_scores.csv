@@ -1,0 +1,12 @@
+theme,lii,commission_reflection_rate,amendment_toward_rate,final_reflection_rate,persistence_rate
+support_period_and_lifecycle_obligations,1.000,None,None,None,1.0
+open_source_software_treatment,1.000,None,None,None,1.0
+interface_with_sectoral_legislation,0.436,0.15,None,0.4,0.975
+essential_cybersecurity_requirements,0.394,0.25,None,0.25,0.8718
+conformity_assessment_and_third_party_verification,0.385,0.0,None,0.5,0.8358
+standardisation_and_harmonised_standards,0.373,0.25,None,0.25,0.7826
+sme_and_proportionality,0.338,0.0,None,0.2778,1.0
+market_surveillance_and_enforcement,0.292,0.1667,None,0.0,0.9857
+vulnerability_disclosure_and_incident_reporting,0.232,0.25,0.0625,0.0,0.9865
+supply_chain_security_obligations,0.201,0.0,None,0.0,0.871
+scope_and_product_coverage,0.131,0.0,0.0,0.0,0.875

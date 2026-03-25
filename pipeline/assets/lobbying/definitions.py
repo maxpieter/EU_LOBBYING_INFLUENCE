@@ -13,6 +13,7 @@ from dagster import (
     AssetExecutionContext,
     AssetIn,
     AssetOut,
+    Config,
     asset,
     multi_asset,
 )
@@ -236,6 +237,14 @@ def eu_lobbying_diamond(
     return results
 
 
+class OrgDedupConfig(Config):
+    """Configuration for the org deduplication asset."""
+
+    dry_run: bool = True
+    """When True (default), pass 4 (TR web search) writes a CSV report but
+    makes no database changes. Passes 1-3 are always applied."""
+
+
 @asset(
     name="eu_lobbying_org_dedup",
     group_name="eu_silver",
@@ -243,23 +252,27 @@ def eu_lobbying_diamond(
     required_resource_keys={"supabase"},
     description=(
         "Deduplicate stub organisations by relinking lobbying meetings to canonical "
-        "Transparency Register entries. Three passes: TR ID extraction from name, "
-        "case-insensitive name match, acronym match."
+        "Transparency Register entries. Four passes: TR ID extraction from name, "
+        "case-insensitive name match, acronym match, TR web search with AI confirmation."
     ),
 )
-def eu_lobbying_org_dedup(context: AssetExecutionContext):
+def eu_lobbying_org_dedup(context: AssetExecutionContext, config: OrgDedupConfig):
     from .org_dedup import run_org_dedup
 
     supabase: SupabaseResource = context.resources.supabase
     client = supabase.get_client()
 
-    stats = run_org_dedup(client, logger=context.log)
+    stats = run_org_dedup(client, logger=context.log, dry_run=config.dry_run)
 
     context.add_output_metadata({
         "tr_id_relinked": stats["tr_id_relinked"],
         "name_relinked": stats["name_relinked"],
         "acronym_relinked": stats["acronym_relinked"],
+        "tr_search_high": stats.get("tr_search_high", 0),
+        "tr_search_medium": stats.get("tr_search_medium", 0),
+        "tr_search_applied": stats.get("tr_search_applied", 0),
         "total_relinked": stats["total"],
+        "dry_run": config.dry_run,
     })
     return stats
 

@@ -17,9 +17,6 @@ class InfluenceAnalysisConfig(Config):
     procedure_id: str
     """Required: EU procedure reference, e.g. '2023/0212(COD)'."""
 
-    no_ai: bool = False
-    """When True, skip all AI calls and use regex-only classification."""
-
     regen_taxonomy: bool = False
     """When True, delete the cached taxonomy and regenerate via AI."""
 
@@ -32,7 +29,7 @@ class InfluenceAnalysisConfig(Config):
     description=(
         "8-step AI-assisted lobbying influence analysis pipeline. "
         "Combines Supabase data (amendments, meetings, procedures) with "
-        "Gemini AI calls to compute LEI, ALAS, ICI metrics, "
+        "Claude AI calls to compute LEI, ALAS, ICI metrics, "
         "extract lobbying positions, and score directional alignment."
     ),
 )
@@ -51,13 +48,12 @@ def eu_influence_analysis(context: AssetExecutionContext, config: InfluenceAnaly
 
     context.log.info(
         f"Starting influence analysis for {procedure_id} "
-        f"(no_ai={config.no_ai}, regen_taxonomy={config.regen_taxonomy})"
+        f"(regen_taxonomy={config.regen_taxonomy})"
     )
 
     report = run_influence_pipeline(
         procedure_id=procedure_id,
         client=client,
-        no_ai=config.no_ai,
         regen_taxonomy=config.regen_taxonomy,
         logger=context.log,
     )

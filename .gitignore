@@ -41,5 +41,8 @@ chromedriver.log
 .DS_Store
 Thumbs.db
 
+# Generated reports
+org_dedup_report.csv
+
 # MCP config (contains local paths/keys)
 .mcp.json
