@@ -2,7 +2,7 @@
 
 This is the top-level analytical asset that sits outside the medallion
 architecture. It depends on bronze data (amendments, documents) being
-already materialized in Supabase and runs the 8-step AI-assisted
+already materialized in Supabase and runs the 9-step evidence-dossier
 influence pipeline for a given procedure.
 """
 
@@ -27,10 +27,10 @@ class InfluenceAnalysisConfig(Config):
     compute_kind="ai+python",
     required_resource_keys={"supabase"},
     description=(
-        "8-step AI-assisted lobbying influence analysis pipeline. "
+        "9-step evidence-dossier lobbying analysis pipeline. "
         "Combines Supabase data (amendments, meetings, procedures) with "
-        "Claude AI calls to compute LEI, ALAS, ICI metrics, "
-        "extract lobbying positions, and score directional alignment."
+        "Claude AI calls to extract positions, classify themes, and "
+        "assemble evidence dossiers for journalist review."
     ),
 )
 def eu_influence_analysis(context: AssetExecutionContext, config: InfluenceAnalysisConfig):
@@ -59,17 +59,6 @@ def eu_influence_analysis(context: AssetExecutionContext, config: InfluenceAnaly
     )
 
     stats = report.get("summary_stats", {})
-    quant_rows = report.get("comparison_table", [])
-    stat_tests = report.get("statistical_tests", {})
-
-    test_summary: dict[str, str] = {}
-    for test_key, result in stat_tests.items():
-        if isinstance(result, dict) and "p_value" in result:
-            test_summary[test_key] = (
-                f"p={result['p_value']:.4f} — {result.get('interpretation', '')[:80]}"
-            )
-        elif isinstance(result, dict) and "error" in result:
-            test_summary[test_key] = f"error: {result['error']}"
 
     context.add_output_metadata({
         "procedure_id": procedure_id,
@@ -80,8 +69,9 @@ def eu_influence_analysis(context: AssetExecutionContext, config: InfluenceAnaly
         "commission_meetings_with_notes": stats.get("commission_meetings_with_notes", 0),
         "total_organisations": stats.get("total_organisations", 0),
         "themes_generated": len(report.get("taxonomy", {})),
-        "meps_analysed": len(quant_rows),
-        "statistical_tests": str(test_summary),
+        "meps_analysed": len(report.get("mep_crossref", {})),
+        "commission_evidence_dossiers": len(report.get("commission_evidence", [])),
+        "amendment_evidence_dossiers": len(report.get("amendment_evidence", [])),
     })
 
     return report

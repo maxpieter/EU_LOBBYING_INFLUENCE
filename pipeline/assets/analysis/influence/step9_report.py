@@ -1,4 +1,4 @@
-"""Step 11: Report generation — assemble JSON report and generate one-pager."""
+"""Step 9: Report generation — assemble JSON report and generate evidence dossier one-pager."""
 
 from __future__ import annotations
 
@@ -14,19 +14,17 @@ from . import _config
 from ._ai import ai_complete
 
 
-def step11_generate_report(
+def step9_generate_report(
     procedure_id: str,
     data: dict[str, Any],
     taxonomy: dict[str, Any],
     amendments: list[dict[str, Any]],
     positions: list[dict[str, Any]],
     quant: dict[str, Any],
-    alignment: dict[str, Any],
+    commission_evidence: list[dict[str, Any]],
+    amendment_evidence: list[dict[str, Any]],
     output_dir: Path | None = None,
     logger: Any = None,
-    proposal_alignment: dict[str, Any] | None = None,
-    text_evolution: dict[str, Any] | None = None,
-    lifecycle_scores: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Assemble the full structured report and write to disk."""
     _log = logger.info if logger else print
@@ -58,29 +56,15 @@ def step11_generate_report(
         },
         "taxonomy": taxonomy,
         "theme_indicators": quant.get("theme_indicators", {}),
+        "theme_lobbying_density": quant.get("theme_lobbying_density", []),
+        "amendment_lobbying_density": quant.get("amendment_lobbying_density", []),
         "org_influence": quant.get("org_influence", {}),
-        "mep_exposure": {
-            mep: {
-                "total_meetings": cr.get("total_meetings", 0),
-                "total_amendments": cr.get("total_amendments", 0),
-                "top_orgs": cr.get("top_orgs_met", [])[:5],
-            }
-            for mep, cr in quant.get("mep_crossref", {}).items()
-        },
-        "mep_amendment_crossref": quant.get("mep_crossref", {}),
-        "mep_indices": quant.get("mep_indices", {}),
-        "comparison_table": quant.get("comparison_rows", []),
-        "statistical_tests": quant.get("statistical_tests", {}),
+        "mep_crossref": quant.get("mep_crossref", {}),
+        "key_meps": quant.get("key_meps", {}),
         "positions": positions,
-        "directional_alignment": alignment,
+        "commission_evidence": commission_evidence,
+        "amendment_evidence": amendment_evidence,
     }
-
-    if proposal_alignment is not None:
-        report["proposal_alignment"] = proposal_alignment
-    if text_evolution is not None:
-        report["text_evolution"] = text_evolution
-    if lifecycle_scores is not None:
-        report["lifecycle_scores"] = lifecycle_scores
 
     pid_dir_name = procedure_id.replace("/", ":")
     proc_dir = (output_dir or _config.ANALYSIS_OUTPUT_DIR) / pid_dir_name
@@ -106,10 +90,9 @@ def _generate_one_pager(
     proc_dir: Path,
     logger: Any = None,
 ) -> None:
-    """Generate a think-tank style one-pager from the report JSON."""
+    """Generate an evidence-dossier one-pager from the report JSON."""
     _log = logger.info if logger else print
 
-    # one_pager_prompt.md is in the parent directory (analysis/)
     prompt_path = Path(__file__).parent.parent / "one_pager_prompt.md"
     if not prompt_path.exists():
         _log("one_pager_prompt.md not found, skipping one-pager generation")
@@ -117,6 +100,7 @@ def _generate_one_pager(
 
     prompt_template = prompt_path.read_text(encoding="utf-8")
 
+    # Trim report for prompt context window
     report_trimmed = {k: v for k, v in report.items() if k != "org_influence"}
     if "org_influence" in report:
         top_orgs = dict(
@@ -127,20 +111,24 @@ def _generate_one_pager(
             )[:30]
         )
         report_trimmed["org_influence_top30"] = top_orgs
-    if "directional_alignment" in report_trimmed:
-        for mep, data in report_trimmed["directional_alignment"].items():
-            if "theme_scores" in data:
-                for theme, scores in data["theme_scores"].items():
-                    if "pair_details" in scores:
-                        scores["pair_details"] = scores["pair_details"][:5]
+    # Trim commission evidence: top 5 themes
+    if "commission_evidence" in report_trimmed:
+        report_trimmed["commission_evidence"] = report_trimmed["commission_evidence"][:5]
+    # Trim amendment evidence: top 10 amendments
+    if "amendment_evidence" in report_trimmed:
+        report_trimmed["amendment_evidence"] = report_trimmed["amendment_evidence"][:10]
+    # Trim amendment_lobbying_density to top 20
+    if "amendment_lobbying_density" in report_trimmed:
+        report_trimmed["amendment_lobbying_density"] = report_trimmed["amendment_lobbying_density"][:20]
 
     report_json = json.dumps(report_trimmed, indent=2, ensure_ascii=False, default=str)
     user_prompt = prompt_template.split("```json")[0] + "```json\n" + report_json + "\n```"
 
     system = (
         "You are a policy analyst at a European transparency think tank. "
-        "You write concise, evidence-based briefings about lobbying influence on EU legislation. "
-        "Your tone is factual and measured — you present data patterns without sensationalising them."
+        "You write concise, evidence-based briefings about lobbying activity on EU legislation. "
+        "Your tone is factual and measured. You present data and evidence for the reader to "
+        "evaluate — you never judge whether lobbying was successful or influential."
     )
 
     _log("Generating one-pager via AI ...")

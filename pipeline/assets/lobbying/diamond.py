@@ -4,6 +4,8 @@ from typing import Any, Dict, List, Optional
 
 from pipeline.models.lobbying_models import LobbyingMeeting, Organization
 
+from .fuzzy_match import resolve_stubs
+
 
 def upload_lobbying_data(
     meetings: List[LobbyingMeeting],
@@ -23,6 +25,12 @@ def upload_lobbying_data(
         Dict with upload results and view refresh status
     """
     results = {}
+
+    # 0. Resolve stub orgs via fuzzy matching before upload
+    if organizations and meetings:
+        organizations, meetings = resolve_stubs(
+            organizations, meetings, supabase_resource, logger
+        )
 
     # 1. Upload Organizations
     if organizations:

@@ -114,7 +114,7 @@ def _scrape_tr_search(query: str) -> list[dict]:
     except ImportError:
         return []
 
-    time.sleep(0.15)
+    time.sleep(0.05)
     url = _TR_SEARCH_URL.format(query=requests.utils.quote(query))
     try:
         resp = requests.get(url, timeout=15, headers={"Accept-Language": "en"})
@@ -163,7 +163,7 @@ def _scrape_tr_detail(tr_id: str) -> dict | None:
     except ImportError:
         return None
 
-    time.sleep(0.15)
+    time.sleep(0.05)
     # The inner endpoint that serves the actual org data
     url = f"https://ec.europa.eu/transparencyregister/public/PUBLIC/ORGANISATION/{tr_id}?lang=en"
     try:

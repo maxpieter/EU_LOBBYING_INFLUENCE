@@ -43,7 +43,6 @@ def step5_extract_positions(
                 "commissioner": m.get("commissioner_name", ""),
                 "orgs": org_names,
                 "themes": themes,
-                "direction": "unknown",
                 "summary": (m.get("points_raised") or "")[:200],
                 "ai_enhanced": False,
             }
@@ -92,8 +91,6 @@ For each meeting, return a JSON array where each entry has:
   "meeting_id": the meeting ID string
   "relevant": true if the meeting is actually about this legislation, false if it discusses unrelated topics
   "themes": list of relevant theme keys from the taxonomy (empty list if not relevant)
-  "direction": one of "supports", "opposes", "modifies", or "unclear"
-               (relative to the original Commission proposal; "unclear" if not relevant)
   "summary": one sentence capturing the core position taken (or "Not relevant to this procedure" if not relevant)
 
 Respond ONLY with the JSON array."""
@@ -120,9 +117,6 @@ Respond ONLY with the JSON array."""
                     ai_themes = [t for t in (entry.get("themes") or []) if t in taxonomy]
                     if ai_themes:
                         pos["themes"] = ai_themes
-                    direction = entry.get("direction", "").lower()
-                    if direction in ("supports", "opposes", "modifies", "unclear"):
-                        pos["direction"] = direction
                     if entry.get("summary"):
                         pos["summary"] = entry["summary"][:500]
                     pos["ai_enhanced"] = True

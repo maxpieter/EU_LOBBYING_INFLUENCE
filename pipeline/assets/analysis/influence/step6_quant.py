@@ -1,40 +1,13 @@
-"""Step 6: Quantitative analysis — LEI, ALAS, ICI, theme indicators, statistical tests."""
+"""Step 6: Quantitative analysis — org influence, theme indicators, match density."""
 
 from __future__ import annotations
 
 import json
-import math
 import re
 from collections import Counter, defaultdict
 from typing import Any
 
 from ._helpers import _classify_by_regex, _meeting_text
-
-# ---------------------------------------------------------------------------
-# Optional scipy
-# ---------------------------------------------------------------------------
-
-try:
-    from scipy import stats as scipy_stats
-
-    SCIPY_AVAILABLE = True
-except ImportError:
-    SCIPY_AVAILABLE = False
-
-# ---------------------------------------------------------------------------
-# Organisation interest weights
-# ---------------------------------------------------------------------------
-
-_ORG_INTEREST_WEIGHTS: dict[str, float] = {
-    "Promotes their own interests or the collective interests of their members": 1.0,
-    "Advances interests of their clients": 0.8,
-    "Does not represent commercial interests": 0.15,
-    "Unknown": 0.5,
-}
-
-
-def _interest_weight(interests_represented: str) -> float:
-    return _ORG_INTEREST_WEIGHTS.get(interests_represented, 0.5)
 
 
 def _extract_rapporteurs(procedure: dict[str, Any]) -> dict[str, dict[str, str]]:
@@ -209,50 +182,6 @@ def _build_mep_crossref(
     return result
 
 
-def _compute_lei(
-    mep_crossref: dict[str, Any],
-    org_influence: dict[str, Any],
-    total_procedure_meetings: int,
-) -> float:
-    if total_procedure_meetings == 0:
-        return 0.0
-    top_orgs = mep_crossref.get("top_orgs_met", [])
-    weighted_sum = sum(
-        entry.get("count", 0)
-        * _interest_weight(org_influence.get(entry.get("org", ""), {}).get("interests_represented", "Unknown"))
-        for entry in top_orgs
-    )
-    return weighted_sum / total_procedure_meetings
-
-
-def _compute_alas(mep_crossref: dict[str, Any]) -> float:
-    total_am = mep_crossref.get("total_amendments", 0)
-    total_mtg = mep_crossref.get("total_meetings", 0)
-    am_themes = mep_crossref.get("amendment_themes", {})
-    mtg_themes = mep_crossref.get("meeting_themes", {})
-    overlapping = mep_crossref.get("overlapping_themes", [])
-    if total_am == 0 or total_mtg == 0 or not overlapping:
-        return 0.0
-    raw_sum = sum(
-        (am_themes.get(t, 0) / total_am) * (mtg_themes.get(t, 0) / total_mtg)
-        for t in overlapping
-    )
-    return math.sqrt(min(1.0, raw_sum))
-
-
-def _compute_ici(mep_crossref: dict[str, Any]) -> float:
-    top_orgs = mep_crossref.get("top_orgs_met", [])
-    total_mtg = mep_crossref.get("total_meetings", 0)
-    if total_mtg == 0 or not top_orgs:
-        return 0.0
-    top_total = sum(e.get("count", 0) for e in top_orgs)
-    remainder = total_mtg - top_total
-    hhi = sum((e.get("count", 0) / total_mtg) ** 2 for e in top_orgs)
-    for _ in range(remainder):
-        hhi += (1 / total_mtg) ** 2
-    return hhi
-
-
 def _build_org_influence(
     commission_meetings: list[dict[str, Any]],
     lobbying_meetings: list[dict[str, Any]],
@@ -362,112 +291,63 @@ def _build_theme_indicators(
     return indicators
 
 
-def _run_statistical_tests(
-    rows: list[dict[str, Any]],
-    crossref_all: dict[str, Any],
-    theme_indicators: dict[str, Any],
-) -> dict[str, Any]:
-    results: dict[str, Any] = {}
-    if not SCIPY_AVAILABLE:
-        results["error"] = "scipy not available"
-        return results
-    if len(rows) < 4:
-        results["error"] = "Insufficient MEP count for meaningful statistical tests"
-        return results
+def _compute_theme_lobbying_density(theme_indicators: dict[str, Any]) -> list[dict[str, Any]]:
+    """Rank themes by commission meeting count ('lobbying density')."""
+    return sorted(
+        [
+            {
+                "theme": t,
+                "commission_meeting_count": ind["commission_meeting_count"],
+                "total_meeting_count": ind["total_meeting_count"],
+                "amendment_count": ind["amendment_count"],
+                "active_org_count": ind["active_org_count"],
+            }
+            for t, ind in theme_indicators.items()
+        ],
+        key=lambda x: x["commission_meeting_count"],
+        reverse=True,
+    )
 
-    lei_vals = [r["lei"] for r in rows]
-    amd_vals = [r["amendments"] for r in rows]
-    alas_vals = [r["alas"] for r in rows]
-    overlap_vals = [r["overlapping_themes"] for r in rows]
 
-    commercial_themes = {
-        t for t, ind in theme_indicators.items() if ind.get("total_meeting_count", 0) > 0
-    }
-    comm_amd_vals = [
-        sum(
-            v
-            for k, v in crossref_all.get(r["mep"], {}).get("amendment_themes", {}).items()
-            if k in commercial_themes
+def _compute_amendment_lobbying_density(
+    amendments: list[dict[str, Any]],
+    positions: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """For each amendment, count how many positions share at least one theme."""
+    pos_by_theme: dict[str, list[str]] = defaultdict(list)
+    for pos in positions:
+        for t in pos.get("themes", []):
+            pos_by_theme[t].append(pos.get("meeting_id", ""))
+
+    results: list[dict[str, Any]] = []
+    for am in amendments:
+        am_themes = set(am.get("themes", []))
+        matching_ids: set[str] = set()
+        for t in am_themes:
+            matching_ids.update(pos_by_theme.get(t, []))
+        results.append(
+            {
+                "amendment_number": am.get("number"),
+                "source": am.get("source"),
+                "themes": sorted(am_themes),
+                "matching_position_count": len(matching_ids),
+                "authors": am.get("authors", []),
+                "location": am.get("location", ""),
+            }
         )
-        for r in rows
-    ]
-
-    if len(set(lei_vals)) > 1 and len(set(amd_vals)) > 1:
-        r1, p1 = scipy_stats.pearsonr(lei_vals, amd_vals)
-        results["test1_lei_vs_amendments"] = {
-            "test": "Pearson correlation",
-            "variables": "LEI vs. total_amendments",
-            "n": len(rows),
-            "statistic": round(float(r1), 4),
-            "p_value": round(float(p1), 4),
-            "interpretation": (
-                "Significant positive correlation: higher-exposed MEPs table more amendments."
-                if p1 < 0.05 and r1 > 0
-                else "No statistically significant relationship."
-            ),
-        }
-    else:
-        results["test1_lei_vs_amendments"] = {"error": "Insufficient variance"}
-
-    if len(set(alas_vals)) > 1 and len(set(comm_amd_vals)) > 1:
-        r2, p2 = scipy_stats.pearsonr(alas_vals, comm_amd_vals)
-        results["test2_alas_vs_commercial_amendments"] = {
-            "test": "Pearson correlation",
-            "variables": "ALAS vs. amendments_on_commercial_themes",
-            "n": len(rows),
-            "statistic": round(float(r2), 4),
-            "p_value": round(float(p2), 4),
-            "interpretation": (
-                "Significant positive correlation."
-                if p2 < 0.05 and r2 > 0
-                else "No statistically significant relationship."
-            ),
-        }
-    else:
-        results["test2_alas_vs_commercial_amendments"] = {"error": "Insufficient variance"}
-
-    median_lei = sorted(lei_vals)[len(lei_vals) // 2]
-    median_overlap = sorted(overlap_vals)[len(overlap_vals) // 2]
-    a = b = c = d = 0
-    for r in rows:
-        high_lei = r["lei"] > median_lei
-        high_ov = r["overlapping_themes"] > median_overlap
-        if high_lei and high_ov:
-            a += 1
-        elif high_lei and not high_ov:
-            b += 1
-        elif not high_lei and high_ov:
-            c += 1
-        else:
-            d += 1
-    try:
-        odds_ratio, p3 = scipy_stats.fisher_exact([[a, b], [c, d]])
-        results["test3_lei_group_vs_overlap_group"] = {
-            "test": "Fisher's exact test",
-            "variables": "LEI group (high/low) x thematic overlap group (high/low)",
-            "contingency": {"a": a, "b": b, "c": c, "d": d},
-            "odds_ratio": round(float(odds_ratio), 4),
-            "p_value": round(float(p3), 4),
-            "interpretation": (
-                "Significant: higher-exposure MEPs have broader thematic overlap."
-                if p3 < 0.05
-                else "No statistically significant association."
-            ),
-        }
-    except Exception as exc:
-        results["test3_lei_group_vs_overlap_group"] = {"error": str(exc)}
-
+    results.sort(key=lambda x: x["matching_position_count"], reverse=True)
     return results
 
 
 def step6_quantitative_analysis(
     data: dict[str, Any],
     amendments: list[dict[str, Any]],
+    positions: list[dict[str, Any]],
     taxonomy: dict[str, Any],
     compiled_patterns: dict[str, list[re.Pattern]],
     logger: Any = None,
 ) -> dict[str, Any]:
-    """Compute LEI, ALAS, ICI, theme indicators, and statistical tests."""
+    """Compute org influence, theme indicators, MEP crossref, and match density."""
     _log = logger.info if logger else print
     _warn = logger.warning if logger else print
 
@@ -489,60 +369,23 @@ def step6_quantitative_analysis(
         amendments, lobbying_meetings, commission_meetings, key_meps, compiled_patterns
     )
 
-    mep_indices: dict[str, dict[str, float]] = {}
-    for mep, crossref in mep_crossref.items():
-        mep_indices[mep] = {
-            "lei": _compute_lei(crossref, org_influence, total_procedure_meetings),
-            "alas": _compute_alas(crossref),
-            "ici": _compute_ici(crossref),
-        }
-
     theme_indicators = _build_theme_indicators(
         amendments, commission_meetings, lobbying_meetings, taxonomy, compiled_patterns
     )
 
-    comparison_rows: list[dict[str, Any]] = []
-    for mep_name, meta in {**key_meps, **{m: {} for m in mep_crossref}}.items():
-        crossref = mep_crossref.get(mep_name, {})
-        indices = mep_indices.get(mep_name, {"lei": 0.0, "alas": 0.0, "ici": 0.0})
-        am_themes = crossref.get("amendment_themes", {})
-        top_themes = [t for t, _ in sorted(am_themes.items(), key=lambda x: x[1], reverse=True)[:3]]
-        comparison_rows.append(
-            {
-                "mep": mep_name,
-                "party": meta.get("party", crossref.get("party", "")),
-                "role": meta.get("role", crossref.get("role", "Member")),
-                "amendments": crossref.get("total_amendments", 0),
-                "meetings": crossref.get("total_meetings", 0),
-                "overlapping_themes": len(crossref.get("overlapping_themes", [])),
-                "lei": round(indices["lei"], 4),
-                "alas": round(indices["alas"], 4),
-                "ici": round(indices["ici"], 4),
-                "top_themes": top_themes,
-                "top_orgs": [e.get("org", "") for e in crossref.get("top_orgs_met", [])[:3]],
-            }
-        )
+    theme_lobbying_density = _compute_theme_lobbying_density(theme_indicators)
+    amendment_lobbying_density = _compute_amendment_lobbying_density(amendments, positions)
 
-    seen_meps: set[str] = set()
-    unique_rows: list[dict[str, Any]] = []
-    for row in comparison_rows:
-        if row["mep"] not in seen_meps:
-            seen_meps.add(row["mep"])
-            unique_rows.append(row)
-    unique_rows.sort(key=lambda r: r["lei"], reverse=True)
-
-    stat_tests = _run_statistical_tests(unique_rows, mep_crossref, theme_indicators)
-
-    _log(f"MEPs analysed: {len(unique_rows)}")
-    _log(f"Top MEP by LEI: {unique_rows[0]['mep'] if unique_rows else 'N/A'}")
+    _log(f"MEPs analysed: {len(mep_crossref)}")
+    _log(f"Organisations tracked: {len(org_influence)}")
+    _log(f"Themes ranked by lobbying density: {len(theme_lobbying_density)}")
 
     return {
         "key_meps": key_meps,
         "mep_crossref": mep_crossref,
-        "mep_indices": mep_indices,
         "org_influence": org_influence,
         "theme_indicators": theme_indicators,
-        "comparison_rows": unique_rows,
-        "statistical_tests": stat_tests,
+        "theme_lobbying_density": theme_lobbying_density,
+        "amendment_lobbying_density": amendment_lobbying_density,
         "total_procedure_meetings": total_procedure_meetings,
     }
