@@ -188,7 +188,11 @@ def eu_documents_bronze(context: AssetExecutionContext, config: DocumentScraperC
 @asset(
     name="eu_legislation_diamond",
     group_name="eu_diamond",
-    description="Upload legislation to Supabase procedures table.",
+    description=(
+        "Upsert legislative procedure records to the Supabase procedures table. Generates "
+        "deterministic IDs from procedure references, formats timeline events, and writes "
+        "with upsert semantics for idempotent re-runs."
+    ),
     compute_kind="upload",
     partitions_def=weekly_partitions,
     ins={"silver_data": AssetIn("eu_legislation_silver")},

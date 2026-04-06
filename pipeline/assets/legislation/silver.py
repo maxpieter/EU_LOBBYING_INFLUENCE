@@ -83,6 +83,11 @@ def normalize_document_url_to_html(url: str) -> str:
     group_name="eu_silver",
     compute_kind="transformation",
     partitions_def=weekly_partitions,
+    description=(
+        "Merge OEIL and v2 API data, normalise document URLs (PDF→HTML), deduplicate events, "
+        "and enrich procedure records with computed fields. Prepares clean procedure dicts "
+        "for diamond-layer upload."
+    ),
 )
 def eu_legislation_silver(
     context: AssetExecutionContext,

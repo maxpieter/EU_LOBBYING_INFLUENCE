@@ -32,7 +32,12 @@ def fetch_outgoing_mep_ids(logger) -> Set[str]:
 @asset(
     name="eu_members_bronze",
     group_name="eu_bronze",
-    description="Scrape complete MEP data from EU Parliament with status tracking.",
+    description=(
+        "Scrape all active MEPs from the EU Parliament XML member list and individual profile "
+        "pages. Collects: full name, nationality, political group, national party, committee "
+        "memberships with roles, and active/inactive status. Creates minimal placeholder records "
+        "for outgoing (inactive) MEPs to preserve referential integrity with historical meeting data."
+    ),
     compute_kind="scraping",
 )
 def eu_members_bronze(
@@ -101,7 +106,11 @@ def eu_members_bronze(
 @asset(
     name="eu_members_diamond",
     group_name="eu_diamond",
-    description="Upload members to Supabase meps table.",
+    description=(
+        "Upsert active MEP records to the Supabase meps table and mark outgoing MEPs as "
+        "inactive. Uses deterministic primary keys for idempotent re-runs. Must run before "
+        "the lobbying diamond asset (foreign key dependency)."
+    ),
     compute_kind="upload",
     ins={"bronze_data": AssetIn("eu_members_bronze")},
 )

@@ -37,7 +37,12 @@ from .silver import (
 @asset(
     name="eu_lobbying_bronze_meetings",
     group_name="eu_bronze",
-    description="Extract lobbying meetings via progressive web-scraping for the partition week.",
+    description=(
+        "Scrape MEP lobbying meeting declarations from europarl.europa.eu for one weekly partition. "
+        "Uses a pool of headless Chrome instances (Selenium) to paginate through results. Extracts "
+        "MEP name, meeting date, title, attendee organisations, procedure references, committee "
+        "codes, and Transparency Register IDs. Recovers MEP integer IDs via EP search facet matching."
+    ),
     compute_kind="extraction",
     partitions_def=weekly_partitions,
 )
@@ -85,7 +90,12 @@ def eu_lobbying_bronze_meetings(
 @asset(
     name="eu_lobbying_bronze_organizations",
     group_name="eu_bronze",
-    description="Extract lobbying organizations from transparency register XML.",
+    description=(
+        "Download the full EU Transparency Register via the open data XML API "
+        "(~104 MB, ~17k registered entities). Extracts name, acronym, TR ID, registration "
+        "category, head office country, website, declared interests, policy areas, entity form, "
+        "and employee headcount for each organisation."
+    ),
     compute_kind="extraction",
 )
 def eu_lobbying_bronze_organizations(
@@ -104,11 +114,21 @@ def eu_lobbying_bronze_organizations(
     outs={
         "eu_lobbying_silver_organizations": AssetOut(
             group_name="eu_silver",
-            description="Organizations from transparency register + extracted from meetings.",
+            description=(
+                "Canonical organisation records from the Transparency Register plus new stub "
+                "organisations discovered in meeting records. Entity resolution via a 5-step "
+                "cascade: TR ID lookup, normalised name match, cleaned name match (strips person "
+                "names, geographic suffixes), acronym match, and parenthetical/prefix match. "
+                "Unmatched orgs get a deterministic hash-based ID (org_{SHA256[:16]})."
+            ),
         ),
         "eu_lobbying_silver_meetings": AssetOut(
             group_name="eu_silver",
-            description="Lobbying meetings linked to organizations.",
+            description=(
+                "Lobbying meetings with organisation references resolved to canonical org IDs. "
+                "Each meeting is linked to its attendee organisations via the 5-step entity "
+                "resolution cascade and validated as a Pydantic LobbyingMeeting model."
+            ),
         ),
     },
     compute_kind="transformation",
@@ -189,7 +209,11 @@ def eu_lobbying_silver(
 @asset(
     name="eu_lobbying_diamond",
     group_name="eu_diamond",
-    description="Upload lobbying data to Supabase.",
+    description=(
+        "Upsert organisations and lobbying meetings to Supabase (PostgreSQL). Uses deterministic "
+        "primary keys for idempotent writes. Depends on eu_members_diamond to satisfy the "
+        "lobbying_meetings.mep_id foreign key constraint against the meps table."
+    ),
     compute_kind="loading",
     partitions_def=weekly_partitions,
     ins={
@@ -251,9 +275,13 @@ class OrgDedupConfig(Config):
     compute_kind="dedup",
     required_resource_keys={"supabase"},
     description=(
-        "Deduplicate stub organisations by relinking lobbying meetings to canonical "
-        "Transparency Register entries. Four passes: TR ID extraction from name, "
-        "case-insensitive name match, acronym match, TR web search with AI confirmation."
+        "Post-hoc batch deduplication of stub organisations that escaped the Silver-layer "
+        "entity resolution. Relinks lobbying meetings from stubs to canonical TR entries. "
+        "Three deterministic passes: (1) extract embedded TR IDs from org names, "
+        "(2) case-insensitive normalised name match against TR, (3) acronym match. "
+        "Pass 4 uses pg_trgm trigram similarity (threshold 0.25) to find fuzzy candidates, "
+        "then sends them to Claude Haiku for high/medium/low/no_match classification. "
+        "Only high-confidence matches are applied; medium are flagged for manual review."
     ),
 )
 def eu_lobbying_org_dedup(context: AssetExecutionContext, config: OrgDedupConfig):

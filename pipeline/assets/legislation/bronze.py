@@ -375,6 +375,14 @@ def _convert_oeil_actors(
     group_name="eu_bronze",
     compute_kind="scraper",
     partitions_def=weekly_partitions,
+    description=(
+        "Discover and scrape legislative procedures from OEIL and the EP Open Data v2 API. "
+        "Recent partitions (<=28 days) use the v2 /procedures/feed for real-time discovery; "
+        "older partitions fall back to the OEIL XML catalog filtered by lastpubdate. For each "
+        "procedure: scrapes OEIL HTML for metadata (title, legal basis, policy area, timeline, "
+        "rapporteurs, committees), then enriches with v2 API data (actors, events, documents). "
+        "Outputs raw procedure dicts partitioned by week."
+    ),
 )
 def eu_legislation_bronze(context: AssetExecutionContext) -> List[Dict[str, Any]]:
     """Bronze layer: v2 feed / OEIL XML discovery -> OEIL HTML scraping -> v2 enrichment.

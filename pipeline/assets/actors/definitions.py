@@ -27,7 +27,12 @@ class ActorsBronzeConfig(Config):
 @asset(
     name="eu_actors_bronze",
     group_name="eu_bronze",
-    description="Scrape institutional actors (Commissioners) with full enrichment.",
+    description=(
+        "Scrape EU institutional actors (Commissioners and cabinet members) from official EC "
+        "sources. Enriches each actor with: team composition, declarations of interest, past "
+        "meetings, speeches, calendar, biography, published documents, and latest news. "
+        "Validates all records against the Actor Pydantic model."
+    ),
     compute_kind="scraping",
 )
 def eu_actors_bronze(
@@ -99,7 +104,10 @@ def eu_actors_bronze(
 @asset(
     name="eu_actors_diamond",
     group_name="eu_diamond",
-    description="Upload actors to Supabase actors table.",
+    description=(
+        "Upsert validated actor records (Commissioners, cabinet members) to the Supabase "
+        "actors table with deterministic primary keys for idempotent re-runs."
+    ),
     compute_kind="upload",
     ins={"bronze_data": AssetIn("eu_actors_bronze")},
 )

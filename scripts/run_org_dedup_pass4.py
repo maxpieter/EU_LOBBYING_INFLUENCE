@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
-"""Overnight runner for org dedup Pass 4 (TR web search).
+"""Org dedup Pass 4 — bulk TR download + local fuzzy match + AI confirmation.
 
-Optimizations:
-- Pre-filters government bodies, permanent representations, EU institutions
-- Quick string similarity check skips obvious non-matches before AI
-- Batched AI calls (10 comparisons per prompt)
-- Parallel TR scraping (configurable workers)
-- Incremental CSV save (resume-safe)
+Two-phase design:
+  Phase 1+2: Download TR dump, fuzzy-match locally, save candidates to CSV (no AI, minutes)
+  Phase 3:   Classify candidates via Anthropic API in large batches (fast, cheap)
 
 Usage:
-    # Dry run (default) — produces CSV report, no DB writes
-    .venv/bin/python scripts/run_org_dedup_pass4.py --resume --workers 5
+    # Phase 1+2 only: generate candidates CSV
+    .venv/bin/python scripts/run_org_dedup_pass4.py --candidates-only
 
-    # Live run — applies high-confidence matches
-    .venv/bin/python scripts/run_org_dedup_pass4.py --apply --resume --workers 5
+    # Full run (phases 1-3), dry run
+    .venv/bin/python scripts/run_org_dedup_pass4.py
+
+    # Full run, apply high-confidence matches to DB
+    .venv/bin/python scripts/run_org_dedup_pass4.py --apply
+
+    # Phase 3 only: classify an existing candidates CSV
+    .venv/bin/python scripts/run_org_dedup_pass4.py --classify-only
+
+    # Resume Phase 3 after interruption
+    .venv/bin/python scripts/run_org_dedup_pass4.py --classify-only --resume
 """
 
 from __future__ import annotations
@@ -22,23 +28,22 @@ import argparse
 import csv
 import importlib.util
 import json
-import os
 import re
-import subprocess
-import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-import requests as _requests
+import requests
 
 # ---------------------------------------------------------------------------
 # Bootstrap
 # ---------------------------------------------------------------------------
 
 PROJECT_ROOT = Path(__file__).parent.parent
-REPORT_PATH = PROJECT_ROOT / "analysis" / "org_dedup_report.csv"
-REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+CANDIDATES_PATH = PROJECT_ROOT / "analysis" / "org_dedup_candidates.csv"
+REPORT_PATH = PROJECT_ROOT / "analysis" / "org_dedup_report_bulk.csv"
+TR_CACHE_PATH = PROJECT_ROOT / "analysis" / "tr_dump.json"
+CANDIDATES_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 _spec = importlib.util.spec_from_file_location(
     "org_dedup",
@@ -46,98 +51,20 @@ _spec = importlib.util.spec_from_file_location(
 )
 _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
-
-_search_variants = _mod._search_variants
 _apply_tr_enrichment = _mod._apply_tr_enrichment
 
-# ---------------------------------------------------------------------------
-# Fast HTTP scraping (shared session, no sleeps)
-# ---------------------------------------------------------------------------
-
-_TR_SEARCH_URL = "https://ec.europa.eu/transparencyregister/public/search?lang=en&queryText={query}"
-_session = _requests.Session()
-_session.headers["Accept-Language"] = "en"
-# Keep-alive connection pooling — much faster than individual requests
-_adapter = _requests.adapters.HTTPAdapter(
-    pool_connections=20, pool_maxsize=50, max_retries=2
-)
-_session.mount("https://", _adapter)
-_session.mount("http://", _adapter)
-
-
-def _scrape_tr_search(query: str) -> list[dict]:
-    url = _TR_SEARCH_URL.format(query=_requests.utils.quote(query))
-    try:
-        resp = _session.get(url, timeout=15)
-        resp.raise_for_status()
-    except Exception:
-        return []
-    entries: list[dict] = []
-    for m in re.finditer(
-        r'href=["\']search-details_en\?id=([0-9]+-[0-9]+)["\'][^>]*>(.*?)</a>',
-        resp.text, re.DOTALL | re.IGNORECASE,
-    ):
-        tr_id = m.group(1).strip()
-        name = re.sub(r"<[^>]+>", "", m.group(2)).strip()
-        name = re.sub(r"\s+", " ", name).strip()
-        if tr_id and name:
-            entries.append({"name": name, "tr_id": tr_id})
-        if len(entries) >= 5:
-            break
-    return entries
-
-
-def _scrape_tr_detail(tr_id: str) -> dict | None:
-    url = f"https://ec.europa.eu/transparencyregister/public/PUBLIC/ORGANISATION/{tr_id}?lang=en"
-    try:
-        resp = _session.get(url, timeout=15)
-        resp.raise_for_status()
-    except Exception:
-        return None
-    import html as html_mod
-    html = html_mod.unescape(resp.text)
-
-    def _cell(label: str) -> str:
-        pat = re.compile(
-            r'<td[^>]*>[^<]*<strong>\s*' + re.escape(label)
-            + r'\s*</strong>[^<]*</td>\s*<td[^>]*>(.*?)</td>',
-            re.DOTALL | re.IGNORECASE,
-        )
-        m = pat.search(html)
-        if not m:
-            return ""
-        return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(1))).strip()
-
-    name = _cell("Organisation name")
-    if not name:
-        return None
-    interests = _cell("Applicant/registrant's representation") or _cell("Interests represented")
-    country = ""
-    cm = re.search(
-        r'(?:GERMANY|BELGIUM|FRANCE|DENMARK|NETHERLANDS|ITALY|SPAIN|AUSTRIA|'
-        r'SWEDEN|FINLAND|PORTUGAL|GREECE|POLAND|CZECH\s*REPUBLIC|HUNGARY|'
-        r'ROMANIA|CROATIA|SLOVAKIA|SLOVENIA|BULGARIA|CYPRUS|ESTONIA|LATVIA|'
-        r'LITHUANIA|LUXEMBOURG|MALTA|IRELAND|UNITED\s*KINGDOM|SWITZERLAND|'
-        r'NORWAY|UNITED\s*STATES)', html,
-    )
-    if cm:
-        country = cm.group(0).strip().title()
-    def _c(v: str) -> str:
-        return "" if v.strip().lower() in {"n/a", "n/a.", "-", "none"} else v.strip()
-    return {
-        "name": _c(name), "acronym": _c(_cell("Acronym")),
-        "interests_represented": _c(interests), "category": _c(_cell("Category of registration")),
-        "country": _c(country), "website": _c(_cell("Website")),
-    }
-
-FIELDNAMES = [
-    "stub_id", "stub_name", "tr_id", "tr_name", "tr_acronym",
-    "tr_country", "tr_category", "tr_interests",
-    "confidence", "reasoning", "action",
+CANDIDATE_FIELDS = [
+    "stub_id", "stub_name",
+    "c1_tr_id", "c1_name", "c1_acronym", "c1_country", "c1_category", "c1_interests", "c1_score",
+    "c2_tr_id", "c2_name", "c2_acronym", "c2_country", "c2_category", "c2_interests", "c2_score",
+    "c3_tr_id", "c3_name", "c3_acronym", "c3_country", "c3_category", "c3_interests", "c3_score",
 ]
 
-# Thread-safe CSV writing
-_csv_lock = threading.Lock()
+REPORT_FIELDS = [
+    "stub_id", "stub_name", "tr_id", "tr_name", "tr_acronym",
+    "tr_country", "tr_category", "tr_interests",
+    "fuzzy_score", "confidence", "reasoning", "action",
+]
 
 # ---------------------------------------------------------------------------
 # Pre-filter: skip orgs that will never be in the TR
@@ -157,7 +84,7 @@ _SKIP_PATTERNS = re.compile(
     r"committee\s+of\s+the\s+regions|"
     r"european\s+central\s+bank|"
     r"european\s+investment\s+bank|"
-    r"^enisa$|^efsa$|^echa$|^ema$|"  # EU agencies
+    r"^enisa$|^efsa$|^echa$|^ema$|"
     r"united\s+nations|^un\s+|"
     r"world\s+bank|^imf$|^oecd$|^nato$|"
     r"^president\s+of|^prime\s+minister"
@@ -167,267 +94,137 @@ _SKIP_PATTERNS = re.compile(
 
 
 def _should_skip(name: str) -> str | None:
-    """Return a reason string if this org should be skipped, else None."""
     m = _SKIP_PATTERNS.search(name)
-    if m:
-        return f"Pre-filtered: matches '{m.group(0).strip()}'"
-    return None
+    return f"Pre-filtered: matches '{m.group(0).strip()}'" if m else None
 
 
 # ---------------------------------------------------------------------------
-# Quick string similarity (avoid AI for obvious non-matches)
+# Phase 1: Download + parse TR dump
 # ---------------------------------------------------------------------------
 
-def _quick_similarity(stub_name: str, tr_name: str, tr_acronym: str) -> bool:
-    """Always returns True — we let the AI decide.
+TR_XML_URL = "https://transparency-register.europa.eu/odplastorganisationxml_en"
 
-    The TR search already does relevance ranking. If the search returned a
-    result, it's worth asking the AI about it. The AI is the smart filter.
-    """
-    return True
+
+def _download_tr_dump() -> list[dict]:
+    """Download and parse the full TR XML dump. Caches as JSON."""
+    if TR_CACHE_PATH.exists():
+        age_hours = (time.time() - TR_CACHE_PATH.stat().st_mtime) / 3600
+        if age_hours < 24:
+            print(f"  Using cached TR dump ({age_hours:.1f}h old)")
+            with TR_CACHE_PATH.open(encoding="utf-8") as f:
+                return json.load(f)
+
+    print("  Downloading TR XML dump...")
+    resp = requests.get(TR_XML_URL, timeout=120)
+    resp.raise_for_status()
+    raw = resp.text
+
+    # Clean invalid XML character references
+    raw = re.sub(r"&#x[0-1]?[0-9a-fA-F];", "", raw)
+
+    import xml.etree.ElementTree as ET
+    root = ET.fromstring(raw)
+
+    orgs = []
+    for ir in root.findall(".//interestRepresentative"):
+        name = ir.findtext("name/originalName", "").strip()
+        if not name:
+            continue
+        acronym = ir.findtext("acronym", "").strip()
+        tr_id = ir.findtext("identificationCode", "").strip()
+        category = ir.findtext("registrationCategory", "").strip()
+        country = ""
+        ho = ir.find("headOffice")
+        if ho is not None:
+            country = ho.findtext("country", "").strip().title()
+        interests = ir.findtext("goals", "").strip()[:500]
+        website = ir.findtext("webSiteURL", "").strip()
+
+        orgs.append({
+            "tr_id": tr_id,
+            "name": name,
+            "acronym": acronym,
+            "category": category,
+            "country": country,
+            "interests": interests,
+            "website": website,
+        })
+
+    with TR_CACHE_PATH.open("w", encoding="utf-8") as f:
+        json.dump(orgs, f, ensure_ascii=False)
+
+    print(f"  Parsed {len(orgs)} TR organisations")
+    return orgs
 
 
 # ---------------------------------------------------------------------------
-# Batched AI confirmation
+# Phase 2: Local fuzzy matching
 # ---------------------------------------------------------------------------
 
-def _ai_confirm_batch(pairs: list[dict]) -> list[dict]:
-    """Confirm multiple stub-TR pairs in a single AI call.
-
-    Each pair should have: stub_name, tr_name, tr_acronym, tr_country, tr_category, tr_interests.
-    Returns a list of {"match": ..., "reasoning": ...} dicts, same order as input.
-    """
-    if not pairs:
-        return []
-
-    items = []
-    for i, p in enumerate(pairs):
-        items.append(
-            f'{i+1}. DB: "{p["stub_name"]}" -> TR: "{p["tr_name"]}" '
-            f'(acronym: "{p.get("tr_acronym", "")}", '
-            f'country: "{p.get("tr_country", "")}", '
-            f'category: "{p.get("tr_category", "")}")'
-        )
-
-    prompt = (
-        "For each pair below, determine if the database organization (DB) is the same "
-        "entity as the EU Transparency Register result (TR). Consider name variants, "
-        "acronyms, translations across EU languages, and abbreviations.\n\n"
-        + "\n".join(items)
-        + "\n\nRespond ONLY with a JSON array, one entry per pair:\n"
-        '[{"match": "high"|"medium"|"low"|"no_match", "reasoning": "one sentence"}, ...]\n'
-        "IMPORTANT: Return exactly " + str(len(pairs)) + " entries in order."
+def _normalize(s: str) -> str:
+    s = s.lower().strip()
+    s = re.sub(
+        r"\b(ltd|limited|gmbh|ag|sa|s\.a\.|s\.r\.l\.|srl|bv|nv|inc|corp|"
+        r"plc|llc|e\.v\.|aisbl|asbl|vzw|ry|z\.s\.|a\.s\.|s\.p\.a\.|"
+        r"s\.l\.|sl|se)\b\.?",
+        "", s,
     )
-
-    fallback = [{"match": "no_match", "reasoning": "batch_parse_failed"}] * len(pairs)
-
-    try:
-        result = subprocess.run(
-            ["claude", "-p", "--model", "haiku"],
-            input=prompt,
-            capture_output=True,
-            text=True,
-            timeout=60,
-        )
-        raw = result.stdout.strip()
-        # Extract JSON array
-        json_match = re.search(r"\[.*\]", raw, re.DOTALL)
-        if not json_match:
-            return fallback
-        parsed = json.loads(json_match.group(0))
-        if not isinstance(parsed, list) or len(parsed) != len(pairs):
-            return fallback
-        # Validate each entry
-        valid = {"high", "medium", "low", "no_match"}
-        results = []
-        for entry in parsed:
-            if isinstance(entry, dict) and entry.get("match") in valid:
-                results.append({
-                    "match": entry["match"],
-                    "reasoning": str(entry.get("reasoning", ""))[:200],
-                })
-            else:
-                results.append({"match": "no_match", "reasoning": "invalid_entry"})
-        return results
-    except Exception:
-        return fallback
+    s = re.sub(r"\s*\(.*?\)\s*", " ", s)
+    s = re.sub(r"[^\w\s]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
 
 
-def _ai_confirm_batch_multi(groups: list[dict]) -> list[dict]:
-    """Multi-candidate AI confirmation. Each group: {stub_name, candidates: [...]}.
+def _build_lookup(tr_orgs: list[dict]) -> dict:
+    by_name: dict[str, list[dict]] = {}
+    by_acronym: dict[str, list[dict]] = {}
 
-    The AI picks the best candidate (A/B/C/D/E) or "none".
-    Returns [{match, chosen_index, reasoning}, ...] in same order.
-    """
-    if not groups:
-        return []
-
-    items = []
-    for i, g in enumerate(groups):
-        cand_lines = []
-        for j, c in enumerate(g["candidates"]):
-            cand_lines.append(
-                f'    {chr(65+j)}. "{c["name"]}" '
-                f'(acronym: "{c.get("acronym", "")}", '
-                f'country: "{c.get("country", "")}", '
-                f'category: "{c.get("category", "")}")'
-            )
-        items.append(
-            f'{i+1}. DB: "{g["stub_name"]}"\n'
-            f'   TR candidates:\n' + "\n".join(cand_lines)
-        )
-
-    prompt = (
-        "For each organization below, determine which TR candidate (if any) is the same "
-        "entity as the DB organization. Consider name variants, acronyms, translations "
-        "across EU languages, and abbreviations. The first candidate is not necessarily "
-        "the best match — evaluate ALL candidates.\n\n"
-        + "\n".join(items)
-        + "\n\nRespond ONLY with a JSON array, one entry per DB org:\n"
-        '[{"match": "high"|"medium"|"low"|"no_match", "chosen": "A"|"B"|"C"|"D"|"E"|"none", '
-        '"reasoning": "one sentence"}, ...]\n'
-        "IMPORTANT: Return exactly " + str(len(groups)) + " entries in order."
-    )
-
-    fallback = [{"match": "no_match", "chosen_index": -1, "reasoning": "batch_parse_failed"}] * len(groups)
-
-    try:
-        result = subprocess.run(
-            ["claude", "-p", "--model", "haiku"],
-            input=prompt,
-            capture_output=True,
-            text=True,
-            timeout=60,
-        )
-        raw = result.stdout.strip()
-        json_match = re.search(r"\[.*\]", raw, re.DOTALL)
-        if not json_match:
-            return fallback
-        parsed = json.loads(json_match.group(0))
-        if not isinstance(parsed, list) or len(parsed) != len(groups):
-            return fallback
-        valid = {"high", "medium", "low", "no_match"}
-        out = []
-        for entry in parsed:
-            if isinstance(entry, dict) and entry.get("match") in valid:
-                chosen_letter = str(entry.get("chosen", "none")).upper()
-                chosen_index = ord(chosen_letter) - 65 if len(chosen_letter) == 1 and chosen_letter.isalpha() else -1
-                out.append({
-                    "match": entry["match"],
-                    "chosen_index": chosen_index,
-                    "reasoning": str(entry.get("reasoning", ""))[:200],
-                })
-            else:
-                out.append({"match": "no_match", "chosen_index": -1, "reasoning": "invalid_entry"})
-        return out
-    except Exception:
-        return fallback
-
-
-# ---------------------------------------------------------------------------
-# Phase 1: TR search + detail (parallelized, no AI)
-# ---------------------------------------------------------------------------
-
-def _search_and_detail(stub: dict) -> dict:
-    """Search TR and fetch detail for one stub. Returns enriched stub dict."""
-    stub_id = stub["id"]
-    stub_name = stub["name"].strip()
-
-    variants = _search_variants(stub_name)
-    results = []
-    for query in variants:
-        results = _scrape_tr_search(query)
-        if results:
-            break
-
-    if not results:
-        return {
-            **stub,
-            "_status": "no_results",
-            "_reasoning": f"No TR results for: {variants}",
-        }
-
-    top = results[0]
-    tr_id = top["tr_id"]
-
-    # Quick similarity check — skip detail fetch for obvious non-matches
-    if not _quick_similarity(stub_name, top["name"], ""):
-        return {
-            **stub,
-            "_status": "no_similarity",
-            "_tr_id": tr_id,
-            "_tr_name": top["name"],
-            "_reasoning": f"Search result '{top['name']}' too dissimilar to '{stub_name}'",
-        }
-
-    detail = _scrape_tr_detail(tr_id)
-    if detail is None:
-        return {
-            **stub,
-            "_status": "detail_failed",
-            "_tr_id": tr_id,
-            "_tr_name": top["name"],
-            "_reasoning": "Could not fetch TR detail page",
-        }
+    for org in tr_orgs:
+        norm = _normalize(org["name"])
+        by_name.setdefault(norm, []).append(org)
+        if org["acronym"]:
+            acr = org["acronym"].lower().strip()
+            by_acronym.setdefault(acr, []).append(org)
 
     return {
-        **stub,
-        "_status": "needs_ai",
-        "_tr_id": tr_id,
-        "_tr_name": detail.get("name", top["name"]),
-        "_tr_acronym": detail.get("acronym", ""),
-        "_tr_country": detail.get("country", ""),
-        "_tr_category": detail.get("category", ""),
-        "_tr_interests": detail.get("interests_represented", ""),
-        "_detail": detail,
+        "by_name": by_name,
+        "by_acronym": by_acronym,
+        "all_names": list(by_name.keys()),
+        "all_orgs": tr_orgs,
     }
 
 
-def _search_and_detail_multi(stub: dict) -> dict:
-    """Search TR and fetch details for ALL results (up to 5).
+def _fuzzy_match(stub_name: str, lookup: dict, top_n: int = 3) -> list[dict]:
+    from rapidfuzz import process, fuzz
 
-    Used by --retry-failed to evaluate all candidates, not just the top hit.
-    """
-    stub_name = stub["name"].strip()
-    variants = _search_variants(stub_name)
-    results = []
-    for query in variants:
-        results = _scrape_tr_search(query)
-        if results:
-            break
+    norm = _normalize(stub_name)
 
-    if not results:
-        return {**stub, "_status": "no_results", "_candidates": []}
+    if norm in lookup["by_name"]:
+        return [{"tr_org": org, "score": 100} for org in lookup["by_name"][norm][:top_n]]
 
-    # Fetch all detail pages in parallel (up to 5 concurrent)
-    candidates = []
-    with ThreadPoolExecutor(max_workers=5) as detail_pool:
-        future_to_r = {detail_pool.submit(_scrape_tr_detail, r["tr_id"]): r for r in results}
-        for fut in as_completed(future_to_r):
-            r = future_to_r[fut]
-            try:
-                detail = fut.result()
-            except Exception:
-                continue
-            if detail:
-                candidates.append({
-                    "tr_id": r["tr_id"],
-                    "name": detail.get("name", r["name"]),
-                    "acronym": detail.get("acronym", ""),
-                    "country": detail.get("country", ""),
-                    "category": detail.get("category", ""),
-                    "interests": detail.get("interests_represented", ""),
-                    "detail": detail,
-                })
+    acr = norm.upper().replace(" ", "")
+    if len(acr) <= 10 and acr.lower() in lookup["by_acronym"]:
+        return [{"tr_org": org, "score": 95} for org in lookup["by_acronym"][acr.lower()][:top_n]]
 
-    if not candidates:
-        return {**stub, "_status": "detail_failed", "_candidates": []}
+    results = process.extract(
+        norm,
+        lookup["all_names"],
+        scorer=fuzz.WRatio,
+        limit=top_n,
+    )
 
-    return {**stub, "_status": "needs_ai", "_candidates": candidates}
+    matches = []
+    for match_name, score, _ in results:
+        if score < 50:
+            continue
+        for org in lookup["by_name"][match_name]:
+            matches.append({"tr_org": org, "score": score})
+
+    return matches[:top_n]
 
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Helpers: DB access
 # ---------------------------------------------------------------------------
 
 def _get_client():
@@ -477,205 +274,263 @@ def _fetch_active_org_ids(client) -> set[str]:
     return active
 
 
-def _load_already_processed() -> set[str]:
-    """Load stub IDs that are fully done (skip pending_ai — those still need Phase 2)."""
-    if not REPORT_PATH.exists():
-        return set()
-    done = set()
-    with REPORT_PATH.open(encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["confidence"] != "pending_ai":
-                done.add(row["stub_id"])
-    return done
-
-
-def _load_pending_ai() -> list[dict]:
-    """Load rows with confidence=pending_ai from the CSV for Phase 2 resume."""
-    if not REPORT_PATH.exists():
-        return []
-    pending = []
-    with REPORT_PATH.open(encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["confidence"] == "pending_ai":
-                pending.append({
-                    "id": row["stub_id"],
-                    "name": row["stub_name"],
-                    "_tr_id": row["tr_id"],
-                    "_tr_name": row["tr_name"],
-                    "_tr_acronym": row.get("tr_acronym", ""),
-                    "_tr_country": row.get("tr_country", ""),
-                    "_tr_category": row.get("tr_category", ""),
-                    "_tr_interests": row.get("tr_interests", ""),
-                    "_status": "needs_ai",
-                })
-    return pending
-
-
-def _deduplicate_csv() -> None:
-    """Remove stale pending_ai rows that have a newer resolved entry."""
-    if not REPORT_PATH.exists():
-        return
-    rows = []
-    with REPORT_PATH.open(encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
-    # Keep the last (most recent) entry per stub_id — resolved rows are
-    # appended after pending_ai, so they come later in the file.
-    seen: dict[str, dict] = {}
-    for row in rows:
-        stub_id = row["stub_id"]
-        prev = seen.get(stub_id)
-        # Prefer resolved over pending_ai; otherwise keep the later row
-        if prev is None or prev["confidence"] == "pending_ai":
-            seen[stub_id] = row
-    deduped = list(seen.values())
-    with REPORT_PATH.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        writer.writerows(deduped)
-    removed = len(rows) - len(deduped)
-    if removed:
-        print(f"  Deduplicated CSV: removed {removed} stale rows ({len(deduped)} remaining)")
-
-
-def _append_row(row: dict) -> None:
-    with _csv_lock:
-        write_header = not REPORT_PATH.exists() or REPORT_PATH.stat().st_size == 0
-        with REPORT_PATH.open("a", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
-            if write_header:
-                writer.writeheader()
-            writer.writerow(row)
-
-
-def _load_failed_stubs() -> list[dict]:
-    """Load stubs with low or no_match confidence from the report CSV.
-
-    Skips stubs that were already retried (confidence starts with 'retried_').
-    """
-    if not REPORT_PATH.exists():
-        return []
-    # Build set of already-retried stub IDs
-    retried_ids: set[str] = set()
-    candidates: list[dict] = []
-    with REPORT_PATH.open(encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row["confidence"].startswith("retried_"):
-                retried_ids.add(row["stub_id"])
-            elif row["confidence"] in ("low", "no_match"):
-                candidates.append({"id": row["stub_id"], "name": row["stub_name"]})
-    return [c for c in candidates if c["id"] not in retried_ids]
-
-
-def _update_csv_rows(updates: dict[str, dict]) -> None:
-    """Update specific rows in the CSV by stub_id."""
-    if not REPORT_PATH.exists() or not updates:
-        return
-    rows = []
-    with REPORT_PATH.open(encoding="utf-8") as f:
-        rows = list(csv.DictReader(f))
-
-    for row in rows:
-        if row["stub_id"] in updates:
-            row.update(updates[row["stub_id"]])
-
-    with REPORT_PATH.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        writer.writerows(rows)
-
-
 # ---------------------------------------------------------------------------
-# Main
+# Phase 2 output: write candidates CSV
 # ---------------------------------------------------------------------------
 
-def _run_retry_failed(args, dry_run: bool) -> None:
-    """Retry low/no_match stubs with multi-candidate matching."""
-    client = _get_client()
-
-    failed_stubs = _load_failed_stubs()
-    if not failed_stubs:
-        print("No failed stubs (low/no_match) to retry.")
-        return
-
-    print(f"Retrying {len(failed_stubs)} failed stubs with multi-candidate matching...\n")
-
-    # Phase 1: parallel TR search + detail for ALL candidates
-    print(f"--- Phase 1: TR search + detail for all candidates ({args.workers} workers) ---")
+def run_candidates(args):
+    """Phase 1+2: download TR dump, fuzzy match, write candidates CSV."""
+    print("--- Phase 1: TR dump ---")
     t0 = time.time()
-    needs_ai: list[dict] = []
-    skipped = 0
+    tr_orgs = _download_tr_dump()
+    print(f"  {len(tr_orgs)} TR organisations loaded in {time.time()-t0:.1f}s")
 
-    with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = {pool.submit(_search_and_detail_multi, s): s for s in failed_stubs}
-        done_count = 0
-        for future in as_completed(futures):
-            done_count += 1
-            try:
-                result = future.result()
-            except Exception:
-                skipped += 1
+    print("\n--- Phase 2: Fuzzy matching ---")
+    t1 = time.time()
+    lookup = _build_lookup(tr_orgs)
+    print(f"  Built lookup ({len(lookup['all_names'])} unique names) in {time.time()-t1:.1f}s")
+
+    client = _get_client()
+    print("\n  Fetching stubs...")
+    all_stubs = _fetch_stubs(client)
+    print(f"  Total stubs: {len(all_stubs)}")
+
+    print("  Fetching active org IDs...")
+    active_ids = _fetch_active_org_ids(client)
+    stubs = [s for s in all_stubs if s["id"] in active_ids]
+    print(f"  Active stubs: {len(stubs)}")
+
+    # Write report for prefiltered + no_match (these don't need AI)
+    report_rows = []
+    candidates_rows = []
+    no_match_count = 0
+    prefilter_count = 0
+    auto_accepted = 0
+
+    for i, stub in enumerate(stubs):
+        skip_reason = _should_skip(stub["name"])
+        if skip_reason:
+            prefilter_count += 1
+            report_rows.append({
+                "stub_id": stub["id"], "stub_name": stub["name"],
+                "tr_id": "", "tr_name": "", "tr_acronym": "",
+                "tr_country": "", "tr_category": "", "tr_interests": "",
+                "fuzzy_score": "", "confidence": "prefiltered",
+                "reasoning": skip_reason, "action": "skip",
+            })
+            continue
+
+        matches = _fuzzy_match(stub["name"], lookup)
+        best_score = matches[0]["score"] if matches else 0
+
+        if not matches or best_score < args.min_score:
+            no_match_count += 1
+            report_rows.append({
+                "stub_id": stub["id"], "stub_name": stub["name"],
+                "tr_id": "", "tr_name": "", "tr_acronym": "",
+                "tr_country": "", "tr_category": "", "tr_interests": "",
+                "fuzzy_score": str(best_score),
+                "confidence": "no_match", "reasoning": "Below fuzzy threshold",
+                "action": "skip",
+            })
+        elif best_score >= args.auto_accept:
+            auto_accepted += 1
+            chosen = matches[0]["tr_org"]
+            report_rows.append({
+                "stub_id": stub["id"], "stub_name": stub["name"],
+                "tr_id": chosen.get("tr_id", ""),
+                "tr_name": chosen.get("name", ""),
+                "tr_acronym": chosen.get("acronym", ""),
+                "tr_country": chosen.get("country", ""),
+                "tr_category": chosen.get("category", ""),
+                "tr_interests": chosen.get("interests", "")[:200],
+                "fuzzy_score": str(best_score),
+                "confidence": "high",
+                "reasoning": f"Auto-accepted: fuzzy score {best_score}",
+                "action": "apply_dry",
+            })
+        else:
+            # Save candidates for AI classification
+            row = {"stub_id": stub["id"], "stub_name": stub["name"]}
+            for ci, m in enumerate(matches[:3], 1):
+                org = m["tr_org"]
+                row[f"c{ci}_tr_id"] = org.get("tr_id", "")
+                row[f"c{ci}_name"] = org.get("name", "")
+                row[f"c{ci}_acronym"] = org.get("acronym", "")
+                row[f"c{ci}_country"] = org.get("country", "")
+                row[f"c{ci}_category"] = org.get("category", "")
+                row[f"c{ci}_interests"] = org.get("interests", "")[:200]
+                row[f"c{ci}_score"] = str(m["score"])
+            # Fill empty candidate slots
+            for ci in range(len(matches[:3]) + 1, 4):
+                for f in ("tr_id", "name", "acronym", "country", "category", "interests", "score"):
+                    row[f"c{ci}_{f}"] = ""
+            candidates_rows.append(row)
+
+        if (i + 1) % 1000 == 0:
+            print(
+                f"  [{i+1:6d}/{len(stubs)}] "
+                f"{auto_accepted} auto, {len(candidates_rows)} need AI, "
+                f"{no_match_count} no match, {prefilter_count} prefiltered"
+            )
+
+    # Write candidates CSV
+    with CANDIDATES_PATH.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=CANDIDATE_FIELDS)
+        writer.writeheader()
+        writer.writerows(candidates_rows)
+
+    # Write already-resolved rows to report
+    with REPORT_PATH.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=REPORT_FIELDS)
+        writer.writeheader()
+        writer.writerows(report_rows)
+
+    elapsed = time.time() - t0
+    print(f"\n=== Phase 1+2 done in {elapsed:.1f}s ===")
+    print(f"  Pre-filtered:  {prefilter_count}")
+    print(f"  No match:      {no_match_count}")
+    print(f"  Auto-accepted: {auto_accepted}")
+    print(f"  Need AI:       {len(candidates_rows)}")
+    print(f"  Candidates:    {CANDIDATES_PATH}")
+    print(f"  Report:        {REPORT_PATH}")
+
+
+# ---------------------------------------------------------------------------
+# Phase 3: AI classification via Anthropic API
+# ---------------------------------------------------------------------------
+
+def _build_ai_prompt(batch: list[dict]) -> str:
+    items = []
+    for i, row in enumerate(batch):
+        cand_lines = []
+        for ci in range(1, 4):
+            name = row.get(f"c{ci}_name", "")
+            if not name:
                 continue
-            if result["_status"] == "needs_ai" and result["_candidates"]:
-                needs_ai.append(result)
-            else:
-                skipped += 1
-            if done_count % 50 == 0:
-                elapsed = time.time() - t0
-                rate = done_count / elapsed
-                remaining = (len(failed_stubs) - done_count) / rate
-                print(
-                    f"  [{done_count:5d}/{len(failed_stubs)}] "
-                    f"{len(needs_ai)} need AI, {skipped} skipped "
-                    f"({rate:.1f}/s, ~{remaining/60:.0f}m left)"
-                )
+            cand_lines.append(
+                f'    {chr(64+ci)}. "{name}" '
+                f'(acronym: "{row.get(f"c{ci}_acronym", "")}", '
+                f'country: "{row.get(f"c{ci}_country", "")}", '
+                f'category: "{row.get(f"c{ci}_category", "")}")'
+            )
+        items.append(
+            f'{i+1}. DB: "{row["stub_name"]}"\n'
+            f'   TR candidates:\n' + "\n".join(cand_lines)
+        )
 
-    elapsed1 = time.time() - t0
-    print(
-        f"  Phase 1 done in {elapsed1/60:.1f}m: "
-        f"{len(needs_ai)} need AI, {skipped} skipped"
+    return (
+        "For each organization below, determine which TR candidate (if any) is the same "
+        "entity as the DB organization. Consider name variants, acronyms, translations "
+        "across EU languages, and abbreviations. The first candidate is not necessarily "
+        "the best match — evaluate ALL candidates.\n\n"
+        + "\n".join(items)
+        + "\n\nRespond ONLY with a JSON array, one entry per DB org:\n"
+        '[{"match": "high"|"medium"|"low"|"no_match", "chosen": "A"|"B"|"C"|"none", '
+        '"reasoning": "one sentence"}, ...]\n'
+        f"IMPORTANT: Return exactly {len(batch)} entries in order."
     )
 
-    if not needs_ai:
-        print("\nNo candidates to evaluate.")
+
+def run_classify(args):
+    """Phase 3: classify candidates CSV via Anthropic API."""
+    import anthropic
+    from dotenv import dotenv_values
+    env = dotenv_values(PROJECT_ROOT / ".env")
+    api_key = env.get("ANTHROPIC_API_KEY")
+
+    if not CANDIDATES_PATH.exists():
+        print(f"Error: candidates file not found: {CANDIDATES_PATH}")
+        print("Run with --candidates-only first.")
         return
 
-    # Phase 2: multi-candidate AI confirmation (parallel AI calls, incremental save)
-    AI_PARALLEL = min(args.workers, 5)  # concurrent claude CLI processes
-    print(f"\n--- Phase 2: Multi-candidate AI ({len(needs_ai)} orgs, batch={args.ai_batch}, {AI_PARALLEL} parallel) ---")
-    t1 = time.time()
-    stats = {"high": 0, "medium": 0, "low": 0, "no_match": 0, "applied": 0, "errors": 0}
-    processed_count = 0
+    # Load candidates
+    with CANDIDATES_PATH.open(encoding="utf-8") as f:
+        candidates = list(csv.DictReader(f))
+    print(f"Loaded {len(candidates)} candidates from {CANDIDATES_PATH}")
 
-    def _process_ai_batch(batch: list[dict]) -> list[tuple[dict, dict]]:
-        """Run AI on one batch and return [(result, ai_result), ...]."""
-        groups = [
-            {"stub_name": r["name"], "candidates": r["_candidates"]}
-            for r in batch
-        ]
-        ai_results = _ai_confirm_batch_multi(groups)
-        return list(zip(batch, ai_results))
+    # Load existing report (prefiltered + no_match + auto-accepted)
+    existing_report = []
+    already_classified = set()
+    if REPORT_PATH.exists():
+        with REPORT_PATH.open(encoding="utf-8") as f:
+            existing_report = list(csv.DictReader(f))
+        if args.resume:
+            already_classified = {
+                r["stub_id"] for r in existing_report
+                if r.get("confidence") not in ("", "pending")
+            }
+            candidates = [c for c in candidates if c["stub_id"] not in already_classified]
+            print(f"  Resuming: {len(candidates)} remaining after skipping {len(already_classified)} already classified")
 
-    batches = [needs_ai[i:i + args.ai_batch] for i in range(0, len(needs_ai), args.ai_batch)]
-    with ThreadPoolExecutor(max_workers=AI_PARALLEL) as ai_pool:
-        futures = {ai_pool.submit(_process_ai_batch, b): b for b in batches}
-        for fut in as_completed(futures):
+    client = anthropic.Anthropic(api_key=api_key)
+    dry_run = not args.apply
+
+    batch_size = args.ai_batch
+    batches = [candidates[i:i + batch_size] for i in range(0, len(candidates), batch_size)]
+    print(f"\n--- Phase 3: AI classification ({len(candidates)} orgs, {len(batches)} batches of {batch_size}) ---")
+
+    t0 = time.time()
+    stats = {"high": 0, "medium": 0, "low": 0, "no_match": 0, "errors": 0}
+    new_report_rows = []
+    workers = args.workers
+    processed = 0
+
+    def _classify_batch(bi_batch):
+        bi, batch = bi_batch
+        prompt = _build_ai_prompt(batch)
+        for attempt in range(5):
             try:
-                pairs = fut.result()
-            except Exception:
-                processed_count += len(futures[fut])
+                response = client.messages.create(
+                    model="claude-haiku-4-5-20251001",
+                    max_tokens=4096,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                break
+            except Exception as e:
+                if "429" in str(e) or "rate_limit" in str(e):
+                    wait = 2 ** attempt * 3  # 3, 6, 12, 24, 48s
+                    time.sleep(wait)
+                    continue
+                raise
+        else:
+            raise RuntimeError(f"Rate limited after 5 retries")
+        raw = response.content[0].text
+        json_match = re.search(r"\[.*\]", raw, re.DOTALL)
+        if not json_match:
+            raise ValueError("No JSON array in response")
+        parsed = json.loads(json_match.group(0))
+        if len(parsed) != len(batch):
+            raise ValueError(f"Expected {len(batch)} entries, got {len(parsed)}")
+        return bi, batch, parsed
+
+    print(f"  Using {workers} parallel workers")
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = {pool.submit(_classify_batch, (bi, b)): (bi, b) for bi, b in enumerate(batches)}
+
+        for fut in as_completed(futures):
+            bi, batch = futures[fut]
+            try:
+                _, batch, parsed = fut.result()
+            except Exception as e:
+                print(f"  Batch {bi+1} failed: {e}")
+                stats["errors"] += len(batch)
+                processed += len(batch)
                 continue
 
-            batch_updates: dict[str, dict] = {}
-            for result, ai in pairs:
-                idx = ai["chosen_index"]
-                candidates = result["_candidates"]
-
-                if 0 <= idx < len(candidates):
-                    chosen = candidates[idx]
+            valid = {"high", "medium", "low", "no_match"}
+            for row, entry in zip(batch, parsed):
+                if not isinstance(entry, dict) or entry.get("match") not in valid:
+                    confidence = "no_match"
+                    reasoning = "invalid_entry"
+                    chosen_ci = 1
                 else:
-                    chosen = candidates[0]
+                    confidence = entry["match"]
+                    reasoning = str(entry.get("reasoning", ""))[:200]
+                    chosen_letter = str(entry.get("chosen", "none")).upper()
+                    chosen_ci = ord(chosen_letter) - 64 if len(chosen_letter) == 1 and chosen_letter.isalpha() and chosen_letter in "ABC" else 1
 
-                confidence = ai["match"]
                 stats[confidence] = stats.get(confidence, 0) + 1
 
                 if confidence == "high":
@@ -685,304 +540,125 @@ def _run_retry_failed(args, dry_run: bool) -> None:
                 else:
                     action = "skip"
 
-                # Apply to DB if live and high confidence
-                if not dry_run and confidence == "high" and chosen.get("tr_id"):
-                    tr_id = chosen["tr_id"]
-                    try:
-                        canonical_resp = (
-                            client.table("organizations")
-                            .select("id,name")
-                            .eq("eu_transparency_register_id", tr_id)
-                            .execute()
-                        )
-                        canonical_orgs = canonical_resp.data or []
-                        detail = chosen.get("detail")
+                chosen_name = row.get(f"c{chosen_ci}_name", row.get("c1_name", ""))
+                best_score = row.get("c1_score", "")
 
-                        if canonical_orgs and canonical_orgs[0]["id"] != result["id"]:
-                            client.table("lobbying_meetings").update(
-                                {"organization_id": canonical_orgs[0]["id"]}
-                            ).eq("organization_id", result["id"]).execute()
-                            action = "applied_relink"
-                        elif detail:
-                            _apply_tr_enrichment(client, result["id"], tr_id, detail, print)
-                            action = "applied_enrich"
-                        stats["applied"] += 1
-                    except Exception as exc:
-                        action = f"apply_failed: {str(exc)[:50]}"
-                        stats["errors"] += 1
-
-                batch_updates[result["id"]] = {
-                    "tr_id": chosen.get("tr_id", ""),
-                    "tr_name": chosen.get("name", ""),
-                    "tr_acronym": chosen.get("acronym", ""),
-                    "tr_country": chosen.get("country", ""),
-                    "tr_category": chosen.get("category", ""),
-                    "tr_interests": chosen.get("interests", ""),
-                    "confidence": f"retried_{confidence}",
-                    "reasoning": ai["reasoning"],
+                new_report_rows.append({
+                    "stub_id": row["stub_id"],
+                    "stub_name": row["stub_name"],
+                    "tr_id": row.get(f"c{chosen_ci}_tr_id", ""),
+                    "tr_name": chosen_name,
+                    "tr_acronym": row.get(f"c{chosen_ci}_acronym", ""),
+                    "tr_country": row.get(f"c{chosen_ci}_country", ""),
+                    "tr_category": row.get(f"c{chosen_ci}_category", ""),
+                    "tr_interests": row.get(f"c{chosen_ci}_interests", ""),
+                    "fuzzy_score": best_score,
+                    "confidence": confidence,
+                    "reasoning": reasoning,
                     "action": action,
-                }
+                })
 
-            # Save after each batch so progress survives interruption
-            _update_csv_rows(batch_updates)
-
-            processed_count += len(pairs)
+            processed += len(batch)
+            elapsed = time.time() - t0
+            rate = processed / elapsed if elapsed > 0 else 0
+            eta = (len(candidates) - processed) / rate if rate > 0 else 0
             print(
-                f"  [{processed_count:5d}/{len(needs_ai)}] "
-                f"high={stats['high']} medium={stats['medium']} "
-                f"low={stats['low']} no_match={stats['no_match']}"
+                f"  [{processed:5d}/{len(candidates)}] "
+                f"high={stats['high']} med={stats['medium']} low={stats['low']} "
+                f"no={stats['no_match']} err={stats['errors']} "
+                f"({rate:.0f}/s, ETA {eta/60:.1f}m)"
             )
 
-    elapsed2 = time.time() - t1
-    total_elapsed = time.time() - t0
-    print(f"\n=== Retry done in {total_elapsed/60:.1f}m ===")
-    print(f"  Phase 1 (search+detail): {elapsed1/60:.1f}m")
-    print(f"  Phase 2 (AI):            {elapsed2/60:.1f}m")
-    print(f"  Retried:   {len(failed_stubs)}")
-    print(f"  With candidates: {len(needs_ai)}")
-    print(f"    High:     {stats['high']}")
-    print(f"    Medium:   {stats['medium']}")
-    print(f"    Low:      {stats['low']}")
-    print(f"    No match: {stats['no_match']}")
-    print(f"    Applied:  {stats['applied']}")
-    print(f"    Errors:   {stats['errors']}")
-    print(f"  Report: {REPORT_PATH}")
+    # Write final report: existing rows + new AI rows
+    all_rows = existing_report + new_report_rows
+    # Write to temp file first, then rename (safe against interruption)
+    tmp_path = REPORT_PATH.with_suffix(".tmp")
+    with tmp_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=REPORT_FIELDS)
+        writer.writeheader()
+        writer.writerows(all_rows)
+    tmp_path.rename(REPORT_PATH)
 
+    elapsed = time.time() - t0
+    print(f"\n=== Phase 3 done in {elapsed/60:.1f}m ===")
+    print(f"  High:     {stats['high']}")
+    print(f"  Medium:   {stats['medium']}")
+    print(f"  Low:      {stats['low']}")
+    print(f"  No match: {stats['no_match']}")
+    print(f"  Errors:   {stats['errors']}")
+    print(f"  Report:   {REPORT_PATH}")
+
+    # Apply to DB if requested
+    if not dry_run:
+        _apply_results(new_report_rows)
+
+
+def _apply_results(rows: list[dict]):
+    """Apply high-confidence matches to the database."""
+    client = _get_client()
+    applied = 0
+    errors = 0
+
+    high_rows = [r for r in rows if r["confidence"] == "high" and r["tr_id"]]
+    print(f"\n--- Applying {len(high_rows)} high-confidence matches ---")
+
+    for r in high_rows:
+        tr_id = r["tr_id"]
+        stub_id = r["stub_id"]
+        try:
+            canonical_resp = (
+                client.table("organizations")
+                .select("id,name")
+                .eq("eu_transparency_register_id", tr_id)
+                .execute()
+            )
+            canonical_orgs = canonical_resp.data or []
+
+            if canonical_orgs and canonical_orgs[0]["id"] != stub_id:
+                client.table("lobbying_meetings").update(
+                    {"organization_id": canonical_orgs[0]["id"]}
+                ).eq("organization_id", stub_id).execute()
+            else:
+                detail = {
+                    "name": r["tr_name"],
+                    "acronym": r.get("tr_acronym", ""),
+                    "category": r.get("tr_category", ""),
+                    "country": r.get("tr_country", ""),
+                    "website": "",
+                    "interests_represented": r.get("tr_interests", ""),
+                }
+                _apply_tr_enrichment(client, stub_id, tr_id, detail, print)
+            applied += 1
+        except Exception as exc:
+            print(f"  Error applying {stub_id}: {str(exc)[:80]}")
+            errors += 1
+
+    print(f"  Applied: {applied}, Errors: {errors}")
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="Run org dedup Pass 4 (TR web search)")
+    parser = argparse.ArgumentParser(description="Org dedup Pass 4 — bulk TR + fuzzy + AI")
     parser.add_argument("--apply", action="store_true", help="Apply high-confidence matches to DB")
-    parser.add_argument("--resume", action="store_true", help="Skip already-processed orgs")
-    parser.add_argument("--retry-failed", action="store_true",
-                        help="Retry low/no_match stubs with multi-candidate matching")
-    parser.add_argument("--workers", type=int, default=8, help="Parallel workers (default: 8)")
-    parser.add_argument("--ai-batch", type=int, default=10, help="AI batch size (default: 10)")
+    parser.add_argument("--resume", action="store_true", help="Resume Phase 3 from where it left off")
+    parser.add_argument("--candidates-only", action="store_true", help="Only run Phase 1+2 (no AI)")
+    parser.add_argument("--classify-only", action="store_true", help="Only run Phase 3 (AI classification)")
+    parser.add_argument("--workers", type=int, default=5, help="Parallel API workers (default: 5)")
+    parser.add_argument("--ai-batch", type=int, default=50, help="AI batch size (default: 50)")
+    parser.add_argument("--min-score", type=int, default=50, help="Min fuzzy score (default: 50)")
+    parser.add_argument("--auto-accept", type=int, default=96, help="Auto-accept above this score (default: 96)")
     args = parser.parse_args()
 
-    dry_run = not args.apply
-    mode = "DRY RUN" if dry_run else "LIVE (will write to DB)"
-    print(f"=== Org Dedup Pass 4 — {mode} ===\n")
-
-    if args.retry_failed:
-        _run_retry_failed(args, dry_run)
-        return
-
-    client = _get_client()
-
-    print("Fetching stubs...")
-    all_stubs = _fetch_stubs(client)
-    print(f"  Total stubs: {len(all_stubs)}")
-
-    print("Fetching active org IDs...")
-    active_ids = _fetch_active_org_ids(client)
-    stubs = [s for s in all_stubs if s["id"] in active_ids]
-    print(f"  Active stubs: {len(stubs)}")
-
-    # Pre-filter government bodies etc
-    filtered = []
-    prefilter_count = 0
-    already_done = _load_already_processed() if args.resume else set()
-
-    if args.resume:
-        stubs = [s for s in stubs if s["id"] not in already_done]
-        print(f"  After resume filter: {len(stubs)}")
-    elif REPORT_PATH.exists():
-        REPORT_PATH.unlink()
-
-    for s in stubs:
-        skip_reason = _should_skip(s["name"])
-        if skip_reason:
-            prefilter_count += 1
-            _append_row({
-                "stub_id": s["id"], "stub_name": s["name"],
-                "tr_id": "", "tr_name": "", "tr_acronym": "",
-                "confidence": "prefiltered", "reasoning": skip_reason,
-                "action": "skip",
-            })
-        else:
-            filtered.append(s)
-
-    print(f"  Pre-filtered (govt/institutions): {prefilter_count}")
-    print(f"  To search: {len(filtered)}")
-
-    # Phase 1: parallel TR search + detail (no AI yet)
-    t0 = time.time()
-    needs_ai = []
-    skipped_phase1 = 0
-    elapsed1 = 0.0
-
-    if filtered:
-        print(f"\n--- Phase 1: TR search + detail ({args.workers} workers) ---")
-
-        with ThreadPoolExecutor(max_workers=args.workers) as pool:
-            futures = {pool.submit(_search_and_detail, s): s for s in filtered}
-            done_count = 0
-
-            for future in as_completed(futures):
-                done_count += 1
-                try:
-                    result = future.result()
-                except Exception as exc:
-                    stub = futures[future]
-                    _append_row({
-                        "stub_id": stub["id"], "stub_name": stub["name"],
-                        "tr_id": "", "tr_name": "", "tr_acronym": "",
-                        "confidence": "error", "reasoning": str(exc)[:100],
-                        "action": "skip",
-                    })
-                    skipped_phase1 += 1
-                    continue
-
-                status = result.get("_status")
-                if status == "needs_ai":
-                    needs_ai.append(result)
-                    # Persist to CSV so Phase 2 can resume if interrupted
-                    _append_row({
-                        "stub_id": result["id"], "stub_name": result["name"],
-                        "tr_id": result.get("_tr_id", ""),
-                        "tr_name": result.get("_tr_name", ""),
-                        "tr_acronym": result.get("_tr_acronym", ""),
-                        "tr_country": result.get("_tr_country", ""),
-                        "tr_category": result.get("_tr_category", ""),
-                        "tr_interests": result.get("_tr_interests", ""),
-                        "confidence": "pending_ai",
-                        "reasoning": "",
-                        "action": "pending",
-                    })
-                else:
-                    _append_row({
-                        "stub_id": result["id"], "stub_name": result["name"],
-                        "tr_id": result.get("_tr_id", ""),
-                        "tr_name": result.get("_tr_name", ""),
-                        "tr_acronym": result.get("_tr_acronym", ""),
-                        "confidence": status,
-                        "reasoning": result.get("_reasoning", ""),
-                        "action": "skip",
-                    })
-                    skipped_phase1 += 1
-
-                if done_count % 50 == 0:
-                    elapsed = time.time() - t0
-                    rate = done_count / elapsed
-                    remaining = (len(filtered) - done_count) / rate
-                    print(
-                        f"  [{done_count:5d}/{len(filtered)}] "
-                        f"{len(needs_ai)} need AI, {skipped_phase1} skipped "
-                        f"({rate:.1f}/s, ~{remaining/60:.0f}m left)"
-                    )
-
-        elapsed1 = time.time() - t0
-        print(
-            f"  Phase 1 done in {elapsed1/60:.1f}m: "
-            f"{len(needs_ai)} need AI, {skipped_phase1} skipped"
-        )
+    if args.classify_only:
+        run_classify(args)
+    elif args.candidates_only:
+        run_candidates(args)
     else:
-        print("\n  Phase 1: no new stubs to search.")
-
-    # Phase 2: batched AI confirmation
-    # On resume, reload pending_ai rows from CSV if Phase 1 produced nothing new
-    if args.resume and not needs_ai:
-        needs_ai = _load_pending_ai()
-        if needs_ai:
-            print(f"\n  Resumed {len(needs_ai)} pending_ai rows from CSV")
-
-    if not needs_ai:
-        print("\nNothing to process for Phase 2.")
-        return
-
-    print(f"\n--- Phase 2: AI confirmation ({len(needs_ai)} orgs, batch={args.ai_batch}) ---")
-    t1 = time.time()
-    stats = {"high": 0, "medium": 0, "low": 0, "no_match": 0, "applied": 0, "errors": 0}
-
-    batches = [needs_ai[i:i + args.ai_batch] for i in range(0, len(needs_ai), args.ai_batch)]
-    for batch_idx, batch in enumerate(batches):
-        pairs = [
-            {
-                "stub_name": r["name"],
-                "tr_name": r["_tr_name"],
-                "tr_acronym": r.get("_tr_acronym", ""),
-                "tr_country": r.get("_tr_country", ""),
-                "tr_category": r.get("_tr_category", ""),
-            }
-            for r in batch
-        ]
-
-        ai_results = _ai_confirm_batch(pairs)
-
-        for result, ai in zip(batch, ai_results):
-            confidence = ai["match"]
-            stats[confidence] = stats.get(confidence, 0) + 1
-
-            if confidence == "high":
-                action = "apply"
-            elif confidence == "medium":
-                action = "review"
-            else:
-                action = "skip"
-
-            # Apply to DB if live mode and high confidence
-            if not dry_run and confidence == "high" and result.get("_tr_id"):
-                tr_id = result["_tr_id"]
-                try:
-                    canonical_resp = (
-                        client.table("organizations")
-                        .select("id,name")
-                        .eq("eu_transparency_register_id", tr_id)
-                        .execute()
-                    )
-                    canonical_orgs = canonical_resp.data or []
-                    detail = result.get("_detail")
-
-                    if canonical_orgs and canonical_orgs[0]["id"] != result["id"]:
-                        client.table("lobbying_meetings").update(
-                            {"organization_id": canonical_orgs[0]["id"]}
-                        ).eq("organization_id", result["id"]).execute()
-                        action = "applied_relink"
-                    elif detail:
-                        _apply_tr_enrichment(client, result["id"], tr_id, detail, print)
-                        action = "applied_enrich"
-
-                    stats["applied"] += 1
-                except Exception as exc:
-                    action = f"apply_failed: {str(exc)[:50]}"
-                    stats["errors"] += 1
-
-            _append_row({
-                "stub_id": result["id"], "stub_name": result["name"],
-                "tr_id": result.get("_tr_id", ""),
-                "tr_name": result.get("_tr_name", ""),
-                "tr_acronym": result.get("_tr_acronym", ""),
-                "confidence": confidence,
-                "reasoning": ai["reasoning"],
-                "action": action,
-            })
-
-        processed = (batch_idx + 1) * args.ai_batch
-        print(
-            f"  [{min(processed, len(needs_ai)):5d}/{len(needs_ai)}] "
-            f"high={stats['high']} medium={stats['medium']} "
-            f"low={stats['low']} no_match={stats['no_match']}"
-        )
-
-    elapsed2 = time.time() - t1
-    total_elapsed = time.time() - t0
-
-    # Deduplicate CSV: remove stale pending_ai rows that now have resolved entries
-    _deduplicate_csv()
-
-    print(f"\n=== Done in {total_elapsed/60:.1f}m ===")
-    print(f"  Phase 1 (search+detail): {elapsed1/60:.1f}m")
-    print(f"  Phase 2 (AI):            {elapsed2/60:.1f}m")
-    print(f"  Pre-filtered:  {prefilter_count}")
-    print(f"  Skipped (ph1): {skipped_phase1}")
-    print(f"  AI confirmed:  {len(needs_ai)}")
-    print(f"    High:    {stats['high']}")
-    print(f"    Medium:  {stats['medium']}")
-    print(f"    Low:     {stats['low']}")
-    print(f"    No match:{stats['no_match']}")
-    print(f"    Applied: {stats['applied']}")
-    print(f"    Errors:  {stats['errors']}")
-    print(f"  Report: {REPORT_PATH}")
+        run_candidates(args)
+        run_classify(args)
 
 
 if __name__ == "__main__":

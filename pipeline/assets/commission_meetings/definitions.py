@@ -25,7 +25,14 @@ class CommissionMeetingsBronzeConfig(Config):
     group_name="eu_bronze",
     compute_kind="scraper",
     required_resource_keys={"supabase"},
-    description="Scrape Commission meetings from EC Transparency Initiative + parse minutes PDFs (EP9 + EP10)",
+    description=(
+        "Scrape European Commission meeting records from the EC Transparency Initiative "
+        "(ec.europa.eu/transparencyinitiative). Covers both EP9 (2019-2024, direct commissioner "
+        "discovery) and EP10 (2024-2029, actor profile URLs from Supabase). Downloads and parses "
+        "meeting minutes PDFs using pypdf to extract: date, subject, organisations present, and "
+        "free-text 'points raised' capturing substantive policy positions expressed by lobbyists. "
+        "Deduplicates by meeting ID across terms."
+    ),
 )
 def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfig):
     from .bronze import scrape_commission_meetings, scrape_ep9_commission_meetings
@@ -70,7 +77,14 @@ def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfi
     compute_kind="python",
     ins={"bronze_data": AssetIn("eu_commission_meetings_bronze")},
     required_resource_keys={"supabase"},
-    description="Entity resolution: link meeting organizations to transparency register",
+    description=(
+        "Entity resolution for commission meeting organisations. Matches organisation names from "
+        "scraped meetings against canonical Transparency Register entries using: (1) TR ID exact "
+        "match, (2) normalised name match, (3) prefix match for short names (e.g. 'Toyota' → "
+        "'Toyota Motor Europe'). Unmatched names are recorded as stubs with deterministic hash IDs "
+        "for later batch deduplication. Requires the organisations table to be populated first "
+        "via the lobbying pipeline."
+    ),
 )
 def eu_commission_meetings_silver(context, bronze_data: list[dict]):
     from .silver import process_commission_meetings
@@ -101,7 +115,11 @@ def eu_commission_meetings_silver(context, bronze_data: list[dict]):
     compute_kind="supabase",
     ins={"silver_data": AssetIn("eu_commission_meetings_silver")},
     required_resource_keys={"supabase"},
-    description="Upload commission meetings and organization links to Supabase",
+    description=(
+        "Upsert commission meetings and meeting-organisation junction records to Supabase. "
+        "Creates entries in commission_meetings and commission_meeting_organizations tables "
+        "with deterministic primary keys for idempotent re-runs."
+    ),
 )
 def eu_commission_meetings_diamond(context, silver_data: dict):
     from .diamond import upload_commission_meetings
