@@ -11,7 +11,7 @@ Or for production:
 import os
 from pathlib import Path
 
-from dagster import Definitions
+from dagster import Definitions, in_process_executor
 from dotenv import load_dotenv
 
 from pipeline.assets import all_assets
@@ -60,4 +60,5 @@ print(f"\n[OK] Total assets loaded: {len(all_assets)}")
 defs = Definitions(
     assets=all_assets,
     resources=RESOURCES,
+    executor=in_process_executor,
 )

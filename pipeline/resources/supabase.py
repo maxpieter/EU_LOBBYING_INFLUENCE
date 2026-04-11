@@ -24,7 +24,8 @@ if (
         pass
 
 try:
-    from supabase import Client, create_client
+    import httpx
+    from supabase import Client, ClientOptions, create_client
 except ImportError:
     if removed_cwd:
         sys.path.insert(0, cwd)
@@ -66,7 +67,13 @@ class SupabaseResource(ConfigurableResource):
 
     def get_client(self) -> Client:
         if self._client is None:
-            self._client = create_client(self._get_url(), self._get_key())
+            self._client = create_client(
+                self._get_url(),
+                self._get_key(),
+                options=ClientOptions(
+                    postgrest_client_timeout=httpx.Timeout(120.0)
+                ),
+            )
         return self._client
 
     def upsert(
