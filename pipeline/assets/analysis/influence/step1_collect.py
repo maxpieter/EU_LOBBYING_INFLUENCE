@@ -119,21 +119,21 @@ def step1_collect_data(
 
 
 def _fetch_commission_meetings(client: Any, procedure_id: str) -> list[dict[str, Any]]:
-    direct = fetch_all(
-        client,
-        "commission_meetings",
-        "id,commissioner_name,meeting_date,subject,organizations_raw,points_raised,conclusions",
-        {"matched_procedure_id": procedure_id},
-    )
+    # All matches now live in meeting_procedure_links (legacy matched_procedure_id dropped)
     link_rows = fetch_all(
         client,
         "meeting_procedure_links",
         "commission_meeting_id",
         {"procedure_id": procedure_id},
     )
-    linked_ids = {r["commission_meeting_id"] for r in link_rows if r.get("commission_meeting_id")}
-    direct_ids = {m["id"] for m in direct}
-    for mid in linked_ids - direct_ids:
+    linked_ids = [r["commission_meeting_id"] for r in link_rows if r.get("commission_meeting_id")]
+
+    meetings: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+    for mid in linked_ids:
+        if mid in seen_ids:
+            continue
+        seen_ids.add(mid)
         resp = (
             client.table("commission_meetings")
             .select(
@@ -145,8 +145,8 @@ def _fetch_commission_meetings(client: Any, procedure_id: str) -> list[dict[str,
             .execute()
         )
         if resp.data:
-            direct.extend(resp.data)
-    return direct
+            meetings.extend(resp.data)
+    return meetings
 
 
 def _fetch_lobbying_meetings(client: Any, procedure_id: str) -> list[dict[str, Any]]:

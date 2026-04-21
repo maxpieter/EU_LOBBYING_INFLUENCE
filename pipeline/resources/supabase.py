@@ -102,11 +102,18 @@ class SupabaseResource(ConfigurableResource):
         batch_size: int = 100,
         on_conflict: Optional[str] = None,
         logger: Optional[Any] = None,
-    ) -> Dict[str, int]:
-        """Upsert records in batches with individual retry fallback."""
+    ) -> Dict[str, Any]:
+        """Upsert records in batches with individual retry fallback.
+
+        Returns {"success", "failed", "failed_ids"}. `failed_ids` holds the
+        `id` field of any record that could not be upserted even after the
+        individual retry — useful for callers that need to drop dependent
+        rows from a subsequent insert to avoid FK violations.
+        """
         client = self.get_client()
         success_count = 0
         failed_count = 0
+        failed_ids: List[str] = []
 
         for i in range(0, len(data), batch_size):
             batch = data[i : i + batch_size]
@@ -135,8 +142,11 @@ class SupabaseResource(ConfigurableResource):
                         success_count += 1
                     except Exception as record_error:
                         failed_count += 1
+                        record_id = record.get("id")
+                        if record_id is not None:
+                            failed_ids.append(record_id)
                         if logger:
-                            record_id = record.get("id", f"index_{i + record_idx}")
-                            logger.error(f"Record {record_id} failed: {record_error}")
+                            log_id = record_id if record_id is not None else f"index_{i + record_idx}"
+                            logger.error(f"Record {log_id} failed: {record_error}")
 
-        return {"success": success_count, "failed": failed_count}
+        return {"success": success_count, "failed": failed_count, "failed_ids": failed_ids}

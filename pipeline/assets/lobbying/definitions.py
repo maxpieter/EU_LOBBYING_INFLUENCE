@@ -4,6 +4,9 @@ Pipeline: Bronze → Silver → Diamond
 - Bronze: Scrape meetings + load transparency register
 - Silver: Entity resolution, link meetings to organizations
 - Diamond: Upload to Supabase
+
+Organisation resolution is handled by pipeline.assets.organizations.
+This module handles meetings only (silver) and uploading (diamond).
 """
 
 from datetime import datetime, timedelta
@@ -12,10 +15,8 @@ from typing import Any, Dict, List
 from dagster import (
     AssetExecutionContext,
     AssetIn,
-    AssetOut,
     Config,
     asset,
-    multi_asset,
 )
 
 from pipeline.models.lobbying_models import LobbyingMeeting, Organization
@@ -28,10 +29,7 @@ from .bronze import (
     load_transparency_register,
 )
 from .diamond import upload_lobbying_data
-from .silver import (
-    process_meetings,
-    process_transparency_data,
-)
+from .silver import process_meetings
 
 
 @asset(
@@ -110,43 +108,31 @@ def eu_lobbying_bronze_organizations(
     return organizations
 
 
-@multi_asset(
-    outs={
-        "eu_lobbying_silver_organizations": AssetOut(
-            group_name="eu_silver",
-            description=(
-                "Canonical organisation records from the Transparency Register plus new stub "
-                "organisations discovered in meeting records. Entity resolution via a 5-step "
-                "cascade: TR ID lookup, normalised name match, cleaned name match (strips person "
-                "names, geographic suffixes), acronym match, and parenthetical/prefix match. "
-                "Unmatched orgs get a deterministic hash-based ID (org_{SHA256[:16]})."
-            ),
-        ),
-        "eu_lobbying_silver_meetings": AssetOut(
-            group_name="eu_silver",
-            description=(
-                "Lobbying meetings with organisation references resolved to canonical org IDs. "
-                "Each meeting is linked to its attendee organisations via the 5-step entity "
-                "resolution cascade and validated as a Pydantic LobbyingMeeting model."
-            ),
-        ),
-    },
+@asset(
+    name="eu_lobbying_silver_meetings",
+    group_name="eu_silver",
     compute_kind="transformation",
     partitions_def=weekly_partitions,
     ins={
         "meetings_bronze": AssetIn("eu_lobbying_bronze_meetings"),
-        "organizations_bronze": AssetIn("eu_lobbying_bronze_organizations"),
     },
+    required_resource_keys={"supabase"},
+    description=(
+        "Lobbying meetings with organisation references resolved to canonical org IDs. "
+        "Fetches organisations from Supabase and uses the unified OrgResolver 8-step "
+        "cascade. Handles pipe-separated multi-org attendees."
+    ),
 )
-def eu_lobbying_silver(
+def eu_lobbying_silver_meetings(
     context: AssetExecutionContext,
     meetings_bronze: List[Dict[str, Any]] | None,
-    organizations_bronze: List[Dict[str, Any]] | None,
-):
-    """Silver layer: Process raw data into Organization and LobbyingMeeting models.
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Silver layer: Link raw meetings to pre-resolved organisations.
 
-    Upserts ALL transparency register organizations (not just those in meetings)
-    to ensure fields like interests_represented are always populated.
+    Output contains both meetings and any new stub organisations the
+    resolver created for unmatched names. Diamond uploads the stubs
+    before the meetings so FK constraints are satisfied even if
+    orgs_diamond hasn't re-run since the new bronze landed.
     """
     partition_key = context.partition_key
 
@@ -159,156 +145,128 @@ def eu_lobbying_silver(
     if len(meetings_bronze) == 0:
         context.log.info(f"No meetings for partition {partition_key} (quiet week).")
 
-    if organizations_bronze is None:
-        context.log.error(f"Organizations bronze data is None for partition {partition_key}.")
-        return [], []
+    from pipeline.assets.organizations.resolution import OrgResolver
 
+    # Fetch orgs from Supabase
+    supabase: SupabaseResource = context.resources.supabase
+    client = supabase.get_client()
+    org_rows: List[Dict] = []
+    page_size = 1000
+    offset = 0
+    while True:
+        resp = (
+            client.table("organizations")
+            .select("id,name,normalized_name,official_name,acronym,eu_transparency_register_id")
+            .range(offset, offset + page_size - 1)
+            .execute()
+        )
+        batch = resp.data or []
+        org_rows.extend(batch)
+        if len(batch) < page_size:
+            break
+        offset += page_size
+
+    org_models = [
+        Organization(
+            id=row["id"],
+            name=row.get("name") or "",
+            normalized_name=row.get("normalized_name"),
+            official_name=row.get("official_name"),
+            acronym=row.get("acronym"),
+            eu_transparency_register_id=row.get("eu_transparency_register_id"),
+        )
+        for row in org_rows
+    ]
+    # Track which org IDs came from Supabase — stubs created during this
+    # resolve pass are the diff, and those are what diamond needs to upsert.
+    existing_ids = {o.id for o in org_models}
+    resolver = OrgResolver(org_models)
     context.log.info(
-        f"Processing {len(meetings_bronze)} meetings against "
-        f"{len(organizations_bronze)} transparency records"
+        f"Built OrgResolver with {len(org_models)} organisations from Supabase"
     )
 
-    # 1. Process Transparency Data (all register orgs)
-    existing_orgs = process_transparency_data(organizations_bronze, context.log)
+    from .silver import process_meetings_v2
 
-    # 2. Process Meetings (and extract new orgs not in register)
-    meetings, new_orgs = process_meetings(meetings_bronze, existing_orgs, context.log)
+    meetings = process_meetings_v2(meetings_bronze, resolver, context.log)
 
-    # 3. Keep ALL register orgs + new orgs from meetings
-    all_orgs = existing_orgs + new_orgs
+    new_stubs = [s for s in resolver.get_stubs() if s.id not in existing_ids]
 
     context.log.info(
-        f"Total: {len(existing_orgs)} orgs from register, "
-        f"{len(new_orgs)} new orgs from meetings = {len(all_orgs)} total"
+        f"Created {len(meetings)} meetings and {len(new_stubs)} new stub orgs"
     )
 
-    # Serialize to dicts for JSON IO Manager
-    orgs_serialized = [o.model_dump(mode="json") for o in all_orgs]
     meetings_serialized = [m.model_dump(mode="json") for m in meetings]
+    stubs_serialized = [s.model_dump(mode="json") for s in new_stubs]
 
-    context.add_output_metadata(
-        metadata={
-            "meetings_count": len(meetings),
-            "organizations_new": len(new_orgs),
-        },
-        output_name="eu_lobbying_silver_meetings",
-    )
+    context.add_output_metadata({
+        "meetings_count": len(meetings),
+        "new_stubs_count": len(new_stubs),
+    })
 
-    context.add_output_metadata(
-        metadata={
-            "organizations_total": len(all_orgs),
-            "organizations_existing": len(orgs_used_in_meetings),
-            "organizations_new": len(new_orgs),
-        },
-        output_name="eu_lobbying_silver_organizations",
-    )
-
-    return orgs_serialized, meetings_serialized
+    return {"meetings": meetings_serialized, "stubs": stubs_serialized}
 
 
 @asset(
     name="eu_lobbying_diamond",
     group_name="eu_diamond",
     description=(
-        "Upsert organisations and lobbying meetings to Supabase (PostgreSQL). Uses deterministic "
-        "primary keys for idempotent writes. Depends on eu_members_diamond to satisfy the "
-        "lobbying_meetings.mep_id foreign key constraint against the meps table."
+        "Upsert lobbying meetings to Supabase (PostgreSQL). Uses deterministic "
+        "primary keys for idempotent writes. Depends on eu_members_diamond for "
+        "the mep_id FK and eu_organizations_diamond for the organization_id FK."
     ),
     compute_kind="loading",
     partitions_def=weekly_partitions,
     ins={
-        "organizations": AssetIn("eu_lobbying_silver_organizations"),
         "meetings": AssetIn("eu_lobbying_silver_meetings"),
         "meps_diamond": AssetIn("eu_members_diamond"),
+        "orgs_diamond": AssetIn("eu_organizations_diamond"),
     },
 )
 def eu_lobbying_diamond(
     context: AssetExecutionContext,
-    organizations: List[Dict[str, Any]] | None,
-    meetings: List[Dict[str, Any]] | None,
+    meetings: Dict[str, List[Dict[str, Any]]] | None,
     meps_diamond: Any,
+    orgs_diamond: Any,
     supabase: SupabaseResource,
 ) -> Dict[str, Any]:
-    """Diamond layer: Upload processed lobbying data to Supabase.
+    """Diamond layer: Upload lobbying meetings to Supabase.
 
-    Depends on eu_members_diamond to ensure MEPs are uploaded first
-    (lobbying_meetings.mep_id has a foreign key constraint to meps.id).
+    Depends on eu_members_diamond and eu_organizations_diamond to ensure
+    MEPs and orgs are uploaded first (FK constraints). Any stubs created
+    in silver for this partition are also upserted here to cover the race
+    between bronze scrapes and the next orgs_diamond refresh.
     """
-    if organizations is None or meetings is None:
-        context.log.warning("Silver data is None - skipping upload")
-        return {"organizations_uploaded": 0, "meetings_uploaded": 0}
+    if meetings is None:
+        context.log.warning("Silver meetings data is None - skipping upload")
+        return {"meetings_uploaded": 0}
 
-    if not organizations and not meetings:
-        context.log.info("No organizations or meetings to upload")
-        return {"organizations_uploaded": 0, "meetings_uploaded": 0}
+    meeting_dicts = meetings.get("meetings", []) if isinstance(meetings, dict) else meetings
+    stub_dicts = meetings.get("stubs", []) if isinstance(meetings, dict) else []
+
+    if not meeting_dicts:
+        context.log.info("No meetings to upload")
+        return {"meetings_uploaded": 0}
 
     context.log.info(
-        f"Uploading {len(meetings)} meetings and {len(organizations)} organizations"
+        f"Uploading {len(meeting_dicts)} meetings and {len(stub_dicts)} silver stubs"
     )
 
-    meetings_models = [LobbyingMeeting(**m) for m in meetings]
-    orgs_models = [Organization(**o) for o in organizations]
+    meetings_models = [LobbyingMeeting(**m) for m in meeting_dicts]
+    stubs_models = [Organization(**s) for s in stub_dicts]
 
-    results = upload_lobbying_data(meetings_models, orgs_models, supabase, context.log)
-
-    context.add_output_metadata(
-        {
-            "meetings_uploaded": results.get("meetings_uploaded", 0),
-            "organizations_uploaded": results.get("organizations_uploaded", 0),
-        }
-    )
-
-    return results
-
-
-class OrgDedupConfig(Config):
-    """Configuration for the org deduplication asset."""
-
-    dry_run: bool = True
-    """When True (default), pass 4 (TR web search) writes a CSV report but
-    makes no database changes. Passes 1-3 are always applied."""
-
-
-@asset(
-    name="eu_lobbying_org_dedup",
-    group_name="eu_silver",
-    compute_kind="dedup",
-    required_resource_keys={"supabase"},
-    description=(
-        "Post-hoc batch deduplication of stub organisations that escaped the Silver-layer "
-        "entity resolution. Relinks lobbying meetings from stubs to canonical TR entries. "
-        "Three deterministic passes: (1) extract embedded TR IDs from org names, "
-        "(2) case-insensitive normalised name match against TR, (3) acronym match. "
-        "Pass 4 uses pg_trgm trigram similarity (threshold 0.25) to find fuzzy candidates, "
-        "then sends them to Claude Haiku for high/medium/low/no_match classification. "
-        "Only high-confidence matches are applied; medium are flagged for manual review."
-    ),
-)
-def eu_lobbying_org_dedup(context: AssetExecutionContext, config: OrgDedupConfig):
-    from .org_dedup import run_org_dedup
-
-    supabase: SupabaseResource = context.resources.supabase
-    client = supabase.get_client()
-
-    stats = run_org_dedup(client, logger=context.log, dry_run=config.dry_run)
+    results = upload_lobbying_data(meetings_models, stubs_models, supabase, context.log)
 
     context.add_output_metadata({
-        "tr_id_relinked": stats["tr_id_relinked"],
-        "name_relinked": stats["name_relinked"],
-        "acronym_relinked": stats["acronym_relinked"],
-        "tr_search_high": stats.get("tr_search_high", 0),
-        "tr_search_medium": stats.get("tr_search_medium", 0),
-        "tr_search_applied": stats.get("tr_search_applied", 0),
-        "total_relinked": stats["total"],
-        "dry_run": config.dry_run,
+        "meetings_uploaded": results.get("meetings_uploaded", 0),
+        "stubs_uploaded": results.get("stubs_uploaded", 0),
     })
-    return stats
+
+    return results
 
 
 lobbying_assets = [
     eu_lobbying_bronze_meetings,
     eu_lobbying_bronze_organizations,
-    eu_lobbying_silver,
+    eu_lobbying_silver_meetings,
     eu_lobbying_diamond,
-    eu_lobbying_org_dedup,
 ]

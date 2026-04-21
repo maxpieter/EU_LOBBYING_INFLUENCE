@@ -29,7 +29,7 @@ TRACKED_PROCEDURE_TYPES = ["COD", "CNS", "APP"]
 
 # Limits on paginated backfill to avoid runaway loops
 MAX_PAGINATE_OFFSET = 10_000
-PAGE_SIZE = 50
+PAGE_SIZE = 500
 
 # Rate-limit sleep between paginated requests (seconds)
 PAGINATE_SLEEP_SECONDS = 0.2
@@ -265,7 +265,7 @@ def fetch_all_procedure_ids(
                 resp = requests.get(
                     PROCEDURES_URL,
                     params=params,
-                    timeout=30,
+                    timeout=60,
                     headers={"User-Agent": "Parl8/1.0"},
                 )
                 if resp.status_code == 204:

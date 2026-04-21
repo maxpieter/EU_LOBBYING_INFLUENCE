@@ -5,7 +5,6 @@ from typing import Any, Dict, List
 from dagster import AssetExecutionContext, asset
 
 from pipeline.models.legislation import Procedure
-from pipeline.partitions.definitions import weekly_partitions
 from pipeline.resources.http_client import HttpClientResource
 from pipeline.resources.selenium import SeleniumResource
 
@@ -82,7 +81,6 @@ def normalize_document_url_to_html(url: str) -> str:
 @asset(
     group_name="eu_silver",
     compute_kind="transformation",
-    partitions_def=weekly_partitions,
     description=(
         "Merge OEIL and v2 API data, normalise document URLs (PDF→HTML), deduplicate events, "
         "and enrich procedure records with computed fields. Prepares clean procedure dicts "
@@ -156,7 +154,7 @@ def eu_legislation_silver(
             logger=context.log,
             http_client=http_client,
             selenium_resource=selenium,
-            partition_key=context.partition_key,
+            partition_key=None,
             cache_dir=DocumentCacheConfig.CACHE_DIR if DocumentCacheConfig.ENABLED else None,
             cache_ttl_days=DocumentCacheConfig.TTL_DAYS,
         )

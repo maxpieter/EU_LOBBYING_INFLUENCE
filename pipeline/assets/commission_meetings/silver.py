@@ -1,11 +1,17 @@
 """Silver layer: Entity resolution for commission meetings.
 
 Links organization names from scraped meetings to organizations in the database,
-using transparency register IDs (from PDF) and fuzzy name matching.
+using transparency register IDs (from PDF) and the unified OrgResolver cascade.
 """
 
+from __future__ import annotations
+
 import re
-from typing import Any, Optional
+from collections import Counter
+from typing import TYPE_CHECKING, Any, Optional
+
+if TYPE_CHECKING:
+    from pipeline.assets.organizations.resolution import OrgResolver
 
 
 def normalize_location(location: str) -> str:
@@ -360,6 +366,197 @@ def process_commission_meetings(
             f"{unmatched_count} unmatched"
         )
         logger.info(f"Silver output: {len(meetings)} meetings, {len(meeting_orgs)} org links")
+
+    return {
+        "meetings": meetings,
+        "meeting_organizations": meeting_orgs,
+    }
+
+
+_LEGAL_FRAGMENTS_RE = re.compile(
+    r"^(s\.a\.?|s\.r\.l\.?|s\.p\.a\.?|s\.l\.?|a\.s\.?|a\.s\.b\.l\.?|"
+    r"ltd\.?|inc\.?|plc\.?|gmbh|ag|sa|bv|nv|se|llc|"
+    r"e\.v\.?|aisbl|asbl|vzw|z\.s\.?|ry|co\.?|"
+    r"corp\.?|eeig|s\.c\.?|kg|ohg)\.?$",
+    re.IGNORECASE,
+)
+
+
+def _presplit_commas(text: str) -> list[str]:
+    """Split comma-separated org string, rejoining obvious legal suffix fragments."""
+    if "," not in text:
+        return [text.strip()] if text.strip() else []
+
+    parts = [p.strip() for p in text.split(",")]
+    result: list[str] = []
+    current = parts[0]
+
+    for part in parts[1:]:
+        if not part:
+            continue
+        # Rejoin legal suffixes and lowercase continuations (e.g. "Chemie" in German compound)
+        if _LEGAL_FRAGMENTS_RE.match(part) or (part and part[0].islower()):
+            current = current + ", " + part
+        else:
+            if current.strip():
+                result.append(current.strip())
+            current = part
+
+    if current.strip():
+        result.append(current.strip())
+    return result
+
+
+def _resolve_comma_org_string(
+    text: str,
+    resolver: OrgResolver,
+    tr_id: str | None = None,
+) -> list[tuple[Any, str]]:
+    """Split a comma-separated org string and resolve each part.
+
+    Uses resolver-aware recombination: if a part resolves to a stub,
+    tries joining with the next part(s) to recover org names that
+    contain internal commas.
+    """
+    parts = _presplit_commas(text)
+    if len(parts) <= 1:
+        org, method = resolver.resolve(text.strip(), tr_id)
+        return [(org, method)]
+
+    results: list[tuple[Any, str]] = []
+    i = 0
+    while i < len(parts):
+        org, method = resolver.resolve(parts[i], tr_id if i == 0 else None)
+
+        if method not in ("stub", "stub_empty"):
+            results.append((org, method))
+            i += 1
+            continue
+
+        # Stub — try joining with next parts to recover internal commas
+        combined = parts[i]
+        found = False
+        for j in range(i + 1, min(i + 4, len(parts))):
+            combined = combined + ", " + parts[j]
+            org2, method2 = resolver.resolve(combined)
+            if method2 not in ("stub", "stub_empty"):
+                results.append((org2, method2))
+                i = j + 1
+                found = True
+                break
+
+        if not found:
+            # Couldn't recombine — keep original stub
+            results.append((org, method))
+            i += 1
+
+    return results
+
+
+def build_meeting_records(
+    bronze_data: list[dict],
+    resolver: OrgResolver,
+    logger: Optional[Any] = None,
+) -> dict[str, list[dict]]:
+    """Process bronze meetings using the unified OrgResolver cascade.
+
+    Same meeting record structure as process_commission_meetings, but uses
+    the 8-step OrgResolver instead of the simple name lookup. Handles
+    comma-separated org strings from Excel exports via resolver-aware splitting.
+    """
+    # Build commissioner name → actor_id lookup
+    name_to_actor_id: dict[str, str] = {}
+    for raw in bronze_data:
+        name = raw.get("commissioner_name")
+        actor_id = raw.get("actor_id")
+        if name and actor_id:
+            name_to_actor_id[name] = actor_id
+
+    meetings = []
+    meeting_orgs = []
+    method_counts: Counter[str] = Counter()
+
+    for raw in bronze_data:
+        actor_id = raw.get("actor_id") or name_to_actor_id.get(raw.get("commissioner_name"))
+
+        meeting = {
+            "id": raw["id"],
+            "actor_id": actor_id,
+            "commissioner_name": raw["commissioner_name"],
+            "commissioner_portfolio": raw.get("commissioner_portfolio"),
+            "host_id": raw.get("host_id"),
+            "meeting_type": raw.get("meeting_type", "commissioner"),
+            "meeting_date": raw.get("meeting_date"),
+            "location": normalize_location(raw.get("location", "")),
+            "subject": raw.get("minutes_subject") or raw.get("subject"),
+            "commission_representatives": raw.get("commission_representatives", []),
+            "organizations_raw": raw.get("organizations_raw"),
+            "transparency_register_ids": raw.get("transparency_register_ids", []),
+            "points_raised": raw.get("points_raised"),
+            "conclusions": raw.get("conclusions"),
+            "ares_number": raw.get("ares_number"),
+            "minutes_url": raw.get("minutes_url"),
+            "source_url": raw.get("source_url"),
+            "raw_data": raw,
+        }
+        meetings.append(meeting)
+
+        # Collect org strings from meeting
+        org_strings = raw.get("organizations", []) or parse_organizations_from_raw(
+            raw.get("organizations_raw", "")
+        )
+        tr_ids = raw.get("transparency_register_ids", [])
+        tr_id_set = set(tr_ids)
+
+        already_matched_ids: set[str] = set()
+
+        for org_string in org_strings:
+            # Each org_string may be comma-separated (Excel format)
+            resolved_pairs = _resolve_comma_org_string(
+                org_string, resolver,
+                tr_id=next(iter(tr_id_set), None),
+            )
+
+            for org, method in resolved_pairs:
+                if org.id in already_matched_ids:
+                    continue
+                already_matched_ids.add(org.id)
+
+                if method.startswith("tr_id"):
+                    tr_id_set.discard(org.eu_transparency_register_id)
+
+                method_counts[method] += 1
+                meeting_orgs.append({
+                    "meeting_id": raw["id"],
+                    "organization_id": org.id,
+                    "organization_name": org.name,
+                    "eu_transparency_register_id": org.eu_transparency_register_id,
+                    "match_method": method,
+                })
+
+        # Resolve remaining TR IDs not yet matched via org names
+        for tid in tr_id_set:
+            org, method = resolver.resolve("", tid)
+            if org.id not in already_matched_ids:
+                already_matched_ids.add(org.id)
+                method_counts[method] += 1
+                meeting_orgs.append({
+                    "meeting_id": raw["id"],
+                    "organization_id": org.id,
+                    "organization_name": org.name,
+                    "eu_transparency_register_id": org.eu_transparency_register_id,
+                    "match_method": method,
+                })
+
+    if logger:
+        logger.info(f"Entity resolution by method: {dict(method_counts.most_common())}")
+        stubs = method_counts.get("stub", 0) + method_counts.get("stub_empty", 0)
+        total = sum(method_counts.values())
+        resolved = total - stubs
+        logger.info(
+            f"Silver output: {len(meetings)} meetings, {len(meeting_orgs)} org links "
+            f"({resolved} resolved, {stubs} stubs)"
+        )
 
     return {
         "meetings": meetings,

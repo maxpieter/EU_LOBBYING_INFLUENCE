@@ -381,3 +381,103 @@ def process_meetings(
         )
 
     return meetings, new_orgs
+
+
+def process_meetings_v2(
+    raw_meetings: List[Dict[str, Any]],
+    resolver: "OrgResolver",
+    logger: Optional[Any] = None,
+) -> List[LobbyingMeeting]:
+    """Process raw meetings using the unified OrgResolver cascade.
+
+    Handles pipe-separated multi-org attendees by creating one meeting row
+    per organisation. Uses OrgResolver's 8-step cascade for matching.
+    """
+    from collections import Counter
+
+    meetings: List[LobbyingMeeting] = []
+    method_counts: Counter[str] = Counter()
+
+    for meeting_row in raw_meetings:
+        attendees_raw = (meeting_row.get("attendees") or "").strip()
+        transparency_id = (meeting_row.get("lobbyist_id") or "").strip() or None
+
+        if not attendees_raw:
+            continue
+
+        # Split pipe-separated attendees into individual org names
+        org_names = [n.strip() for n in attendees_raw.split("|") if n.strip()]
+        # Deduplicate within a single meeting (e.g. "DanSteel|DanSteel")
+        seen_names = set()
+        unique_org_names: list[str] = []
+        for n in org_names:
+            if n.lower() not in seen_names:
+                seen_names.add(n.lower())
+                unique_org_names.append(n)
+
+        # Parse shared meeting fields once
+        meeting_date_str = meeting_row.get("meeting_date")
+        meeting_date = None
+        if meeting_date_str:
+            try:
+                meeting_date = datetime.strptime(meeting_date_str, "%Y-%m-%d").date()
+            except ValueError:
+                if logger:
+                    logger.warning(f"Could not parse meeting date: {meeting_date_str}")
+
+        mep_id_str = meeting_row.get("member_id", "").strip()
+        mep_id = None
+        if mep_id_str:
+            try:
+                mep_id = int(mep_id_str)
+            except ValueError:
+                pass
+
+        title = meeting_row.get("title", "").strip()
+        title_lower = title.lower()
+        if any(term in title_lower for term in ["hearing", "committee"]):
+            meeting_type = "Committee"
+        elif any(term in title_lower for term in ["conference", "workshop", "event"]):
+            meeting_type = "Event"
+        elif any(term in title_lower for term in ["bilateral", "meeting"]):
+            meeting_type = "Informal"
+        elif "briefing" in title_lower:
+            meeting_type = "Briefing"
+        else:
+            meeting_type = "Formal"
+
+        mep_key = str(mep_id) if mep_id else meeting_row.get("member_name", "unknown")
+
+        # Resolve each org and create a meeting row per org
+        for org_name in unique_org_names:
+            # Pass transparency_id only for single-org meetings
+            tr_id = transparency_id if len(unique_org_names) == 1 else None
+            org, method = resolver.resolve(org_name, tr_id)
+            method_counts[method] += 1
+
+            id_key = f"{meeting_date}_{mep_key}_{org.id}_{org_name}"
+            meeting_id = hashlib.sha256(id_key.encode("utf-8")).hexdigest()
+
+            meeting = LobbyingMeeting(
+                id=meeting_id,
+                mep_id=mep_id,
+                organization_id=org.id,
+                meeting_date=meeting_date,
+                title=title,
+                location=meeting_row.get("location"),
+                meeting_type=meeting_type,
+                capacity=meeting_row.get("member_capacity"),
+                related_procedure=meeting_row.get("procedure_reference"),
+                committee_acronym=meeting_row.get("committee_code"),
+                transparency_level="High" if org.eu_transparency_register_id else "Low",
+            )
+            meetings.append(meeting)
+
+    if logger:
+        logger.info(f"Entity resolution by method: {dict(method_counts.most_common())}")
+        stubs = method_counts.get("stub", 0) + method_counts.get("stub_empty", 0)
+        total = sum(method_counts.values())
+        resolved = total - stubs
+        logger.info(f"Org resolution: {resolved} resolved, {stubs} stubs out of {total}")
+
+    return meetings

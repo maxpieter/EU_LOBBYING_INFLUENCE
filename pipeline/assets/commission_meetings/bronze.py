@@ -22,11 +22,14 @@ from bs4 import BeautifulSoup
 # Format: {slug: {name, portfolio, host_id}}
 # This is populated dynamically by discover_commissioner_host_ids().
 
+# Bump this when parse_minutes_pdf() logic changes — invalidates cached PDF parses.
+_PARSER_VERSION = 2
+
 COMMISSIONERS_URL = "https://commission.europa.eu/about/organisation/college-commissioners_en"
 COMMISSIONER_BASE = "https://commission.europa.eu/about/organisation/college-commissioners"
 PRESIDENT_URL = "https://commission.europa.eu/about/organisation/president_en"
-MEETINGS_BASE = "https://ec.europa.eu/transparencyinitiative/meetings/meeting.do"
-MINUTES_BASE = "https://ec.europa.eu/transparencyinitiative/meetings/exportmeetings.do"
+MEETINGS_BASE = "https://ec.europa.eu/transparency-initiative/meetings/meeting.do"
+MINUTES_BASE = "https://ec.europa.eu/transparency-initiative/meetings/exportmeetings.do"
 
 # EP9 (2019-2024) Commission — different domain
 EP9_COLLEGE_URL = "https://commissioners.ec.europa.eu/college-commissioners-2019-2024_en"
@@ -46,17 +49,452 @@ def _make_session() -> requests.Session:
     return session
 
 
-def _get(session: requests.Session, url: str, timeout: int = 30) -> requests.Response:
-    time.sleep(REQUEST_DELAY)
-    response = session.get(url, timeout=timeout)
-    response.raise_for_status()
-    return response
+def _get(session: requests.Session, url: str, timeout: int = 30, retries: int = 3) -> requests.Response:
+    for attempt in range(retries):
+        time.sleep(REQUEST_DELAY)
+        try:
+            response = session.get(url, timeout=timeout)
+            response.raise_for_status()
+            return response
+        except Exception:
+            if attempt < retries - 1:
+                time.sleep(2 ** attempt * 2)
+                continue
+            raise
 
 
 def generate_meeting_id(commissioner_name: str, date_str: str, subject: str, orgs_raw: str) -> str:
     """Deterministic meeting ID from key fields."""
     raw = f"{commissioner_name}|{date_str}|{subject}|{orgs_raw}".lower().strip()
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
+
+
+# ---------------------------------------------------------------------------
+# New scraper: Excel exports + HTML for minutes UUIDs
+# ---------------------------------------------------------------------------
+
+_LISTING_URL = "https://ec.europa.eu/transparency-initiative/meetings/listcommissioners?collegeid={college_id}"
+_EXPORT_URL = "https://ec.europa.eu/transparency-initiative/meetings/data/meetings/hosts/export?hostId={host_id}"
+_MEETING_PAGE_URL = "https://ec.europa.eu/transparency-initiative/meetings/meeting/{meeting_type}?id={host_id}&page={page}"
+_MINUTES_URL = "https://ec.europa.eu/transparency-initiative/meetings/data/meetings/{meeting_uuid}/minutes"
+
+
+def discover_commissioners_from_listing(
+    session: requests.Session, college_id: int, logger=None
+) -> list[dict]:
+    """Parse the EC transparency initiative listing page for commissioner host IDs.
+
+    Args:
+        college_id: 0 = EP10 (2024-2029), 1 = EP9 (2019-2024), 2 = Juncker
+
+    Returns list of {name, host_id, meeting_type} dicts.
+    """
+    url = _LISTING_URL.format(college_id=college_id)
+    resp = _get(session, url)
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    results = []
+    seen = set()
+
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+        m = re.search(r"/meeting/(commissioner|cabinet)\?id=([a-f0-9-]+)", href)
+        if not m:
+            continue
+
+        meeting_type = m.group(1)
+        host_id = m.group(2)
+
+        key = (host_id, meeting_type)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        # Extract name from link title/text
+        text = link.get("title", "") or link.get_text(strip=True)
+        # "Information on meetings held by [Title] Name..." or "...Name's cabinet..."
+        name_match = re.search(
+            r"(?:President|Executive Vice-President|Vice-President|"
+            r"High Representative[^,]*|Commissioner)\s+(.+?)(?:'s cabinet|$)",
+            text, re.IGNORECASE,
+        )
+        name = name_match.group(1).strip().rstrip(".") if name_match else ""
+        # Fallback: grab everything after "held by " up to "'s cabinet" or end
+        if not name:
+            name_match2 = re.search(r"held by\s+(?:members of\s+)?(.+?)(?:'s cabinet|$)", text, re.IGNORECASE)
+            name = name_match2.group(1).strip().rstrip(".") if name_match2 else text[:40]
+
+        results.append({"name": name, "host_id": host_id, "meeting_type": meeting_type})
+
+    if logger:
+        commissioner_count = sum(1 for r in results if r["meeting_type"] == "commissioner")
+        cabinet_count = sum(1 for r in results if r["meeting_type"] == "cabinet")
+        logger.info(
+            f"College {college_id}: {len(results)} targets "
+            f"({commissioner_count} commissioner, {cabinet_count} cabinet)"
+        )
+
+    return results
+
+
+def download_excel_export(
+    session: requests.Session, host_id: str, logger=None
+) -> list[dict]:
+    """Download the Excel meeting export for a host ID.
+
+    Returns list of meeting dicts with keys: date_raw, meeting_date, location,
+    organizations_raw, organizations, subject, cabinet_member (if cabinet).
+    """
+    import pandas as pd
+
+    url = _EXPORT_URL.format(host_id=host_id)
+    try:
+        resp = session.get(url, timeout=60)
+        resp.raise_for_status()
+    except Exception as e:
+        if logger:
+            logger.warning(f"Excel export failed for {host_id}: {e}")
+        return []
+
+    content_type = resp.headers.get("Content-Type", "")
+    if "spreadsheet" not in content_type and "excel" not in content_type:
+        if logger:
+            logger.warning(f"Excel export not spreadsheet for {host_id}: {content_type}")
+        return []
+
+    try:
+        df = pd.read_excel(io.BytesIO(resp.content))
+    except Exception as e:
+        if logger:
+            logger.warning(f"Failed to parse Excel for {host_id}: {e}")
+        return []
+
+    if len(df) < 1:
+        return []
+
+    # Row 0 is the real header, rows 1+ are data
+    real_headers = [str(h).strip().lower() for h in df.iloc[0]]
+    data = df.iloc[1:].reset_index(drop=True)
+    data.columns = range(len(data.columns))
+
+    # Detect column mapping
+    # Commissioner format: Date, Location, Interest rep(s), Subject(s)
+    # Cabinet format: Name, Date, Location, Interest rep(s), Subject(s)
+    has_name_col = any("name" in h for h in real_headers)
+
+    meetings = []
+    for _, row in data.iterrows():
+        if has_name_col and len(row) >= 5:
+            cabinet_member = str(row[0]).strip() if pd.notna(row[0]) else None
+            date_raw = str(row[1]).strip() if pd.notna(row[1]) else ""
+            location = str(row[2]).strip() if pd.notna(row[2]) else ""
+            orgs_raw = str(row[3]).strip() if pd.notna(row[3]) else ""
+            subject = str(row[4]).strip() if pd.notna(row[4]) else ""
+        elif len(row) >= 4:
+            cabinet_member = None
+            date_raw = str(row[0]).strip() if pd.notna(row[0]) else ""
+            location = str(row[1]).strip() if pd.notna(row[1]) else ""
+            orgs_raw = str(row[2]).strip() if pd.notna(row[2]) else ""
+            subject = str(row[3]).strip() if pd.notna(row[3]) else ""
+        else:
+            continue
+
+        if not date_raw or date_raw == "nan":
+            continue
+
+        # Parse date
+        meeting_date = None
+        for fmt in ("%d/%m/%Y", "%Y-%m-%d %H:%M:%S", "%d %B %Y"):
+            try:
+                meeting_date = datetime.strptime(date_raw.split(" ")[0] if " " in date_raw and "/" in date_raw else date_raw.split(" ")[0], fmt).strftime("%Y-%m-%d")
+                break
+            except ValueError:
+                continue
+
+        # Split org names by newline (Excel preserves \n within cells)
+        org_names = [o.strip() for o in orgs_raw.split("\n") if o.strip()]
+
+        meetings.append({
+            "date_raw": date_raw,
+            "meeting_date": meeting_date,
+            "location": location,
+            "organizations_raw": orgs_raw,
+            "organizations": org_names,
+            "subject": subject,
+            "cabinet_member": cabinet_member,
+        })
+
+    # Extract commissioner name from the title row
+    title = str(df.columns[0])
+    name_match = re.search(
+        r"(?:President|Executive Vice-President|Vice-President|"
+        r"High Representative[^,]*|Commissioner)\s+(.+?)\s+published",
+        title, re.IGNORECASE,
+    )
+    commissioner_name = name_match.group(1).strip() if name_match else ""
+    # Also handle cabinet title: "members of [Title] Name's cabinet"
+    if not commissioner_name:
+        name_match2 = re.search(r"members of\s+.+?\s+(.+?)'s cabinet", title, re.IGNORECASE)
+        commissioner_name = name_match2.group(1).strip() if name_match2 else ""
+
+    for m in meetings:
+        m["_commissioner_name_from_excel"] = commissioner_name
+
+    return meetings
+
+
+def scrape_minutes_uuids(
+    session: requests.Session, host_id: str, meeting_type: str, logger=None
+) -> dict[str, str]:
+    """Scrape HTML meeting pages to extract minutes download UUIDs.
+
+    Returns {match_key: minutes_url} where match_key is "date|subject_normalized".
+    """
+    page_url = _MEETING_PAGE_URL.format(
+        meeting_type=meeting_type, host_id=host_id, page=1,
+    )
+    resp = _get(session, page_url)
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    # Get total pages
+    total_pages = 1
+    page_text = soup.find(string=re.compile(r"Page\s+\d+\s+of\s+\d+"))
+    if page_text:
+        m = re.search(r"of\s+(\d+)", page_text)
+        if m:
+            total_pages = int(m.group(1))
+
+    minutes_map: dict[str, str] = {}
+
+    def _extract_from_soup(s: BeautifulSoup) -> None:
+        table = s.find("table")
+        if not table:
+            return
+        for row in table.find_all("tr"):
+            cells = row.find_all("td")
+            if not cells:
+                continue
+
+            # Find date and subject cells by header attribute
+            date_cell = None
+            subj_cell = None
+            for c in cells:
+                header = (c.get("data-ecl-table-header") or "").lower()
+                if header == "date":
+                    date_cell = c
+                elif "subject" in header:
+                    subj_cell = c
+
+            if not date_cell:
+                continue
+
+            date_text = date_cell.get_text(strip=True)
+            subj_text = subj_cell.get_text(strip=True) if subj_cell else ""
+
+            # Find minutes link in this row
+            minutes_link = row.find("a", href=re.compile(r"meetings/data/meetings/[a-f0-9-]+/minutes"))
+            if not minutes_link:
+                continue
+
+            minutes_url = minutes_link["href"]
+            if not minutes_url.startswith("http"):
+                minutes_url = f"https://ec.europa.eu{minutes_url}"
+
+            # Key for matching with Excel data
+            key = f"{date_text}|{subj_text.lower().strip()}"
+            minutes_map[key] = minutes_url
+
+    _extract_from_soup(soup)
+
+    # Paginate
+    for page in range(2, total_pages + 1):
+        try:
+            page_url = _MEETING_PAGE_URL.format(
+                meeting_type=meeting_type, host_id=host_id, page=page,
+            )
+            resp = _get(session, page_url)
+            _extract_from_soup(BeautifulSoup(resp.text, "lxml"))
+        except Exception as e:
+            if logger:
+                logger.warning(f"Failed page {page} for {host_id}: {e}")
+
+    if logger:
+        logger.debug(f"  Minutes UUIDs: {len(minutes_map)} from {total_pages} pages")
+
+    return minutes_map
+
+
+def scrape_commission_meetings_v2(
+    session: requests.Session,
+    college_id: int,
+    logger=None,
+    max_commissioners: int = 0,
+    skip_minutes: bool = False,
+) -> list[dict]:
+    """Scrape commission meetings using Excel exports + HTML for minutes UUIDs.
+
+    Args:
+        college_id: 0 = EP10, 1 = EP9
+        max_commissioners: limit for testing (0 = all)
+        skip_minutes: if True, skip PDF download (EP9 has no working PDFs)
+    """
+    # Step 1: Discover commissioners
+    targets = discover_commissioners_from_listing(session, college_id, logger)
+    if max_commissioners > 0:
+        # Limit unique commissioners (each has commissioner + cabinet entries)
+        seen_names = set()
+        limited = []
+        for t in targets:
+            if t["name"] not in seen_names:
+                if len(seen_names) >= max_commissioners:
+                    break
+                seen_names.add(t["name"])
+            limited.append(t)
+        targets = limited
+        if logger:
+            logger.info(f"Limited to {max_commissioners} commissioners ({len(targets)} targets)")
+
+    # Step 2: Download Excel exports + optionally scrape minutes UUIDs
+    all_meetings = []
+
+    for target in targets:
+        host_id = target["host_id"]
+        meeting_type = target["meeting_type"]
+        name = target["name"]
+        label = f"{name} ({meeting_type})"
+
+        if logger:
+            logger.info(f"  {label}...")
+
+        # Download Excel export
+        meetings = download_excel_export(session, host_id, logger)
+        if logger:
+            logger.info(f"    Excel: {len(meetings)} meetings")
+
+        if not meetings:
+            continue
+
+        # Scrape HTML for minutes UUIDs (EP10 only)
+        minutes_map: dict[str, str] = {}
+        if not skip_minutes:
+            minutes_map = scrape_minutes_uuids(session, host_id, meeting_type, logger)
+            if logger:
+                logger.info(f"    Minutes: {len(minutes_map)} URLs found")
+
+        # Enrich meetings with metadata + minutes URLs
+        for m in meetings:
+            commissioner_name = m.pop("_commissioner_name_from_excel", name)
+            m["commissioner_name"] = commissioner_name
+            m["host_id"] = host_id
+            m["meeting_type"] = meeting_type
+
+            # Match to minutes URL
+            match_key = f"{m['date_raw']}|{(m.get('subject') or '').lower().strip()}"
+            m["minutes_url"] = minutes_map.get(match_key)
+
+            # Generate deterministic ID
+            m["id"] = generate_meeting_id(
+                commissioner_name,
+                m.get("meeting_date", m.get("date_raw", "")),
+                m.get("subject", ""),
+                m.get("organizations_raw", ""),
+            )
+
+        all_meetings.extend(meetings)
+
+    if logger:
+        with_url = sum(1 for m in all_meetings if m.get("minutes_url"))
+        logger.info(
+            f"College {college_id}: {len(all_meetings)} meetings total, "
+            f"{with_url} with minutes URL"
+        )
+
+    # Step 3: Download and parse PDF minutes
+    if not skip_minutes:
+        _download_and_parse_minutes(all_meetings, logger)
+
+    return all_meetings
+
+
+def _download_and_parse_minutes(meetings: list[dict], logger=None) -> None:
+    """Download and parse PDF minutes for meetings that have a minutes_url."""
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    pdf_cache = _load_pdf_cache(logger)
+
+    to_download = []
+    cached = 0
+    skipped = 0
+
+    for meeting in meetings:
+        if not meeting.get("minutes_url"):
+            skipped += 1
+            continue
+
+        cached_data = pdf_cache.get(meeting["id"])
+        if cached_data:
+            for field, value in cached_data.items():
+                if value is not None:
+                    meeting[field] = value
+            meeting["_parser_version"] = _PARSER_VERSION
+            cached += 1
+        else:
+            to_download.append(meeting)
+
+    if logger:
+        logger.info(
+            f"PDF minutes: {cached} cached, {len(to_download)} to download, {skipped} no URL"
+        )
+
+    if not to_download:
+        return
+
+    success = 0
+    failed = 0
+
+    def _download_one(meeting):
+        for attempt in range(3):
+            try:
+                resp = requests.get(
+                    meeting["minutes_url"],
+                    timeout=60,
+                    headers={"User-Agent": USER_AGENT},
+                )
+                resp.raise_for_status()
+                if "application/pdf" not in resp.headers.get("Content-Type", ""):
+                    return meeting, None
+                return meeting, parse_minutes_pdf(resp.content)
+            except Exception:
+                if attempt < 2:
+                    time.sleep(2 ** attempt)
+                    continue
+                return meeting, None
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        futures = {pool.submit(_download_one, m): m for m in to_download}
+        done = 0
+        for future in as_completed(futures):
+            done += 1
+            if done % 200 == 0 and logger:
+                logger.info(f"  PDF progress: {done}/{len(to_download)} (ok={success}, fail={failed})")
+            try:
+                meeting, parsed = future.result()
+                if parsed:
+                    success += 1
+                    meeting["minutes_subject"] = parsed.get("subject")
+                    meeting["points_raised"] = parsed.get("points_raised")
+                    meeting["conclusions"] = parsed.get("conclusions")
+                    meeting["ares_number"] = parsed.get("ares_number")
+                    meeting["transparency_register_ids"] = parsed.get("transparency_register_ids", [])
+                    meeting["commission_representatives"] = parsed.get("commission_representatives", [])
+                    meeting["_parser_version"] = _PARSER_VERSION
+                else:
+                    failed += 1
+            except Exception:
+                failed += 1
+
+    if logger:
+        logger.info(f"Minutes: {success} new, {cached} cached, {failed} failed, {skipped} no URL")
 
 
 def discover_commissioners(session: requests.Session, logger=None) -> list[dict]:
@@ -133,7 +571,8 @@ def get_host_uuids(session: requests.Session, slug: str, logger=None) -> list[di
 
     for link in soup.find_all("a", href=True):
         href = link["href"]
-        if "transparencyinitiative/meetings/meeting.do" not in href or "host=" not in href:
+        if ("transparencyinitiative/meetings/meeting.do" not in href
+                and "transparency-initiative/meetings/meeting.do" not in href) or "host=" not in href:
             continue
 
         match = re.search(r"host=([a-f0-9-]+)", href)
@@ -176,7 +615,8 @@ def get_host_uuids_from_url(session: requests.Session, url: str, logger=None) ->
 
     for link in soup.find_all("a", href=True):
         href = link["href"]
-        if "transparencyinitiative/meetings/meeting.do" not in href or "host=" not in href:
+        if ("transparencyinitiative/meetings/meeting.do" not in href
+                and "transparency-initiative/meetings/meeting.do" not in href) or "host=" not in href:
             continue
         match = re.search(r"host=([a-f0-9-]+)", href)
         if not match:
@@ -281,22 +721,32 @@ def scrape_meetings_page(
     resp = _get(session, url)
     soup = BeautifulSoup(resp.text, "lxml")
 
-    # Parse total count from "1-10 of 81" text
+    # Parse total page count from "Page 1 of 5" or old "1-10 of 81" format
     total_count = 0
-    paging_text = soup.find(string=re.compile(r"\d+\s*-\s*\d+\s+of\s+\d+"))
-    if paging_text:
-        match = re.search(r"of\s+(\d+)", paging_text)
+    # New format: "Page 1 of 5" → total_count = 5 * 20 (pages × rows_per_page)
+    page_of_text = soup.find(string=re.compile(r"Page\s+\d+\s+of\s+\d+"))
+    if page_of_text:
+        match = re.search(r"of\s+(\d+)", page_of_text)
         if match:
-            total_count = int(match.group(1))
+            total_pages = int(match.group(1))
+            total_count = total_pages * 20  # 20 rows per page in new format
+    else:
+        # Old format: "1-10 of 81"
+        paging_text = soup.find(string=re.compile(r"\d+\s*-\s*\d+\s+of\s+\d+"))
+        if paging_text:
+            match = re.search(r"of\s+(\d+)", paging_text)
+            if match:
+                total_count = int(match.group(1))
 
     meetings = []
     table = soup.find("table")
     if not table:
         return meetings, total_count
 
-    # Detect table format: commissioner pages have 4 data columns,
-    # cabinet pages have 5 (extra "Commission representative(s)" first column)
-    headers = [th.get_text(strip=True).lower() for th in table.find_all("th")]
+    # Detect table format: new EC site always has 6 columns including
+    # "Commission Representative(s)" first. Old format had 4 (no rep) or 5 (with rep).
+    # Normalize whitespace in headers since EC injects \n\t between words.
+    headers = [re.sub(r"\s+", " ", th.get_text(strip=True)).lower() for th in table.find_all("th")]
     has_rep_column = any("commission representative" in h for h in headers)
 
     rows = table.find_all("tr")
@@ -318,13 +768,14 @@ def scrape_meetings_page(
             continue
 
         # Find minutes PDF link in this row or nearby expandable section
+        # New format: /meetings/data/meetings/{uuid}/minutes
+        # Old format: exportmeetings.do?meetingId=...
         minutes_url = None
-        minutes_link = row.find("a", href=re.compile(r"exportmeetings\.do"))
+        minutes_link = row.find("a", href=re.compile(r"meetings/data/meetings/.+/minutes|exportmeetings\.do"))
         if not minutes_link:
-            # Check next sibling row (expandable detail)
             next_row = row.find_next_sibling("tr")
             if next_row:
-                minutes_link = next_row.find("a", href=re.compile(r"exportmeetings\.do"))
+                minutes_link = next_row.find("a", href=re.compile(r"meetings/data/meetings/.+/minutes|exportmeetings\.do"))
         if minutes_link:
             minutes_url = minutes_link["href"]
             if not minutes_url.startswith("http"):
@@ -372,9 +823,10 @@ def scrape_all_meetings(
     if logger and total > 0:
         logger.info(f"  Host {host_id}: {total} meetings total, page 1 got {len(meetings)}")
 
-    # Each page has 10 meetings
-    if total > 10:
-        total_pages = (total + 9) // 10
+    # Pages have 20 meetings (new format) or 10 (old format)
+    page_size = len(meetings) if meetings else 20
+    if total > page_size:
+        total_pages = (total + page_size - 1) // page_size
         for page in range(2, total_pages + 1):
             try:
                 meetings, _ = scrape_meetings_page(session, host_id, page=page)
@@ -419,25 +871,28 @@ def parse_minutes_pdf(pdf_content: bytes, logger=None) -> Optional[dict]:
     # Extract structured fields using regex patterns
     # These patterns match the standard Commission meeting minutes format
     patterns = {
-        # "Subject matter:" or just "Subject " (no colon, no "matter")
+        # "Subject matter:" — colon required to avoid partial captures.
+        # Boundary: next field label on its own line.
         "subject": (
-            r"Subject(?:\s+matter)?\s*:?\s*(.+?)"
-            r"(?=Main\s+points|Points\s+raised|$)"
+            r"Subject(?:\s+matter)?\s*:\s*(.+?)"
+            r"(?=\n\s*Main\s+points|\n\s*Points\s+raised|\Z)"
         ),
-        # "Main points raised and positions expressed:" — colon optional
-        # Stop at "Conclusion" only when it's a field label (after newline),
-        # not when "conclusion" appears mid-sentence.
-        # Don't stop at "European Commission" — it appears in normal text too.
+        # "Main points raised and positions expressed:" — colon optional.
+        # Stop at "Conclusion" only when it's a field label (after newline).
         "points_raised": (
             r"(?:Main\s+points\s+raised\s+(?:and\s+positions?\s+expressed\s*)?|"
             r"Points\s+raised)\s*:?\s*(.+?)"
-            r"(?=\n\s*Conclusions?\s*:?\s*(?:\n|[A-Z])|Ares\s*(?:number|\()|$)"
+            r"(?=\n\s*Conclusions?\s*:?\s*(?:\n|[A-Z])|Ares\s*(?:number|\()|"
+            r"\n\s*EUROPEAN\s+COMMISSION|\Z)"
         ),
-        # "Conclusions:" — colon optional, stop at Ares or "EUROPEAN COMMISSION"
-        # page header (require newline before it to avoid matching mid-text)
+        # "Conclusions:" — explicit cross-line capture with multiple end-markers.
         "conclusions": (
-            r"\n\s*Conclusions?\s*:?\s*(.*?)"
-            r"(?=\nEUROPEAN\s+COMMISSION|Ares\s*(?:number|\()|$)"
+            r"\n\s*Conclusions?\s*:?\s*"
+            r"([\s\S]+?)"
+            r"(?=\n\s*EUROPEAN\s+COMMISSION|"
+            r"\n\s*Ares\s*(?:number|\()|"
+            r"\n\s*Date\s*:|"
+            r"\n\s*Ref(?:erence)?\s*:|\Z)"
         ),
         "ares_number": r"(Ares\(\d{4}\)\d+(?:\s*/\s*Ares\(\d{4}\)\d+)*)",
     }
@@ -449,8 +904,10 @@ def parse_minutes_pdf(pdf_content: bytes, logger=None) -> Optional[dict]:
             # Normalize whitespace
             value = re.sub(r"\s+", " ", value).strip()
             # Strip leaked field label prefixes (PDF layout artifacts)
+            # Note: "matter:" prefix strip removed — the subject regex now
+            # requires the colon and consumes "Subject matter:" before capture.
             value = re.sub(
-                r"^(?:Subject\s+)?matter\s*:\s*|^(?:Main\s+)?points?\s+raised"
+                r"^(?:Main\s+)?points?\s+raised"
                 r"(?:\s+and\s+positions?\s+expressed)?\s*:\s*|^Conclusions?\s*:\s*",
                 "", value, flags=re.IGNORECASE,
             ).strip()
@@ -480,9 +937,16 @@ def parse_minutes_pdf(pdf_content: bytes, logger=None) -> Optional[dict]:
         result["transparency_register_ids"] = list(set(tr_ids))
 
     # Extract commission representatives
+    # Handles variants: "Name(s) and function(s) of the Commission Representative(s):"
+    # Boundary: stops at "Name(s) of the interest representative(s)" or "Subject matter:"
     repr_match = re.search(
-        r"(?:Names and functions\s*of the Commission\s*Representatives?|"
-        r"Commission\s*Representatives?)\s*(.+?)(?=Names? of the interest|Interest representative|$)",
+        r"(?:Name(?:\(s\)|s)?\s+(?:and\s+)?function(?:\(s\)|s)?\s*"
+        r"of\s+(?:the\s+)?Commission\s*Representative(?:\(s\)|s)?|"
+        r"Commission\s*Representative(?:\(s\)|s)?)\s*:?\s*"
+        r"(.+?)"
+        r"(?=Name(?:\(s\)|s)?\s+of\s+(?:the\s+)?interest|"
+        r"Interest\s+representative|"
+        r"Subject(?:\s+matter)?\s*:|\Z)",
         full_text,
         re.DOTALL | re.IGNORECASE,
     )
@@ -545,6 +1009,8 @@ def _load_pdf_cache(logger=None) -> dict[str, dict]:
     """Load previously parsed PDF data from existing bronze output.
 
     Returns dict keyed by meeting ID with minutes fields.
+    Only returns entries parsed with the current _PARSER_VERSION —
+    entries from older versions are invalidated and will be re-parsed.
     """
     import json
     import os
@@ -562,12 +1028,20 @@ def _load_pdf_cache(logger=None) -> dict[str, dict]:
             "minutes_subject", "points_raised", "conclusions",
             "ares_number", "transparency_register_ids", "commission_representatives",
         ]
-        # Don't cache any previous PDF parses — the old regex was broken
-        # and even "successful" extractions may be truncated or partial.
-        # All PDFs will be re-downloaded and re-parsed with the fixed regex.
+        for m in data:
+            mid = m.get("id")
+            if not mid:
+                continue
+            # Only use cache entries from the current parser version
+            if m.get("_parser_version") != _PARSER_VERSION:
+                continue
+            has_pdf = any(m.get(f) for f in pdf_fields)
+            if has_pdf:
+                cache[mid] = {f: m.get(f) for f in pdf_fields}
+
         if logger:
-            logger.info("PDF cache: skipping (full re-parse needed due to regex fixes)")
-        return {}
+            logger.info(f"PDF cache: {len(cache)} entries (parser v{_PARSER_VERSION})")
+        return cache
     except Exception as e:
         if logger:
             logger.warning(f"Failed to load PDF cache: {e}")
@@ -636,7 +1110,7 @@ def scrape_commission_meetings(context, actors: list[dict]) -> list[dict]:
     return _scrape_meetings_from_targets(session, scrape_targets, logger)
 
 
-def scrape_ep9_commission_meetings(context) -> list[dict]:
+def scrape_ep9_commission_meetings(context, max_commissioners: int = 0) -> list[dict]:
     """Scrape EP9 (2019-2024) commission meetings via commissioner discovery.
 
     No actors table needed — discovers commissioners from the EP9 college page.
@@ -646,6 +1120,9 @@ def scrape_ep9_commission_meetings(context) -> list[dict]:
 
     # Step 1: Discover EP9 commissioners
     commissioners = discover_ep9_commissioners(session, logger)
+    if max_commissioners > 0:
+        commissioners = commissioners[:max_commissioners]
+        logger.info(f"EP9: limited to {max_commissioners} commissioners (test mode)")
 
     # Step 2: Get host UUIDs for each
     logger.info("Finding EP9 meeting page UUIDs...")
@@ -725,12 +1202,12 @@ def _scrape_meetings_from_targets(
             minutes_skipped += 1
             continue
 
-        cache_key = f"{meeting.get('host_id')}|{meeting.get('meeting_date', '')}|{meeting.get('subject', '')}"
-        cached = pdf_cache.get(cache_key)
+        cached = pdf_cache.get(meeting["id"])
         if cached:
             for field, value in cached.items():
                 if value is not None:
                     meeting[field] = value
+            meeting["_parser_version"] = _PARSER_VERSION
             minutes_cached += 1
         else:
             to_download.append(meeting)
@@ -782,6 +1259,7 @@ def _scrape_meetings_from_targets(
                     meeting["ares_number"] = parsed.get("ares_number")
                     meeting["transparency_register_ids"] = parsed.get("transparency_register_ids", [])
                     meeting["commission_representatives"] = parsed.get("commission_representatives", [])
+                    meeting["_parser_version"] = _PARSER_VERSION
                 else:
                     minutes_failed += 1
             except Exception:

@@ -1,14 +1,18 @@
 """Commission Meetings Assets.
 
-New pipeline (not in parl8) for European Commission meetings.
-Data source: EC Transparency Initiative + Meeting Minutes PDFs.
+Pipeline for European Commission meetings.
+Data source: EC Transparency Initiative (ec.europa.eu/transparency-initiative).
 
-Bronze: Scrape commissioner pages → meetings → parse PDFs
+Bronze: Excel exports for meeting lists + PDF minutes for EP10
 Silver: Entity resolution (org names → organizations table)
 Diamond: Upload to Supabase
 
 Supports both EP9 (2019-2024) and EP10 (2024-2029) commissions.
+EP9 meeting minutes PDFs are no longer available from the EC.
 """
+
+import re as _re
+from typing import Any
 
 from dagster import AssetIn, Config, asset
 
@@ -18,47 +22,57 @@ from pipeline.resources.supabase import SupabaseResource
 class CommissionMeetingsBronzeConfig(Config):
     """Configuration for commission meetings bronze asset."""
     terms: list[str] = ["EP9", "EP10"]
+    max_commissioners: int = 0
+    """Limit number of commissioners to scrape (0 = all). Useful for testing."""
 
 
 @asset(
     name="eu_commission_meetings_bronze",
     group_name="eu_bronze",
     compute_kind="scraper",
-    required_resource_keys={"supabase"},
     description=(
-        "Scrape European Commission meeting records from the EC Transparency Initiative "
-        "(ec.europa.eu/transparencyinitiative). Covers both EP9 (2019-2024, direct commissioner "
-        "discovery) and EP10 (2024-2029, actor profile URLs from Supabase). Downloads and parses "
-        "meeting minutes PDFs using pypdf to extract: date, subject, organisations present, and "
-        "free-text 'points raised' capturing substantive policy positions expressed by lobbyists. "
-        "Deduplicates by meeting ID across terms."
+        "Scrape European Commission meeting records from the EC Transparency Initiative. "
+        "Uses structured Excel exports for meeting lists (date, location, orgs, subject) "
+        "and HTML page scraping for minutes PDF UUIDs. Downloads and parses EP10 meeting "
+        "minutes PDFs using pypdf. EP9 minutes are no longer available from the EC. "
+        "Covers both EP9 (2019-2024) and EP10 (2024-2029) commissions."
     ),
 )
 def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfig):
-    from .bronze import scrape_commission_meetings, scrape_ep9_commission_meetings
+    from .bronze import _make_session, scrape_commission_meetings_v2
 
+    session = _make_session()
     all_meetings = []
 
-    # EP10 (2024-2029): actor-based discovery
+    # EP10 (2024-2029): Excel exports + PDF minutes
     if "EP10" in config.terms:
-        supabase: SupabaseResource = context.resources.supabase
-        result = supabase.select(
-            "actors",
-            columns="actor_id,\"fullName\",portfolio,profile_url,actor_type",
+        context.log.info("=== EP10 (2024-2029) ===")
+        ep10 = scrape_commission_meetings_v2(
+            session, college_id=0, logger=context.log,
+            max_commissioners=config.max_commissioners,
+            skip_minutes=False,
         )
-        actors = [a for a in (result.data or []) if a.get("profile_url")]
-        context.log.info(f"EP10: Loaded {len(actors)} actors with profile URLs")
-        ep10_meetings = scrape_commission_meetings(context, actors=actors)
-        all_meetings.extend(ep10_meetings)
-        context.log.info(f"EP10: {len(ep10_meetings)} meetings")
+        all_meetings.extend(ep10)
+        context.log.info(f"EP10: {len(ep10)} meetings")
 
-    # EP9 (2019-2024): direct commissioner discovery
+    # EP9 (2019-2024): Excel exports only (PDFs no longer available)
     if "EP9" in config.terms:
-        ep9_meetings = scrape_ep9_commission_meetings(context)
-        all_meetings.extend(ep9_meetings)
-        context.log.info(f"EP9: {len(ep9_meetings)} meetings")
+        context.log.info("=== EP9 (2019-2024) ===")
+        try:
+            ep9 = scrape_commission_meetings_v2(
+                session, college_id=1, logger=context.log,
+                max_commissioners=config.max_commissioners,
+                skip_minutes=True,  # EP9 PDFs return 404
+            )
+            all_meetings.extend(ep9)
+            context.log.info(f"EP9: {len(ep9)} meetings")
+        except Exception as e:
+            context.log.warning(f"EP9 scrape failed (non-fatal): {e}")
+            context.log.info("Continuing with EP10 data only")
 
-    # Deduplicate by meeting ID (in case of overlap)
+    session.close()
+
+    # Deduplicate: pass 1 — by meeting ID
     seen_ids = set()
     unique = []
     for m in all_meetings:
@@ -67,58 +81,99 @@ def eu_commission_meetings_bronze(context, config: CommissionMeetingsBronzeConfi
             seen_ids.add(mid)
             unique.append(m)
 
-    context.log.info(f"Total unique meetings: {len(unique)} (from {len(all_meetings)} raw)")
-    return unique
+    id_dupes = len(all_meetings) - len(unique)
+
+    # Deduplicate: pass 2 — by content (catches cross-term duplicates)
+    content_seen = set()
+    final = []
+    for m in unique:
+        content_key = (
+            (m.get("commissioner_name") or "").lower().strip(),
+            m.get("meeting_date", ""),
+            _re.sub(r"\s+", " ", (m.get("subject") or "").lower().strip()),
+            _re.sub(r"\s+", " ", (m.get("organizations_raw") or "").lower().strip()),
+        )
+        if content_key not in content_seen:
+            content_seen.add(content_key)
+            final.append(m)
+
+    content_dupes = len(unique) - len(final)
+    context.log.info(
+        f"Dedup: {len(all_meetings)} raw → {len(final)} unique "
+        f"({id_dupes} ID dupes, {content_dupes} content dupes)"
+    )
+    return final
 
 
 @asset(
     name="eu_commission_meetings_silver",
     group_name="eu_silver",
     compute_kind="python",
-    ins={"bronze_data": AssetIn("eu_commission_meetings_bronze")},
+    ins={
+        "bronze_data": AssetIn("eu_commission_meetings_bronze"),
+    },
     required_resource_keys={"supabase"},
     description=(
-        "Entity resolution for commission meeting organisations. Matches organisation names from "
-        "scraped meetings against canonical Transparency Register entries using: (1) TR ID exact "
-        "match, (2) normalised name match, (3) prefix match for short names (e.g. 'Toyota' → "
-        "'Toyota Motor Europe'). Unmatched names are recorded as stubs with deterministic hash IDs "
-        "for later batch deduplication. Requires the organisations table to be populated first "
-        "via the lobbying pipeline."
+        "Entity resolution for commission meeting organisations. Fetches the "
+        "canonical organisations table directly from Supabase and uses the "
+        "unified OrgResolver 8-step cascade for matching."
     ),
 )
 def eu_commission_meetings_silver(context, bronze_data: list[dict]):
-    from .silver import process_commission_meetings
+    from pipeline.assets.organizations.resolution import OrgResolver
+    from pipeline.models.lobbying_models import Organization
+
+    from .silver import build_meeting_records
 
     supabase: SupabaseResource = context.resources.supabase
-
-    # Fetch existing organizations for entity resolution
-    context.log.info("Fetching existing organizations for entity resolution...")
-    result = supabase.select(
-        "organizations",
-        columns="id,name,normalized_name,official_name,acronym,eu_transparency_register_id",
-    )
-    existing_orgs = result.data if result.data else []
-    context.log.info(f"Loaded {len(existing_orgs)} organizations")
-    if not existing_orgs:
-        context.log.warning(
-            "Organizations table is empty — run the lobbying pipeline first "
-            "to populate it from the Transparency Register. "
-            "Proceeding with 0 org matches."
+    client = supabase.get_client()
+    org_rows = []
+    page_size = 1000
+    offset = 0
+    while True:
+        resp = (
+            client.table("organizations")
+            .select("id,name,normalized_name,official_name,acronym,eu_transparency_register_id")
+            .range(offset, offset + page_size - 1)
+            .execute()
         )
+        batch = resp.data or []
+        org_rows.extend(batch)
+        if len(batch) < page_size:
+            break
+        offset += page_size
+    context.log.info(f"Fetched {len(org_rows)} organisations from Supabase")
 
-    return process_commission_meetings(bronze_data, existing_orgs, logger=context.log)
+    # Build Organization models and OrgResolver
+    orgs = []
+    for row in org_rows:
+        orgs.append(Organization(
+            id=row["id"],
+            name=row.get("name") or "",
+            normalized_name=row.get("normalized_name"),
+            official_name=row.get("official_name"),
+            acronym=row.get("acronym"),
+            eu_transparency_register_id=row.get("eu_transparency_register_id"),
+        ))
+    resolver = OrgResolver(orgs)
+    context.log.info(f"Built OrgResolver with {len(orgs)} organisations")
+
+    return build_meeting_records(bronze_data, resolver, logger=context.log)
 
 
 @asset(
     name="eu_commission_meetings_diamond",
     group_name="eu_diamond",
     compute_kind="supabase",
-    ins={"silver_data": AssetIn("eu_commission_meetings_silver")},
+    ins={
+        "silver_data": AssetIn("eu_commission_meetings_silver"),
+    },
     required_resource_keys={"supabase"},
     description=(
         "Upsert commission meetings and meeting-organisation junction records to Supabase. "
         "Creates entries in commission_meetings and commission_meeting_organizations tables "
-        "with deterministic primary keys for idempotent re-runs."
+        "with deterministic primary keys for idempotent re-runs. Depends on "
+        "eu_organizations_diamond for the organisation FK constraint."
     ),
 )
 def eu_commission_meetings_diamond(context, silver_data: dict):

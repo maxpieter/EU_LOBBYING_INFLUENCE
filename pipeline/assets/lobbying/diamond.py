@@ -1,10 +1,12 @@
-"""Diamond stage: Upload structured lobbying data to Supabase."""
+"""Diamond stage: Upload lobbying meetings to Supabase.
+
+Organisation upload is handled by eu_organizations_diamond.
+This module is a pure meetings uploader.
+"""
 
 from typing import Any, Dict, List, Optional
 
 from pipeline.models.lobbying_models import LobbyingMeeting, Organization
-
-from .fuzzy_match import resolve_stubs
 
 
 def upload_lobbying_data(
@@ -12,12 +14,14 @@ def upload_lobbying_data(
     organizations: List[Organization],
     supabase_resource: Any,
     logger: Optional[Any] = None,
-) -> Dict[str, Dict[str, int]]:
-    """Upload lobbying data to Supabase.
+) -> Dict[str, Any]:
+    """Upload lobbying meetings to Supabase.
 
     Args:
         meetings: List of LobbyingMeeting models
-        organizations: List of Organization models
+        organizations: Stub orgs created in silver for names not present in
+            Supabase. Upserted before meetings to satisfy the FK, covering
+            the race where bronze landed after the last orgs_diamond run.
         supabase_resource: Supabase resource instance
         logger: Optional logger
 
@@ -26,82 +30,61 @@ def upload_lobbying_data(
     """
     results = {}
 
-    # 0. Resolve stub orgs via fuzzy matching before upload
-    if organizations and meetings:
-        organizations, meetings = resolve_stubs(
-            organizations, meetings, supabase_resource, logger
-        )
-
-    # 1. Upload Organizations
+    # 0. Upsert silver-created stub orgs so meeting FKs resolve.
+    # Failures here are non-fatal: the GIN trigram index on organizations.name
+    # can push individual upserts past statement_timeout under DB load. Any
+    # meetings referencing a stub that didn't make it are dropped from this
+    # run and will be retried on re-materialisation.
+    failed_stub_ids: set[str] = set()
     if organizations:
         if logger:
-            logger.info(f"Preparing {len(organizations)} organizations for upload")
+            logger.info(f"Upserting {len(organizations)} silver stub organisations")
 
         org_records = []
-        for org in organizations:
-            record = {
-                "id": org.id,
-                "name": org.name,
-                "normalized_name": org.normalized_name,
-                "official_name": org.official_name,
-                "website": org.website,
+        seen_ids: set[str] = set()
+        for o in organizations:
+            if not o.id or o.id in seen_ids:
+                continue
+            seen_ids.add(o.id)
+            org_records.append({
+                "id": o.id,
+                "name": o.name,
+                "normalized_name": o.normalized_name,
+                "official_name": o.official_name,
                 "organization_type": (
-                    org.organization_type.value if org.organization_type else None
+                    o.organization_type.value if o.organization_type else None
                 ),
-                "industry_sector": (org.industry_sector.value if org.industry_sector else None),
-                "country": org.country,
-                "eu_transparency_register_id": org.eu_transparency_register_id,
-                "description": org.description,
-                "founding_year": org.founding_year,
-                "employee_count_range": org.employee_count_range,
-                "annual_revenue_range": org.annual_revenue_range,
-                "transparency_score": org.transparency_score,
-                "scraped_at": org.scraped_at.isoformat() if org.scraped_at else None,
-                "logo_url": org.logo_url,
-                "social_media": org.social_media,
-                "key_personnel": org.key_personnel,
-                "policy_focus_areas": org.policy_focus_areas,
-                "acronym": org.acronym,
-                "city": org.city,
-                "address": org.address,
-                "post_code": org.post_code,
-                "level_of_interest": org.level_of_interest,
-                "interests_represented": org.interests_represented,
-                "form_of_entity": org.form_of_entity,
-                "source_of_funding": org.source_of_funding,
-            }
-            org_records.append(record)
+                "eu_transparency_register_id": o.eu_transparency_register_id,
+                "acronym": o.acronym,
+            })
 
-        if logger:
-            logger.info(f"Uploading {len(org_records)} organizations to Supabase")
-
-        # Upsert organizations - use 'id' as the primary key for conflict resolution
-        results["organizations"] = supabase_resource.batch_upsert(
+        stub_result = supabase_resource.batch_upsert(
             table="organizations",
             data=org_records,
-            batch_size=100,
+            batch_size=50,
             on_conflict="id",
             logger=logger,
         )
-
+        results["stubs"] = stub_result
+        results["stubs_uploaded"] = stub_result["success"]
         if logger:
-            org_result = results["organizations"]
             logger.info(
-                f"Organization upload complete: {org_result['success']} succeeded, {org_result['failed']} failed"
+                f"Stub upload complete: {stub_result['success']} succeeded, "
+                f"{stub_result['failed']} failed"
             )
-            if org_result["failed"] > 0:
-                logger.error(
-                    f"Failed to upload {org_result['failed']} organizations - check Supabase logs"
+        if stub_result["failed"] > 0:
+            failed_ids = stub_result.get("failed_ids") or []
+            failed_stub_ids = set(failed_ids)
+            if logger:
+                logger.warning(
+                    f"{stub_result['failed']} stub orgs failed to upsert "
+                    f"(likely DB statement_timeout). Meetings referencing "
+                    f"these stubs will be dropped from this run and retried next time. "
+                    f"Failed IDs: {sorted(failed_stub_ids)[:5]}"
+                    + ("..." if len(failed_stub_ids) > 5 else "")
                 )
-                raise RuntimeError(
-                    f"Failed to upload {org_result['failed']} organizations to Supabase. "
-                    f"Check logs for details."
-                )
-    else:
-        if logger:
-            logger.warning("No organizations provided for upload")
 
-    # 2. Create placeholder MEPs for missing/inactive members
+    # 1. Create placeholder MEPs for missing/inactive members
     if meetings:
         if logger:
             logger.info("Checking for missing MEPs and creating placeholders if needed")
@@ -180,6 +163,18 @@ def upload_lobbying_data(
         if logger:
             logger.info(f"Preparing {len(meetings)} meetings for upload")
 
+        # Drop any meetings whose stub org failed to upsert — uploading them
+        # would FK-fail. They'll be retried on the next materialisation.
+        if failed_stub_ids:
+            before = len(meetings)
+            meetings = [m for m in meetings if m.organization_id not in failed_stub_ids]
+            dropped = before - len(meetings)
+            if logger and dropped:
+                logger.warning(
+                    f"Dropped {dropped} meetings referencing {len(failed_stub_ids)} "
+                    f"stub orgs that failed to upsert"
+                )
+
         # Deduplicate meetings by ID to avoid "cannot affect row a second time" error
         seen_ids = set()
         unique_meetings = []
@@ -196,12 +191,8 @@ def upload_lobbying_data(
             logger.warning(f"Removed {duplicate_count} duplicate meetings (same ID)")
 
         meeting_records = []
-        org_lookup = {org.id: org for org in organizations}
 
         for m in unique_meetings:
-            # Try to find org
-            org = org_lookup.get(m.organization_id)
-
             record = {
                 "id": m.id,
                 "mep_id": m.mep_id,
@@ -226,6 +217,7 @@ def upload_lobbying_data(
             batch_size=100,
             logger=logger,
         )
+        results["meetings_uploaded"] = results["meetings"]["success"]
 
         if logger:
             meeting_result = results["meetings"]

@@ -81,17 +81,36 @@ def upload_commission_meetings(
             logger.warning(f"Failed to clear old org links (may not exist yet): {e}")
 
     # Insert new org links
+    # Check which organization IDs exist in DB to avoid FK violations.
+    # Stub IDs (org_...) from OrgResolver may not be in the organizations table.
+    existing_org_ids: set[str] = set()
+    all_org_ids = [o["organization_id"] for o in meeting_orgs if o.get("organization_id")]
+    for batch_start in range(0, len(all_org_ids), 500):
+        batch_ids = all_org_ids[batch_start : batch_start + 500]
+        try:
+            resp = client.table("organizations").select("id").in_("id", batch_ids).execute()
+            existing_org_ids.update(r["id"] for r in (resp.data or []))
+        except Exception:
+            pass
+
     org_records = []
+    nulled_count = 0
     for org in meeting_orgs:
         record = {
             "meeting_id": org["meeting_id"],
             "organization_name": org["organization_name"],
         }
-        if org.get("organization_id"):
-            record["organization_id"] = org["organization_id"]
+        org_id = org.get("organization_id")
+        if org_id and org_id in existing_org_ids:
+            record["organization_id"] = org_id
+        elif org_id:
+            nulled_count += 1
         if org.get("eu_transparency_register_id"):
             record["eu_transparency_register_id"] = org["eu_transparency_register_id"]
         org_records.append(record)
+
+    if logger and nulled_count:
+        logger.info(f"Nulled {nulled_count} org IDs not found in organizations table")
 
     org_result = {"success": 0, "failed": 0}
     if org_records:

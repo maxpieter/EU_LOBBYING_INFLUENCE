@@ -17,13 +17,9 @@ import os
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Literal, Optional
 
-from dagster import AssetExecutionContext, asset
+from dagster import AssetExecutionContext, Config, asset
 
 from pipeline.models.legislation import Procedure
-from pipeline.partitions.definitions import (
-    get_week_range_from_partition,
-    weekly_partitions,
-)
 
 # How far back (in days) the v2 feed reliably covers.
 # The EP API caps the feed at ~30 days regardless of start-date parameter.
@@ -371,29 +367,41 @@ def _convert_oeil_actors(
 # ---------------------------------------------------------------------------
 
 
+class LegislationBronzeConfig(Config):
+    """Configuration for the legislation bronze asset."""
+
+    lookback_days: int = 28
+    """Discover procedures updated in the last N days via v2 feed. The EP v2
+    feed is hard-capped at ~30 days, so anything larger won't help incrementally."""
+
+    full_rescrape: bool = False
+    """If True, scrape the full v2 paginated catalog (~5k procedures) instead of
+    just the recent window. Expensive — use for initial backfill only."""
+
+
 @asset(
     group_name="eu_bronze",
     compute_kind="scraper",
-    partitions_def=weekly_partitions,
     description=(
         "Discover and scrape legislative procedures from OEIL and the EP Open Data v2 API. "
-        "Recent partitions (<=28 days) use the v2 /procedures/feed for real-time discovery; "
-        "older partitions fall back to the OEIL XML catalog filtered by lastpubdate. For each "
-        "procedure: scrapes OEIL HTML for metadata (title, legal basis, policy area, timeline, "
-        "rapporteurs, committees), then enriches with v2 API data (actors, events, documents). "
-        "Outputs raw procedure dicts partitioned by week."
+        "By default, discovers procedures updated in the last 28 days via the v2 /procedures/feed "
+        "and scrapes each one (OEIL HTML + v2 API enrichment). Set full_rescrape=True to rebuild "
+        "the entire catalog (~5k procedures, slow)."
     ),
 )
-def eu_legislation_bronze(context: AssetExecutionContext) -> List[Dict[str, Any]]:
-    """Bronze layer: v2 feed / OEIL XML discovery -> OEIL HTML scraping -> v2 enrichment.
+def eu_legislation_bronze(
+    context: AssetExecutionContext,
+    config: LegislationBronzeConfig,
+) -> List[Dict[str, Any]]:
+    """Bronze layer: v2 feed discovery -> OEIL HTML scraping -> v2 enrichment.
 
-    Discovery:
-    - Recent partitions (<=28 days): Uses EP Open Data v2 /procedures/feed.
-      Captures ANY procedural activity with millisecond-precision timestamps.
-    - Older partitions (>28 days / backfill): Uses OEIL XML catalog filtered
-      by lastpubdate (legacy path, unchanged).
+    Unpartitioned. Procedures span multi-year lifecycles, so weekly partitioning
+    was never a good fit. Discovery strategies:
 
-    Force a specific mode via env var LEGISLATION_DISCOVERY_MODE=v2_feed|oeil_catalog.
+    - Default (incremental): v2 /procedures/feed for the last ``lookback_days``.
+      Captures any procedural activity with millisecond-precision timestamps.
+    - Full rescrape: paginated v2 /procedures endpoint (all ~5k procedures).
+      Use for initial backfill; expensive.
 
     Content enrichment (always):
     - OEIL HTML scraping: subjects, legal basis, summary text, EUR-Lex refs
@@ -401,28 +409,31 @@ def eu_legislation_bronze(context: AssetExecutionContext) -> List[Dict[str, Any]
     """
     from .oeil_scraper import scrape_multiple_procedures
     from .v2_api import enrich_bronze_with_v2_events
+    from .v2_feed import fetch_all_procedure_ids
 
-    partition_key = context.partition_key
-    start_date, end_date = get_week_range_from_partition(partition_key)
-    partition_year = int(partition_key.split("-")[0])
-
-    context.log.info(
-        f"Fetching legislation for week {partition_key} ({start_date} to {end_date}), "
-        f"year={partition_year}"
-    )
-
-    # --- STEP 1: Discover which procedures were updated this week ---
-    env_override = os.environ.get("LEGISLATION_DISCOVERY_MODE")
-    mode = select_discovery_mode(start_date, env_override=env_override)
-
-    context.log.info(f"Discovery mode: {mode} (env_override={env_override!r})")
-
-    if mode == "v2_feed":
-        discovered = discover_via_v2_feed(start_date, end_date, logger=context.log)
+    if config.full_rescrape:
+        context.log.info("Full rescrape: fetching complete procedure catalog from v2")
+        all_procs = fetch_all_procedure_ids(logger=context.log)
+        discovered = [
+            {
+                "process_id": p["process_id"],
+                "oeil_ref": _process_id_to_oeil_ref(p["process_id"], p.get("process_type", "")),
+                "title": p.get("label", ""),
+                "process_type": p.get("process_type", ""),
+                "updated_at": None,
+            }
+            for p in all_procs
+        ]
+        mode = "full_rescrape"
     else:
-        discovered = discover_via_oeil_catalog(
-            partition_year, start_date, end_date, logger=context.log
+        end_date = datetime.now(tz=timezone.utc)
+        start_date = end_date - timedelta(days=config.lookback_days)
+        context.log.info(
+            f"Incremental scrape: discovering procedures updated between "
+            f"{start_date.date()} and {end_date.date()} via v2 feed"
         )
+        discovered = discover_via_v2_feed(start_date, end_date, logger=context.log)
+        mode = "v2_feed_incremental"
 
     context.log.info(f"Discovered {len(discovered)} procedures to scrape via {mode}")
 
@@ -459,12 +470,10 @@ def eu_legislation_bronze(context: AssetExecutionContext) -> List[Dict[str, Any]
     context.add_output_metadata(
         {
             "discovery_mode": mode,
-            "year": partition_year,
             "discovered_count": len(discovered),
             "details_scraped": len(all_procedures),
             "validated_count": len(validated),
             "v2_enriched_count": v2_enriched_count,
-            "week": partition_key,
         }
     )
 

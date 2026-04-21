@@ -5,13 +5,17 @@ from .feedback.hys_feedback_asset import hys_feedback_bronze, hys_feedback_chunk
 from .legislation.definitions import legislation_assets
 from .lobbying.definitions import lobbying_assets
 from .meps.definitions import members_assets
+from .organizations.definitions import organization_assets
+from .procedures.definitions import procedure_matching_assets
 
 all_assets = [
     *members_assets,
+    *organization_assets,
     *lobbying_assets,
     *legislation_assets,
     *actors_assets,
     *commission_meetings_assets,
+    *procedure_matching_assets,
     *analysis_assets,
     hys_feedback_bronze,
     hys_feedback_chunks,

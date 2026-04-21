@@ -10,7 +10,6 @@ from typing import Any, Dict, List
 
 from dagster import AssetExecutionContext, AssetIn, Config, asset
 
-from pipeline.partitions.definitions import weekly_partitions
 from pipeline.resources.supabase import SupabaseResource
 
 from .bronze import eu_legislation_bronze
@@ -194,13 +193,12 @@ def eu_documents_bronze(context: AssetExecutionContext, config: DocumentScraperC
         "with upsert semantics for idempotent re-runs."
     ),
     compute_kind="upload",
-    partitions_def=weekly_partitions,
     ins={"silver_data": AssetIn("eu_legislation_silver")},
 )
 def eu_legislation_diamond(
     context: AssetExecutionContext,
     supabase: SupabaseResource,
-    silver_data: List[Dict[str, Any]],
+    silver_data: List[Dict[str, Any]] | None,
 ) -> Dict[str, int]:
     """Diamond layer: Upload procedures to Supabase."""
     if not silver_data:
