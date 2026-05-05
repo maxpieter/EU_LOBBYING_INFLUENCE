@@ -423,7 +423,7 @@ def eu_meeting_procedure_matcher(
     while True:
         resp = (
             client.table("procedures")
-            .select("id,title,procedure_type,proposal_date,decision_date,last_activity_date")
+            .select("id,title,procedure_type,proposal_date,decision_date,last_activity_date,subjects")
             .eq("is_deleted", False)
             .range(offset, offset + 999)
             .execute()
@@ -477,7 +477,7 @@ def eu_meeting_procedure_matcher(
     while True:
         resp = (
             client.table("commission_meetings")
-            .select("id,subject,meeting_date,points_raised,match_status")
+            .select("id,subject,meeting_date,points_raised,conclusions,match_status")
             .is_("match_status", "null")
             .range(offset, offset + 999)
             .execute()

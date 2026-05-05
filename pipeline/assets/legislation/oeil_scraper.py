@@ -128,6 +128,60 @@ def _sanitize_text(text: str) -> str:
     return text.strip()
 
 
+def _normalize_mep_name(name: str) -> str:
+    """Convert OEIL "LASTNAME Firstname" → "Firstname LASTNAME".
+
+    OEIL renders MEP names with the surname uppercased and placed first
+    (e.g. "SCHWAB Andreas", "VAN BREMPT Kathleen"). The EP MEPs feed
+    (members.fullName) uses the opposite convention: "Firstname LASTNAME".
+    Normalize OEIL output to match the canonical EP form so a single
+    string format flows through the rest of the pipeline.
+
+    Detection: tokens at the start that are entirely uppercase belong to
+    the surname (which can be multi-word, e.g. "VAN BREMPT"). The first
+    non-uppercase token starts the given name.
+
+    If the input doesn't fit the OEIL pattern (no uppercase prefix or
+    every token is uppercase), return it unchanged so we don't corrupt
+    correctly-formatted names.
+    """
+    if not name:
+        return name
+    # OEIL appends a trailing party tag like "(EPP)". Detach it so it
+    # doesn't get caught up in the firstname during the flip, then
+    # re-attach at the end.
+    party_match = re.search(r"\s*(\([^)]+\))\s*$", name)
+    if party_match:
+        party_suffix = " " + party_match.group(1)
+        name = name[: party_match.start()].rstrip()
+    else:
+        party_suffix = ""
+
+    parts = name.split()
+    if len(parts) < 2:
+        return name + party_suffix
+    # OEIL format requires the FIRST token to be all-uppercase (the surname
+    # starts there). If it isn't, the input is already in forename-first
+    # form (e.g. "Ursula von der Leyen") — leave it alone.
+    if not (parts[0].isupper() and any(c.isalpha() for c in parts[0])):
+        return name + party_suffix
+    # Find the first non-uppercase token after position 0 — that's where
+    # the firstname starts. Multi-word surnames like "VAN BREMPT" stay
+    # together because their tokens are all uppercase.
+    first_idx = len(parts)
+    for i, p in enumerate(parts):
+        if i == 0:
+            continue
+        if not p.isupper() and any(c.isalpha() for c in p):
+            first_idx = i
+            break
+    if first_idx == len(parts):
+        return name + party_suffix  # entire string uppercase → unknown format
+    last = " ".join(parts[:first_idx])
+    first = " ".join(parts[first_idx:])
+    return f"{first} {last}{party_suffix}"
+
+
 def _construct_document_url(doc_id: str) -> Optional[str]:
     """Construct document URL from document ID if possible.
 
@@ -342,7 +396,7 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                     # Find ALL MEP links in the cell (there can be multiple)
                     mep_links = mep_cell.find_all("a")
                     for mep_link in mep_links:
-                        mep_name = _sanitize_text(mep_link.get_text())
+                        mep_name = _normalize_mep_name(_sanitize_text(mep_link.get_text()))
                         href = mep_link.get("href", "")
                         mep_id_match = re.search(r"/meps/en/(\d+)", href)
                         mep_id = int(mep_id_match.group(1)) if mep_id_match else None
@@ -399,7 +453,7 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                     # Find ALL rapporteur links in the cell (there can be multiple)
                     rapporteur_links = rapporteur_cell.find_all("a")
                     for rapporteur_link in rapporteur_links:
-                        rapporteur_name = _sanitize_text(rapporteur_link.get_text())
+                        rapporteur_name = _normalize_mep_name(_sanitize_text(rapporteur_link.get_text()))
                         href = rapporteur_link.get("href", "")
                         mep_id_match = re.search(r"/meps/en/(\d+)", href)
                         mep_id = int(mep_id_match.group(1)) if mep_id_match else None
@@ -424,7 +478,7 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                     # First cell: Shadow rapporteur name
                     shadow_link = cells[0].find("a")
                     if shadow_link:
-                        shadow_name = _sanitize_text(shadow_link.get_text())
+                        shadow_name = _normalize_mep_name(_sanitize_text(shadow_link.get_text()))
                         href = shadow_link.get("href", "")
                         mep_id_match = re.search(r"/meps/en/(\d+)", href)
                         mep_id = int(mep_id_match.group(1)) if mep_id_match else None
@@ -473,7 +527,7 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                     # Find ALL rapporteur links in the cell
                     rapporteur_links = rapporteur_cell.find_all("a")
                     for rapporteur_link in rapporteur_links:
-                        rapporteur_name = _sanitize_text(rapporteur_link.get_text())
+                        rapporteur_name = _normalize_mep_name(_sanitize_text(rapporteur_link.get_text()))
                         href = rapporteur_link.get("href", "")
                         mep_id_match = re.search(r"/meps/en/(\d+)", href)
                         mep_id = int(mep_id_match.group(1)) if mep_id_match else None

@@ -121,7 +121,9 @@ class Organization(BaseModel):
     interests_represented: Optional[str] = None
     form_of_entity: Optional[str] = None
     source_of_funding: Optional[str] = None
-    dedup_status: Optional[str] = None
+    dedup_status: Optional[str] = None  # legacy; superseded by match_method
+    match_method: Optional[str] = None
+    matched_tr_id: Optional[str] = None
 
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

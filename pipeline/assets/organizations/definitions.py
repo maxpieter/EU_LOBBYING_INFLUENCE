@@ -224,6 +224,8 @@ def eu_organizations_diamond(
             "form_of_entity": o.get("form_of_entity"),
             "source_of_funding": o.get("source_of_funding"),
             "dedup_status": o.get("dedup_status"),
+            "match_method": o.get("match_method"),
+            "matched_tr_id": o.get("matched_tr_id"),
         }
         org_records.append(record)
 
@@ -284,10 +286,12 @@ class FuzzyConfig(Config):
         "Fuzzy resolution of stub organisations via rapidfuzz + Anthropic API. "
         "Downloads TR XML dump, fuzzy-matches stubs locally, sends ambiguous "
         "candidates (score 50-96) to Claude Haiku for classification. Uses the "
-        "dedup_status column on organizations table as persistent ledger — stubs "
-        "with any status are never re-sent. Optionally backfills "
-        "commission_meeting_organizations.organization_id for NULL rows. "
-        "First run ~$3, subsequent runs ~$0."
+        "match_method column on organizations as persistent ledger — stubs with "
+        "any value are never re-sent. match_method values mirror "
+        "meeting_procedure_links: prefiltered | fuzzy_auto_accept | ai_high | "
+        "no_match. matched_tr_id always reflects the matcher's selection. "
+        "Optionally backfills commission_meeting_organizations.organization_id "
+        "for NULL rows. First run ~$3, subsequent runs ~$0."
     ),
 )
 def eu_organizations_fuzzy(
@@ -316,29 +320,34 @@ def eu_organizations_fuzzy(
     # Stubs = orgs without a TR ID
     stubs = [o for o in org_models if not o.eu_transparency_register_id]
 
-    # Hydrate dedup_status from Supabase — silver doesn't know about it
-    # because it creates fresh orgs from bronze data
+    # Hydrate match_method + matched_tr_id from Supabase — silver doesn't
+    # know them because it creates fresh orgs from bronze data.
     if stubs:
         stub_ids = [s.id for s in stubs]
-        context.log.info(f"Hydrating dedup_status for {len(stub_ids)} stubs from Supabase...")
-        status_map: Dict[str, str] = {}
-        for i in range(0, len(stub_ids), 500):
-            batch = stub_ids[i:i + 500]
+        context.log.info(f"Hydrating match_method for {len(stub_ids)} stubs from Supabase...")
+        method_map: Dict[str, dict] = {}
+        # 200-id chunks: sha256 IDs are 64 chars + URL encoding ~67B → ~16KB cap
+        for i in range(0, len(stub_ids), 200):
+            batch = stub_ids[i:i + 200]
             resp = (
                 client.table("organizations")
-                .select("id,dedup_status")
+                .select("id,match_method,matched_tr_id")
                 .in_("id", batch)
                 .execute()
             )
             for row in (resp.data or []):
-                if row.get("dedup_status"):
-                    status_map[row["id"]] = row["dedup_status"]
+                if row.get("match_method"):
+                    method_map[row["id"]] = {
+                        "match_method": row["match_method"],
+                        "matched_tr_id": row.get("matched_tr_id"),
+                    }
 
         for stub in stubs:
-            if stub.id in status_map:
-                stub.dedup_status = status_map[stub.id]
+            if stub.id in method_map:
+                stub.match_method = method_map[stub.id]["match_method"]
+                stub.matched_tr_id = method_map[stub.id]["matched_tr_id"]
 
-        already = sum(1 for s in stubs if s.dedup_status)
+        already = sum(1 for s in stubs if s.match_method)
         context.log.info(f"Stubs: {len(stubs)} total, {already} already classified, {len(stubs) - already} new")
 
     if not stubs and not config.backfill:

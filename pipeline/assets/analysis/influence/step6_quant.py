@@ -43,20 +43,7 @@ def _extract_rapporteurs(procedure: dict[str, Any]) -> dict[str, dict[str, str]]
 
         party_match = re.search(r"\(([^)]+)\)\s*$", raw_name)
         party = party_match.group(1) if party_match else ""
-        name_part = re.sub(r"\s*\([^)]+\)\s*$", "", raw_name).strip()
-
-        parts = name_part.split()
-        if len(parts) >= 2:
-            first_idx = len(parts)
-            for i, p in enumerate(parts):
-                if p != p.upper() and i > 0:
-                    first_idx = i
-                    break
-            first_name = " ".join(parts[first_idx:])
-            last_name = " ".join(parts[:first_idx])
-            canonical = f"{first_name} {last_name}".strip()
-        else:
-            canonical = name_part
+        canonical = re.sub(r"\s*\([^)]+\)\s*$", "", raw_name).strip()
 
         committee_code = actor.get("committee_code")
         if role == "rapporteur" and committee_code == responsible_committee:

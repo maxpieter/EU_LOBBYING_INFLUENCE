@@ -5,9 +5,15 @@ Consolidates:
 - lobbying/org_dedup.py pass 4 (TR web search + AI)
 - scripts/run_org_dedup_pass4.py (rapidfuzz + Anthropic API)
 
-Uses the organizations.dedup_status column in Supabase as the persistent
-ledger. Stubs with any dedup_status value are never re-sent to AI.
-Only stubs with dedup_status IS NULL hit the API.
+Uses the organizations.match_method column in Supabase as the persistent
+ledger. Stubs with any match_method value are never re-sent to AI.
+Only stubs with match_method IS NULL hit the API.
+
+match_method vocabulary mirrors meeting_procedure_links.match_method:
+    prefiltered, fuzzy_auto_accept, ai_high, no_match.
+For fuzzy_auto_accept and ai_high, matched_tr_id is also written so the
+matcher's selection is queryable independently of the relink/enrich
+choice in Phase 2 of definitions.py.
 """
 
 from __future__ import annotations
@@ -176,32 +182,49 @@ def fuzzy_match_local(
 
 
 # ---------------------------------------------------------------------------
-# Supabase dedup_status helpers
+# Supabase match_method helpers
 # ---------------------------------------------------------------------------
 
-def _set_dedup_status(
+def _set_match_method(
     supabase_client: Any,
     stub_ids: list[str],
-    status: str,
+    method: str,
 ) -> None:
-    """Batch-update dedup_status for a list of org IDs."""
+    """Batch-update match_method for a list of org IDs.
+
+    Uses 50-id chunks — proven safe size against Supabase's writer
+    statement_timeout (matches pipeline/assets/procedures/matching.py:765).
+    """
     if not stub_ids:
         return
-    for i in range(0, len(stub_ids), 500):
-        batch = stub_ids[i:i + 500]
+    for i in range(0, len(stub_ids), 50):
+        batch = stub_ids[i:i + 50]
         try:
             supabase_client.table("organizations").update(
-                {"dedup_status": status}
+                {"match_method": method}
             ).in_("id", batch).execute()
         except Exception:
-            # Fall back to individual updates
             for sid in batch:
                 try:
                     supabase_client.table("organizations").update(
-                        {"dedup_status": status}
+                        {"match_method": method}
                     ).eq("id", sid).execute()
                 except Exception:
                     pass
+
+
+def _set_matched_tr_ids(
+    supabase_client: Any,
+    pairs: list[tuple[str, str]],
+) -> None:
+    """Per-row PATCH writing matched_tr_id. One UPDATE per pair (small)."""
+    for sid, tr_id in pairs:
+        try:
+            supabase_client.table("organizations").update(
+                {"matched_tr_id": tr_id}
+            ).eq("id", sid).execute()
+        except Exception:
+            pass
 
 
 # ---------------------------------------------------------------------------
@@ -232,8 +255,9 @@ def _build_ai_prompt(batch: list[dict]) -> str:
         "the best match — evaluate ALL candidates.\n\n"
         + "\n".join(items)
         + "\n\nRespond ONLY with a JSON array, one entry per DB org:\n"
-        '[{"match": "high"|"medium"|"low"|"no_match", "chosen": "A"|"B"|"C"|"none", '
+        '[{"match": "high"|"no_match", "chosen": "A"|"B"|"C"|"none", '
         '"reasoning": "one sentence"}, ...]\n'
+        "Only use 'high'. Do not use 'medium' or 'low' — if unsure, return no_match.\n"
         f"IMPORTANT: Return exactly {len(batch)} entries in order."
     )
 
@@ -281,23 +305,26 @@ def ai_confirm_batch(
     if not isinstance(parsed, list) or len(parsed) != len(groups):
         return fallback
 
-    valid = {"high", "medium", "low", "no_match"}
+    # Mirror procedure matcher (matching.py:458): collapse non-"high" to no_match.
+    # The prompt only authorises 'high' or 'no_match', but old/strict-mode
+    # responses may still include 'medium' or 'low' — treat those as no_match.
     out = []
     for entry in parsed:
-        if isinstance(entry, dict) and entry.get("match") in valid:
-            chosen_letter = str(entry.get("chosen", "none")).upper()
-            chosen_index = (
-                ord(chosen_letter) - 65
-                if len(chosen_letter) == 1 and chosen_letter.isalpha() and chosen_letter in "ABC"
-                else -1
-            )
-            out.append({
-                "match": entry["match"],
-                "chosen_index": chosen_index,
-                "reasoning": str(entry.get("reasoning", ""))[:200],
-            })
-        else:
+        if not isinstance(entry, dict):
             out.append({"match": "no_match", "chosen_index": -1, "reasoning": "invalid_entry"})
+            continue
+        match_val = "high" if entry.get("match") == "high" else "no_match"
+        chosen_letter = str(entry.get("chosen", "none")).upper()
+        chosen_index = (
+            ord(chosen_letter) - 65
+            if len(chosen_letter) == 1 and chosen_letter.isalpha() and chosen_letter in "ABC"
+            else -1
+        )
+        out.append({
+            "match": match_val,
+            "chosen_index": chosen_index,
+            "reasoning": str(entry.get("reasoning", ""))[:200],
+        })
     return out
 
 
@@ -320,27 +347,34 @@ def resolve_stubs(
     """Resolve stub orgs via fuzzy matching + AI.
 
     Returns {stub_id: canonical_tr_id} for high-confidence matches.
-    Writes dedup_status to Supabase. Only processes stubs where
-    dedup_status IS NULL.
+    Writes match_method (and matched_tr_id where applicable) to Supabase.
+    Only processes stubs where match_method IS NULL.
+
+    match_method values (parallels meeting_procedure_links.match_method):
+        prefiltered          — _should_skip pattern hit
+        fuzzy_auto_accept    — fuzzy score >= auto_accept_threshold
+        ai_high              — AI returned "high"
+        no_match             — no fuzzy candidates OR AI returned non-high
     """
     _log = logger.info if logger else print
     _warn = logger.warning if logger else print
 
     # Filter to stubs that haven't been classified yet
-    new_stubs = [s for s in stubs if not s.dedup_status]
+    new_stubs = [s for s in stubs if not s.match_method]
     already_count = len(stubs) - len(new_stubs)
     _log(f"Stubs: {len(new_stubs)} new, {already_count} already classified (skipped)")
 
     need_ai: list[dict] = []
     mappings: dict[str, str] = {}  # stub_id -> canonical_tr_id
 
-    # Harvest existing high-confidence mappings from already-classified stubs
+    # Harvest existing mappings from already-classified stubs
     for s in stubs:
-        if s.dedup_status == "high" and s.eu_transparency_register_id:
-            mappings[s.id] = s.eu_transparency_register_id
+        if s.match_method in ("ai_high", "fuzzy_auto_accept") and s.matched_tr_id:
+            mappings[s.id] = s.matched_tr_id
 
     # Track status updates to batch-write at end
-    status_updates: dict[str, list[str]] = {}  # status -> [stub_ids]
+    status_updates: dict[str, list[str]] = {}  # match_method -> [stub_ids]
+    tr_id_writes: list[tuple[str, str]] = []   # (stub_id, tr_id) for matched_tr_id PATCHes
 
     for stub in new_stubs:
         skip_reason = _should_skip(stub.name)
@@ -356,9 +390,10 @@ def resolve_stubs(
         elif best_score >= auto_accept_threshold:
             chosen = matches[0]["tr_org"]
             tr_id = chosen.get("tr_id", "")
-            status_updates.setdefault("high", []).append(stub.id)
+            status_updates.setdefault("fuzzy_auto_accept", []).append(stub.id)
             if tr_id:
                 mappings[stub.id] = tr_id
+                tr_id_writes.append((stub.id, tr_id))
         else:
             need_ai.append({
                 "stub_id": stub.id,
@@ -377,9 +412,9 @@ def resolve_stubs(
                 ],
             })
 
-    auto_high = len(status_updates.get("high", []))
+    fuzzy_high = len(status_updates.get("fuzzy_auto_accept", []))
     _log(
-        f"Fuzzy phase: {auto_high} auto-accepted, "
+        f"Fuzzy phase: {fuzzy_high} auto-accepted, "
         f"{len(status_updates.get('no_match', []))} no match, "
         f"{len(status_updates.get('prefiltered', []))} prefiltered, "
         f"{len(need_ai)} need AI"
@@ -405,30 +440,41 @@ def resolve_stubs(
                     continue
 
                 for group, ai in zip(batch, ai_results):
-                    confidence = ai["match"]
+                    confidence = ai["match"]   # "high" or "no_match" only
                     idx = ai["chosen_index"]
                     chosen = group["candidates"][idx] if 0 <= idx < len(group["candidates"]) else {}
 
-                    status_updates.setdefault(confidence, []).append(group["stub_id"])
+                    method = "ai_high" if confidence == "high" else "no_match"
+                    status_updates.setdefault(method, []).append(group["stub_id"])
 
                     if confidence == "high" and chosen.get("tr_id"):
                         mappings[group["stub_id"]] = chosen["tr_id"]
+                        tr_id_writes.append((group["stub_id"], chosen["tr_id"]))
 
     elif need_ai:
         _warn(f"Skipping AI classification for {len(need_ai)} stubs (no anthropic_client)")
 
-    # Write dedup_status to Supabase
+    # Write match_method and matched_tr_id to Supabase
     if not dry_run:
-        for status, ids in status_updates.items():
-            _set_dedup_status(supabase_client, ids, status)
-            _log(f"  Set dedup_status='{status}' on {len(ids)} orgs")
+        for method, ids in status_updates.items():
+            _set_match_method(supabase_client, ids, method)
+            _log(f"  Set match_method='{method}' on {len(ids)} orgs")
+        if tr_id_writes:
+            _set_matched_tr_ids(supabase_client, tr_id_writes)
+            _log(f"  Wrote matched_tr_id on {len(tr_id_writes)} orgs")
     else:
-        for status, ids in status_updates.items():
-            _log(f"  [dry-run] Would set dedup_status='{status}' on {len(ids)} orgs")
+        for method, ids in status_updates.items():
+            _log(f"  [dry-run] Would set match_method='{method}' on {len(ids)} orgs")
+        _log(f"  [dry-run] Would write matched_tr_id on {len(tr_id_writes)} orgs")
 
     total_new = sum(len(ids) for ids in status_updates.values())
-    high_count = len(status_updates.get("high", []))
-    _log(f"Fuzzy resolution complete: {total_new} classified, {high_count} high, {len(mappings)} total mappings")
+    auto = len(status_updates.get("fuzzy_auto_accept", []))
+    aih = len(status_updates.get("ai_high", []))
+    _log(
+        f"Fuzzy resolution complete: {total_new} classified, "
+        f"{auto} fuzzy_auto_accept, {aih} ai_high, "
+        f"{len(mappings)} total mappings"
+    )
 
     return mappings
 
@@ -443,7 +489,7 @@ def backfill_unmatched_junction_rows(
     """Backfill commission_meeting_organizations WHERE organization_id IS NULL.
 
     1. Run each organization_name through OrgResolver (deterministic, free)
-    2. Check dedup_status on matching stub orgs
+    2. Check match_method on matching stub orgs
     3. Only truly new names go through fuzzy + AI
     4. UPDATE organization_id in Supabase
 
@@ -493,8 +539,8 @@ def backfill_unmatched_junction_rows(
                 pass
             continue
 
-        # Step 2: check if the stub has dedup_status='high' with a TR ID
-        if org.dedup_status == "high" and org.eu_transparency_register_id:
+        # Step 2: stub already matched (fuzzy_auto_accept or ai_high) with a TR ID
+        if org.match_method in ("fuzzy_auto_accept", "ai_high") and org.matched_tr_id:
             try:
                 supabase_client.table("commission_meeting_organizations").update(
                     {"organization_id": org.id}
@@ -504,8 +550,8 @@ def backfill_unmatched_junction_rows(
                 pass
             continue
 
-        # Skip stubs already classified as no_match/low/prefiltered
-        if org.dedup_status in ("no_match", "low", "prefiltered"):
+        # Skip stubs already classified as no_match/prefiltered
+        if org.match_method in ("no_match", "prefiltered"):
             continue
 
         # Step 3: truly new — collect for fuzzy
