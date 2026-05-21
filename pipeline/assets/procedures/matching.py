@@ -610,7 +610,8 @@ def ai_classify_batch(
         try:
             response = anthropic_client.messages.create(
                 model=model,
-                max_tokens=4096,
+                max_tokens=8192,
+                temperature=0,
                 messages=[{"role": "user", "content": content_blocks}],
             )
             break
@@ -719,18 +720,17 @@ def match_meetings(
     for m in commission_meetings:
         if m.get("match_status") is not None:
             continue
-        # Concatenate all free-text fields the meeting carries.
-        # subject + points_raised + conclusions — all are searched for aliases.
-        parts = [m.get("subject") or ""]
-        if m.get("points_raised"):
-            parts.append(m["points_raised"])
-        if m.get("conclusions"):
-            parts.append(m["conclusions"])
-        text = ". ".join(p for p in parts if p)
+        # Subject only — points_raised and conclusions are discursive and
+        # tend to mention legislative files in passing rather than as the
+        # meeting's actual subject. Including them produced spurious alias
+        # hits and inflated false positives in the gold-set evaluation
+        # (commission F1=0.55 vs lobbying F1=0.67 with the long-text version).
+        # Aligns with the prompt's "alias must be the meeting's actual
+        # subject, not a passing reference" rule.
         to_process.append({
             "source": "commission",
             "id": m["id"],
-            "text": text,
+            "text": m.get("subject") or "",
             "date": m.get("meeting_date"),
             "related_procedure": None,
             "org_name": None,

@@ -163,6 +163,8 @@ class LobbyingMeeting(BaseModel):
     meeting_type: Optional[MeetingType] = None
     transparency_level: Optional[TransparencyLevel] = None
 
+    org_match_method: Optional[str] = None
+
     @field_validator("*", mode="before")
     @classmethod
     def sanitize_all_strings(cls, v):

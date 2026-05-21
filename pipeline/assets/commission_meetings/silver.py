@@ -531,7 +531,7 @@ def build_meeting_records(
                     "organization_id": org.id,
                     "organization_name": org.name,
                     "eu_transparency_register_id": org.eu_transparency_register_id,
-                    "match_method": method,
+                    "org_match_method": method,
                 })
 
         # Resolve remaining TR IDs not yet matched via org names
@@ -545,7 +545,7 @@ def build_meeting_records(
                     "organization_id": org.id,
                     "organization_name": org.name,
                     "eu_transparency_register_id": org.eu_transparency_register_id,
-                    "match_method": method,
+                    "org_match_method": method,
                 })
 
     if logger:

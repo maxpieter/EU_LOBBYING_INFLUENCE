@@ -470,6 +470,7 @@ def process_meetings_v2(
                 related_procedure=meeting_row.get("procedure_reference"),
                 committee_acronym=meeting_row.get("committee_code"),
                 transparency_level="High" if org.eu_transparency_register_id else "Low",
+                org_match_method=method,
             )
             meetings.append(meeting)
 

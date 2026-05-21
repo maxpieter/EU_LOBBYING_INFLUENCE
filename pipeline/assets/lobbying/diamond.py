@@ -205,6 +205,7 @@ def upload_lobbying_data(
                 "committee_acronym": m.committee_acronym,
                 "meeting_type": m.meeting_type,
                 "transparency_level": m.transparency_level,
+                "org_match_method": m.org_match_method,
             }
             meeting_records.append(record)
 

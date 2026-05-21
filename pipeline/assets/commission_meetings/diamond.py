@@ -99,6 +99,7 @@ def upload_commission_meetings(
         record = {
             "meeting_id": org["meeting_id"],
             "organization_name": org["organization_name"],
+            "org_match_method": org.get("org_match_method"),
         }
         org_id = org.get("organization_id")
         if org_id and org_id in existing_org_ids:

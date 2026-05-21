@@ -283,6 +283,7 @@ def ai_confirm_batch(
             response = anthropic_client.messages.create(
                 model=model,
                 max_tokens=4096,
+                temperature=0,
                 messages=[{"role": "user", "content": prompt}],
             )
             break
