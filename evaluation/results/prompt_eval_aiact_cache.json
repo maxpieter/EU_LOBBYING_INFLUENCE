@@ -1,0 +1,852 @@
+{
+  "acc_A_0.0_0": {
+    "amendment_direction": "Classifies AI systems used in employment, worker management, and recruitment as high-risk due to their potential to perpetuate discrimination and impact workers' rights and livelihoods.",
+    "label": "NOISE",
+    "reasoning": "Google's submission focuses on medical device software classification guidance, soft-law/industry-led approaches to AI governance, and skill-building resources — none of which substantively engage with the classification of employment-related AI systems as high-risk. There is no directional relationship between the org's position and the legislative provision's specific subject matter."
+  },
+  "acc_A_0.0_1": {
+    "amendment_direction": "Establishes that EU AI rules apply in a non-discriminatory manner to all AI system providers regardless of whether they are established inside or outside the Union, ensuring a level playing field across the single market.",
+    "label": "NOISE",
+    "reasoning": "Google's feedback focuses on the merits of soft-law versus legislative approaches, industry self-regulation, anti-discrimination concepts in existing EU law, and skill-building resources — none of which address the geographic/jurisdictional scope of the AI Regulation or the level-playing-field principle for third-country providers. There is no substantive connection between the organisation's expressed position and the provision's subject matter."
+  },
+  "acc_A_0.0_2": {
+    "amendment_direction": "Requires high-risk AI systems to be designed with human oversight measures, including the ability to monitor, interpret, override, or stop the system, to prevent risks to health, safety, or fundamental rights.",
+    "label": "ALIGNED",
+    "reasoning": "Google's pre-proposal feedback explicitly discusses human oversight as a mandatory requirement for AI systems, including mechanisms for flagging issues, awareness of bias, and performance monitoring across diverse user groups — all of which align directionally with the provision's requirements for human oversight of high-risk AI systems. The feedback also references the EU legislative option of establishing mandatory requirements including human oversight, indicating support for the kind of framework the provision establishes."
+  },
+  "acc_A_0.0_3": {
+    "amendment_direction": "Requires providers and users of AI systems to disclose to natural persons that they are interacting with an AI, that emotion recognition or biometric categorisation is in operation, and that content is a deep fake, establishing mandatory transparency obligations.",
+    "label": "NOISE",
+    "reasoning": "Google's feedback focuses on fairness, bias, performance benchmarking, and the general architecture of AI regulation (risk tiers, mandatory requirements), with no substantive discussion of transparency or disclosure obligations toward natural persons interacting with AI systems. The provision specifically addresses disclosure/transparency duties (AI interaction notices, emotion recognition notices, deep fake labelling), which are not addressed in Google's position."
+  },
+  "acc_A_0.0_4": {
+    "amendment_direction": "Empowers the Commission to adopt delegated acts to add new high-risk AI systems to Annex III based on specific risk criteria related to health, safety, and fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback touches on related themes — defining high-risk AI, fairness, bias, and the criteria for identifying problematic AI systems — and expresses a general preference against overly prescriptive requirements. However, the legislative provision specifically concerns the Commission's delegated power to expand the high-risk AI list using enumerated criteria, which Google's feedback neither explicitly supports nor opposes; there is no clear directional alignment or opposition to this specific mechanism."
+  },
+  "acc_A_0.0_5": {
+    "amendment_direction": "Requires high-risk AI systems to be transparent and accompanied by detailed instructions for use, including information on performance characteristics, accuracy, limitations, fairness across user groups, human oversight measures, and known risks.",
+    "label": "ALIGNED",
+    "reasoning": "Google's feedback explicitly advocates for clear communication of performance benchmarks, fairness testing across diverse user groups, and transparency about system limitations and failure rates — all of which align directionally with the provision's requirements for detailed instructions covering accuracy, performance across groups, and known risks. However, Google also cautions against overly prescriptive requirements, introducing a partial tension, though the overall thrust of their position supports transparency and performance disclosure obligations as embodied in the provision."
+  },
+  "acc_A_0.0_6": {
+    "amendment_direction": "Prohibits specific AI practices including subliminal manipulation, exploitation of vulnerable groups, social scoring by public authorities, and real-time remote biometric identification in public spaces for law enforcement (with limited exceptions and safeguards).",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback acknowledges the possibility of an EU legislative instrument covering remote biometric identification systems and discusses fairness, bias, and performance benchmarks, while cautioning against overly prescriptive requirements. However, the feedback does not take a clear directional stance on the specific prohibitions and narrow exceptions for real-time biometric identification or the other banned practices (subliminal manipulation, social scoring) that the provision establishes — it neither explicitly supports nor opposes these concrete prohibitions."
+  },
+  "acc_A_0.0_7": {
+    "amendment_direction": "Establishes a uniform EU-wide regulatory framework for AI systems based on Article 114 TFEU to prevent fragmentation of the internal market and ensure consistent protection of fundamental rights, including specific rules on real-time remote biometric identification in public spaces.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and Google's feedback address the scope and design of an EU legislative instrument for AI, including the treatment of remote biometric identification systems. However, Google's position focuses on cautioning against overly prescriptive requirements and advocating for a balanced regulatory approach, without clearly supporting or opposing the specific legal basis (Article 114/16 TFEU), the internal market harmonisation rationale, or the particular framing of the provision as written."
+  },
+  "acc_A_0.0_8": {
+    "amendment_direction": "Establishes that real-time remote biometric identification systems used in publicly accessible spaces for law enforcement purposes are governed exclusively by the AI Act as lex specialis, prohibiting their use outside this framework, while exempting non-law-enforcement uses from the same authorisation requirements.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and Google's feedback address the regulation of remote biometric identification systems, but Google's position focuses on the general question of regulatory scope and the risk of overly prescriptive requirements, without taking a clear stance for or against the specific lex specialis framework, the law enforcement carve-out, or the authorisation requirements established by the provision."
+  },
+  "acc_A_0.0_9": {
+    "amendment_direction": "Specifies the scope of the AI regulation, including its application to EU institutions and the exclusion of military-use AI systems under CFSP, while preserving intermediary liability rules under the Digital Services Act.",
+    "label": "NOISE",
+    "reasoning": "Google's feedback focuses on fairness definitions, performance metrics, and the appropriate level of prescriptiveness in AI regulation (e.g., whether to limit scope to biometric systems, high-risk AI, or all AI), rather than addressing the specific scope provisions in the legislative text concerning EU institutions, military exclusions, or intermediary liability. There is no substantive connection between the organisation's expressed positions and the particular scoping decisions made in this provision."
+  },
+  "acc_A_0.0_10": {
+    "amendment_direction": "Permits 'real-time' remote biometric identification systems for law enforcement only in three narrowly defined, exhaustively listed exceptional situations involving serious public interest.",
+    "label": "NOISE",
+    "reasoning": "Google's feedback focuses on general AI regulatory scope, fairness metrics, and the balance between prescriptive requirements and innovation flexibility, without taking any directional position on the specific conditions or exceptions for law enforcement use of real-time remote biometric identification systems. The two texts do not share a substantive connection on the specific subject matter of the provision."
+  },
+  "acc_A_0.0_11": {
+    "amendment_direction": "Designates notified bodies under national competent authorities to carry out mandatory third-party conformity assessments for AI systems used in remote biometric identification, subject to requirements on independence, competence, and absence of conflicts of interest.",
+    "label": "OPPOSING",
+    "reasoning": "Google's position explicitly cautions against overly prescriptive and stringent mandatory requirements for AI, warning that tight regulation reduces flexibility and imposes opportunity costs on innovation. The legislative provision introduces mandatory third-party conformity assessment by designated notified bodies for remote biometric identification systems — a highly prescriptive, compliance-heavy mechanism that Google's feedback implicitly pushes back against by advocating for a \"properly balanced\" approach that avoids over-regulation."
+  },
+  "acc_A_0.0_12": {
+    "amendment_direction": "Requires high-risk AI systems to be developed on training, validation, and testing datasets meeting quality criteria, including data governance practices, representativeness, bias examination, and allows processing of special categories of personal data strictly for bias monitoring with appropriate safeguards.",
+    "label": "OPPOSING",
+    "reasoning": "Google explicitly argues against mandatory training data quality requirements, contending that obligations to ensure datasets are \"sufficiently representative\" conflict with GDPR, that emphasis should shift from training data to output testing, and that keeping datasets should not be mandated. The legislative provision does the opposite by imposing detailed, mandatory data governance and quality criteria — including representativeness and bias examination — on training, validation, and testing datasets for high-risk AI systems."
+  },
+  "acc_A_0.0_13": {
+    "amendment_direction": "Requires high-quality training, validation, and testing data sets with appropriate data governance, representativeness, and statistical properties for high-risk AI systems, and permits processing of special categories of personal data to detect and correct bias.",
+    "label": "OPPOSING",
+    "reasoning": "Google explicitly argues against mandatory training data quality requirements, contending that emphasis should shift to testing model outputs rather than regulating training data, and that obligations to ensure datasets are \"sufficiently representative\" conflict with GDPR — directly opposing the provision's imposition of data quality, representativeness, and bias-correction requirements on high-risk AI systems."
+  },
+  "acc_A_0.0_14": {
+    "amendment_direction": "Establishes that real-time remote biometric identification systems in publicly accessible spaces for law enforcement must be used proportionately, with limits in time and space, appropriate reference databases, and consideration of rights and freedoms impacts.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly supports applying mandatory requirements and safeguards to remote biometric identification systems, recognising them as higher-risk, and endorses a risk-based, use-case-targeted approach with proportionality considerations — all of which align with the provision's framework of narrowly scoped, proportionate limits on real-time remote biometric identification in public spaces. Google's call for targeted regulation with safeguards mirrors the provision's narrowly defined, condition-bound approach to law enforcement use of such systems."
+  },
+  "acc_A_0.0_15": {
+    "amendment_direction": "Requires prior judicial or independent administrative authorisation for real-time remote biometric identification in public spaces for law enforcement, with narrow urgency exceptions.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback acknowledges that remote biometric identification systems are a higher-risk area warranting mandatory requirements and safeguards, which broadly aligns with the spirit of the provision. However, Google's position focuses on training data obligations, reproducibility, and a risk-based framework rather than specifically addressing the prior judicial/administrative authorisation mechanism that the provision establishes, so no clear directional relationship to the specific content of the provision can be determined."
+  },
+  "acc_A_0.0_16": {
+    "amendment_direction": "Requires providers of high-risk AI systems to establish, implement, and maintain a continuous, iterative risk management system throughout the system's lifecycle, including risk identification, estimation, mitigation measures, and testing.",
+    "label": "ALIGNED",
+    "reasoning": "Google's pre-proposal feedback explicitly advocates for a structured, multi-step risk assessment framework (inherent risk, system attributes, mitigations, and overall residual risk tolerance) that closely mirrors the iterative, layered risk management process mandated in the provision. Both the organisation's position and the legislative text emphasise proportionate, context-sensitive risk evaluation and the adoption of mitigations to reduce residual risk to an acceptable level."
+  },
+  "acc_A_0.0_17": {
+    "amendment_direction": "Requires high-risk AI systems to be designed with human oversight measures, including the ability to monitor, interpret, override, or stop the system, to prevent risks to health, safety, or fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback advocates for a risk-based, proportionate regulatory framework that distinguishes between higher and lower risk AI applications and considers mitigations (including human monitoring procedures) when assessing overall risk. While this broadly touches on the same ecosystem of risk management and human oversight, the feedback does not specifically support or oppose the detailed mandatory human oversight requirements (e.g., stop buttons, automation bias awareness, two-person verification) that the provision imposes on high-risk AI systems — making the directional relationship unclear."
+  },
+  "acc_A_0.0_18": {
+    "amendment_direction": "Empowers the Commission to adopt common specifications for high-risk AI systems via implementing acts when harmonised standards are absent or insufficient, with compliance presumed for conforming systems.",
+    "label": "NOISE",
+    "reasoning": "Google's feedback focuses on advocating for a risk-tiered regulatory framework and a multi-factor risk assessment methodology (inherent risk, system attributes, mitigations, and overall tolerability), rather than addressing the mechanism of common specifications or harmonised standards. The provision deals specifically with the Commission's power to adopt common specifications as a conformity tool, which is a distinct subject not touched upon in Google's submission."
+  },
+  "acc_A_0.0_19": {
+    "amendment_direction": "Establishes that only high-risk AI systems (those with significant harmful impact on health, safety, and fundamental rights) must comply with mandatory requirements before being placed on the EU market, limiting regulatory burden to genuinely high-risk applications.",
+    "label": "ALIGNED",
+    "reasoning": "Google's feedback explicitly advocates for risk-differentiated regulation, arguing that applying uniform mandatory requirements to all AI systems regardless of risk level is disproportionate, burdensome, and counterproductive — precisely the rationale the legislative provision uses to justify limiting mandatory requirements to high-risk AI systems only. Both push in the same direction: targeted, proportionate regulation focused on genuinely high-risk applications."
+  },
+  "acc_A_0.0_20": {
+    "amendment_direction": "Requires providers of high-risk AI systems to supply all documentation and logs to national competent authorities upon request to demonstrate conformity with regulatory requirements.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly supports making documentation \"available to view on demand by regulators,\" which directly mirrors the provision's requirement to provide information and logs to national competent authorities upon request. Both the org's position and the provision converge on an ex-post, on-demand access model rather than mandatory upfront submission, reflecting the same directional approach to regulatory oversight."
+  },
+  "acc_A_0.0_21": {
+    "amendment_direction": "Establishes a two-condition classification rule for high-risk AI systems, limiting the high-risk category to AI used as safety components in products subject to third-party conformity assessment under Union harmonisation legislation, plus systems listed in Annex III.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly argues that the risk-based approach should be \"revised and broadened\" so that rules apply to all AI/algorithmic systems regardless of risk level, with obligations scaling up from a baseline applicable to all applications — directly opposing the provision's narrower, binary high-risk classification tied to specific product safety and conformity assessment criteria. BEUC's call for a more inclusive framework that covers low-risk applications and imposes at least basic obligations universally contradicts the legislative provision's restrictive definition of what qualifies as high-risk."
+  },
+  "acc_A_0.0_22": {
+    "amendment_direction": "Establishes harmonised rules for AI systems covering prohibitions, requirements for high-risk AI, transparency rules, and market surveillance across the EU.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's pre-proposal feedback explicitly calls for a regulatory framework covering prohibitions/bans on certain AI systems, transparency obligations applicable to all AI applications, specific requirements for high-risk AI, and an oversight/enforcement structure — all of which are reflected in the legislative provision's subject matter. The organisation's push for harmonised rules, risk-based obligations, transparency requirements, and market surveillance aligns directionally with what the provision establishes."
+  },
+  "acc_A_0.0_23": {
+    "amendment_direction": "Exempts AI systems already placed on the market or put into service (including large-scale IT systems) from the new AI Regulation's requirements unless they undergo significant changes in design or intended purpose.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly advocates for broad application of new AI rules to all algorithmic systems regardless of risk level, and calls for a precautionary approach ensuring systems are tested and certified before deployment. The legislative provision, by contrast, grants transitional exemptions to already-deployed AI systems, limiting the regulation's reach — which runs counter to BEUC's push for comprehensive and immediate coverage of all AI applications."
+  },
+  "acc_A_0.0_24": {
+    "amendment_direction": "Requires providers of high-risk AI systems to cooperate with national competent authorities by providing documentation, information, and access to automatically generated logs upon request to demonstrate conformity.",
+    "label": "UNDETECTABLE",
+    "reasoning": "BEUC's position broadly advocates for a coherent oversight, enforcement, and accountability system for AI, which is thematically related to the provision's requirement for providers to cooperate with competent authorities. However, BEUC's feedback focuses on the overall regulatory framework design (risk-based approach, scope, liability, enforcement structure) and does not specifically address or take a directional stance on the specific mechanism of provider cooperation and log access with national authorities established in this provision."
+  },
+  "acc_A_0.0_25": {
+    "amendment_direction": "Requires high-risk AI systems to comply with established requirements, taking into account the intended purpose and risk management system.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and BEUC's position address compliance requirements for AI systems under a risk-based framework, but BEUC's feedback pushes for a broader scope (obligations beyond just high-risk applications, covering all AI systems with graduated requirements), which neither directly supports nor opposes the specific compliance mechanism established in this provision. The provision focuses on how high-risk AI systems must comply with requirements, while BEUC's concern is about the adequacy and breadth of the risk-based approach itself, making the directional relationship unclear."
+  },
+  "acc_A_0.0_26": {
+    "amendment_direction": "Establishes harmonised rules for AI systems including prohibitions of certain AI practices, specific requirements for high-risk AI systems, transparency rules, and market surveillance provisions.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's pre-proposal feedback explicitly called for a regulatory framework covering AI systems with risk-based obligations, transparency requirements applicable to all AI applications, prohibitions on harmful AI systems, and effective supervision and enforcement — all of which are reflected in the legislative provision's scope. While BEUC pushed for a broader approach beyond just high-risk systems, the provision does include transparency rules for a wider range of AI systems and outright prohibitions, directionally matching BEUC's core recommendations."
+  },
+  "acc_A_0.0_27": {
+    "amendment_direction": "Establishes a mandatory, continuous risk management system for high-risk AI systems covering identification, evaluation, and mitigation of risks throughout the entire lifecycle, including testing and post-market monitoring.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly advocates for risk assessments covering the whole lifecycle of AI systems, organisational and technical safeguards, and a precautionary approach requiring testing and certification before deployment — all of which are reflected in the provision's mandatory, iterative risk management system. However, BEUC also pushes for obligations beyond high-risk systems alone, which the provision does not address, but the core direction of lifecycle-based risk management and mitigation aligns with BEUC's stated position."
+  },
+  "acc_A_0.0_28": {
+    "amendment_direction": "Prohibits specific AI practices including subliminal manipulation, exploitation of vulnerable groups, social scoring by public authorities, and real-time remote biometric identification in public spaces for law enforcement (with limited exceptions).",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly called for a precautionary approach and the ability to ban certain AI/ADM systems as an ultima ratio measure, which aligns with the legislative provision's establishment of outright prohibitions on specific harmful AI practices. BEUC also advocated for protections covering vulnerable groups and broader risk-based obligations, consistent with the provision's bans on subliminal manipulation, exploitation of vulnerable persons, social scoring, and restricted use of biometric identification systems."
+  },
+  "acc_A_0.0_29": {
+    "amendment_direction": "Exempts AI systems already placed on the market or put into service (including components of large-scale IT systems) from the new AI Act requirements, unless they undergo significant changes in design or intended purpose.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly advocates for broad application of new AI rules to all algorithmic systems regardless of risk level, and calls for a precautionary approach ensuring harmful technologies are not deployed until tested and certified. The legislative provision, by contrast, grants broad exemptions to already-deployed AI systems, shielding them from the new requirements unless significantly changed — directly contradicting BEUC's push for comprehensive, inclusive coverage of all AI systems."
+  },
+  "acc_A_0.0_30": {
+    "amendment_direction": "Establishes mandatory requirements for high-risk AI systems placed on the EU market, based on intended purpose and a provider-managed risk management system, to protect users and affected persons.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly argues that mandatory requirements should not be limited to \"high-risk\" AI applications alone, but should apply to all algorithmic systems with obligations scaling up with risk level. The legislative provision, by contrast, confines mandatory requirements specifically to high-risk AI systems, which is the narrower, risk-tiered approach BEUC sought to revise and broaden."
+  },
+  "acc_A_0.0_31": {
+    "amendment_direction": "Encourages voluntary codes of conduct for AI systems, including non-high-risk ones, covering areas such as environmental sustainability, accessibility, and stakeholder participation, while accounting for small-scale providers and start-ups.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly criticises voluntary/non-binding approaches (noting that the AI HLEG Ethics Guidelines \"are not legally binding\" as a problem) and calls for a mandatory regulatory framework with binding obligations, effective remedies, and compliance by design — directly opposing the provision's reliance on voluntary codes of conduct. The organisation's position pushes for enforceable legal requirements rather than the soft-law, self-regulatory mechanism the provision establishes."
+  },
+  "acc_A_0.0_32": {
+    "amendment_direction": "Defines 'AI system' as software developed with techniques listed in Annex I that can generate outputs such as content, predictions, recommendations, or decisions influencing their environment, and establishes a comprehensive set of definitions for key actors and concepts in the AI regulatory framework.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the organisation and the legislative provision address the definition of AI systems, with BEUC criticising the Commission's White Paper definition as overly simplistic and calling for a more comprehensive one that captures behavioural characteristics and human context. The provision does adopt a more technical and structured definition (referencing specific techniques in Annex I), but it is not possible to determine whether BEUC would consider this definition sufficient or still inadequate, meaning there is no clear directional alignment or opposition."
+  },
+  "acc_A_0.0_33": {
+    "amendment_direction": "Establishes harmonised rules for placing AI systems on the market, prohibitions of certain AI practices, requirements for high-risk AI systems, transparency rules, and market surveillance within the EU.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for AI to be \"properly regulated\" and raises concerns about the adequacy of the Commission's AI definition, pushing for a more robust and comprehensive regulatory framework — which is directionally consistent with the provision establishing harmonised EU-wide rules, prohibitions, and requirements for AI systems. Both the organisation and the provision share the overarching goal of subjecting AI to structured legal governance, even if BEUC's feedback focuses specifically on definitional adequacy as a precondition for effective regulation."
+  },
+  "acc_A_0.0_34": {
+    "amendment_direction": "Defines AI systems based on key functional characteristics — particularly the ability to generate outputs such as content, predictions, recommendations, or decisions influencing the environment — and requires the definition to be complemented by an updatable list of specific techniques and approaches.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly criticised the Commission's White Paper definition of AI as overly simplistic and lacking crucial behavioural and functional characteristics, and called for a more robust, comprehensive definition. The legislative provision responds in the same direction by grounding the AI definition in functional characteristics (outputs, autonomy, interaction with the environment) and supplementing it with a list of specific techniques — directly addressing BEUC's concern that the earlier definition failed to capture the behavioural nature of AI."
+  },
+  "acc_A_0.0_35": {
+    "amendment_direction": "Provides a specific technical definition of 'AI system' as software using techniques listed in Annex I that generates outputs such as content, predictions, recommendations, or decisions, and establishes a comprehensive set of related definitions for the regulation.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC argued that the Commission's definition of AI was too narrow and insufficiently precise, warning it could allow organisations to circumvent regulation, and proposed using broader, technology-neutral terms like 'algorithmic decision-making' (ADM) instead. The legislative provision adopts a specific, software-focused definition tied to a fixed list of techniques (Annex I), which mirrors the approach BEUC criticised as inadequate and potentially easy to circumvent, rather than adopting the broader ADM-style framing BEUC advocated for."
+  },
+  "acc_A_0.0_36": {
+    "amendment_direction": "Establishes harmonised rules for AI systems placed on the EU market, including prohibitions, requirements for high-risk systems, transparency rules, and market surveillance, using \"artificial intelligence systems\" as the core regulatory term.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the organisation and the provision address the scope and subject matter of an EU regulatory framework for AI, but they diverge on a key definitional choice: BEUC advocates replacing or supplementing \"AI\" with the technology-neutral term \"algorithmic decision-making (ADM)\" to better capture the regulatory objectives, while the legislative provision firmly adopts \"artificial intelligence systems\" as its central concept. This is a terminological/scoping disagreement rather than a directional one — BEUC is not opposing regulation or supporting a weaker/stronger framework, but rather proposing a different definitional architecture, making the relationship neither clearly aligned nor opposing."
+  },
+  "acc_A_0.0_37": {
+    "amendment_direction": "Defines 'AI system' using a specific list of techniques (Annex I) and establishes a set of related definitions (provider, user, operator, etc.) to scope the regulation.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly argued against using \"AI system\" as the core definitional term, instead advocating for the technology-neutral concept of \"algorithmic-based decision making\" (ADM) to better capture the regulatory objectives. The legislative provision adopts precisely the \"AI system\" framing that BEUC opposed, rather than the broader ADM-based approach BEUC recommended."
+  },
+  "acc_A_0.0_38": {
+    "amendment_direction": "Requires providers of high-risk AI systems to establish a documented quality management system covering design, development, data management, risk management, post-market monitoring, and accountability frameworks.",
+    "label": "NOISE",
+    "reasoning": "The organisation's feedback focuses on definitional and scoping questions — arguing for the use of \"algorithmic decision-making\" (ADM) rather than \"AI\" as the regulatory term — and broadly calls for a comprehensive regulatory framework with consumer safeguards. It does not address quality management systems, their content, or the obligations they should impose on providers, which is the specific subject of the legislative provision."
+  },
+  "acc_A_0.0_39": {
+    "amendment_direction": "Establishes transitional provisions exempting AI systems already on the market from the new regulation unless they undergo significant design or purpose changes.",
+    "label": "NOISE",
+    "reasoning": "The organisation's feedback focuses on definitional issues — arguing for the use of \"algorithmic decision-making\" (ADM) rather than \"AI\" as the regulatory term — and broad scope/risk-based framework concerns. The legislative provision deals specifically with transitional arrangements for AI systems already placed on the market, a topic not addressed at all in the organisation's position."
+  },
+  "acc_A_0.0_40": {
+    "amendment_direction": "Requires providers of high-risk AI systems to establish, document, and maintain a post-market monitoring system that actively collects and analyses performance data throughout the system's lifetime.",
+    "label": "NOISE",
+    "reasoning": "The organisation's feedback focuses entirely on definitional and scoping questions — specifically arguing for the use of \"algorithmic decision-making\" (ADM) rather than \"AI\" as the regulatory term — and broadly on the need for a lifecycle-based regulatory framework. It does not address post-market monitoring obligations, data collection requirements, or monitoring plans, which are the substance of the legislative provision."
+  },
+  "acc_A_0.0_41": {
+    "amendment_direction": "Requires providers and users of certain AI systems (chatbots, emotion recognition, biometric categorisation, deepfakes) to disclose to natural persons that they are interacting with or being processed by an AI system.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly identifies lack of transparency as a core consumer concern with AI/ADM systems and calls for a regulatory framework with strong, legally binding safeguards — including transparency — for anyone affected by such systems. The legislative provision directly operationalises transparency obligations for AI systems interacting with or affecting natural persons, which aligns with BEUC's push for mandatory, enforceable transparency rules."
+  },
+  "acc_A_0.0_42": {
+    "amendment_direction": "Classifies AI systems used in migration, asylum, and border control management as high-risk, requiring accuracy, non-discrimination, and transparency to protect fundamental rights of affected persons.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's position advocates for strong safeguards (transparency, non-discrimination, safety) for anyone affected by ADM/AI systems and supports a risk-based regulatory framework — all of which align with the legislative provision's classification of migration/asylum/border control AI as high-risk and its emphasis on transparency, non-discrimination, and fundamental rights protection. While BEUC's text is general and pre-proposal, its directional thrust clearly supports the kind of protective, risk-based approach the provision embodies."
+  },
+  "acc_A_0.0_43": {
+    "amendment_direction": "Establishes non-discriminatory territorial scope for the AI regulation, applying it to all AI system providers regardless of whether they are established in the EU or a third country, and to users within the Union.",
+    "label": "UNDETECTABLE",
+    "reasoning": "BEUC's position broadly advocates for a comprehensive regulatory framework for AI/ADM systems with strong safeguards for anyone affected, but does not specifically address the territorial/jurisdictional scope of the regulation or the non-discriminatory application to providers inside and outside the EU. Both texts relate to the general AI regulatory framework, but there is no clear directional alignment or opposition between BEUC's expressed concerns and the specific provision on territorial applicability."
+  },
+  "acc_A_0.0_44": {
+    "amendment_direction": "Encourages Member States to establish AI regulatory sandboxes to facilitate development and testing of innovative AI systems under strict regulatory oversight before market placement.",
+    "label": "UNDETECTABLE",
+    "reasoning": "BEUC's position focuses on the need for a comprehensive regulatory framework with strong consumer safeguards, transparency, and a risk-based approach for AI/ADM systems, but does not specifically address or take a position on regulatory sandboxes for AI experimentation. While both texts concern AI regulation broadly, BEUC's feedback neither supports nor opposes the sandbox mechanism described in the legislative provision."
+  },
+  "acc_A_0.0_45": {
+    "amendment_direction": "Applies the regulation to EU institutions and excludes military AI systems from scope, while preserving intermediary liability rules under the Digital Services Act.",
+    "label": "UNDETECTABLE",
+    "reasoning": "BEUC's position addresses the broad need for a regulatory framework for AI/ADM systems covering consumer safeguards, transparency, and a risk-based approach, but does not specifically address the inclusion of EU institutions, the military exclusion, or the intermediary liability carve-out that this provision deals with. Both touch on the scope of AI regulation, but there is no clear directional alignment or opposition between BEUC's expressed concerns and the specific scoping decisions made in this provision."
+  },
+  "acc_A_0.0_46": {
+    "amendment_direction": "Delegates power to the Commission to amend annexes defining AI systems, high-risk AI categories, conformity assessment procedures, and related technical provisions via delegated acts.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision is specifically about delegating powers to the Commission to amend technical annexes via delegated acts under Article 290 TFEU. BEUC's position focuses on the general need for risk-based AI regulation, the scope of high-risk classifications, and consumer protection concerns — it does not address the mechanism of delegated acts or the Commission's power to amend annexes. There is no substantive connection between the two."
+  },
+  "acc_A_0.0_47": {
+    "amendment_direction": "Requires providers of high-risk AI systems to undergo a conformity assessment procedure before placing their system on the market or putting it into service, and to draw up an EU declaration of conformity and affix CE marking upon demonstrated compliance.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly anticipated and welcomed the direction of conformity assessments for high-risk AI applications as part of stricter legal requirements, which is precisely what this provision mandates. While BEUC raised concerns about the narrowness of the risk-based scope, their position supports the existence of conformity assessments for high-risk AI systems, aligning with what the provision establishes."
+  },
+  "acc_A_0.0_48": {
+    "amendment_direction": "Requires providers of high-risk AI systems listed under Article 6(2) to register those systems in the EU database before placing them on the market or putting them into service.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly supports stricter legal requirements for high-risk AI applications, including mandatory pre-market regulatory approval and conformity assessments, which aligns with the provision's requirement to register high-risk AI systems in an EU database before market deployment. Both the organisation's position and the provision push toward greater pre-market oversight and accountability for high-risk AI systems."
+  },
+  "acc_A_0.0_49": {
+    "amendment_direction": "Empowers the Commission to update the list of high-risk AI systems in Annex III via delegated acts, using specific criteria (intended purpose, extent of use, severity of harm, vulnerability of affected persons, reversibility, etc.) to assess whether new AI systems pose equivalent or greater risks than those already listed.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly called on the Commission to move beyond a vague tautological definition of high-risk and to specify concrete, precise factors that cause risks for individuals and society. The legislative provision directly responds to this by enumerating detailed criteria (intended purpose, extent of use, severity and probability of harm, vulnerability of affected persons, reversibility of outcomes, etc.) for assessing high-risk classification. Both push in the same direction of making the high-risk determination more substantive and criteria-based, even though BEUC also argued for a broader horizontal scope beyond sector-based lists."
+  },
+  "acc_A_0.0_50": {
+    "amendment_direction": "Classifies AI systems used in employment, worker management, and access to self-employment as high-risk, citing risks to career prospects, discrimination, and privacy.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly supports classifying AI used in recruitment and workers' rights situations as high-risk, which directly aligns with the provision's classification of employment-related AI systems as high-risk. While BEUC also argues the overall risk-based framework is too narrow and sector-based regulation is unsuitable, their specific endorsement of high-risk status for AI in recruitment and workers' rights matches the direction of this particular provision."
+  },
+  "acc_A_0.0_51": {
+    "amendment_direction": "Clarifies that high-risk AI classification under the AI Act does not confer lawfulness under other Union or national law (e.g. data protection), and that the AI Act does not provide a legal basis for personal data processing.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision addresses the relationship between the AI Act's high-risk classification and other legal frameworks (particularly data protection law), clarifying that the AI Act does not override or substitute those laws. BEUC's feedback, by contrast, focuses on whether the risk-based approach and the definition/scope of \"high-risk\" are sufficiently broad and well-defined to protect consumers — a distinct subject matter with no substantive directional connection to the provision's clarification about legal grounds and cross-regulatory interaction."
+  },
+  "acc_A_0.0_52": {
+    "amendment_direction": "Limits high-risk AI classification to systems with significant harmful impact on health, safety, and fundamental rights, and restricts mandatory requirements to such high-risk systems placed on the Union market.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly argues that the risk-based, sector-specific approach is too narrow in scope and that a broader horizontal intervention covering all sectors is needed, whereas the legislative provision deliberately limits the high-risk classification to systems with significant harmful impact in order to minimise trade restrictions. The organisation's position pushes for a wider scope of mandatory requirements, directly opposing the provision's intentionally narrow framing."
+  },
+  "acc_A_0.0_53": {
+    "amendment_direction": "Empowers the Commission to add new high-risk AI systems to Annex III via delegated acts, based on a defined set of criteria including harm severity, probability, vulnerability of affected persons, and reversibility of outcomes.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly welcomes specific requirements for high-risk AI applications and calls for a gradual, criteria-based risk assessment approach that is not limited to a binary high/low risk classification. The legislative provision establishes a dynamic, criteria-driven mechanism for expanding the list of high-risk AI systems — including factors like vulnerability of affected persons, severity of harm, and reversibility — which aligns with BEUC's push for a more nuanced, comprehensive risk assessment framework that captures the full spectrum of AI-related dangers."
+  },
+  "acc_A_0.0_54": {
+    "amendment_direction": "Classifies AI systems used in law enforcement contexts (e.g., individual risk assessments, predictive policing, profiling) as high-risk, requiring accuracy, transparency, and reliability standards to protect fundamental rights.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly welcomes high-risk classification requirements (training data, transparency, robustness, accuracy, human oversight) and emphasises the need to protect fundamental rights from biased or inaccurate AI — directly consistent with the provision's rationale for classifying law enforcement AI as high-risk. BEUC even pushes further by arguing requirements should extend beyond high-risk categories, which reinforces rather than opposes the provision's protective direction."
+  },
+  "acc_A_0.0_55": {
+    "amendment_direction": "Establishes data governance and quality requirements (relevance, representativeness, bias examination, etc.) specifically for training, validation, and testing datasets used in high-risk AI systems.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly welcomes requirements on training data, records, and conformity assessments for high-risk AI, which directly corresponds to the data governance and quality criteria laid out in this provision. While BEUC also argues these requirements should extend beyond high-risk applications, their expressed support for the high-risk data requirements themselves aligns with what the provision establishes."
+  },
+  "acc_A_0.0_56": {
+    "amendment_direction": "Establishes a two-tier classification system where AI systems are considered high-risk only if they meet specific conditions related to safety components under Union harmonisation legislation or are listed in Annex III, effectively creating a binary high-risk/non-high-risk distinction.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC explicitly criticises the binary bifurcation of AI into high and low/no risk as failing to capture the full spectrum of AI risks, and calls instead for a gradual, multi-level approach to risk assessment with mandatory requirements at each risk level — directly opposing the provision's two-tier classification structure. While BEUC welcomes the specific requirements for high-risk AI, it argues that the high/non-high-risk binary is too narrow and that requirements should not be limited to high-risk applications alone."
+  },
+  "acc_A_0.0_57": {
+    "amendment_direction": "Requires high-risk AI systems to be sufficiently transparent and accompanied by detailed instructions for use, including information on capabilities, limitations, accuracy, risks to health/safety/fundamental rights, and human oversight measures.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly welcomes transparency requirements and human oversight for high-risk AI systems, stating these requirements \"are certainly capable of contributing to a more transparent and responsible development of new technologies,\" which directly aligns with the provision's detailed transparency and information obligations. BEUC's only divergence is that it wants such requirements extended beyond high-risk applications, but it does not oppose the high-risk transparency rules themselves."
+  },
+  "acc_A_0.0_58": {
+    "amendment_direction": "Classifies AI systems used for credit scoring/creditworthiness evaluation and public benefits determination as high-risk, citing risks of discrimination and exclusion for vulnerable persons.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly flags credit scoring algorithms as largely unregulated and often discriminatory, and calls for a regulatory framework that addresses discrimination, social/economic exclusion, and protects vulnerable consumers — directly mirroring the provision's rationale for classifying credit scoring and public benefits AI systems as high-risk. Both the organisation and the provision share the same concern about algorithmic discrimination and the need for regulatory safeguards in these specific use cases."
+  },
+  "acc_A_0.0_59": {
+    "amendment_direction": "Establishes a mandatory, continuous risk management system for high-risk AI systems covering identification, evaluation, and mitigation of risks throughout the entire lifecycle, including testing and post-market monitoring.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC called for a precautionary, lifecycle-spanning risk assessment process covering risks from the conceptual phase through the whole lifecycle, with graduated legal obligations based on risk level and the possibility of banning the most harmful technologies. The legislative provision establishes exactly such a continuous, iterative risk management system covering the full lifecycle of high-risk AI systems, including identification of risks, mitigation measures, testing, and post-market monitoring, which broadly aligns with BEUC's push for a more rigorous, lifecycle-based risk management framework."
+  },
+  "acc_A_0.0_60": {
+    "amendment_direction": "Establishes that the severity of harm caused by AI systems — including to health, safety, fundamental rights, and the environment — is a key factor in classifying AI systems as high-risk.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's pre-proposal feedback explicitly calls for consumer rights to safety, non-discrimination, reliability, and environmental protection in the context of AI/ADM systems, and stresses the need to account for AI's carbon footprint and environmental impact. The legislative provision similarly highlights health and safety risks, fundamental rights (including non-discrimination and consumer protection), and the environmental dimension as relevant criteria for classifying AI systems as high-risk, placing both texts in the same directional push toward broader risk and rights-based considerations in AI regulation."
+  },
+  "acc_A_0.0_61": {
+    "amendment_direction": "Requires the Commission to take into account AI Act safety requirements (Title III, Chapter 2) when adopting technical specifications and testing standards for AI systems that are safety components in marine equipment under Directive 2014/90/EU.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision specifically addresses the integration of AI Act safety requirements into marine equipment technical standards under Directive 2014/90/EU, while BEUC's position focuses entirely on updating liability rules (particularly the Product Liability Directive) to address harms from AI-powered products. These are distinct subjects with no substantive connection."
+  },
+  "acc_A_0.0_62": {
+    "amendment_direction": "Requires market surveillance and compliance enforcement under Regulation (EU) 2019/1020 to apply to AI systems, and grants national public authorities and equality bodies access to documentation created under the regulation.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for strong, independent oversight and enforcement of AI/ADM systems, closer cooperation among authorities, and access to documentation about automated decision systems for supervisory authorities — all of which align with the provision's establishment of a market surveillance framework and granting of documentation access to relevant national authorities. Both push in the same direction of robust, multi-authority enforcement and oversight."
+  },
+  "acc_A_0.0_63": {
+    "amendment_direction": "Designates national competent authorities and a national supervisory authority in each Member State as the official point of contact for supervising and implementing the AI Regulation.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for strong independent oversight and supervisory authorities for AI/ADM systems, closer cooperation among authorities, and an enforcement system capable of delivering EU-wide results — all of which align with the provision's establishment of designated national competent and supervisory authorities. The organisation's push for robust, structured public enforcement infrastructure is directionally consistent with the legislative provision creating formal national oversight bodies."
+  },
+  "acc_A_0.0_64": {
+    "amendment_direction": "Establishes a sectoral coordination group for notified bodies conducting AI conformity assessments, requiring Member States to ensure their notified bodies participate in this group.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and the organisation's position touch on oversight and coordination mechanisms for AI systems, but they address different aspects: the provision specifically establishes a coordination group among notified bodies for conformity assessment, while BEUC's position focuses on broader oversight by public authorities, consumer organisations, and enforcement systems for ADM technologies. There is no clear directional alignment or opposition between the organisation's call for independent control and the provision's technical coordination mechanism for notified bodies."
+  },
+  "acc_A_0.0_65": {
+    "amendment_direction": "Establishes that AI systems must undergo a new conformity assessment when a change may affect compliance or intended purpose changes, while clarifying that pre-determined algorithmic changes assessed at the time of initial conformity assessment do not constitute a substantial modification.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for a principle of 'continued conformity' throughout a product's lifecycle, recognising that software updates and self-learning algorithms can change system properties and affect legal compliance — directly mirroring the provision's requirement for new conformity assessments when changes may affect compliance. Both the organisation and the provision also address the specific challenge of continuously learning/self-adapting AI systems, with BEUC advocating for ongoing oversight and the provision establishing rules for when algorithmic changes in such systems do or do not trigger reassessment."
+  },
+  "acc_A_0.0_66": {
+    "amendment_direction": "Requires the Commission to periodically evaluate and review the AI Regulation, including assessing the Annex III list annually, submitting reports every four years, and proposing amendments in light of technological developments.",
+    "label": "ALIGNED",
+    "reasoning": "NL AIC explicitly calls for \"agile, flexible governance solutions\" and a system that \"can quickly adapt to changing circumstances,\" which directly aligns with the provision's built-in periodic review and amendment mechanism. The provision's commitment to revisiting the regulation in light of technological developments mirrors the organisation's call for adaptive governance."
+  },
+  "acc_A_0.0_67": {
+    "amendment_direction": "Encourages Member States to establish AI regulatory sandboxes to facilitate development and testing of innovative AI systems under strict regulatory oversight before market placement.",
+    "label": "OPPOSING",
+    "reasoning": "ZVEI explicitly argues against new horizontal AI regulation, stating there is no evidence of fundamental regulatory gaps and that innovation must not be hampered by regulation. The provision establishes a regulatory oversight framework (sandboxes) premised on the need for novel regulatory intervention in AI, which directly contradicts ZVEI's position that no new horizontal regulation is needed and that existing rules are sufficient."
+  },
+  "acc_A_0.0_68": {
+    "amendment_direction": "Establishes that EU support infrastructures (AI-on-demand platform, European Digital Innovation Hubs, Testing and Experimentation Facilities) should contribute technical and scientific support to providers and notified bodies to facilitate compliance with the AI Regulation.",
+    "label": "NOISE",
+    "reasoning": "ZVEI's feedback focuses on whether a new horizontal AI regulation is needed at all, product safety, liability, and risk classification principles — it does not address the role of support infrastructures like AI-on-demand platforms, Digital Innovation Hubs, or Testing and Experimentation Facilities in facilitating compliance. There is no substantive connection between the organisation's expressed positions and this specific provision."
+  },
+  "acc_A_0.0_69": {
+    "amendment_direction": "Establishes a European Artificial Intelligence Board responsible for advisory tasks including issuing opinions, recommendations, and guidance on the implementation of the AI Regulation.",
+    "label": "NOISE",
+    "reasoning": "ZVEI's feedback focuses on whether horizontal AI regulation is needed at all, risk classification, product safety, and liability — it does not address the creation or role of a European AI Board. There is no substantive connection between the organisation's expressed positions and the specific provision establishing the Board's advisory mandate."
+  },
+  "acc_A_0.0_70": {
+    "amendment_direction": "Requires users of high-risk AI systems to follow instructions of use, monitor system operation, maintain logs, suspend use upon identified risks, and use AI-related information for data protection impact assessments.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's position explicitly calls for mandatory logging, documentation, human oversight, internal audits, and accountability measures for AI/ADM systems, which directly aligns with the legislative provision's requirements for users to maintain logs, monitor operations, implement human oversight, and suspend use when risks are identified. Both push in the same direction of imposing concrete operational obligations and oversight duties on those deploying high-risk AI systems."
+  },
+  "acc_A_0.0_71": {
+    "amendment_direction": "Establishes a penalties regime for AI regulation infringements, including tiered administrative fines up to 6% of global turnover, with Member States responsible for implementation and enforcement powers.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly called for enforcement authorities to have necessary powers to scrutinise AI systems, stop illegal practices, and impose penalties, which aligns with the legislative provision establishing a tiered administrative fines regime and requiring Member States to implement effective enforcement measures. Both the organisation's position and the provision push in the same direction of ensuring robust, effective enforcement with meaningful penalties for non-compliance."
+  },
+  "acc_A_0.0_72": {
+    "amendment_direction": "Establishes a market surveillance framework for AI systems in the EU, designating national supervisory authorities with oversight responsibilities and requiring coordination and reporting to the Commission.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for enforcement authorities to have powers to inspect, scrutinise, and evaluate AI systems, for ex-post checks, and for effective auditing and oversight mechanisms — all of which align with the legislative provision's establishment of a market surveillance framework with designated national authorities empowered to oversee AI systems. Both push in the same direction of robust external control and enforcement of AI rules."
+  },
+  "acc_A_0.0_73": {
+    "amendment_direction": "Empowers the European Data Protection Supervisor to impose administrative fines (up to €500,000 or €250,000 depending on the infringement) on Union institutions, agencies, and bodies for non-compliance with AI Act requirements.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for enforcement authorities to have the necessary powers to scrutinise AI systems and impose penalties for law infringements, which aligns with the provision granting the EDPS authority to impose administrative fines on Union institutions for AI Act non-compliance. Both the organisation's position and the legislative provision move in the same direction of establishing meaningful enforcement mechanisms with financial penalties."
+  },
+  "acc_A_0.0_74": {
+    "amendment_direction": "Requires the Commission to periodically evaluate and review the AI Regulation, including assessing national competent authorities' resources, penalties applied by Member States, and the effectiveness of codes of conduct, and to submit reports to the European Parliament and Council.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's position strongly advocates for continuous oversight, enforcement powers for authorities, ex-post checks, auditing systems, and periodic evaluation of AI/ADM systems — all of which align directionally with the legislative provision's requirements for regular Commission reviews of the Regulation, assessment of national authorities' resources and penalties, and evaluation of codes of conduct. Both push toward robust, ongoing external control and accountability mechanisms for AI systems."
+  },
+  "acc_A_0.0_75": {
+    "amendment_direction": "Requires that real-time remote biometric identification in publicly accessible spaces for law enforcement be subject to proportionality limits, safeguards, and appropriate reference databases, within three narrowly defined situations.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for heightened safeguards on biometric identification systems used in public spaces, stresses the need for necessity and proportionality, and urges a broad debate on appropriate conditions for such use — all of which align with the provision's imposition of proportionality limits, safeguards, and conditions on real-time remote biometric identification in publicly accessible spaces. Both push in the same direction of restricting and conditioning the use of such systems."
+  },
+  "acc_A_0.0_76": {
+    "amendment_direction": "Requires that processing of biometric data by AI systems outside the specific law enforcement/real-time remote biometric identification context must continue to comply with existing GDPR and related data protection rules (Article 9(1) of Regulation 2016/679, etc.).",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly highlights that biometric data processing for identification purposes is already forbidden under Article 9(1) of GDPR unless an exemption applies, and calls for heightened safeguards across all biometric systems and use cases — including those beyond law enforcement in public spaces. The legislative provision similarly anchors all non-law-enforcement biometric AI processing to Article 9(1) of Regulation 2016/679, directly reflecting BEUC's position that GDPR compliance must be maintained and enforced for the full range of biometric data uses."
+  },
+  "acc_A_0.0_77": {
+    "amendment_direction": "Requires prior judicial or independent administrative authorisation for real-time remote biometric identification in public spaces for law enforcement, with narrow urgency exceptions.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's position calls for heightened safeguards on biometric identification systems used in public spaces, questions their social acceptability, and urges robust protections including necessity and proportionality principles — all of which align directionally with the provision's requirement for prior judicial or independent administrative authorisation before deploying real-time remote biometric identification for law enforcement. Both push toward stronger oversight and restrictions on such systems in public spaces."
+  },
+  "acc_A_0.0_78": {
+    "amendment_direction": "Permits real-time remote biometric identification by law enforcement in public spaces under three narrowly defined exceptions, including searching for crime victims, preventing terrorist threats, and prosecuting serious criminal offences.",
+    "label": "OPPOSING",
+    "reasoning": "BEUC's position calls for heightened safeguards on all biometric identification systems, expresses concern about the use of facial recognition in public spaces, and questions whether such use is socially acceptable at all — pushing toward stricter restriction or prohibition. The legislative provision, by contrast, carves out explicit law enforcement exceptions permitting real-time remote biometric identification in public spaces, which runs counter to BEUC's cautionary stance."
+  },
+  "acc_A_0.0_79": {
+    "amendment_direction": "Recognises real-time remote biometric identification in public spaces for law enforcement as particularly intrusive, highlighting risks to privacy, freedom of assembly, and fundamental rights due to the immediacy and limited corrective opportunities of such systems.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's position explicitly flags the intrusive nature of biometric identification systems used in public spaces, raises concerns about privacy, social acceptability, and fundamental rights, and calls for heightened safeguards — all of which align with the legislative provision's framing of real-time remote biometric identification in public spaces as particularly intrusive and rights-threatening. While BEUC goes further by advocating for broader debate beyond law enforcement contexts, its directional push clearly supports the provision's cautionary stance."
+  },
+  "acc_A_0.0_80": {
+    "amendment_direction": "Establishes conditions and limits for the use of real-time remote biometric identification systems in publicly accessible spaces for law enforcement, including temporal/spatial limits and appropriate reference databases.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and BEUC's position address the use of biometric identification systems in public spaces and the need for safeguards, proportionality, and necessity. However, BEUC's position focuses on broadening the debate beyond remote identification to all biometric data uses (including authentication and vulnerable groups like children), while the provision narrows its scope specifically to real-time remote biometric identification for law enforcement with defined conditions. There is no clear directional alignment or opposition — BEUC neither supports nor contests the specific limits and conditions the provision establishes."
+  },
+  "acc_A_0.0_81": {
+    "amendment_direction": "Classifies remote biometric identification systems (both real-time and post) as high-risk AI, requiring specific logging and human oversight requirements due to risks of biased and discriminatory results.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for heightened safeguards on all biometric systems, including remote biometric identification, and highlights risks of discriminatory outcomes and harms to vulnerable groups such as children — directly supporting the legislative provision's classification of remote biometric identification systems as high-risk and its imposition of specific requirements. Both the organisation and the provision share the same directional push toward stronger regulation and oversight of these systems."
+  },
+  "acc_A_0.0_82": {
+    "amendment_direction": "Aligns the definition of biometric data in the AI Act with existing definitions in GDPR and related EU data protection legislation for consistency.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision is purely a definitional/interpretive alignment clause, cross-referencing the biometric data definition across EU data protection instruments. BEUC's position focuses on substantive policy recommendations — heightened safeguards, red lines, impact assessments, and special protections for children — none of which relate to the definitional consistency that the provision addresses."
+  },
+  "acc_A_0.0_83": {
+    "amendment_direction": "Establishes that real-time remote biometric identification systems in publicly accessible spaces for law enforcement must be used proportionately, subject to temporal and spatial limits, with specific safeguards and conditions tied to the nature of the situation and its consequences for rights and freedoms.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC's pre-proposal position calls for clear red lines, prior impact assessments, safeguards, and limits on biometric/remote identification technology to protect rights and freedoms — all of which align directionally with the provision's requirement for proportionality, temporal/spatial limits, and specific safeguards on real-time remote biometric identification in public spaces. Both push toward restricting and conditioning the use of such systems rather than permitting them freely."
+  },
+  "acc_A_0.0_84": {
+    "amendment_direction": "Requires express and specific prior authorisation by a judicial or independent administrative authority before each use of real-time remote biometric identification systems in publicly accessible spaces for law enforcement purposes, with limited exceptions for urgency.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC calls for clear red lines, prior impact assessments, and limits or prohibitions on biometric technology in high-risk situations, and warns against its normalisation — all of which align directionally with the provision's requirement for strict prior authorisation and controlled, exceptional use of real-time remote biometric identification. Both push toward restricting and tightly regulating the deployment of such systems rather than allowing broad or uncontrolled use."
+  },
+  "acc_A_0.0_85": {
+    "amendment_direction": "Permits 'real-time' remote biometric identification by law enforcement in three narrowly defined exceptional situations (search for crime victims, serious threats, and prosecution of serious criminal offences punishable by at least three years' custody).",
+    "label": "OPPOSING",
+    "reasoning": "BEUC calls for clear red lines to limit or prohibit biometric/facial recognition technology in high-risk situations and warns against its normalisation and wide deployment, implying a preference for stricter or broader prohibitions. The legislative provision, by contrast, carves out explicit exceptions allowing law enforcement use of real-time remote biometric identification in three defined scenarios, which runs counter to BEUC's push for tighter restrictions and a precautionary approach to such technology."
+  },
+  "acc_A_0.0_86": {
+    "amendment_direction": "Aligns the definition of biometric data in the AI Act with existing EU data protection legislation (GDPR, Regulation 2018/1725, and Directive 2016/680) for consistent interpretation.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and the organisation's position concern biometric data, but they address entirely different aspects: the provision is a narrow definitional/interpretive alignment clause cross-referencing existing EU data protection law, while BEUC's position focuses on substantive policy recommendations (red lines, impact assessments, consumer choice, non-normalisation of biometric tech). There is no clear directional relationship — BEUC neither supports nor opposes the act of harmonising the definition of biometric data across EU instruments."
+  },
+  "acc_A_0.0_87": {
+    "amendment_direction": "Establishes conditions, safeguards, and proportionality limits (including time and space constraints) for the use of real-time remote biometric identification systems in publicly accessible spaces for law enforcement purposes.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly calls for clear red lines, prior impact assessments, safeguards, and limits on biometric technology use in public spaces to protect rights and freedoms — all of which align with the provision's focus on proportionality, safeguards, and constrained conditions for real-time remote biometric identification in publicly accessible spaces. Both push in the same direction of restricting and carefully conditioning the use of such technology."
+  },
+  "acc_A_0.0_88": {
+    "amendment_direction": "Requires prior judicial or independent administrative authorisation for real-time remote biometric identification in public spaces for law enforcement, with narrow exceptions for urgency.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC calls for clear red lines, prior impact assessments, and restrictions on biometric technology deployment to protect individuals' rights — all pushing toward limiting and conditioning the use of biometric identification systems. The legislative provision similarly restricts real-time remote biometric identification in public spaces by requiring prior authorisation and limiting urgency exceptions, reflecting the same protective, restrictive direction as BEUC's position."
+  },
+  "acc_A_0.0_89": {
+    "amendment_direction": "Facilitates access to high-quality datasets (including through European common data spaces) for the training, validation, and testing of high-risk AI systems by providers, notified bodies, and other relevant entities.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision is specifically about enabling access to high-quality datasets and data spaces for AI development, whereas Enel's position focuses on the definition and scope of \"high-risk\" AI classifications and the need for a sector-by-sector risk assessment methodology. There is no substantive connection between Enel's feedback on risk categorisation and the provision's subject matter of data access and data sharing infrastructure."
+  },
+  "acc_A_0.0_90": {
+    "amendment_direction": "Allows Member States to authorise AI systems that have not undergone conformity assessment under exceptional circumstances of public security or protection of life and health.",
+    "label": "NOISE",
+    "reasoning": "ZVEI's feedback focuses on broad regulatory philosophy — opposing horizontal AI regulation, advocating for soft law, technology-neutral approaches, and risk-based frameworks — and does not address the specific provision allowing Member States to bypass conformity assessment under exceptional public security or health circumstances. There is no substantive connection between ZVEI's expressed positions and this narrow emergency derogation mechanism."
+  },
+  "acc_A_0.0_91": {
+    "amendment_direction": "Encourages providers of non-high-risk AI systems to voluntarily adopt codes of conduct aligned with high-risk AI requirements, and apply additional voluntary requirements (e.g. sustainability, accessibility), while the Commission may facilitate cross-border data exchange for AI development.",
+    "label": "ALIGNED",
+    "reasoning": "Vodafone explicitly raises concerns about the lack of focus on incentives for trustworthy AI development (voluntary labelling, certification, industry codes) and calls for more clarity on such schemes, which directly aligns with the provision's encouragement of voluntary codes of conduct for non-high-risk AI providers. Additionally, Vodafone's call for improved access to high-quality training data and joined-up policy on the EU Data Strategy aligns with the provision's mention of Commission initiatives to lower barriers to cross-border data exchange for AI development."
+  },
+  "acc_A_0.0_92": {
+    "amendment_direction": "Facilitates access to high-quality datasets for the development of high-risk AI systems through European common data spaces and data sharing mechanisms.",
+    "label": "ALIGNED",
+    "reasoning": "Vodafone explicitly underlines \"the importance of availability of high quality training data for AI, to ensure that European businesses can continue to innovate,\" which directly mirrors the provision's focus on enabling access to high-quality datasets for AI development. Both the organisation's position and the legislative provision push in the same direction of facilitating data access for AI training and innovation."
+  },
+  "acc_A_0.0_93": {
+    "amendment_direction": "Establishes AI regulatory sandboxes as controlled environments for developing, testing, and validating innovative AI systems under competent authority supervision, with specific rules on liability, data protection coordination, and implementing acts for operational modalities.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's feedback focuses on the appropriate regulatory approach for high-risk AI (mandatory vs. voluntary requirements, liability rules, enforcement mechanisms, and risk classification criteria), with no mention of or position on regulatory sandboxes as a testing and validation mechanism. The provision specifically addresses the structure, governance, and operation of AI regulatory sandboxes, a topic entirely absent from Vodafone's submission."
+  },
+  "acc_A_0.0_94": {
+    "amendment_direction": "Establishes a penalties regime for AI Act infringements, including administrative fines of up to 6% of global turnover for the most serious violations, with Member States responsible for implementing and enforcing these rules.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Vodafone's position supports EU-wide enforcement mechanisms to ensure compliance with AI requirements, which is broadly consistent with the provision's goal of establishing penalties. However, Vodafone's feedback focuses on avoiding duplication with existing enforcement bodies and ensuring consistency with existing regulation, whereas the provision sets out specific fine levels and enforcement structures without addressing those concerns — making the directional relationship unclear rather than clearly aligned or opposing."
+  },
+  "acc_A_0.0_95": {
+    "amendment_direction": "Integrates conformity assessment of high-risk AI systems into existing New Legislative Framework procedures to minimise duplication and burden on operators.",
+    "label": "ALIGNED",
+    "reasoning": "Vodafone explicitly advocates for avoiding duplication of existing enforcement bodies and processes, and for ensuring consistency with existing regulation — directly mirroring the provision's goal of minimising burden and avoiding duplication by folding AI conformity assessments into existing NLF procedures. Both the organisation and the provision push in the same direction of streamlining compliance obligations for high-risk AI systems rather than creating parallel or overlapping frameworks."
+  },
+  "acc_A_0.0_96": {
+    "amendment_direction": "Extends the territorial scope of the AI Regulation to providers and users of AI systems established in third countries when the output of those systems is used in the Union, to prevent circumvention.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's feedback focuses on the appropriate regulatory approach (risk-based thresholds, ex ante vs. ex post requirements, liability rules, and enforcement consistency), with no mention of territorial scope or extraterritorial application of the regulation. The legislative provision exclusively addresses the geographic reach of the regulation to third-country operators, a subject entirely absent from Vodafone's position."
+  },
+  "acc_A_0.0_97": {
+    "amendment_direction": "Establishes mandatory requirements for high-risk AI systems placed on the Union market, based on intended purpose and a risk management system to be set up by the provider.",
+    "label": "ALIGNED",
+    "reasoning": "Vodafone explicitly supports mandatory requirements being applicable only to high-risk AI applications (option 3.b), and endorses criteria such as intended purpose and degree/scale of harm to determine high-risk status — directly mirroring the provision's approach of applying mandatory requirements to high-risk AI systems based on intended purpose and a risk management framework. Both the organisation's position and the legislative provision converge on targeted, risk-based mandatory obligations rather than broad ex ante regulation."
+  },
+  "acc_A_0.0_98": {
+    "amendment_direction": "Requires third parties in the AI value chain (e.g. software, data, pre-trained model providers) to cooperate with providers and users to enable compliance with the AI Regulation.",
+    "label": "ALIGNED",
+    "reasoning": "BDVA explicitly acknowledges that AI systems operate within value chains and that liabilities and requirements may need to extend across those chains, including to training data and upstream components — directly echoing the provision's recognition of AI value chain complexity and the need for third-party cooperation. Their call for careful scoping of requirements across value chain actors and their support for a trust-based regulatory framework aligns with the provision's direction of engaging third parties in compliance obligations."
+  },
+  "acc_A_0.0_99": {
+    "amendment_direction": "Establishes that the severity of adverse impacts on fundamental rights (including dignity, privacy, non-discrimination, children's rights, and environmental protection) and health/safety risks are key criteria for classifying AI systems as high-risk.",
+    "label": "ALIGNED",
+    "reasoning": "The Good Lobby explicitly argues that risks should be calculated based on \"impact on rights and safety rather than the sector and specific use,\" which directly aligns with the provision's approach of using fundamental rights impacts and health/safety harms as the primary criteria for high-risk classification. Both the organisation and the provision share the same directional emphasis on a rights- and safety-centred framework for assessing AI risk."
+  },
+  "acc_A_0.0_100": {
+    "amendment_direction": "Establishes a procedure for market surveillance authorities to evaluate, restrict, withdraw, or recall AI systems presenting a risk to health, safety, or fundamental rights, with cross-border coordination mechanisms between Member States and the Commission.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both FERMA's position and the legislative provision engage with a risk-based approach to AI regulation, but FERMA's feedback focuses on promoting enterprise risk management frameworks (ERM, Three Lines of Defense) and a general risk-based legislative philosophy, while the provision establishes a specific procedural mechanism for market surveillance authorities to act on non-compliant AI systems. FERMA neither supports nor opposes the detailed enforcement and cross-border coordination procedure set out in the article."
+  },
+  "acc_A_0.0_101": {
+    "amendment_direction": "Establishes national competent authorities in each Member State responsible for supervising and enforcing the AI Regulation, with requirements for adequate resources, expertise, and coordination.",
+    "label": "NOISE",
+    "reasoning": "FERMA's position paper focuses on advocating for a risk-based approach to AI regulation and promoting Enterprise Risk Management frameworks, with no substantive commentary on the institutional design of national competent authorities, their designation, resourcing, or supervisory structure. The two texts address entirely different subjects."
+  },
+  "acc_A_0.0_102": {
+    "amendment_direction": "Establishes a regime of administrative fines (up to 500,000 EUR or 250,000 EUR) that the European Data Protection Supervisor can impose on Union institutions, agencies, and bodies for non-compliance with AI Act requirements.",
+    "label": "NOISE",
+    "reasoning": "FERMA's position paper focuses on advocating for a risk-based approach to AI regulation and promoting enterprise risk management frameworks (ERM, Three Lines of Defense) in AI legislation. It does not address, support, or oppose the specific mechanism of administrative fines imposed by the European Data Protection Supervisor on Union institutions for AI non-compliance, which is the subject of the legislative provision."
+  },
+  "acc_A_0.0_103": {
+    "amendment_direction": "Requires providers of high-risk AI systems to keep automatically generated logs for an appropriate period, with specific obligations for credit institutions under existing banking directives.",
+    "label": "NOISE",
+    "reasoning": "FERMA's position paper focuses broadly on advocating for a risk-based approach to AI regulation and promoting Enterprise Risk Management frameworks, with no specific mention of logging obligations or record-keeping requirements for high-risk AI systems. The organisation's feedback does not address the subject matter of the legislative provision in any substantive way."
+  },
+  "acc_A_0.0_104": {
+    "amendment_direction": "Requires that AI requirements (Title III, Chapter 2 of the AI Regulation) be taken into account when adopting implementing and delegated acts concerning AI systems that are safety components under aviation safety regulation (EU) 2018/1139.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren explicitly warns against extending new AI regulations to AI technology embedded in hardware and existing regulated sectors, and cautions that existing regulatory frameworks should not be unnecessarily expanded to cover AI. The legislative provision does precisely that — it integrates AI Act requirements into aviation safety legislation (EU 2018/1139), extending the AI regulatory framework into an existing sectoral regime, which directly contradicts Keidanren's stated position."
+  },
+  "acc_A_0.0_105": {
+    "amendment_direction": "Establishes classification rules for high-risk AI systems, including AI used as safety components in products subject to EU harmonisation legislation and requiring third-party conformity assessment, as well as AI systems listed in Annex III.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren explicitly warns against extending new AI regulations to AI technology embedded in hardware (products), arguing that existing product safety legislation should not be expanded to cover AI-enabled systems. The legislative provision does precisely that — it classifies AI systems used as safety components in products covered by EU harmonisation legislation as high-risk, thereby extending regulatory requirements to AI embedded in products, which directly contradicts Keidanren's stated position."
+  },
+  "acc_A_0.0_106": {
+    "amendment_direction": "Establishes the territorial and material scope of the AI Act, applying it to providers and users of AI systems in the Union (including third-country providers whose outputs are used in the Union), while carving out military use and certain sector-specific regulated products.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren explicitly argues that new AI regulations \"must not be extended to AI technology embedded in hardware, including software and services,\" and urges full attention to existing regulations to avoid overlap — a position that pushes against the broad territorial and material scope the provision establishes, which covers providers and users globally wherever AI outputs are used in the Union, including AI embedded in products. The organisation's concern about legal uncertainty and regulatory overreach directly conflicts with the expansive scope defined in the article."
+  },
+  "acc_A_0.0_107": {
+    "amendment_direction": "Establishes a procedure for market surveillance authorities to evaluate, restrict, withdraw, or recall AI systems presenting risks to health, safety, or fundamental rights, with cross-border coordination mechanisms.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren acknowledges gaps in existing product safety legislation regarding AI risks and the challenges faced by market surveillance authorities, which is broadly consistent with the provision's subject matter. However, Keidanren's position also cautions against extending new regulations to AI embedded in hardware and emphasises coherence with existing frameworks, making its directional relationship to the specific enforcement and withdrawal procedures established in the article unclear — it neither straightforwardly supports nor opposes the detailed procedural mechanism laid out."
+  },
+  "acc_A_0.0_108": {
+    "amendment_direction": "Requires the Commission to take into account mandatory AI safety requirements when adopting future delegated or implementing acts under existing sector-specific product safety regulations, without interfering with existing governance and conformity assessment mechanisms.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren explicitly warns that existing regulations and systems must not be extended to AI technology embedded in hardware, and that full attention must be given to avoiding such extensions — directly opposing the provision's approach of integrating new mandatory AI requirements into existing sector-specific product safety legislation via future delegated/implementing acts. The organisation's concern about legal uncertainty and interference with existing frameworks further contrasts with the provision's directive to layer AI requirements onto those very frameworks."
+  },
+  "acc_A_0.0_109": {
+    "amendment_direction": "Establishes a uniform EU-wide regulatory framework for AI systems based on Article 114 TFEU to prevent internal market fragmentation, ensure legal certainty, and guarantee consistent protection of fundamental rights across Member States.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren and the legislative provision share the same overarching goals — harmonisation, legal certainty, and a single-market framework — and Keidanren explicitly welcomes a harmonised framework to reduce compliance costs from legal fragmentation. However, Keidanren simultaneously cautions against uniform accountability rules that could hinder AI utilisation and stresses the need to balance societal benefits against risks, pushing for a more flexible approach than the provision's uniform obligations imply. The positions overlap on harmonisation but diverge on the strictness of uniform rules, making the directional relationship ambiguous rather than clearly aligned or opposing."
+  },
+  "acc_A_0.0_110": {
+    "amendment_direction": "Establishes regulatory sandboxes to foster AI innovation through controlled experimentation, enhance legal certainty for innovators, and accelerate market access, including for SMEs and start-ups, while ensuring compliance with EU regulations.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and Keidanren's position address the need for legal certainty for businesses and a balanced approach to AI regulation that does not unduly hinder innovation. However, Keidanren's feedback focuses broadly on accountability frameworks, uniform rules, and the risk of overburdening developers, without specifically addressing or taking a directional stance on the regulatory sandbox mechanism that the provision establishes. The thematic overlap exists but there is no clear alignment or opposition to the sandbox concept itself."
+  },
+  "acc_A_0.0_111": {
+    "amendment_direction": "Establishes a harmonised EU legal framework for AI that balances fostering AI development in the internal market with high-level protection of public interests, health, safety, and fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren and the provision share the same broad topic — a harmonised EU AI regulatory framework balancing innovation with safety/fundamental rights — and Keidanren explicitly welcomes the harmonisation goal and reduced compliance costs. However, Keidanren simultaneously warns against uniform accountability rules and overly broad regulatory targets, pushing for a more cautious, differentiated approach, which neither straightforwardly supports nor opposes the provision's high-level framing of the dual objective of fostering AI while ensuring strong protections."
+  },
+  "acc_A_0.0_112": {
+    "amendment_direction": "Requires providers and users of certain AI systems (chatbots, emotion recognition, biometric categorisation, deepfakes) to disclose to natural persons that they are interacting with or exposed to an AI system.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren warns against uniform accountability rules imposed on AI developers and providers, arguing they may be held responsible for issues beyond their control and that such rules could hinder AI utilization across diverse areas. The transparency/disclosure obligations in the provision impose exactly the kind of uniform, mandatory accountability requirements on providers and users that Keidanren cautions against, placing the two positions in opposition."
+  },
+  "acc_A_0.0_113": {
+    "amendment_direction": "Establishes AI regulatory sandboxes as controlled environments for developing, testing, and validating innovative AI systems under competent authority supervision, with liability retained by participants and coordinated reporting requirements.",
+    "label": "NOISE",
+    "reasoning": "Keidanren's feedback focuses on accountability frameworks, liability allocation, harmonised compliance costs, and the balance between AI benefits and risks — it does not address regulatory sandboxes, controlled testing environments, or the supervisory/coordination mechanisms that the provision establishes. There is no substantive connection between the organisation's expressed concerns and the specific sandbox mechanism described in the article."
+  },
+  "acc_A_0.0_114": {
+    "amendment_direction": "Encourages Member States to support small-scale AI providers through awareness initiatives, reduced conformity assessment fees, and language accommodations to reduce compliance burdens.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and Keidanren's position share a concern for reducing burdens on smaller operators and promoting innovation, but they address different aspects: the provision focuses on concrete support measures for small-scale providers (fees, language, awareness), while Keidanren's position broadly argues against uniform accountability rules, favors minimal new regulation, and promotes contractual flexibility. There is no clear directional alignment or opposition between the specific measures in the provision and Keidanren's general regulatory philosophy."
+  },
+  "acc_A_0.0_115": {
+    "amendment_direction": "Requires non-EU providers of AI systems to appoint an authorised representative established in the Union before making their systems available there, to ensure enforcement and a level playing field.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren advocates for minimal, non-duplicative regulation, preference for soft law and contractual flexibility, and warns against complicating compliance burdens for businesses operating across diverse areas. The provision imposes a specific mandatory structural requirement (appointing an EU-based authorised representative) on non-EU providers, which directly adds to the regulatory obligations Keidanren argues should be kept to a minimum and avoided where existing frameworks suffice."
+  },
+  "acc_A_0.0_116": {
+    "amendment_direction": "Encourages providers of non-high-risk AI systems to voluntarily adopt codes of conduct aligned with mandatory high-risk AI requirements, and promotes voluntary additional requirements on sustainability, accessibility, and diversity.",
+    "label": "ALIGNED",
+    "reasoning": "Keidanren explicitly advocates for a \"soft law\" approach, industry-led voluntary measures, and government-private sector schemes for voluntary evaluation of AI, which aligns with the provision's encouragement of voluntary codes of conduct for non-high-risk AI systems. Both the organisation and the provision favour voluntary, industry-driven compliance mechanisms over mandatory regulation for non-high-risk AI."
+  },
+  "acc_A_0.0_117": {
+    "amendment_direction": "Prohibits certain AI practices including subliminal manipulation, exploitation of vulnerable groups, social scoring by public authorities, and real-time remote biometric identification in public spaces for law enforcement (with limited exceptions and safeguards).",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues that regulation of high-risk AI (including remote biometric identification) is premature, that definitions and scopes remain unclear, and that mandatory requirements risk hindering innovation and restricting private-sector use — pushing for soft law or minimal legislative intervention. The provision, by contrast, imposes hard prohibitions and strict conditions on AI practices including real-time biometric identification, directly contradicting Keidanren's preference for avoiding binding prior regulations and ensuring private-sector utilization is not restricted."
+  },
+  "acc_A_0.0_118": {
+    "amendment_direction": "Encourages national competent authorities to establish AI regulatory sandboxes to facilitate development and testing of innovative AI systems under strict regulatory oversight before market placement.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren's position strongly favors a \"soft law,\" industry-led, non-legislative approach and warns that imposing prior regulations on AI products and services may hinder innovation, which runs counter to the provision's call for formal regulatory sandboxes under strict regulatory oversight. While sandboxes are framed as innovation-friendly, Keidanren's preference for minimal mandatory regulation and corporate self-governance opposes the structured, government-supervised regulatory framework the provision establishes."
+  },
+  "acc_A_0.0_119": {
+    "amendment_direction": "Requires that delegated acts on AI systems used as safety components in agricultural/forestry vehicles take into account the mandatory requirements set out in the AI Act's Title III, Chapter 2.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren's position strongly advocates against mandatory legislative requirements for AI, preferring soft law, industry-led measures, and minimal regulation to avoid hindering innovation. The legislative provision does the opposite by embedding mandatory AI Act requirements (Title III, Chapter 2) into sector-specific delegated acts, directly contradicting Keidanren's call to limit hard regulatory obligations on AI systems."
+  },
+  "acc_A_0.0_120": {
+    "amendment_direction": "Establishes that real-time remote biometric identification in publicly accessible spaces for law enforcement purposes is governed exclusively by this Regulation as lex specialis, prohibiting such use except under specific exceptions, while excluding non-law-enforcement uses from this framework.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues against premature mandatory regulation of AI, advocates for soft law and industry-led approaches, and specifically warns against unnecessarily restricting private sector use of remote biometric identification systems, calling for careful clarification before imposing rules. The legislative provision, by contrast, establishes a strict mandatory prohibition-with-exceptions framework for real-time remote biometric identification in public spaces for law enforcement, representing exactly the kind of binding legislative intervention Keidanren cautioned against."
+  },
+  "acc_A_0.0_121": {
+    "amendment_direction": "Defines 'remote biometric identification systems' functionally and distinguishes between 'real-time' and 'post' systems for regulatory purposes under the AI Act.",
+    "label": "ALIGNED",
+    "reasoning": "Keidanren explicitly called for clarification of the definition and scope of remote biometric identification systems, distinguishing them from biometric authentication, and for practical guidelines classifying their utilisation methods. The legislative provision directly responds to this by providing a functional definition of remote biometric identification and drawing a clear distinction between 'real-time' and 'post' systems, aligning with the organisation's stated need for definitional clarity."
+  },
+  "acc_A_0.0_122": {
+    "amendment_direction": "Requires that processing of biometric and personal data by AI-based biometric identification systems (outside the specific law enforcement/public space context) must continue to comply with existing EU data protection law (GDPR, Regulation 2018/1725, Directive 2016/680).",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues against imposing mandatory legislative requirements on AI systems including remote biometric identification, advocating instead for soft law, voluntary industry-led measures, and practical guidelines rather than hard legal obligations. The legislative provision, by contrast, firmly anchors biometric AI processing to existing mandatory EU data protection requirements, reflecting the kind of binding regulatory approach Keidanren explicitly cautioned against."
+  },
+  "acc_A_0.0_123": {
+    "amendment_direction": "Establishes that real-time remote biometric identification systems used in publicly accessible spaces for law enforcement must be subject to proportionate, narrowly defined conditions, spatial/temporal limits, and appropriate reference databases.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues against premature mandatory regulation of AI, advocates for soft law and industry-led voluntary measures, and specifically warns against unnecessarily restricting private-sector use of remote biometric identification systems — urging careful discussion before imposing binding requirements. The legislative provision does the opposite by establishing mandatory, binding conditions and safeguards for the use of real-time remote biometric identification in public spaces."
+  },
+  "acc_A_0.0_124": {
+    "amendment_direction": "Aligns the definition of biometric data in the AI Act with existing EU data protection law definitions (GDPR, Regulation 2018/1725, and Directive 2016/680).",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren's position calls for clarification of the definition and scope of biometric data (e.g., remote biometric identification vs. biometric authentication), which touches on the same general topic. However, the legislative provision simply cross-references existing EU data protection law definitions without expanding or restricting scope, while Keidanren's concern is about avoiding unnecessary restrictions on private sector use and ensuring careful deliberation — neither clearly supporting nor opposing the act of aligning definitions with GDPR and related instruments."
+  },
+  "acc_A_0.0_125": {
+    "amendment_direction": "Establishes a two-condition classification rule for high-risk AI systems based on safety component status and third-party conformity assessment requirements, supplemented by a fixed list of additional high-risk use cases in Annex III.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues against uniform high-risk classification criteria, calling for a step-by-step approach, sector-specific risk assessment methods, and exemptions where physical safety measures can mitigate risks — all of which push against the provision's fixed, rule-based two-condition classification system. The organisation also stresses that technical validation of high-risk criteria is still very difficult, directly opposing the provision's establishment of a definitive, binding classification framework."
+  },
+  "acc_A_0.0_126": {
+    "amendment_direction": "Defines 'remote biometric identification systems' functionally and distinguishes between 'real-time' and 'post' systems based on the timing of biometric data capture, comparison, and identification.",
+    "label": "ALIGNED",
+    "reasoning": "Keidanren explicitly called for clear definitions of remote biometric identification systems, clarification of the difference between identification and authentication, and practical guidelines classifying utilisation methods — all of which the legislative provision directly addresses by providing a functional definition and a real-time/post distinction. Both push in the same direction of establishing definitional clarity around remote biometric identification."
+  },
+  "acc_A_0.0_127": {
+    "amendment_direction": "Requires high-risk AI systems to be sufficiently transparent and accompanied by detailed instructions for use, including information on capabilities, limitations, accuracy, risks, and human oversight measures.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and Keidanren's feedback concern the regulation of high-risk AI systems, but they address different aspects: the provision establishes specific transparency and information disclosure requirements, while Keidanren's feedback focuses on the scope and definition of \"high-risk\" AI, the criteria for classification, and the need for a step-by-step approach. Keidanren does not directly support or oppose transparency/instruction requirements; its concerns are about how high-risk AI is defined and scoped, not about what obligations should apply once that classification is made."
+  },
+  "acc_A_0.0_128": {
+    "amendment_direction": "Imposes specific obligations on users of high-risk AI systems, including following instructions of use, monitoring system operation, maintaining logs, and reporting incidents or malfunctions.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren's feedback focuses on the scope and definition of high-risk AI and biometric identification systems, urging a cautious, step-by-step approach to defining \"high-risk\" categories and avoiding overly broad or uniform regulation. The legislative provision, by contrast, deals specifically with the operational obligations of users of already-classified high-risk AI systems (e.g., monitoring, logging, incident reporting). While both touch on the high-risk AI framework, Keidanren's position addresses the classification and scoping stage rather than the user obligations stage, making the directional relationship unclear."
+  },
+  "acc_A_0.0_129": {
+    "amendment_direction": "Requires non-EU AI providers to appoint an authorised representative established in the Union to maintain documentation and cooperate with national competent authorities regarding high-risk AI systems.",
+    "label": "NOISE",
+    "reasoning": "The organisation's feedback focuses on the scope and definition of high-risk AI and biometric identification systems, advocating for careful, step-by-step regulation. It does not address the requirement for non-EU providers to appoint an authorised representative in the Union, which is the sole subject of the legislative provision."
+  },
+  "acc_A_0.0_130": {
+    "amendment_direction": "Permits Member States to authorise AI systems that have not undergone conformity assessment under exceptional circumstances related to public security or protection of life and health.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren's feedback broadly addresses concerns about compliance costs, regulatory flexibility, and the risk of stifling innovation through uniform AI requirements, but does not specifically address or take a position on emergency/exceptional authorisations bypassing conformity assessment. While there is a general thematic overlap around conformity assessment burdens, the org's position neither supports nor opposes the specific mechanism of Member State emergency authorisations described in the provision."
+  },
+  "acc_A_0.0_131": {
+    "amendment_direction": "Requires market surveillance authorities to mandate correction of formal non-compliance (e.g., missing or incorrect conformity markings/declarations) and empowers them to restrict, recall, or withdraw non-compliant high-risk AI systems from the market.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Keidanren's feedback addresses broad concerns about compliance costs, regulatory flexibility, international consistency, and legal certainty in AI regulation at a pre-proposal stage, without specifically addressing conformity marking requirements or market surveillance enforcement mechanisms. While both texts touch on AI compliance frameworks, the org's position does not push for or against the specific formal non-compliance and market withdrawal enforcement mechanism established in the provision."
+  },
+  "acc_A_0.0_132": {
+    "amendment_direction": "Requires Member States to develop initiatives supporting small-scale AI providers and users, including awareness raising, reduced conformity assessment fees, and language accommodations to lower compliance burdens.",
+    "label": "OPPOSING",
+    "reasoning": "The legislative provision specifically carves out protections and accommodations for small-scale providers, treating company size as a relevant criterion for regulatory relief. Keidanren explicitly argues that company size (SME status) should NOT be used as a criterion for determining regulatory obligations, since AI's societal impact is determined by user reach rather than firm size — directly opposing the provision's size-based preferential treatment logic."
+  },
+  "acc_A_0.0_133": {
+    "amendment_direction": "Provides small-scale providers and start-ups with priority access to AI regulatory sandboxes, tailored awareness activities, dedicated communication channels, and proportionally reduced conformity assessment fees.",
+    "label": "OPPOSING",
+    "reasoning": "The legislative provision grants special accommodations and fee reductions to small-scale providers based on their size, while Keidanren explicitly argues that company size is not an appropriate criterion for determining regulatory obligations, since small and medium enterprises can have enormous societal reach regardless of their size. Keidanren's position directly pushes against using size as a basis for differentiated regulatory treatment."
+  },
+  "acc_A_0.0_134": {
+    "amendment_direction": "Establishes that AI systems undergoing changes (including post-deployment learning) require new conformity assessments unless the changes were pre-determined and assessed at the time of the original conformity assessment.",
+    "label": "ALIGNED",
+    "reasoning": "Keidanren explicitly raises the concern that AI systems undergo model changes through learning after deployment, creating unforeseen litigation risks, and calls for clarification of supplier obligations to ensure legal certainty. The provision directly addresses this by defining when post-deployment changes constitute a \"substantial modification\" requiring reassessment, which aligns with Keidanren's call for clearer rules around ongoing model changes. While Keidanren also raises broader concerns about compliance costs, its specific point about legal certainty for post-deployment model changes pushes in the same direction as the provision."
+  },
+  "acc_A_0.0_135": {
+    "amendment_direction": "Establishes a tiered penalty regime for AI Act infringements, with fines up to 6% of global turnover, while explicitly requiring that penalties take into account the interests of small-scale providers and start-ups and their economic viability.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren argues that compliance costs and regulatory burdens may harm competitiveness and innovation, and specifically contends that company size or SME status is not an appropriate criterion for determining regulatory obligations — directly opposing the provision's explicit carve-out that penalties must take particular account of the interests of small-scale providers and start-ups. More broadly, Keidanren's concern about excessive compliance burdens runs counter to the provision's imposition of substantial, dissuasive fines tied to global turnover."
+  },
+  "acc_A_0.0_136": {
+    "amendment_direction": "Requires providers established outside the Union to appoint an authorised representative in the Union before making AI systems available there, where no importer can be identified.",
+    "label": "OPPOSING",
+    "reasoning": "Keidanren's feedback warns that imposing compliance obligations on companies developing AI—particularly those engaged in global operations—increases costs, risks weakening international competitiveness, and may deter market entry into the EU. The requirement for non-EU providers to appoint an authorised representative is precisely the kind of additional compliance burden and market-access condition that Keidanren argues against, pushing in the opposite direction to the provision."
+  },
+  "acc_A_0.0_137": {
+    "amendment_direction": "Establishes regulatory sandboxes as controlled experimentation environments to foster AI innovation, ensure compliance, enhance legal certainty, and accelerate market access, including for SMEs and start-ups, with common rules for implementation across the Union.",
+    "label": "ALIGNED",
+    "reasoning": "The Confederation of Industry of the Czech Republic consistently advocates for a proportionate, risk-based approach that balances innovation with safeguards, warns against excessive administrative burdens on SMEs, and stresses that regulation must not discourage AI innovation — all of which align directionally with the provision's goal of using regulatory sandboxes to foster innovation, reduce barriers for SMEs/start-ups, and enhance legal certainty. Both the organisation and the provision share the same pro-innovation, SME-friendly orientation."
+  },
+  "acc_A_0.0_138": {
+    "amendment_direction": "Establishes AI regulatory sandboxes as controlled environments for developing, testing, and validating innovative AI systems under competent authority supervision, with defined liability, cooperation, and implementing rules.",
+    "label": "ALIGNED",
+    "reasoning": "The Confederation of Industry of the Czech Republic consistently advocates for a proportionate, risk-based approach that encourages innovation while ensuring responsible AI use, and warns against regulation that discourages AI development. The AI regulatory sandbox provision directly supports innovation by creating a controlled, supervised environment for testing AI before market placement, which aligns with the organisation's push for smart, innovation-friendly governance. The organisation's concern about balancing harms with social/economic benefits mirrors the sandbox's design of enabling development under supervision rather than imposing blanket restrictions."
+  },
+  "acc_A_0.0_139": {
+    "amendment_direction": "Establishes a detailed procedure for market surveillance authorities to evaluate, restrict, withdraw, or recall AI systems presenting risks to health, safety, or fundamental rights, with mandatory corrective actions and cross-border coordination obligations.",
+    "label": "OPPOSING",
+    "reasoning": "The Confederation of Industry of the Czech Republic consistently advocates for a proportionate, risk-based approach that avoids heavy administrative burdens, warns against regulation that discourages AI innovation, and urges caution with mandatory requirements — positions that push against the provision's detailed, prescriptive mandatory enforcement and corrective-action regime imposed on AI operators. The organisation's emphasis on minimising regulatory burden and preserving innovation space is directionally opposed to the provision's expansive market surveillance and mandatory withdrawal/recall obligations."
+  },
+  "acc_A_0.0_140": {
+    "amendment_direction": "Empowers market surveillance authorities to require withdrawal, recall, or corrective action for compliant AI systems that nonetheless present risks, with Commission oversight of national measures.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation advocates for a proportionate, risk-based regulatory approach that balances harms with benefits and avoids stifling innovation, which touches on the same broad AI regulatory framework. However, their feedback does not specifically address or take a directional stance on market surveillance powers, withdrawal/recall mechanisms, or the Commission's role in evaluating national corrective measures — the specific subject of this provision."
+  },
+  "acc_A_0.0_141": {
+    "amendment_direction": "Establishes the territorial and material scope of the AI regulation, applying mandatory requirements to providers and users of AI systems in the Union, including third-country actors whose outputs are used in the Union, while exempting military applications and certain sectoral products.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's feedback addresses the general regulatory approach to AI (advocating for proportionality, risk-based regulation, and avoiding excessive burdens), which is broadly related to the legislative proposal's subject matter. However, the organisation does not take any specific position on the territorial scope, the inclusion/exclusion of particular actors, or the exemptions defined in this provision, making it impossible to determine a clear directional alignment or opposition."
+  },
+  "acc_A_0.0_142": {
+    "amendment_direction": "Empowers market surveillance authorities to require corrective action, withdrawal, or recall of compliant AI systems that nonetheless present risks, with Commission oversight and coordination across Member States.",
+    "label": "ALIGNED",
+    "reasoning": "FERMA explicitly advocates for a combination of ex-ante compliance and ex-post enforcement mechanisms, a risk-based approach, and market monitoring by a European-level institution — all of which align directionally with the provision's establishment of a post-market surveillance and corrective action regime for risky AI systems. Both the organisation's position and the legislative provision support regulatory oversight tools that can intervene after AI systems are placed on the market, without necessarily blocking innovation upfront."
+  },
+  "acc_A_0.0_143": {
+    "amendment_direction": "Requires providers of high-risk AI systems to establish, document, and maintain a post-market monitoring system that actively collects and analyses performance data throughout the system's lifetime to ensure continuous compliance.",
+    "label": "ALIGNED",
+    "reasoning": "FERMA explicitly recommends a combination of ex-ante compliance and ex-post enforcement mechanisms, market monitoring by a European institution, and close monitoring of AI systems due to their ability to learn and adapt over time — all of which align directionally with the legislative provision mandating a structured post-market monitoring system for high-risk AI. FERMA's call for ongoing market monitoring and re-assessment of high-risk AI products supports the same goal as the provision's requirement for continuous post-market data collection and performance analysis."
+  },
+  "acc_A_0.0_144": {
+    "amendment_direction": "Establishes a procedure for market surveillance authorities to evaluate, restrict, withdraw, or recall AI systems presenting a risk at national level, with cross-border coordination mechanisms between Member States and the Commission.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the legislative provision and FERMA's position address risk-based oversight and enforcement of AI systems, and FERMA broadly supports a mix of ex-ante and ex-post enforcement mechanisms with market monitoring. However, FERMA's position advocates for a \"light-touch\" ex-post enforcement approach and broad market-based principles, whereas the provision establishes a detailed, prescriptive national-level market surveillance and corrective action procedure — making it impossible to determine whether FERMA would support or oppose the specific procedural framework as written."
+  },
+  "acc_A_0.0_145": {
+    "amendment_direction": "Designates existing financial services supervisory authorities (including the ECB) as competent authorities for AI Act enforcement over regulated financial institutions, and integrates AI conformity assessment obligations into existing financial sector frameworks (e.g., CRD IV) to avoid regulatory overlaps.",
+    "label": "UNDETECTABLE",
+    "reasoning": "FERMA's position addresses broad horizontal AI regulation principles — risk-based approaches, ex-ante/ex-post mechanisms, mandatory requirements for high-risk AI, and governance committee composition — without specifically addressing the designation of financial sector supervisors as competent AI authorities or the integration of AI obligations into existing financial services law (CRD IV). Both touch on AI governance and risk-based oversight, but FERMA's feedback neither supports nor opposes the specific institutional and sectoral supervisory alignment mechanism described in the provision."
+  },
+  "acc_A_0.0_146": {
+    "amendment_direction": "Requires providers of high-risk AI systems (outside existing Union harmonisation legislation) to register their systems in an EU database established and managed by the Commission, to increase transparency and facilitate oversight.",
+    "label": "UNDETECTABLE",
+    "reasoning": "FERMA's position broadly supports transparency, ex-ante compliance mechanisms, and mandatory requirements for high-risk AI, which are thematically related to the provision's goals. However, FERMA's feedback does not specifically address or take a directional stance on a mandatory EU-wide registration database for high-risk AI systems, making it impossible to determine whether they would support or oppose this specific measure."
+  },
+  "acc_A_0.0_147": {
+    "amendment_direction": "Establishes a mechanism for market surveillance authorities to require corrective action, withdrawal, or recall of compliant AI systems that nonetheless present risks, with Commission oversight and coordination across Member States.",
+    "label": "ALIGNED",
+    "reasoning": "FERMA explicitly advocates for a combination of ex-ante compliance and ex-post enforcement mechanisms, risk-based monitoring, and market surveillance by a European-level institution — all of which align with the provision's establishment of post-market surveillance powers allowing authorities to intervene on compliant but risky AI systems. The organisation's call for ongoing monitoring and re-assessment of AI systems throughout their lifecycle is directionally consistent with the provision's corrective action and recall framework."
+  },
+  "acc_A_0.0_148": {
+    "amendment_direction": "Establishes a procedure for market surveillance authorities to evaluate, restrict, withdraw, or recall AI systems presenting a risk at national level, with cross-border notification and corrective action requirements for non-compliant operators.",
+    "label": "ALIGNED",
+    "reasoning": "FERMA explicitly supports a combination of ex-ante compliance and ex-post enforcement mechanisms, a risk-based approach with market monitoring, and mandatory requirements for high-risk AI applications — all of which are directionally consistent with the provision's framework for market surveillance authorities to evaluate and enforce corrective actions against non-compliant AI systems. Both the organisation's position and the legislative provision converge on the need for structured risk-based oversight and enforcement tools to ensure AI trustworthiness and compliance."
+  },
+  "acc_A_0.0_149": {
+    "amendment_direction": "Requires high-risk AI systems to be sufficiently transparent and accompanied by detailed instructions for use, including information on capabilities, limitations, accuracy, human oversight measures, and lifecycle details, to enable users to interpret outputs and use the system appropriately.",
+    "label": "ALIGNED",
+    "reasoning": "FERMA explicitly recommends \"reasonable transparency requirements\" for high-risk AI applications and supports mandatory requirements aligned to AI risks, which directly corresponds to the provision's detailed transparency and information obligations for high-risk AI systems. Both the organisation's position and the legislative provision push in the same direction of ensuring users can understand and appropriately use high-risk AI systems through transparency and disclosure."
+  },
+  "acc_A_0.0_150": {
+    "amendment_direction": "Establishes a uniform EU-wide regulatory framework for AI systems based on Article 114 TFEU to prevent fragmentation of the internal market and ensure consistent protection of fundamental rights across Member States.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE explicitly supports avoiding regulatory fragmentation and diverging national rules, and acknowledges that a purely soft-law approach may be insufficient to provide legal certainty — directly mirroring the provision's rationale for harmonised EU-wide obligations. Both the organisation and the provision converge on the need for a unified internal market approach to AI regulation to prevent Member State divergence."
+  },
+  "acc_A_0.0_151": {
+    "amendment_direction": "Defines the territorial and material scope of the AI Regulation, applying it to providers and users placing or using AI systems in the Union, including third-country actors whose outputs are used in the Union, while carving out military use and certain sectoral product safety regimes.",
+    "label": "UNDETECTABLE",
+    "reasoning": "DIGITALEUROPE's position addresses the general design principles of AI regulation (risk-based approach, avoiding regulatory fragmentation, not overburdening industry, and being mindful of global divergence), which are broadly relevant to scope questions but do not specifically support or oppose the particular territorial and material scope choices made in the provision — such as the third-country extraterritorial reach, the military carve-out, or the sectoral product safety exclusions. There is topical overlap but no clear directional alignment or opposition to what the article actually does."
+  },
+  "acc_A_0.0_152": {
+    "amendment_direction": "Establishes regulatory sandboxes to foster AI innovation through controlled experimentation, enhance legal certainty for innovators, accelerate market access (especially for SMEs/start-ups), and provide a common Union-wide framework for sandbox implementation and supervision.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE explicitly supports stimulating AI development and uptake, calls for legal certainty, advocates for a risk-based approach that avoids overly burdensome obligations, and warns against measures that could delay or prevent AI product launches in the internal market. The regulatory sandbox provision directly serves these goals by creating a controlled, legally certain experimentation environment that lowers barriers for innovators, particularly SMEs and start-ups, and establishes a harmonised Union-wide framework to prevent regulatory fragmentation — all of which align with DIGITALEUROPE's stated priorities."
+  },
+  "acc_A_0.0_153": {
+    "amendment_direction": "Establishes a harmonised EU legal framework for AI to foster development and uptake in the internal market while ensuring high protection of public interests, fundamental rights, and supporting the EU's goal of being a global leader in trustworthy AI.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE explicitly supports the Commission's ambition to stimulate AI development and uptake while addressing risks, endorses harmonised rules to avoid regulatory fragmentation across Member States, and agrees that a purely soft-law approach may be insufficient — all of which align with the provision's rationale for a binding, harmonised EU AI framework. Both the organisation and the provision share the same overarching goal of enabling AI in the internal market under a coherent, risk-aware regulatory structure."
+  },
+  "acc_A_0.0_154": {
+    "amendment_direction": "Establishes a uniform EU legal framework for AI development, marketing, and use to protect health, safety, and fundamental rights while ensuring free cross-border movement of AI goods and services and preventing Member State-level restrictions.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE explicitly supports avoiding regulatory fragmentation and divergence between Member States, endorses a risk-based approach with legal certainty, and warns against purely soft-law measures — all of which align with the provision's goal of a uniform EU legal framework that prevents diverging national rules. The organisation's concern about not overburdening AI development is broadly consistent with the provision's dual aim of protecting rights while ensuring free movement of AI goods and services."
+  },
+  "acc_A_0.0_155": {
+    "amendment_direction": "Establishes mandatory transparency obligations requiring providers and users of certain AI systems (chatbots, emotion recognition, biometric categorisation, deepfakes) to disclose AI interaction or artificially generated content to natural persons.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE argues against mandating specific requirements on all AI applications, advocates for a case-by-case and ex-post enforcement approach, and warns that blanket transparency obligations are disproportionate — directly opposing the provision's imposition of mandatory, ex-ante transparency disclosure requirements on specific categories of AI systems."
+  },
+  "acc_A_0.0_156": {
+    "amendment_direction": "Establishes the broad territorial and subject-matter scope of the AI Act, applying it to providers and users placing or using AI systems in the Union, with specific exclusions for military use, certain sectoral regulations, and third-country public authorities.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and DIGITALEUROPE's position address the scope of AI regulation, but they operate at different levels: the provision defines who and what is covered (territorial scope, exclusions), while DIGITALEUROPE's feedback focuses on the risk-tiering model, enforcement mechanisms (ex-ante vs. ex-post), and the need to avoid overly broad definitions of AI. There is no clear directional alignment or opposition between DIGITALEUROPE's concerns about risk classification and enforcement approach and the provision's territorial/subject-matter scoping rules."
+  },
+  "acc_A_0.0_157": {
+    "amendment_direction": "Requires high-risk AI systems to be sufficiently transparent and accompanied by detailed instructions for use, specifying performance characteristics, limitations, human oversight measures, and other technical information for users.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE argues against mandating specific requirements (including transparency requirements) on all AI applications, advocates for a case-by-case and ex-post enforcement approach, and warns against disproportionate ex-ante obligations — all of which run counter to the provision's imposition of detailed, mandatory transparency and information disclosure requirements on high-risk AI systems. While the provision is scoped to high-risk AI, DIGITALEUROPE's broader skepticism toward prescriptive, ex-ante transparency mandates and its preference for self-assessment and voluntary standards directly opposes the binding, detailed transparency obligations the article establishes."
+  },
+  "acc_A_0.0_158": {
+    "amendment_direction": "Establishes harmonised rules for AI systems in the EU, including prohibitions, specific requirements for high-risk AI systems, transparency rules, and market surveillance, using a tiered/risk-based regulatory approach.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE explicitly supports a tiered, risk-based model (Options 3/4) and advocates against blanket requirements on all AI applications, which aligns with the provision's structure of targeting high-risk systems specifically while not regulating all AI uniformly. However, the org also pushes for ex-post enforcement and self-assessment rather than broad ex-ante mandates, which partially diverges from the provision's inclusion of ex-ante requirements for high-risk systems — yet the overall directional thrust of both the org's position and the provision is a proportionate, risk-tiered framework rather than universal regulation."
+  },
+  "acc_A_0.0_159": {
+    "amendment_direction": "Extends the scope of the AI Regulation to providers and users of AI systems established in third countries when the output of those systems is used in the Union, to prevent circumvention of the Regulation.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision addresses the extraterritorial/geographic scope of the AI Regulation (covering third-country operators whose AI outputs are used in the Union), while DIGITALEUROPE's feedback focuses on the risk-tiering model, the definition of high-risk AI, and enforcement mechanisms (ex-ante vs. ex-post). There is no substantive connection between the organisation's expressed positions and the specific question of extraterritorial applicability addressed in the provision."
+  },
+  "acc_A_0.0_160": {
+    "amendment_direction": "Requires providers of high-risk AI systems to have post-market monitoring systems in place and to report serious incidents or breaches of fundamental rights law to relevant authorities.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE advocates for ex-post, case-by-case enforcement as the primary mechanism and warns against broad mandatory requirements on all AI applications, favouring limited, proportionate obligations. The legislative provision imposes mandatory post-market monitoring and incident-reporting obligations on all providers of high-risk AI systems, which represents a more prescriptive and systematic ex-ante/ongoing compliance regime than DIGITALEUROPE endorsed."
+  },
+  "acc_A_0.0_161": {
+    "amendment_direction": "Sets specific responsibilities for users of high-risk AI systems, including obligations to follow instructions of use, monitor AI system functioning, and maintain records.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Both the provision and DIGITALEUROPE's position address obligations and requirements placed on AI system users/deployers, but they operate at different levels. The provision specifically establishes user-side obligations (instructions of use, monitoring, record-keeping) for high-risk AI systems, while DIGITALEUROPE's feedback focuses on the broader question of scope, proportionality, and enforcement mechanisms (ex-ante vs. ex-post), arguing against blanket requirements across all AI applications. DIGITALEUROPE's position neither directly supports nor opposes the specific user obligations outlined in the provision, as it does not address those particular duties."
+  },
+  "acc_A_0.0_162": {
+    "amendment_direction": "Classifies stand-alone AI systems as high-risk based on their intended purpose, potential harm to health/safety or fundamental rights, severity, and probability of occurrence in pre-defined areas, implying ex-ante risk-based classification and conformity requirements.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE argues against broad ex-ante classification and conformity assessments, favouring ex-post enforcement for most cases and limiting ex-ante requirements to very specific physical-harm scenarios, while opposing ex-ante approaches for fundamental rights risks. The legislative provision establishes a systematic ex-ante high-risk classification framework covering both health/safety and fundamental rights harms, directly contradicting DIGITALEUROPE's preferred approach of limiting such upfront categorisation and relying more heavily on ex-post mechanisms and self-assessment."
+  },
+  "acc_A_0.0_163": {
+    "amendment_direction": "Establishes mandatory data governance and quality requirements (relevance, representativeness, bias examination, etc.) for training, validation, and testing datasets used in high-risk AI systems.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE argues that risks related to discriminatory bias and training data cannot easily be made subject to ex-ante requirements or technology standards, and instead favours principle-based internal governance, industry best practices, and ex-post monitoring. The legislative provision does the opposite, imposing detailed, mandatory ex-ante data governance and quality obligations (including bias examination) on high-risk AI systems."
+  },
+  "acc_A_0.0_164": {
+    "amendment_direction": "Facilitates access to high-quality datasets (including through European common data spaces) for training, validation, and testing of high-risk AI systems by providers, notified bodies, and other relevant entities.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision is specifically about enabling access to high-quality datasets for AI development through data spaces, while DIGITALEUROPE's feedback focuses entirely on conformity assessment procedures, risk classification frameworks, and governance approaches for high-risk AI. There is no substantive connection between the two texts."
+  },
+  "acc_A_0.0_165": {
+    "amendment_direction": "Establishes the rationale for classifying AI systems as high-risk based on adverse impacts to health, safety, and fundamental rights (including dignity, privacy, non-discrimination, children's rights, and environmental protection), justifying ex-ante risk-based regulation of AI.",
+    "label": "OPPOSING",
+    "reasoning": "The legislative provision broadly frames both physical safety risks and fundamental rights impacts (privacy, non-discrimination, etc.) as grounds for classifying AI as high-risk and subject to ex-ante requirements. DIGITALEUROPE's position explicitly argues that fundamental rights risks (e.g. privacy, discrimination) are ill-suited to ex-ante conformity assessments and should instead be addressed through principle-based internal governance, industry best practices, and ex-post monitoring — directly opposing the provision's approach of treating fundamental rights harms as a key justification for upfront high-risk classification and regulatory intervention."
+  },
+  "acc_A_0.0_166": {
+    "amendment_direction": "Permits further processing of personal data in AI regulatory sandboxes for public interest purposes, subject to strict safeguards including isolation, monitoring, deletion, and documentation requirements.",
+    "label": "NOISE",
+    "reasoning": "The legislative provision specifically addresses the conditions under which personal data may be further processed within AI regulatory sandboxes for public interest purposes. DIGITALEUROPE's feedback focuses on conformity assessment approaches, risk classification frameworks, and the balance between ex-ante and ex-post regulatory measures — topics that are substantively unrelated to the sandbox data processing rules in the provision."
+  },
+  "acc_A_0.0_167": {
+    "amendment_direction": "Requires high-quality, representative, and bias-free training/validation/testing data sets for high-risk AI systems, including permitting processing of special categories of personal data for bias monitoring and correction.",
+    "label": "OPPOSING",
+    "reasoning": "DIGITALEUROPE argues that risks related to discrimination and bias are context-dependent and better addressed through principle-based internal governance, industry best practices, and ex-post monitoring rather than ex-ante requirements — explicitly cautioning against prescriptive upfront data quality mandates. The legislative provision, by contrast, imposes specific ex-ante data governance and quality requirements (relevance, representativeness, freedom from errors) on training/validation/testing datasets for high-risk AI systems, directly contradicting DIGITALEUROPE's preferred approach."
+  },
+  "acc_A_0.0_168": {
+    "amendment_direction": "Requires providers of high-risk AI systems to establish, document, and actively operate a post-market monitoring system and plan, integrating it with existing sector-specific frameworks where applicable.",
+    "label": "ALIGNED",
+    "reasoning": "DIGITALEUROPE advocates for combining industry-led measures with targeted obligations for specific high-risk AI categories, and explicitly supports ex-post monitoring for fundamental rights risks and integration with existing sector-specific regulatory frameworks — all of which are reflected in the provision's post-market monitoring requirements and its instruction to integrate with existing sectoral legislation (Annex II). The organisation's preference for ex-post over ex-ante requirements for certain risk types aligns with the post-market monitoring approach the provision establishes."
+  },
+  "acc_A_0.0_169": {
+    "amendment_direction": "Establishes a harmonised EU legal framework for AI that balances internal market development with high-level protection of public interests, fundamental rights, health and safety, and positions the EU as a global leader in trustworthy and ethical AI.",
+    "label": "ALIGNED",
+    "reasoning": "SHERPA explicitly welcomes and endorses the prioritisation of human rights protection and the development of a harmonised EU regulatory framework for AI, strongly agreeing with the objective of fostering safe, lawful AI that respects fundamental rights across the Single Market — which is precisely what the legislative provision establishes. Their recommendations to keep fundamental rights and safety as central pillars of the framework, build on existing EU law, and ensure ethical principles are embedded in regulation all push in the same direction as the provision's stated goals."
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "acc_A_0.0_0": {
+    "amendment_direction": "Classifies AI systems used in employment, worker management, and access to self-employment as high-risk due to their potential to perpetuate discrimination and impact workers' rights, career prospects, and privacy.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is largely a mix of background descriptions of existing guidance (MDCG 2019), academic footnotes, and general advocacy for industry-led soft law approaches and skill-building resources. It does not take any directional stance on the specific legislative provision classifying employment-related AI systems as high-risk."
+  },
+  "acc_A_0.0_1": {
+    "amendment_direction": "Establishes that the AI regulation applies to all AI system providers in a non-discriminatory manner, regardless of whether they are established within or outside the EU, ensuring a level playing field across the Union.",
+    "label": "NOISE",
+    "reasoning": "Google's text focuses on industry-led soft law approaches, voluntary compliance, sharing best practices, and skill-building resources for responsible AI — none of which address the geographic/jurisdictional scope or non-discriminatory application of the regulation. There is no substantive advocacy position that relates to the provision's subject matter of territorial applicability and level playing field."
+  },
+  "acc_A_0.0_2": {
+    "amendment_direction": "Requires high-risk AI systems to be designed with human oversight mechanisms, enabling overseers to monitor, interpret, override, and intervene in AI system operations to prevent risks to health, safety, or fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's text touches on related themes such as bias awareness, fairness mechanisms, and human oversight as a policy option, showing topical overlap with the provision. However, the org text is largely a checklist of fairness and bias considerations and a description of policy options, without expressing a clear directional stance for or against the specific human oversight requirements mandated by the legislative provision."
+  },
+  "acc_A_0.0_3": {
+    "amendment_direction": "Requires providers and users of AI systems to disclose to natural persons that they are interacting with an AI, that emotion recognition or biometric categorisation systems are in operation, and that deep fake content has been artificially generated or manipulated.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a mix of internal AI fairness checklists, performance benchmarking guidance, and general commentary on EU legislative options for AI regulation, none of which directly addresses the transparency and disclosure obligations (AI interaction disclosure, emotion recognition notification, deep fake labelling) set out in the legislative provision. There is no substantive advocacy position expressed that directionally aligns with or opposes the specific transparency requirements in the article."
+  },
+  "acc_A_0.0_4": {
+    "amendment_direction": "Empowers the Commission to adopt delegated acts to expand the list of high-risk AI systems in Annex III based on specific risk criteria related to health, safety, and fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's position touches on related themes such as fairness, bias, performance benchmarks, and the definition of high-risk AI applications, showing topical overlap with the provision's risk-assessment framework. However, Google's text does not take a clear directional stance on the Commission's delegated authority to expand the Annex III high-risk list, nor does it explicitly support or oppose the specific criteria outlined in the provision for adding new high-risk AI systems."
+  },
+  "acc_A_0.0_5": {
+    "amendment_direction": "Requires high-risk AI systems to be transparent and accompanied by detailed instructions for use, including information on performance, accuracy, limitations, human oversight measures, and risks to health, safety, and fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback touches on overlapping themes such as performance benchmarks, fairness testing, bias disclosure, and information provision to users, which are topically related to the provision's transparency and instructions-for-use requirements. However, Google's position simultaneously advocates against overly prescriptive requirements and warns about the costs of stringent regulation, meaning its directional stance neither clearly aligns with nor straightforwardly opposes the specific transparency obligations laid out in the provision."
+  },
+  "acc_A_0.0_6": {
+    "amendment_direction": "Prohibits specific AI practices including subliminal manipulation, exploitation of vulnerable groups, social scoring by public authorities, and real-time remote biometric identification in public spaces for law enforcement (with limited exceptions and safeguards).",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's text touches on related topics such as fairness, bias, remote biometric identification systems, and the debate over mandatory AI requirements, and it expresses a general preference against overly prescriptive regulation. However, the org text does not take a clear directional stance on the specific prohibitions laid out in the provision (subliminal manipulation, social scoring, real-time biometric ID bans), making it impossible to classify the position as straightforwardly aligned or opposing to what the article does."
+  },
+  "acc_A_0.0_7": {
+    "amendment_direction": "Establishes a uniform EU-wide regulatory framework for AI systems based on Article 114 TFEU to prevent market fragmentation, ensure legal certainty, and guarantee consistent protection of fundamental rights across the internal market.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's text acknowledges the need for an EU legislative instrument and discusses scope options (including biometric identification and high-risk AI), but its primary advocacy is for avoiding overly prescriptive requirements and balancing regulation with innovation — neither clearly endorsing nor opposing the specific rationale of harmonisation, legal certainty, and Article 114 TFEU basis that the provision establishes. The topical overlap exists, but Google's directional push (against over-regulation) does not map cleanly onto what the provision does (justifying uniform EU rules to prevent fragmentation)."
+  },
+  "acc_A_0.0_8": {
+    "amendment_direction": "Establishes that AI-based real-time remote biometric identification in publicly accessible spaces for law enforcement purposes is governed exclusively by this Regulation as lex specialis, restricting its use to the framework set therein and requiring authorisation under national law.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a fragmented mix of internal assessment checklists, summaries of regulatory options from the EU White Paper consultation, and general advocacy for balanced AI regulation — it contains no substantive directional position specifically addressing the lex specialis treatment of real-time remote biometric identification for law enforcement as described in the legislative provision. The topical mention of remote biometric identification systems is incidental and descriptive (listing it as one possible regulatory scope option), not a position on the specific legal mechanism the provision establishes."
+  },
+  "acc_A_0.0_9": {
+    "amendment_direction": "Defines the scope of the AI regulation to include EU institutions as providers/users, exclude military AI under CFSP, and preserve intermediary liability rules under the Digital Services Act.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a fragmented mix of internal assessment checklists, descriptions of regulatory options from the EU White Paper, and general commentary on avoiding over-prescriptive AI regulation. It does not contain any substantive position that directionally addresses the specific scope provisions in the legislative text (EU institutions coverage, military exclusion, or DSA liability carve-out)."
+  },
+  "acc_A_0.0_10": {
+    "amendment_direction": "Permits 'real-time' remote biometric identification systems for law enforcement only in three narrowly defined, exhaustively listed exceptional situations involving serious crimes or public safety threats.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a fragmented mix of AI fairness checklist items, descriptions of regulatory options from the EU White Paper consultation, and general commentary on avoiding overly prescriptive AI regulation. It does not take any directional position on the specific question of permitting or restricting real-time remote biometric identification for law enforcement purposes addressed in the legislative provision."
+  },
+  "acc_A_0.0_11": {
+    "amendment_direction": "Designates notified bodies to carry out third-party conformity assessments for AI systems used in remote biometric identification, subject to requirements on independence, competence, and absence of conflicts of interest.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's text references remote biometric identification systems as a potential scope category for EU AI regulation and expresses general caution against overly prescriptive requirements, but it does not take a clear directional stance on the specific mechanism of third-party conformity assessment by notified bodies. The topical overlap exists (remote biometric identification, mandatory requirements), but Google's position neither explicitly supports nor opposes the designation of notified bodies for conformity assessment."
+  },
+  "acc_A_0.0_12": {
+    "amendment_direction": "Requires high-risk AI systems to be developed on the basis of training, validation and testing data sets meeting specific quality, governance, and management criteria, including relevance, representativeness, freedom from errors, and bias examination.",
+    "label": "OPPOSING",
+    "reasoning": "Google explicitly opposes the emphasis on training data quality requirements, arguing that mandating dataset retention conflicts with GDPR, that testing model outputs is preferable to regulating training data, and that obligations to ensure datasets are \"sufficiently representative\" are unworkable and conflict with data protection law — all of which directly push against the provision's detailed data governance and quality requirements for training, validation and testing datasets."
+  },
+  "acc_A_0.0_13": {
+    "amendment_direction": "Requires high-quality, representative, and error-free training, validation, and testing datasets for high-risk AI systems, including appropriate data governance practices and the ability to process special categories of personal data to detect and correct bias.",
+    "label": "OPPOSING",
+    "reasoning": "Google explicitly argues against mandating dataset retention, challenges the emphasis on training data quality in favour of output testing, and contends that requirements to ensure datasets are \"sufficiently representative\" conflict with GDPR — all of which directly push back against the provision's data quality and governance requirements for high-risk AI systems."
+  },
+  "acc_A_0.0_14": {
+    "amendment_direction": "Establishes that real-time remote biometric identification systems in publicly accessible spaces for law enforcement must be used responsibly and proportionately, subject to limits in time and space, with appropriate reference databases and safeguards for each narrowly defined use case.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's position touches on related topics — remote biometric identification systems, risk-based approaches, and law enforcement use cases — and even explicitly supports applying mandatory requirements and safeguards to remote biometric identification systems. However, Google's feedback is primarily focused on dataset retention obligations, training data quality, reproducibility requirements, and the framing of risk assessment steps, rather than directly addressing the specific provisions on temporal/spatial limits, reference database appropriateness, or the proportionality safeguards for real-time biometric identification in public spaces that the legislative provision establishes."
+  },
+  "acc_A_0.0_15": {
+    "amendment_direction": "Requires prior judicial or independent administrative authorisation for real-time remote biometric identification in public spaces for law enforcement, with narrow exceptions for urgency.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's text acknowledges that remote biometric identification systems are a higher-risk area warranting mandatory requirements and safeguards, which has topical overlap with the provision. However, Google does not take a directional position on the specific mechanism of prior judicial/administrative authorisation required by the provision; its comments focus on dataset obligations, reproducibility, and a risk-based framework rather than on the authorisation regime itself."
+  },
+  "acc_A_0.0_16": {
+    "amendment_direction": "Establishes a mandatory, continuous risk management system for high-risk AI systems, requiring identification, evaluation, and mitigation of risks throughout the entire lifecycle, including testing and residual risk communication.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback discusses a multi-factor risk assessment framework (inherent risk, system attributes, mitigations, and overall tolerability) that is broadly compatible with the provision's risk management logic, but the org's primary advocacy thrust is against undifferentiated, one-size-fits-all regulation (sub-option 3) and in favour of proportionate, risk-tiered requirements. The provision itself already applies only to high-risk AI systems and mandates a structured risk management process, so while there is clear topical overlap, Google's position does not straightforwardly push in the same direction as — nor explicitly oppose — the specific lifecycle risk management obligations the article establishes."
+  },
+  "acc_A_0.0_17": {
+    "amendment_direction": "Requires high-risk AI systems to be designed with human oversight measures, enabling natural persons to monitor, interpret, override, and intervene in AI system operations to prevent risks to health, safety, or fundamental rights.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Google's feedback discusses a risk-based framework for assessing AI systems, including the value of monitoring procedures and operational checks as risk mitigations, which touches on human oversight themes. However, Google's position is primarily advocating for proportionate, tiered regulation rather than directly supporting or opposing the specific human oversight requirements (e.g., stop buttons, automation bias awareness, two-person verification) mandated by the provision."
+  },
+  "acc_A_0.0_18": {
+    "amendment_direction": "Establishes a mechanism for the Commission to adopt common specifications for high-risk AI systems via implementing acts when harmonised standards are absent or insufficient, with compliance presumed for conforming systems.",
+    "label": "NOISE",
+    "reasoning": "Google's text focuses on a risk assessment framework (inherent risk, system attributes, mitigations, and proportionality of regulation) and critiques a flat regulatory approach, but contains no substantive position on the Commission's power to adopt common specifications or the conformity presumption mechanism described in the provision. There is no directional overlap with the specific legislative mechanism at issue."
+  }
+}
