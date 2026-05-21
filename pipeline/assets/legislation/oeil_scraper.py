@@ -421,7 +421,11 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
         elif "Committee responsible" in header_text and "Rapporteur" in header_text:
             rows = table.find("tbody").find_all("tr") if table.find("tbody") else []
             for row in rows:
-                # Extract committee
+                # Shadow rapporteurs live in a second row of the same table
+                row_text = _sanitize_text(row.get_text())
+                is_shadow_row = "Shadow rapporteur" in row_text
+
+                # Extract committee (only present on non-shadow rows)
                 committee_cell = row.find("th")
                 committee_code = None
                 committee_name = None
@@ -436,7 +440,6 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                     )
 
                     if committee_code:
-                        # Add committee actor
                         actors.append(
                             {
                                 "actor_type": "committee",
@@ -446,26 +449,27 @@ def _extract_parliament_actors(soup: BeautifulSoup) -> List[Dict[str, Any]]:
                             }
                         )
 
-                # Extract all rapporteurs from rapporteur cell(s)
+                # Extract MEP links; role depends on whether this is a shadow row
                 cells = row.find_all("td")
                 if len(cells) >= 1:
-                    rapporteur_cell = cells[0]
-                    # Find ALL rapporteur links in the cell (there can be multiple)
-                    rapporteur_links = rapporteur_cell.find_all("a")
-                    for rapporteur_link in rapporteur_links:
-                        rapporteur_name = _normalize_mep_name(_sanitize_text(rapporteur_link.get_text()))
-                        href = rapporteur_link.get("href", "")
+                    mep_cell = cells[0]
+                    mep_links = mep_cell.find_all("a")
+                    for mep_link in mep_links:
+                        mep_name = _sanitize_text(mep_link.get_text())
+                        href = mep_link.get("href", "")
                         mep_id_match = re.search(r"/meps/en/(\d+)", href)
                         mep_id = int(mep_id_match.group(1)) if mep_id_match else None
+
+                        role = "shadow_rapporteur" if is_shadow_row else "rapporteur"
 
                         actors.append(
                             {
                                 "actor_type": "mep",
-                                "role": "rapporteur",
+                                "role": role,
                                 "mep_id": mep_id,
-                                "mep_name": rapporteur_name,
-                                "committee_code": committee_code,  # Associate rapporteur with committee
-                                "committee_name": committee_name,
+                                "mep_name": mep_name,
+                                "committee_code": committee_code if not is_shadow_row else None,
+                                "committee_name": committee_name if not is_shadow_row else None,
                             }
                         )
 
@@ -1315,36 +1319,56 @@ def _fetch_summary_text(summary_id: str, logger: Optional[Any] = None) -> Option
 def _extract_key_dates(events: List[Dict[str, Any]]) -> Dict[str, Optional[str]]:
     """Extract key dates from events list.
 
+    Uses activity_type codes (already mapped from OEIL text in _extract_events).
+
     Returns:
-        Dict with proposal_date and decision_date
+        Dict with proposal_date, decision_date, amendment_vote_date,
+        regulation_vote_date, and date_of_final_act_signed.
     """
     proposal_date = None
     decision_date = None
+    amendment_vote_date = None
+    regulation_vote_date = None
+    date_of_final_act_signed = None
 
-    # Keywords for identifying proposal events
-    proposal_keywords = ["legislative proposal published", "proposal", "commission proposal"]
+    plenary_vote_count = 0
 
-    # Keywords for identifying decision events (in priority order)
-    decision_keywords = [
-        "final act published",  # Highest priority - actual publication
-        "final act signed",  # Second - signing
-        "act adopted",  # Third - adoption
-        "decision by parliament",  # Fourth - parliament decision
+    # Decision activity types in priority order (highest priority first)
+    decision_priority = [
+        "PUBLICATION_OFFICIAL_JOURNAL",
+        "SIGNATURE",
+        "COUNCIL_ADOPTION",
+        "PLENARY_ADOPT_POSITION",
     ]
 
-    # Find proposal date (first matching event)
     for event in events:
-        event_type = event.get("event_type", "").lower()
-        if any(keyword in event_type for keyword in proposal_keywords):
-            proposal_date = event.get("event_date")
-            break
+        activity_type = event.get("activity_type", "")
+        event_date = event.get("event_date")
 
-    # Find decision date (latest matching event, prioritize by keyword order)
-    for keyword in decision_keywords:
+        if not event_date:
+            continue
+
+        # Proposal date: first legislative proposal event
+        if proposal_date is None and activity_type == "PROPOSAL_PUBLICATION":
+            proposal_date = event_date
+
+        # First and second plenary votes
+        if activity_type == "PLENARY_VOTE":
+            plenary_vote_count += 1
+            if plenary_vote_count == 1:
+                amendment_vote_date = event_date
+            elif plenary_vote_count == 2:
+                regulation_vote_date = event_date
+
+        # Final act signed
+        if date_of_final_act_signed is None and activity_type == "SIGNATURE":
+            date_of_final_act_signed = event_date
+
+    # Decision date: find by priority order
+    for priority_type in decision_priority:
         for event in events:
-            event_type = event.get("event_type", "").lower()
-            if keyword in event_type:
-                decision_date = event.get("event_date")
+            if event.get("activity_type") == priority_type and event.get("event_date"):
+                decision_date = event["event_date"]
                 break
         if decision_date:
             break
@@ -1352,7 +1376,102 @@ def _extract_key_dates(events: List[Dict[str, Any]]) -> Dict[str, Optional[str]]
     return {
         "proposal_date": proposal_date,
         "decision_date": decision_date,
+        "amendment_vote_date": amendment_vote_date,
+        "regulation_vote_date": regulation_vote_date,
+        "date_of_final_act_signed": date_of_final_act_signed,
     }
+
+
+def _extract_amendments_tabled_date(soup: BeautifulSoup) -> Optional[str]:
+    """Extract date of first amendment document from Documentation Gateway (EP section).
+
+    The Documentation Gateway section is located by its h2 heading text. Within it the
+    European Parliament accordion is found, and the first table row whose document type
+    contains "amendment" is used. The table columns are:
+        Document type | Committee | Reference | Date | Summary
+
+    Returns:
+        ISO date string (YYYY-MM-DD) or None if not found.
+    """
+def _extract_amendments_tabled_date(soup: BeautifulSoup) -> Optional[str]:
+    """Extract date of first amendment document from Documentation Gateway (EP section).
+
+    The Documentation Gateway section is located by its h2 heading text. Within it the
+    European Parliament accordion is found, and the first table row whose document type
+    contains "amendment" is used. The table columns are:
+        Document type | Committee | Reference | Date | Summary
+
+    Falls back to scanning all tables on the page if the section cannot be identified.
+
+    Returns:
+        ISO date string (YYYY-MM-DD) or None if not found.
+    """
+    # --- locate the Documentation Gateway section ---
+    doc_gateway = None
+
+    # Try by section id first (some OEIL pages use section4 / section5)
+    for section_id in ("section4", "section5"):
+        candidate = soup.find("div", id=section_id)
+        if candidate and "documentation" in candidate.get_text()[:200].lower():
+            doc_gateway = candidate
+            break
+
+    # Fallback: find by h2 heading using get_text() (robust against child elements)
+    if not doc_gateway:
+        for h2 in soup.find_all("h2", class_="es_title-h2"):
+            if "documentation" in h2.get_text().lower():
+                doc_gateway = h2.find_parent("div", class_="erpl-product-content")
+                break
+
+    # --- find the EP accordion within the section (or full page as last resort) ---
+    search_root = doc_gateway if doc_gateway else soup
+
+    ep_button = None
+    for button in search_root.find_all("button", class_="es_accordion-item-title"):
+        if "European Parliament" in button.get_text():
+            ep_button = button
+            break
+
+    if ep_button:
+        target_id = ep_button.get("data-target", "").lstrip("#")
+        if target_id:
+            content_div = soup.find("div", id=target_id)
+        else:
+            content_div = ep_button.find_next_sibling("div", class_="es_accordion-item-content")
+
+        if content_div:
+            for table in content_div.find_all("table", class_="table"):
+                result = _find_amendment_date_in_table(table)
+                if result:
+                    return result
+
+    # --- last resort: scan every table on the page ---
+    for table in soup.find_all("table", class_="table"):
+        result = _find_amendment_date_in_table(table)
+        if result:
+            return result
+
+    return None
+
+
+def _find_amendment_date_in_table(table) -> Optional[str]:
+    """Return the date from the first row whose document-type cell contains 'amendment'."""
+    rows = table.find("tbody").find_all("tr") if table.find("tbody") else table.find_all("tr")
+    for row in rows:
+        cells = row.find_all(["th", "td"])
+        if not cells:
+            continue
+        doc_type_text = _sanitize_text(cells[0].get_text()).lower()
+        if "amendment" not in doc_type_text:
+            continue
+        for cell in cells:
+            date_text = _sanitize_text(cell.get_text())
+            if re.match(r"\d{2}/\d{2}/\d{4}", date_text):
+                try:
+                    return datetime.strptime(date_text[:10], "%d/%m/%Y").date().isoformat()
+                except ValueError:
+                    pass
+    return None
 
 
 def scrape_oeil_procedure(
@@ -1483,6 +1602,9 @@ def scrape_oeil_procedure(
         # Extract key dates from events
         key_dates = _extract_key_dates(procedure_data["events"])
         procedure_data.update(key_dates)
+
+        # Amendments tabled date (Documentation Gateway, EP section)
+        procedure_data["amendments_tabled_date"] = _extract_amendments_tabled_date(soup)
 
         # Extract Commission document and CELEX references
         procedure_data["commission_document"] = _extract_commission_document(soup)

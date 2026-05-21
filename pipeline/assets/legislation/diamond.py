@@ -139,6 +139,18 @@ def prepare_procedure_record(procedure: Dict[str, Any]) -> Dict[str, Any]:
         "ai_next_steps": procedure.get("ai_next_steps"),
         "embedding_model": procedure.get("embedding_model"),
         "api_uri": procedure.get("api_uri"),
+        # Flat actor fields
+        "responsible_committee": procedure.get("responsible_committee"),
+        "rapporteurs": procedure.get("rapporteurs", []),
+        "shadow_rapporteurs": procedure.get("shadow_rapporteurs", []),
+        "rapporteurs_for_opinion": procedure.get("rapporteurs_for_opinion", []),
+        "commission_dg": procedure.get("commission_dg"),
+        "commissioner": procedure.get("commissioner"),
+        # Flat timeline date fields
+        "amendments_tabled_date": procedure.get("amendments_tabled_date"),
+        "amendment_vote_date": procedure.get("amendment_vote_date"),
+        "regulation_vote_date": procedure.get("regulation_vote_date"),
+        "date_of_final_act_signed": procedure.get("date_of_final_act_signed"),
     }
 
     return record

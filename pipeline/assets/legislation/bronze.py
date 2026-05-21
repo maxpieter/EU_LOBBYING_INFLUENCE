@@ -14,6 +14,7 @@ via the ``LEGISLATION_DISCOVERY_MODE`` environment variable ("v2_feed" or
 """
 
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Literal, Optional
 
@@ -250,6 +251,7 @@ def build_procedures_from_oeil(
             "joint committee" in e.get("title", "").lower() for e in proc.get("events", [])
         )
         actors_converted = _convert_oeil_actors(proc.get("actors", []), has_joint_committee)
+        flat_actors = _extract_flat_actor_fields(proc.get("actors", []))
 
         procedures.append(
             {
@@ -284,12 +286,113 @@ def build_procedures_from_oeil(
                 "amending_acts": proc.get("amending_acts", []),
                 "background_documents": proc.get("background_documents", []),
                 "celex_number": proc.get("celex_number"),
-                "eurlex_proposal_url": proc.get("eurlex_proposal_url"),
-                "eurlex_final_act_url": proc.get("eurlex_final_act_url"),
+                "eurlex_proposal_url": _build_proposal_url(
+                    proc.get("eurlex_proposal_url"), proc.get("commission_document")
+                ),
+                "eurlex_final_act_url": _build_final_act_url(
+                    proc.get("eurlex_final_act_url"), proc.get("celex_number")
+                ),
+                # Flat actor fields
+                **flat_actors,
+                # Flat timeline date fields
+                "amendments_tabled_date": proc.get("amendments_tabled_date"),
+                "amendment_vote_date": proc.get("amendment_vote_date"),
+                "regulation_vote_date": proc.get("regulation_vote_date"),
+                "date_of_final_act_signed": proc.get("date_of_final_act_signed"),
             }
         )
 
     return procedures
+
+
+def _build_proposal_url(existing_url: Optional[str], commission_document: Optional[str]) -> Optional[str]:
+    if existing_url:
+        return existing_url
+    if commission_document:
+        m = re.search(r"COM\((\d{4})\)(\d+)", commission_document)
+        if m:
+            year, number = m.groups()
+            celex = f"5{year}PC{number.zfill(4)}"
+            return f"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:{celex}"
+    return None
+
+
+def _build_final_act_url(existing_url: Optional[str], celex_number: Optional[str]) -> Optional[str]:
+    if existing_url:
+        return existing_url
+    if celex_number:
+        return f"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:{celex_number}"
+    return None
+
+
+def _extract_flat_actor_fields(actors: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Derive flat top-level actor columns from the actors list.
+
+    Returns a dict with:
+      responsible_committee, rapporteurs, shadow_rapporteurs,
+      rapporteurs_for_opinion, commission_dg, commissioner
+    """
+    responsible_committee = None
+    rapporteurs: List[Dict[str, Any]] = []
+    shadow_rapporteurs: List[Dict[str, Any]] = []
+    rapporteurs_for_opinion: List[Dict[str, Any]] = []
+    commission_dg = None
+    commissioner = None
+
+    for actor in actors:
+        role = actor.get("role", "")
+        actor_type = actor.get("actor_type", "")
+
+        if role in ("committee_responsible", "joint_committee_responsible") and actor_type == "committee":
+            if responsible_committee is None:
+                responsible_committee = actor.get("committee_code")
+
+        elif role == "rapporteur" and actor_type == "mep":
+            name = actor.get("mep_name")
+            if name:
+                rapporteurs.append(
+                    {
+                        "mep_id": actor.get("mep_id"),
+                        "mep_name": name,
+                        "committee_code": actor.get("committee_code"),
+                    }
+                )
+
+        elif role == "shadow_rapporteur" and actor_type == "mep":
+            name = actor.get("mep_name")
+            if name:
+                shadow_rapporteurs.append(
+                    {
+                        "mep_id": actor.get("mep_id"),
+                        "mep_name": name,
+                    }
+                )
+
+        elif role == "opinion_rapporteur" and actor_type == "mep":
+            name = actor.get("mep_name")
+            if name:
+                rapporteurs_for_opinion.append(
+                    {
+                        "mep_id": actor.get("mep_id"),
+                        "mep_name": name,
+                        "committee_code": actor.get("committee_code"),
+                        "committee_name": actor.get("committee_name"),
+                    }
+                )
+
+        elif actor_type == "commission" and role == "commission_dg":
+            if commission_dg is None:
+                commission_dg = actor.get("institution_name")
+                commissioner = actor.get("commissioner_name")
+
+    return {
+        "responsible_committee": responsible_committee,
+        "rapporteurs": rapporteurs,
+        "shadow_rapporteurs": shadow_rapporteurs,
+        "rapporteurs_for_opinion": rapporteurs_for_opinion,
+        "commission_dg": commission_dg,
+        "commissioner": commissioner,
+    }
 
 
 def _convert_oeil_events(

@@ -75,6 +75,20 @@ class Procedure(BaseModel):
     eurlex_proposal_url: Optional[str] = None
     eurlex_final_act_url: Optional[str] = None
 
+    # Flat actor fields (denormalised from actors JSONB for easy querying)
+    responsible_committee: Optional[str] = None
+    rapporteurs: List[Dict[str, Any]] = Field(default_factory=list)
+    shadow_rapporteurs: List[Dict[str, Any]] = Field(default_factory=list)
+    rapporteurs_for_opinion: List[Dict[str, Any]] = Field(default_factory=list)
+    commission_dg: Optional[str] = None
+    commissioner: Optional[str] = None
+
+    # Flat timeline date fields
+    amendments_tabled_date: Optional[date] = None
+    amendment_vote_date: Optional[date] = None
+    regulation_vote_date: Optional[date] = None
+    date_of_final_act_signed: Optional[date] = None
+
     # Gold layer (kept for parl8 compatibility, will be null)
     ai_summary: Optional[str] = None
     ai_next_steps: Optional[str] = None
