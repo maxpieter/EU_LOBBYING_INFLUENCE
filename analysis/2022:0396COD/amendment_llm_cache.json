@@ -1,0 +1,607 @@
+{
+  "228c9b5e9a5e6a20512d_amd_218": {
+    "provision_effect": "The amendment inserts a new recital recognising job-creation potential in the low-carbon packaging industry and requiring Member States to ensure quality job creation, collective bargaining, gender equality, training, social protection, and responsible restructuring in implementing the Regulation.",
+    "label": "NOISE",
+    "reasoning": "While the organisation briefly mentions that the regulation \"will create new business opportunities and employment,\" this is a passing observation rather than a specific directional advocacy position on labour standards, collective bargaining, social protection, or restructuring obligations. The organisation's substantive positions focus on waste reduction targets, reuse/recycling ambition, and hazardous materials — not on the social/employment dimensions that the amendment introduces. An organisation with the opposite stance on labour provisions could produce the same general text, confirming the connection is too vague to be directional."
+  },
+  "42359324f0f5b0d04e29_amd_404": {
+    "provision_effect": "The amendment inserts a new recital establishing that plastic packaging is a significant source of secondary microplastic emissions and recommends that EPR fees be modulated according to the assessed risk of microplastic emissions, in line with the 'polluter pays' principle.",
+    "label": "ALIGNED",
+    "reasoning": "Ecopreneur.eu explicitly calls for \"eco-modulated EPR schemes and financial incentives\" to encourage ecodesign and the shift away from plastics, which directly aligns with the amendment's recommendation to modulate EPR fees based on microplastic emission risk. The amendment moves in precisely the direction the organisation advocated — using eco-modulated EPR as a regulatory instrument to incentivise producers to reduce plastic-related environmental harm."
+  },
+  "42359324f0f5b0d04e29_amd_579": {
+    "provision_effect": "The amendment adds language specifying that the Regulation shall provide a legal framework giving certainty to European industry for investments towards packaging circularity, beyond the original reference to the waste hierarchy.",
+    "label": "ALIGNED",
+    "reasoning": "Ecopreneur.eu explicitly calls for \"a regulatory framework that facilitates and rewards investment and innovation in circular packaging solutions,\" which directly mirrors the amendment's addition of language providing legal certainty for industry investments towards circularity. The organisation's position is specific enough — advocating for a framework that incentivises circular investment — to align with the direction the amendment takes."
+  },
+  "42359324f0f5b0d04e29_amd_578": {
+    "provision_effect": "The amendment adds language framing the regulation as providing \"a supportive legal framework for the industry's ongoing investments towards achieving packaging circularity,\" supplementing the original waste hierarchy reference.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Ecopreneur.eu does call for a \"regulatory framework that facilitates and rewards investment and innovation in circular packaging solutions,\" which superficially aligns with the amendment's addition of a \"supportive legal framework for industry's ongoing investments.\" However, the amendment's framing is notably industry-friendly and could be used to soften or dilute ambitious regulatory requirements — something Ecopreneur.eu explicitly opposes by insisting on strong top-tier waste hierarchy regulation and not compromising the Circular Economy Action Plan goals. It is genuinely unclear whether this addition satisfies or undermines their position."
+  },
+  "42359324f0f5b0d04e29_amd_580": {
+    "provision_effect": "The amendment adds a reference to achieving climate neutrality by 2050 under the Climate Law alongside the existing circular economy transition objective.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on waste hierarchy, recycling quality, ecodesign, and EPR schemes, with only general references to the Green Deal and circular economy goals. While they broadly support ambitious environmental regulation, they express no specific directional stance on whether climate neutrality by 2050 should be explicitly referenced in the regulation's objectives, making their position too general to be meaningfully aligned or opposed to this specific amendment."
+  },
+  "4d7316a719558c5a0bf3_amd_294": {
+    "provision_effect": "The amendment expands the mandatory harmonised criteria and methodology to cover not only recyclability but also reusability of packaging, changing \"recyclable or reusable\" to \"recyclable and reusable\" as the 2030 target.",
+    "label": "UNDETECTABLE",
+    "reasoning": "SFIF acknowledges that recyclability and reuse are \"complementary solutions\" and supports the 2030 goal of all packaging being reusable or recyclable, but their specific advocacy focuses on Design for Recycling guidelines (via CEN standardisation) rather than explicitly calling for a parallel reusability methodology to be added to the harmonised criteria. While there is a genuine thematic connection, it is unclear whether SFIF's position specifically advocates for the direction this amendment takes — adding mandatory reusability criteria and methodology alongside recyclability — or whether their reuse references are merely contextual acknowledgements."
+  },
+  "4d7316a719558c5a0bf3_amd_934": {
+    "provision_effect": "The amendment replaces references to \"delegated acts\" with \"CEN standards\" as the basis for design-for-recycling criteria and recyclability-at-scale requirements.",
+    "label": "ALIGNED",
+    "reasoning": "The Swedish Forest Industries Federation explicitly advocated that \"Design for Recycling guidelines should be drawn up by the European Committee for Standardisation (CEN)\" rather than through delegated acts. The amendment does precisely this, replacing \"delegated acts\" with \"CEN standards\" as the governing instrument for design-for-recycling criteria, directly responding to the organisation's stated position."
+  },
+  "4d7316a719558c5a0bf3_amd_933": {
+    "provision_effect": "The amendment replaces references to \"delegated acts\" with \"CEN standards\" as the basis for design-for-recycling criteria and recyclability-at-scale requirements for packaging.",
+    "label": "ALIGNED",
+    "reasoning": "The Swedish Forest Industries Federation explicitly advocated that \"Design for Recycling guidelines should be drawn up by the European Committee for Standardisation (CEN),\" which is precisely the direction the amendment takes by replacing delegated acts with CEN standards. The organisation's position is specific and directionally matches the amendment's change."
+  },
+  "4d7316a719558c5a0bf3_amd_978": {
+    "provision_effect": "The amendment changes the recyclability threshold date from a fixed \"1 January 2030\" to whichever is later: 1 January 2030 or 36 months after publication of the CEN harmonised standard, effectively tying the deadline to CEN's standardisation timeline.",
+    "label": "ALIGNED",
+    "reasoning": "The Swedish Forest Industries Federation explicitly advocates that Design for Recycling guidelines should be drawn up by CEN, signalling that CEN's standardisation process should be the basis for recyclability criteria. The amendment directly links the enforcement date of the recyclability threshold to the publication of the CEN harmonised standard, ensuring the deadline cannot precede CEN's work — which is precisely the direction SFIF's position on CEN's role advocates for."
+  },
+  "10b210df46eb0526a2d9_amd_1399": {
+    "provision_effect": "The amendment adds a requirement that packaging must be fully recyclable at end of life and scopes the weight/volume minimisation obligation per producer, while exempting reusable packaging placed on the market before the Regulation's entry into force.",
+    "label": "ALIGNED",
+    "reasoning": "SFIF explicitly advocates that all packaging should be reusable or recyclable by 2030 and supports design-for-recycling guidelines, which directly aligns with the amendment's new requirement that packaging be \"fully recyclable at end of life.\" The organisation's position is specific enough — calling for recyclability as a mandatory design criterion — to match the direction the amendment moves the original text."
+  },
+  "10b210df46eb0526a2d9_amd_489": {
+    "provision_effect": "The amendment adds \"without prejudice to Article 4(2) of Directive 2008/98/EC\" to the recital, clarifying that waste prevention measures for economic operators must respect the waste hierarchy established in that Directive.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position text does not express any specific directional stance on whether waste prevention obligations should be qualified by or made subject to the waste hierarchy in Directive 2008/98/EC. While SFIF references the waste hierarchy in passing, their matched chunk focuses on packaging bans, life-cycle assessments, reuse targets, and recycled content — none of which specifically advocate for or against inserting a \"without prejudice to Article 4(2)\" clause into this recital."
+  },
+  "1d695c0cc0b5929d36c5_amd_2218": {
+    "provision_effect": "The amendment narrows the per-capita packaging waste reduction obligation so that it applies only to packaging materials where data shows waste has consistently increased and is not highly recyclable, rather than applying broadly to all packaging waste.",
+    "label": "ALIGNED",
+    "reasoning": "SFIF explicitly advocates that reuse and circularity targets (including waste reduction targets) must be based on \"scientific and material-specific data,\" and that any bans or restrictions on specific packaging types should be \"duly justified by impact assessments and science-based facts.\" The amendment directly responds to this by conditioning the reduction obligation on data showing consistent waste increases and low recyclability, making the target material-specific and evidence-based rather than universally applicable — precisely the direction SFIF advocated for."
+  },
+  "1d695c0cc0b5929d36c5_amd_2248": {
+    "provision_effect": "The amendment adds a new sentence prohibiting the landfilling of packaging waste by 2030, on top of the existing obligation for Member States to implement measures to prevent packaging waste generation and minimise environmental impact.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text does not express any specific directional stance on landfilling of packaging waste or a landfill ban. Their positions focus on renewable materials, life-cycle assessments, reuse/recycling targets, recycled content, and bans on specific packaging types — none of which address the specific change introduced by this amendment (a 2030 landfill prohibition). The matched chunk merely describes Commission proposals without advocating for or against a landfill ban."
+  },
+  "1d695c0cc0b5929d36c5_amd_497": {
+    "provision_effect": "The amendment removes the specific numerical reduction targets (5% by 2030, 10% by 2035, 15% by 2040 compared to 2018) from the recital, leaving only a general reference to reduction targets for 2030, 2035, and 2040 without quantified obligations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text merely describes the Commission's proposal (that Member States will be required to reduce packaging waste per capita by 2030, 2035, and 2040) without expressing any specific directional advocacy position on whether the numerical targets should be kept, strengthened, weakened, or removed. There is no substantive stance on the specific reduction percentages or their removal that would allow alignment or opposition to be determined."
+  },
+  "1d695c0cc0b5929d36c5_amd_496": {
+    "provision_effect": "The amendment changes the packaging waste reduction target framework from a per-capita basis with specific percentage targets for 2030, 2035, and 2040 to a per-material (plastics, wood, ferrous metals, aluminum, glass, paper and cardboard) per-capita basis, removing the specific numerical reduction targets from the recital.",
+    "label": "ALIGNED",
+    "reasoning": "SFIF explicitly states that \"reuse and circularity targets must be based on scientific and material-specific data,\" which directly aligns with the amendment's introduction of material-specific waste reduction targets. The amendment moves from a single aggregate per-capita target to material-specific per-capita targets, which is precisely the direction SFIF advocated for."
+  },
+  "d2efc4d871f7287ee00c_amd_278": {
+    "provision_effect": "The amendment inserts a new recital recognising that a sustainable bio-economy can reduce Europe's dependence on imported raw materials, and calls for improving market conditions for bio-based and compostable packaging while reviewing laws that hamper such materials, in order to stimulate innovation and substitute fossil-based feedstocks with renewable sources from a lifecycle perspective.",
+    "label": "ALIGNED",
+    "reasoning": "SFIF explicitly advocates for acknowledging renewable/biobased materials' contribution to climate neutrality, reducing dependence on fossil resources, and supporting the development of biobased industries to substitute fossil-based products — all of which the amendment directly enshrines in a new recital. The amendment moves in precisely the direction SFIF urged: recognising renewability, improving conditions for bio-based packaging, and framing this through a lifecycle perspective."
+  },
+  "d2efc4d871f7287ee00c_amd_1337": {
+    "provision_effect": "The amendment inserts a new requirement that bio-based packaging must be produced from biomass complying with the sustainability criteria in Article 29(2-5) of the Renewable Energy Directive (EU) 2018/2001.",
+    "label": "ALIGNED",
+    "reasoning": "SFIF explicitly advocates for recognising the contribution of renewable/biobased materials and urges the EU to support biobased industries and acknowledge the potential of biobased products, while also stressing that raw materials must come from sustainable sources. The amendment responds directly to this by formally linking bio-based packaging to the sustainability criteria of the Renewable Energy Directive, ensuring that only sustainably sourced biomass qualifies — which aligns with SFIF's call for sustainable sourcing of renewable materials."
+  },
+  "44a9d7a3f88c579c4bf8_amd_1214": {
+    "provision_effect": "The amendment adds requirements for compostable packaging to contain a minimum content of renewable raw material (measured by biological carbon origin using EN 16640) and mandates that agricultural and forest biomass used in compostable packaging comply with sustainability criteria from Directive (EU) 2018/2001.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem specifically advocates for biobased content targets in the Packaging and Packaging Waste Regulation, including a minimum percentage of biobased material measured by carbon of biological origin, and calls for stringent sustainability criteria (biodiversity, land use, etc.) aligned with EU policy frameworks — precisely what the amendment introduces for compostable packaging. The amendment's direction of adding a minimum renewable raw material content requirement (measured via EN 16640 radiocarbon methods) and linking biomass use to sustainability criteria from Directive 2018/2001 directly responds to Braskem's stated advocacy."
+  },
+  "44a9d7a3f88c579c4bf8_amd_1212": {
+    "provision_effect": "The amendment inserts a new requirement that compostable packaging must contain a minimum of 60% renewable raw material content (measured by biological carbon origin), with sustainability criteria for agricultural and forest biomass sourcing.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly calls for biobased content targets in the Packaging and Packaging Waste Regulation, specifically advocating for a 10% standalone biobased plastic content target (with more ambitious targets for 2040), and insists these targets comply with stringent sustainability criteria including biodiversity protection and land use change — mirroring the amendment's introduction of a minimum renewable raw material content requirement with sustainability criteria for biomass sourcing. The amendment moves in the exact direction Braskem advocated: introducing mandatory biobased content thresholds with sustainability safeguards."
+  },
+  "44a9d7a3f88c579c4bf8_amd_1393": {
+    "provision_effect": "The amendment inserts a new provision requiring compostable packaging to contain a minimum content of renewable raw materials (measured by biological carbon content via EN 16640), with sustainability criteria for agricultural and forest biomass sourcing.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly calls for biobased content targets in the Packaging and Packaging Waste Regulation, including sustainability criteria for biomass sourcing (biodiversity, land use, etc.), which directly mirrors what this amendment introduces — a minimum renewable raw material content requirement for compostable packaging with sustainability criteria aligned to the Renewable Energy Directive. The amendment moves in precisely the direction Braskem advocated for, making biobased content requirements mandatory with sustainability guardrails."
+  },
+  "44a9d7a3f88c579c4bf8_amd_1213": {
+    "provision_effect": "The amendment expands the exemption from paragraphs 1 and 2 to include inks, adhesives, varnishes and coatings, and adds conditions for compostable packaging placement on the market, including a minimum biobased carbon content requirement tied to EN 16640 and sustainability criteria for agricultural and forest biomass sourcing.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem specifically advocates for biobased content targets in the Packaging and Packaging Waste Regulation, including sustainability criteria for biomass (biodiversity, land use, etc.), which directly aligns with the amendment's introduction of a minimum renewable raw material content requirement for compostable packaging and the application of sustainability criteria from Directive (EU) 2018/2001 for agricultural and forest biomass. The amendment moves the text in the direction Braskem advocated — mandating biobased content thresholds and sustainability compliance for biomass used in packaging."
+  },
+  "44a9d7a3f88c579c4bf8_amd_1332": {
+    "provision_effect": "The amendment inserts a new provision empowering the Commission to adopt delegated acts establishing bio-based waste targets for plastic packaging (counting toward recycled content targets) and sustainability requirements for bio-based waste feedstocks.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Braskem specifically and directionally advocates for bio-based content targets in the PPWR and for stringent sustainability criteria for bio-based feedstocks, which aligns thematically with this amendment. However, the amendment is narrowly focused on bio-based *waste* feedstocks counted toward *recycled content* targets, whereas Braskem explicitly calls for a *standalone* 10% bio-based content target (not subsumed under recycled content) and emphasises drop-in, fully recyclable bio-based plastics from renewable (not necessarily waste) sources. It is genuinely unclear whether this amendment — which folds bio-based waste into recycled content targets rather than creating a standalone bio-based target — satisfies or contradicts Braskem's specific advocacy position."
+  },
+  "74da89ce025e464322e4_amd_1398": {
+    "provision_effect": "The amendment inserts a new article requiring the Commission to publish a report by 31 December 2026 on the sustainability of bio-based feedstock for packaging, potentially accompanied by a legislative proposal introducing sustainability requirements and targets for replacing fossil raw materials with sustainable bio-based feedstock.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly calls for a standalone 10% bio-based plastic content target in the PPWR, separate from recycled content targets, and insists such targets must comply with stringent sustainability criteria (biodiversity, land use, human rights). The amendment directly responds to both of these specific directional asks: it introduces a dedicated article (separate from recycled content) on bio-based feedstock sustainability and mandates the Commission to consider targets for replacing fossil raw materials with sustainable bio-based feedstock, aligned with sustainability criteria (referencing the RED Article 29 framework)."
+  },
+  "74da89ce025e464322e4_amd_1495": {
+    "provision_effect": "The amendment inserts a new requirement for the Commission to assess and then establish, via delegated act, sustainability requirements for bio-based feedstocks used in packaging.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly calls for bio-based content targets in the PPWR and states that such targets \"should be compliant with stringent sustainability criteria — including the protection of biodiversity and ecosystems, negating inadvertent effects of land use change, and protecting human rights.\" The amendment directly responds to this by mandating the Commission to assess and establish sustainability requirements for bio-based feedstocks, moving in the same direction Braskem advocated for: formalising sustainability criteria for bio-based materials within the regulation."
+  },
+  "b0f8f7c7427704c2ded0_amd_222": {
+    "provision_effect": "The amendment inserts a new footnote reference to the European Commission's Communication on EU policy framework for biobased, biodegradable and compostable plastics (COM(2022) 682 final).",
+    "label": "NOISE",
+    "reasoning": "The amendment is purely a bibliographic footnote insertion referencing the Commission's Communication on biobased, biodegradable and compostable plastics. While Braskem advocates strongly for biobased plastic targets, their position does not express any directional stance on whether this specific document should or should not be cited as a reference in the legislative text. The amendment adds no substantive policy change that Braskem's position either supports or opposes."
+  },
+  "b0f8f7c7427704c2ded0_amd_278": {
+    "provision_effect": "The amendment inserts a new recital recognising that fostering a sustainable bio-economy can reduce Europe's dependence on imported raw materials, and that improving market conditions for bio-based recyclable and compostable/biodegradable packaging — and reviewing laws that hamper their use — can stimulate innovation, substitute fossil feedstocks with renewable sources (where beneficial from a lifecycle perspective), and support organic recycling.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem specifically advocates for substituting fossil-based feedstocks with biobased alternatives, arguing that biobased plastics reduce carbon footprint and complement recycled feedstocks — directly mirroring the amendment's recognition that bio-based packaging can substitute fossil fuel-based feedstocks with renewable sources. The amendment's call to improve market conditions and review laws hampering bio-based materials aligns with Braskem's push for a standalone biobased content target and incentives for biobased products, both pointing in the same direction of promoting bio-based materials in packaging regulation."
+  },
+  "b0f8f7c7427704c2ded0_amd_760": {
+    "provision_effect": "The amendment inserts a new footnote reference defining \"bio-based plastic\" by citing the EU Communication on bio-based, biodegradable and compostable plastics (COM(2022) 682 final).",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly advocates for a standalone biobased plastic content target in the Packaging and Packaging Waste Regulation and emphasises the importance of distinguishing biobased plastics from biodegradable/compostable plastics. The amendment inserts a definitional footnote for \"bio-based plastic\" referencing the relevant EU Communication, which directly supports Braskem's push for formal recognition and clear definition of biobased plastics within the regulatory framework — a necessary precondition for the targets they advocate."
+  },
+  "b0f8f7c7427704c2ded0_amd_761": {
+    "provision_effect": "The amendment inserts a new definition of 'bio-based plastic' as a plastic material made entirely from biological resources instead of fossil raw materials.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly advocates for bio-based plastic targets and policy recognition within the Packaging and Packaging Waste Regulation, and even provides its own clarifying definition of bio-based plastics in its submission (footnote 1: \"Biobased plastics are made from biomass, not fossil fuels\"). Introducing a formal legislative definition of 'bio-based plastic' directly supports Braskem's push for regulatory recognition and distinct treatment of bio-based plastics, moving in the direction the organisation advocated for."
+  },
+  "b0f8f7c7427704c2ded0_amd_758": {
+    "provision_effect": "The amendment inserts a new definition of 'bio-based plastic' as a plastic made entirely from biological rather than fossil raw materials, clarifying it is not necessarily biodegradable or compostable.",
+    "label": "ALIGNED",
+    "reasoning": "Braskem explicitly advocates for bio-based plastic targets and distinguishes bio-based plastics from biodegradable/compostable ones — precisely the clarification the amendment codifies in its definition. The amendment's insertion of a formal definition (including the note that bio-based plastics are not necessarily biodegradable or compostable) directly mirrors the conceptual framing Braskem promotes, supporting the regulatory recognition of bio-based plastics that Braskem calls for."
+  },
+  "e10265e51954d46fc551_amd_386": {
+    "provision_effect": "The amendment inserts a new recital distinguishing biodegradable polymers intended for recycling from those intended for composting, and calls for recyclable biodegradable materials (e.g. PLA, PHA) to be considered in delegated acts on design-for-recycling criteria, recyclability at scale, and labelling.",
+    "label": "NOISE",
+    "reasoning": "Braskem's position focuses exclusively on biobased (but non-biodegradable) plastics like its I'm Green™ polyethylene, explicitly distinguishing biobased from biodegradable/compostable plastics. The amendment concerns biodegradable polymers (PLA, PHA) and their recycling/composting distinction — a subject on which Braskem expresses no directional advocacy position in the matched text."
+  },
+  "f6b4d16af1276e94eb7f_amd_250": {
+    "provision_effect": "The amendment qualifies the goal of increased re-use of packaging by adding a condition that it must be supported by scientific evidence of best environmental outcomes and must account for challenges in Member States with limited water resources, thereby weakening the unconditional push for reuse.",
+    "label": "ALIGNED",
+    "reasoning": "EUMEPS explicitly argues that reuse requirements should be achievable, avoid encouraging long-distance return of empty packaging, and that a holistic, case-by-case environmental assessment (including CO2 emissions) is needed rather than a general preference for reuse. The amendment directly responds to this by conditioning the reuse goal on scientific evidence of best environmental outcomes, which aligns with EUMEPS's advocacy for evidence-based, life-cycle-informed decision-making over a strict reuse hierarchy."
+  },
+  "f6b4d16af1276e94eb7f_amd_252": {
+    "provision_effect": "The amendment adds a conditional clause to the promotion of re-use, requiring that re-usable packaging demonstrably achieves higher environmental benefits compared to single-use packaging before it is preferred.",
+    "label": "ALIGNED",
+    "reasoning": "EUMEPS explicitly advocates for a holistic, case-by-case environmental assessment when comparing single-use and reusable packaging, warning that a general preference for reuse could lead to more harmful alternatives (e.g. higher CO2 from collection, cleaning, and transport). The amendment directly responds to this by conditioning the promotion of re-use on a demonstrated environmental benefit over single-use packaging, moving the text precisely in the direction EUMEPS advocated for."
+  },
+  "f6b4d16af1276e94eb7f_amd_251": {
+    "provision_effect": "The amendment adds qualifications to the original text: re-use measures must not increase food waste and must preserve food safety/hygiene standards, and recycled content can be achieved through either mechanical or chemical recycling.",
+    "label": "ALIGNED",
+    "reasoning": "EUMEPS explicitly advocates for a holistic, life-cycle-based approach that avoids environmentally unsound outcomes from strict hierarchy interpretations, and warns against reuse requirements that could lead to harmful side effects. The amendment's addition of food waste/safety caveats to reuse measures and the explicit recognition of chemical recycling as a valid pathway for recycled content both align with EUMEPS's position that recycled content targets should be defined more flexibly and that reuse requirements should not produce adverse environmental or practical consequences. The amendment moves the text in the direction EUMEPS advocated for."
+  },
+  "f6fbf3d2e1ff306eeadb_amd_338": {
+    "provision_effect": "The amendment changes the recycled content requirement from applying to \"the plastic part of each unit of packaging\" to applying only to packaging \"where plastics is the predominant material,\" calculated as an average across plastic packaging placed on a Member State's territory, and adds an exemption for food contact plastic packaging where safety risks exist.",
+    "label": "ALIGNED",
+    "reasoning": "UPM explicitly advocated that \"recycled content is required only from packaging consisting predominantly of plastics,\" arguing that extending the scope to all plastic parts in all packaging creates unnecessary bureaucracy and technical problems — particularly for fibre-based packaging with thin plastic barriers used in food contact. The amendment directly adopts this position by limiting the requirement to packaging where plastics is the predominant material and adding a food safety exemption for food contact plastic packaging, both of which UPM specifically called for."
+  },
+  "f6fbf3d2e1ff306eeadb_amd_223": {
+    "provision_effect": "The amendment inserts a new recital recognising plastic's role in food packaging safety/shelf life, noting gaps in EU legislation for non-plastic food contact materials, calling for technically and economically feasible substitution of single-use plastic food packaging, and positioning chemical recycling as a complementary option to mechanical recycling for food-contact plastic packaging targets.",
+    "label": "ALIGNED",
+    "reasoning": "UPM explicitly argues that chemical recycling is still early-stage and costly, that adding recycled plastic to food-contact barriers is technically very difficult, and that any recycled content requirements for plastic in food-contact applications must be technically and economically feasible. The amendment directly echoes these positions by acknowledging that substitution of single-use plastic in the food sector must be done in a \"technically and economically feasible way\" and that chemical recycling is a complementary (not primary) option — aligning with UPM's advocacy for feasibility-based, not prescriptive, approaches to food-contact plastic packaging."
+  },
+  "f6fbf3d2e1ff306eeadb_amd_336": {
+    "provision_effect": "The amendment adds that recycled content is calculated as an average across a producer's plastic packaging portfolio, and exempts food/feed contact plastic packaging where recycled content risks affecting human/animal health or organoleptic characteristics.",
+    "label": "ALIGNED",
+    "reasoning": "UPM explicitly advocates that recycled content requirements should not apply to plastic parts in non-predominantly-plastic packaging (e.g., thin barrier coatings in fibre-based food packaging), citing food safety concerns and technical infeasibility. The amendment's new exemption for food/feed contact plastic packaging where recycled content risks human/animal health or organoleptic characteristics directly responds to this position. The portfolio-averaging approach also aligns with UPM's concern about unnecessary bureaucracy and technical problems from applying requirements to every plastic part in every unit."
+  },
+  "f6fbf3d2e1ff306eeadb_amd_335": {
+    "provision_effect": "The amendment adds that recycled content is calculated as an average across a producer's plastic packaging placed on the market, and exempts food/feed contact plastic packaging where recycled content risks affecting human/animal health or organoleptic characteristics.",
+    "label": "ALIGNED",
+    "reasoning": "UPM explicitly argued that mandatory recycled content requirements should not extend to plastic parts in all packaging (especially food-contact barriers in fibre-based packaging), citing food safety, technical difficulty, and unnecessary costs. The amendment's new exemption for food/feed contact plastic packaging where recycled content risks affecting human/animal health or organoleptic characteristics directly responds to UPM's concern about applying recycled content requirements to protective plastic barriers in food-contact packaging, moving the text in the direction UPM advocated."
+  },
+  "f6fbf3d2e1ff306eeadb_amd_337": {
+    "provision_effect": "The amendment changes the recycled content requirement from applying to \"the plastic part of each unit of packaging\" to applying to \"plastic packaging\" calculated as an average across a producer's portfolio, and explicitly exempts food/feed contact plastic packaging where recycled content risks affecting human/animal health or food safety.",
+    "label": "ALIGNED",
+    "reasoning": "UPM explicitly advocated that recycled content requirements should apply only to packaging consisting predominantly of plastics (not to every plastic part in all packaging), and specifically flagged that adding recycled plastic to food-contact barriers is technically very difficult and raises food safety concerns. The amendment narrows the scope from \"the plastic part of each unit of packaging\" to \"plastic packaging\" averaged across a producer's portfolio, and introduces a food/feed contact exemption where recycled content risks health or food safety — directly responding to both of UPM's stated concerns."
+  },
+  "98d959861b277776ca9e_amd_575": {
+    "provision_effect": "The amendment adds \"prevention\" as an explicit element alongside extended producer responsibility, collection, treatment, and recycling of packaging waste in the regulation's scope.",
+    "label": "NOISE",
+    "reasoning": "JDE Peet's position focuses on specific issues such as recyclability of SSUs, EPR fee calculation, and compostability requirements — not on whether \"prevention\" should be explicitly named in the regulation's scope clause. The matched text is a general endorsement of circularity and the circular economy without any directional stance on adding or excluding \"prevention\" from the regulation's subject-matter article."
+  },
+  "98d959861b277776ca9e_amd_574": {
+    "provision_effect": "The amendment adds \"reduction of superfluous packaging\" as an explicit requirement within the scope of the Regulation, alongside the existing provisions on EPR, collection, treatment, and recycling of packaging waste.",
+    "label": "NOISE",
+    "reasoning": "JDE Peet's position focuses on circularity, recyclability of SSUs, EPR fee calculation, and compostability — not on the reduction of superfluous packaging. Their text contains no directional stance on whether the Regulation's scope should or should not explicitly include reduction of superfluous packaging. Their general endorsement of \"Reduce, Reuse, Recycle\" is too broad and non-specific to constitute a directional advocacy position on this particular amendment."
+  },
+  "98d959861b277776ca9e_amd_218": {
+    "provision_effect": "The amendment inserts a new recital requiring Member States to ensure quality job creation, collective bargaining, gender equality, vocational training, social protection, and responsible restructuring in implementing the Packaging and Packaging Waste Regulation.",
+    "label": "NOISE",
+    "reasoning": "JDE Peet's position focuses entirely on packaging circularity, recyclability of single-serve units, EPR fee calculations, and the economic impacts of the PPWR on their specific product lines. They express no directional stance on labour market provisions, job quality, collective bargaining, or social protection measures. The organisation's text contains no substantive advocacy position related to the subject matter of this amendment."
+  },
+  "7f0c5197896567a2f72d_amd_597": {
+    "provision_effect": "The amendment narrows the scope of the exemption from a broad category of \"tea or coffee bags\" to specifically \"compostable coffee bags and system single-serve units and permeable tea or coffee single-serve units,\" effectively limiting which SSUs qualify and introducing a compostability requirement for coffee bags while allowing permeable tea/coffee single-serve units.",
+    "label": "ALIGNED",
+    "reasoning": "JDE Peet's explicitly advocates that tea bags and filter coffee pads (permeable single-serve units) should remain industrially compostable, while recyclable aluminium and plastic SSUs should not be required to be compostable. The amendment aligns with this position by distinguishing between compostable coffee bags/system SSUs and permeable tea/coffee single-serve units, rather than applying a blanket compostability requirement to all SSUs — directly responding to JDE Peet's objection that the original text improperly mandated compostability for all SSU types."
+  },
+  "7f0c5197896567a2f72d_amd_600": {
+    "provision_effect": "The amendment narrows the exemption from \"tea or coffee bags\" broadly to specifically \"compostable coffee bags and system single-serve units or teabags,\" introducing a compostability requirement for coffee-related single-serve units while retaining teabags without that qualifier.",
+    "label": "OPPOSING",
+    "reasoning": "JDE Peet's explicitly and repeatedly argues that requiring all SSUs to be compostable is wrong, that recyclable aluminium and plastic SSUs should be permitted, and that compostability should only apply to tea bags and filter coffee pads — not to coffee capsules/SSUs broadly. The amendment moves in the opposite direction by introducing a compostability requirement for coffee bags and single-serve units, which is precisely what JDE Peet's opposes."
+  },
+  "7f0c5197896567a2f72d_amd_602": {
+    "provision_effect": "The amendment narrows the scope of the compostable packaging requirement to only compostable coffee bags and single-serve units and teabags, explicitly excluding other packaging like coffee capsules (which can be separated and recycled) from the compostability mandate.",
+    "label": "ALIGNED",
+    "reasoning": "JDE Peet's explicitly advocates that only tea bags and filter coffee pads/pods should be required to be compostable, while recyclable aluminium and plastic SSUs (capsules) should be permitted under recycling rules rather than forced into compostability. The amendment does precisely this — it limits the compostability requirement to compostable coffee bags/single-serve units and teabags, and its justification explicitly carves out coffee capsules for recycling rules instead, directly matching JDE Peet's stated position."
+  },
+  "7f0c5197896567a2f72d_amd_598": {
+    "provision_effect": "The amendment narrows the exemption from a broad category of \"tea or coffee bags\" to specifically \"compostable coffee bags and system single-serve units or tea bags,\" adding a compostability requirement for coffee-related items while retaining tea bags without that qualifier.",
+    "label": "OPPOSING",
+    "reasoning": "JDE Peet's explicitly argues that compostability should not be the exclusive or mandatory solution for all SSUs, and that recyclable aluminium and plastic SSUs should be permitted — opposing any requirement that SSUs (beyond tea bags and filter coffee pads) must be compostable. The amendment moves in the opposite direction by inserting \"compostable\" as a qualifier for coffee bags and single-serve units, which is precisely the mandatory compostability requirement JDE Peet's argues against."
+  },
+  "7f0c5197896567a2f72d_amd_599": {
+    "provision_effect": "The amendment narrows the exemption for tea/coffee bags to only compostable coffee bags, system single-serve units, or tea bags, whereas the original text applied broadly to all tea or coffee bags without a compostability requirement.",
+    "label": "OPPOSING",
+    "reasoning": "JDE Peet's explicitly argues that requiring all SSUs to be compostable undermines the circular economy and that recyclable aluminium and plastic SSUs should be permitted, with compostability reserved only for tea bags and filter coffee pads. The amendment moves in the opposite direction by introducing a compostability requirement for coffee bags/single-serve units within the exemption, which is precisely what JDE Peet's opposes."
+  },
+  "575470b94bd4156d1fa7_amd_603": {
+    "provision_effect": "The amendment expands the definition of tea or coffee bags to explicitly include soft pad single-serve units, while removing the word \"necessary\" from the original text, thereby distinguishing soft pad SSUs from rigid single-serve units for the purposes of specific requirements.",
+    "label": "ALIGNED",
+    "reasoning": "JDE Peet's explicitly advocates that tea bags and filter coffee pads (i.e., soft pad single-serve units) should be the only permitted compostable SSUs and should not be considered \"packaging\" under the PPWR, while aluminium and plastic (rigid) SSUs should be treated as packaging. The amendment directly responds to this position by carving out soft pad single-serve units into the tea/coffee bag definition, creating the very distinction between soft and rigid SSUs that JDE Peet's sought."
+  },
+  "641747ee5fe8ed5261dc_amd_608": {
+    "provision_effect": "The amendment restricts the exemption for tea or coffee bags to only those that are compostable, adding \"compostable\" as a qualifying condition to the original text.",
+    "label": "ALIGNED",
+    "reasoning": "JDE Peet's explicitly advocates that tea bags and filter coffee pods should be permitted as compostable single-serve units and argues that compostable tea bags/filter coffee pods should not be treated as conventional packaging. The amendment aligns with this position by restricting the exemption specifically to compostable tea or coffee bags, effectively recognising the distinct compostable nature of these products that JDE Peet's was advocating for."
+  },
+  "575470b94bd4156d1fa7_amd_404": {
+    "provision_effect": "The amendment inserts a new recital establishing that plastic packaging is a significant source of secondary microplastic emissions and recommends modulating EPR fees based on assessed microplastic emission risk, in line with the 'polluter pays' principle.",
+    "label": "UNDETECTABLE",
+    "reasoning": "JDE Peet's has a specific position on EPR fees — arguing they should be based only on the weight of the packaging material portion of SSUs — but their position does not address microplastic emission risk as a basis for modulating EPR fees. The amendment introduces a new dimension (microplastic risk-based EPR fee modulation) that could either complement or conflict with JDE Peet's EPR fee position, but the direction of impact on their specific concern is genuinely unclear from the available text."
+  },
+  "575470b94bd4156d1fa7_amd_1763": {
+    "provision_effect": "The amendment changes the obligation for economic operators using reusable packaging from mandatory participation (\"shall\") in re-use systems to optional participation (\"may\"), and allows existing EPR recycling systems to fulfil this requirement.",
+    "label": "ALIGNED",
+    "reasoning": "JDE Peet's advocates that aluminium and plastic SSU packaging should be considered packaging designed for recycling, and that EPR systems for recycling are the appropriate policy tool for managing post-consumer packaging. The amendment weakens the mandatory re-use obligation and explicitly allows existing EPR recycling systems to satisfy the requirement, which directly aligns with JDE Peet's position favouring recyclability and EPR-based recycling frameworks over mandatory re-use systems."
+  },
+  "575470b94bd4156d1fa7_amd_1757": {
+    "provision_effect": "The amendment changes the obligation for economic operators placing reusable packaging on the market from mandatory (\"shall\") to optional (\"may\") to have a re-use system in place, and adds that existing EPR systems for recycling in Member States can satisfy this provision.",
+    "label": "NOISE",
+    "reasoning": "JDE Peet's position focuses on SSU (single-serve unit) packaging classification, EPR fee calculation based on packaging weight only, and the scope of compostable SSUs — not on whether reusable packaging systems should be mandatory or optional. Their mention of EPR relates to fee structures for recyclable aluminium/plastic SSUs, not to the obligation to establish re-use systems. There is no substantive directional stance on the shall/may distinction for reusable packaging systems that this amendment addresses."
+  },
+  "48ee23f1d17b0dba78e7_amd_1614": {
+    "provision_effect": "The amendment removes the option to provide information and documentation in paper form, making electronic form the sole required format.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly calls for \"a preference in digital solutions going forward,\" including for labelling and compliance obligations. The amendment moves in exactly that direction by eliminating the paper option and mandating electronic-only communication, directly responding to APPLiA's stated preference for digital solutions."
+  },
+  "48ee23f1d17b0dba78e7_amd_1617": {
+    "provision_effect": "The amendment removes the option to provide information and documentation in paper form, making electronic form the sole required format.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly calls for \"a preference in digital solutions\" regarding documentation and labelling obligations. The amendment removes the paper option and mandates electronic form only, directly moving in the direction APPLiA advocated for."
+  },
+  "48ee23f1d17b0dba78e7_amd_1615": {
+    "provision_effect": "The amendment removes the option to provide information and documentation in paper form, making electronic form the sole required format.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly calls for \"a preference in digital solutions\" regarding documentation and labelling obligations, which directly aligns with the amendment's removal of the paper option in favour of electronic-only submission. The amendment moves the original text in exactly the direction APPLiA advocated for."
+  },
+  "48ee23f1d17b0dba78e7_amd_1616": {
+    "provision_effect": "The amendment removes the option to provide information and documentation in paper form, making electronic form the sole required format.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly calls for \"a preference in digital solutions\" regarding documentation and labelling obligations, which directly aligns with the amendment's removal of the paper option in favour of electronic-only submission. The amendment moves the original text in exactly the direction APPLiA advocated for."
+  },
+  "2b0fc108700e7bd04211_amd_2597": {
+    "provision_effect": "The amendment adds tampering and counterfeiting protection, as well as brand identity and product distinction, to the list of requirements that packaging design may address, alongside the existing product protection criteria.",
+    "label": "NOISE",
+    "reasoning": "APPLiA's position focuses on physical protection (damage, humidity, moisture) and the complexity of home appliance packaging shapes/sizes, without any directional stance on tampering, counterfeiting, or brand identity considerations. The org text does not advocate for or against the specific additions the amendment introduces, making it too unrelated to constitute a substantive position on this change."
+  },
+  "2b0fc108700e7bd04211_amd_2598": {
+    "provision_effect": "The amendment adds \"fraud (including counterfeiting)\" as an explicit concern that packaging design must protect against, alongside the existing list of damage, loss, deterioration, and waste.",
+    "label": "NOISE",
+    "reasoning": "APPLiA's position focuses on physical protection of home appliances (mechanical damage, humidity, safety), complexity of packaging design, and reusable transport packaging concerns — but does not express any directional stance on anti-fraud or anti-counterfeiting protections in packaging. The amendment's specific addition of fraud/counterfeiting is entirely unaddressed in the org's text, making this a subject mismatch rather than a genuine directional connection."
+  },
+  "11dffbf3c3ca074e3819_amd_1787": {
+    "provision_effect": "The amendment adds an alternative compliance pathway to the 90% reusable transport packaging requirement, allowing economic operators to instead use single-use transport packaging with a minimum of 90% recycled content.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly warns that reusable packaging targets may increase greenhouse gas emissions, that reuse is technically difficult or impossible for some transport packaging components, and recommends applying reusable targets \"only where it would make sense from the technical and environmental perspective.\" The amendment directly responds to this concern by placing recycling on equal footing with reuse as an alternative compliance option, moving the text in the direction APPLiA advocated for — away from a rigid reuse-only mandate toward a more flexible, environmentally-assessed approach."
+  },
+  "11dffbf3c3ca074e3819_amd_1788": {
+    "provision_effect": "The amendment adds an explicit exclusion of paper board and corrugated board from the reusable transport packaging requirement for large household appliances, narrowing the scope of packaging types subject to the 90% reuse target.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA specifically advocated for applying reusable targets \"only where it would make sense from the technical and environmental perspective\" and called for \"an explicit and appropriate list of transport packaging components\" to be covered by the requirements — i.e., they wanted certain packaging types excluded from the reuse obligation. The amendment responds directly to this by carving out paper board and corrugated board (packaging types for which reuse is environmentally questionable) from the 90% reuse target, moving the text in the direction APPLiA advocated."
+  },
+  "11dffbf3c3ca074e3819_amd_1790": {
+    "provision_effect": "The amendment adds \"excluding cardboard\" to the reusable transport packaging requirement, explicitly carving out cardboard from the 90% reusable transport packaging obligation for large household appliances from 2030.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA specifically advocated for establishing \"an explicit and appropriate list of transport packaging components that would be ultimately covered by the requirements,\" warning that some transport packaging components (boxes, pallets, plastic straps, pallet wrappings) make reuse \"technically very difficult, or even impossible.\" The amendment responds directly to this by carving out cardboard — a common transport packaging component — from the reusable packaging obligation, moving in the direction APPLiA advocated for by narrowing the scope of covered packaging components."
+  },
+  "11dffbf3c3ca074e3819_amd_1794": {
+    "provision_effect": "The amendment changes the reference from point 2 to point 1 of Annex II of Directive 2012/19/EU, altering which category of large household appliances is subject to the 90% reusable transport packaging requirement.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly stated that \"the reference to Annex II of Directive 2012/19/EU is not clear enough and is outdated,\" advocating for greater clarity and precision in the Annex II reference. The amendment directly addresses this concern by correcting the specific point reference within Annex II (from point 2 to point 1), which responds to APPLiA's call for a clearer and more appropriate reference to the applicable annex categories."
+  },
+  "11dffbf3c3ca074e3819_amd_1795": {
+    "provision_effect": "The amendment changes the reference from point 2 to point 1 of Annex II of Directive 2012/19/EU, altering which category of large household appliances is subject to the 90% reusable transport packaging requirement.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly stated that \"the reference to Annex II of Directive 2012/19/EU is not clear enough and is outdated,\" advocating for greater clarity and precision in how the Annex II reference is applied. The amendment directly addresses this concern by correcting the specific point reference within Annex II (from point 2 to point 1), which responds to APPLiA's call for a clearer and more appropriate reference to the WEEE Directive's Annex II."
+  },
+  "00e8e5668377bc8af483_amd_1523": {
+    "provision_effect": "The amendment expands the labelling requirement to include recyclability (in addition to reusability) and specifies that reusable sales packaging must be distinguished from single-use packaging through information tags near the product that match price tags in form and font size.",
+    "label": "UNDETECTABLE",
+    "reasoning": "APPLiA's position focuses on implementation timelines for Article 11 labelling requirements (advocating for 24 months after adoption of implementing acts), not on the substantive content of what the label should cover or how reusable packaging should be distinguished at point of sale. While there is a genuine connection to Article 11 labelling, APPLiA's position does not express a directional stance on whether recyclability should be added to the label or whether point-of-sale distinction should be done via information tags, making it genuinely unclear whether this amendment satisfies, contradicts, or ignores their advocacy."
+  },
+  "00e8e5668377bc8af483_amd_2156": {
+    "provision_effect": "The amendment adds a requirement that the Commission's review of reuse packaging targets must be based on a life-cycle analysis evaluating the overall reduction of greenhouse gas emissions.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly advocates that proposed goals for packaging reuse should be based on thorough analyses including environmental perspectives and feasibility studies. The amendment's addition of a mandatory life-cycle analysis evaluating greenhouse gas emissions aligns with APPLiA's position that reuse targets should be grounded in rigorous environmental and technical analyses rather than set without such evidence-based assessment."
+  },
+  "00e8e5668377bc8af483_amd_1328": {
+    "provision_effect": "The amendment shortens the Commission's review deadline for recycled content in non-plastic packaging from 8 years to 2 years after entry into force, and broadens the scope of packaging excluded from the review to all packaging referred to in the Article rather than just plastics.",
+    "label": "NOISE",
+    "reasoning": "APPLiA's position focuses on transition times and lead-times for industry compliance with packaging requirements, not on the timeline for the Commission's review of recycled content in non-plastic packaging. Their advocacy for \"sufficient lead-time (not less than five years)\" concerns implementation periods for industry, not the Commission's review/assessment deadline. There is no substantive directional stance on whether the Commission's review should happen sooner or later."
+  },
+  "00e8e5668377bc8af483_amd_2157": {
+    "provision_effect": "The amendment shortens the Commission's review deadline for reuse packaging targets from 8 years to 6 years after entry into force.",
+    "label": "OPPOSING",
+    "reasoning": "APPLiA consistently advocates for longer timelines and transition periods (recommending at least five years for implementation), expressing concern that requirements are being introduced too quickly. The amendment moves in the opposite direction by accelerating the Commission's review deadline from 8 years to 6 years, which would bring potential new reuse targets and measures sooner rather than later — contrary to APPLiA's position of needing more time."
+  },
+  "00e8e5668377bc8af483_amd_1624": {
+    "provision_effect": "The amendment inserts a new requirement for Member States to submit implementation plans to the Commission within 5 years of the Regulation's entry into force, detailing measures for achieving foodservice packaging reuse targets.",
+    "label": "UNDETECTABLE",
+    "reasoning": "APPLiA advocates for sufficient transition times (at least five years) before new packaging requirements apply, which loosely connects to the 5-year timeline in the amendment. However, the amendment is about Member States submitting implementation plans for foodservice reuse targets — a procedural planning requirement — rather than a transition/lead-time for industry compliance with packaging requirements. It is genuinely unclear whether this amendment satisfies, contradicts, or is simply orthogonal to APPLiA's specific concern about industry lead-times for implementing new packaging standards."
+  },
+  "48ee23f1d17b0dba78e7_amd_1234": {
+    "provision_effect": "The amendment adds an alternative compliance demonstration pathway — reporting to Producer Responsibility Organisations (PROs) — alongside the existing technical documentation route, in order to reduce administrative burden.",
+    "label": "ALIGNED",
+    "reasoning": "APPLiA explicitly calls for the administrative effort for compliance to be \"appropriate\" and raises concerns about the burden of storing technical documentation and unclear responsibilities across the supply chain under the existing Module A conformity assessment approach. The amendment directly responds to this by introducing an alternative, lighter compliance route (PRO reporting), reducing the administrative burden APPLiA flagged — moving the text in the direction APPLiA advocated for."
+  },
+  "9cc91963128535c41545_amd_1752": {
+    "provision_effect": "The amendment removes the Commission's delegated act power to amend Annex V and instead requires the Commission to submit a report (and possibly a legislative proposal) to Parliament and Council within 8 years, replacing a regulatory tool with a review-and-report mechanism.",
+    "label": "UNDETECTABLE",
+    "reasoning": "EUROPEN expresses concern about the lack of clear timelines for secondary legislation and the absence of packaging expert involvement in delegated/implementing acts, which is related to this area. However, their position does not clearly advocate for either retaining the delegated act mechanism or replacing it with a report-and-legislative-proposal approach; their concern is about transparency and expert inclusion, not the specific legal instrument used. It is therefore genuinely unclear whether this amendment's direction satisfies or contradicts their position."
+  },
+  "c479dd8b9e2b546106a5_amd_567": {
+    "provision_effect": "The amendment adds a requirement that the evaluation of the Regulation must include a dedicated section on the impact of the Regulation on the agri-food system.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly calls on co-legislators to assess proposed measures against packaging functionalities including food waste reduction targets, safety requirements, consumer health, and product safety — all of which are directly relevant to the agri-food system. The amendment's addition of a dedicated evaluation section on the Regulation's impact on the agri-food system directly responds to EUROPEN's advocacy for a more thorough impact assessment that accounts for food-related considerations."
+  },
+  "ecba40558efdd0e7e27f_amd_324": {
+    "provision_effect": "The amendment expands the scope of EPR fee modulation criteria from recyclability alone to also include reusability and environmental performance, adding reusable packaging as an incentivised outcome alongside recyclable packaging.",
+    "label": "NOISE",
+    "reasoning": "EUROPEN's position on EPR focuses on improving governance, transparency, and oversight of EPR fees and their utilisation, and on harmonisation to avoid fragmented national measures — but does not take a specific directional stance on whether EPR fee modulation criteria should be broadened to include reusability/environmental performance alongside recyclability. Their text is too general and focused on different aspects of EPR governance to constitute a specific advocacy position on the direction this amendment takes."
+  },
+  "ecba40558efdd0e7e27f_amd_323": {
+    "provision_effect": "The amendment adds a requirement that extended producer responsibility fees be made transparent and easily accessible online, supplementing the existing text about harmonising EPR fee modulation criteria.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly calls for improved \"governance and transparency of Extended Producers Responsibilities (EPR) schemes\" to \"ensure better oversight of EPR fees and their utilisation.\" The amendment directly responds to this by adding a requirement for EPR fees to be made transparent and easily accessible online, moving the text in precisely the direction EUROPEN advocated."
+  },
+  "ecba40558efdd0e7e27f_amd_322": {
+    "provision_effect": "The amendment adds a requirement that EPR fees be earmarked to finance the net cost of collection, sorting and recycling of packaging, on top of the existing harmonisation of fee modulation criteria.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly calls for \"better oversight of EPR fees and their utilisation\" and for mandatory obligations on Member States to invest in sorting and recycling infrastructure, directly advocating that EPR fees be directed toward collection, sorting and recycling. The amendment's addition — earmarking EPR fees to finance the net cost of collection, sorting and recycling — moves the text precisely in the direction EUROPEN advocated."
+  },
+  "ecba40558efdd0e7e27f_amd_321": {
+    "provision_effect": "The amendment adds a requirement that EPR fees be earmarked to finance the net cost of collection, sorting and recycling of packaging, on top of the existing harmonisation of fee modulation criteria.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly calls for \"better oversight of EPR fees and their utilisation\" and for mandatory obligations on Member States to invest in sorting and recycling infrastructure, which directly aligns with the amendment's addition of earmarking EPR fees to finance collection, sorting and recycling costs. The amendment moves in the specific direction EUROPEN advocated — ensuring EPR fees are directed toward the infrastructure and activities they are meant to support."
+  },
+  "c479dd8b9e2b546106a5_amd_514": {
+    "provision_effect": "The amendment expands the recital to include e-commerce actors as producers responsible for end-of-life management, and adds references to promoting prevention and reusable packaging through a specific fund and ecomodulation principles, as well as separate collection, mixed waste sorting, and littering cost coverage.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly advocates for improved governance and transparency of EPR schemes, mandatory collection requirements, and obligations for Member States to invest in sorting and recycling infrastructure. The amendment strengthens the recital by adding separate collection, mixed waste sorting, and littering cost coverage — directly responding to EUROPEN's call for stronger collection and infrastructure obligations within the EPR framework."
+  },
+  "c479dd8b9e2b546106a5_amd_515": {
+    "provision_effect": "The amendment removes references to \"packaged products\" and \"of packaging\" in the recital, narrowing the scope so that EPR responsibility applies to producers of packaging only, not producers of packaged products.",
+    "label": "NOISE",
+    "reasoning": "EUROPEN's position on EPR focuses on improving governance, transparency, and oversight of EPR fees and their utilisation — a directional stance about how EPR schemes should function. The amendment makes a textual/scoping change by removing \"packaged products\" and \"of packaging\" from the recital, which is a different directional question (who bears EPR responsibility) that EUROPEN's text does not address. The org's EPR-related advocacy is not specific enough to the scoping question the amendment resolves, and no counterfactual test can establish a directional alignment or opposition."
+  },
+  "83ffbb236b3abf07cc33_amd_1587": {
+    "provision_effect": "The amendment inserts a new requirement for the Commission to establish a \"Packaging and Packaging Waste Forum\" — an expert group ensuring balanced participation of industry stakeholders, including manufacturers, SMEs, and others — to contribute to defining sustainability and design-for-recycling requirements.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly advocated for the creation of a Technical Committee at EU level, managed by the Commission and composed of representatives from national authorities and the entire packaging value chain, to support the development of technical secondary legislation including DfR criteria — directly mirroring the amendment's insertion of the \"Packaging and Packaging Waste Forum.\" The amendment moves precisely in the direction EUROPEN called for, addressing their stated concern that the Commission's earlier omission of such a forum was \"a missed opportunity.\""
+  },
+  "275fb50df0ca889c88c6_amd_462": {
+    "provision_effect": "The amendment removes the explicit reference to \"single use\" packaging and the HORECA ban, and instead adds a carve-out exempting single-use packaging from restrictions when it provides a better overall environmental, economic, and health outcome supported by life cycle thinking.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly urged co-legislators to hold off on restrictions on single-use packaging until health, environmental, and food safety implications are properly assessed, and argued that reuse/refill targets should only apply when they make environmental and ecological sense without jeopardising health and safety. The amendment directly responds to this by introducing a life-cycle-based exemption for single-use packaging with better overall environmental, economic, and health outcomes, and by removing the blanket HORECA ban — moving the text in exactly the direction EUROPEN advocated."
+  },
+  "275fb50df0ca889c88c6_amd_461": {
+    "provision_effect": "The amendment removes the specific reference to \"single use\" packaging and the HORECA ban on single-use packaging for food and beverages consumed on premises, replacing it with a general exemption for single-use packaging that delivers a better overall environmental outcome justified by life-cycle thinking, as well as better economic and health impact.",
+    "label": "ALIGNED",
+    "reasoning": "EUROPEN explicitly urged co-legislators to hold off on restrictions on single-use packaging until health, environmental, and food safety implications are properly assessed, and argued that reuse/refill targets should only apply when they make environmental and ecological sense without jeopardising health and safety. The amendment directly responds to this by removing the blanket HORECA ban on single-use packaging and introducing a life-cycle-based exemption that accounts for overall environmental, economic, and health outcomes — precisely the kind of evidence-based, conditional approach EUROPEN advocated for."
+  },
+  "113b991174dae145cfdd_amd_510": {
+    "provision_effect": "The amendment changes \"encouraging\" economic operators to offer refill possibilities to \"mandating\" them, and adds \"reuse\" alongside refill, while also removing \"refill targets\" from the list of parallel measures.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticises reliance on \"voluntary actions\" and \"corporate waste management plans\" as unlikely to deliver results, and calls for stronger harmonised waste prevention measures and enabling Member States to pursue reuse uptake. The amendment directly responds to this by replacing the weak \"encouraging\" language with a mandatory obligation (\"mandating\") on economic operators to offer refill and reuse options, which aligns with the org's push for stronger, binding measures rather than voluntary ones."
+  },
+  "113b991174dae145cfdd_amd_508": {
+    "provision_effect": "The amendment adds language encouraging and incentivising the use of sales packaging as e-commerce packaging to the list of measures Member States may use to achieve waste targets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on ensuring Member States retain sufficient flexibility to adopt ambitious waste prevention measures and that targets are more stringent — it does not address the specific topic of using sales packaging as e-commerce packaging. The amendment's addition is unrelated to the directional concerns the organisation expresses, and no counterfactual test can link the org's stance to this specific change."
+  },
+  "113b991174dae145cfdd_amd_247": {
+    "provision_effect": "The amendment changes the reference from Article 4(2) to Article 4(1) of Directive 2008/98/EC and adds explicit acknowledgment that specific waste streams may depart from the waste hierarchy where justified by life-cycle thinking, while also adding \"and recycling\" alongside re-use as a packaging measure.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's position focuses on ensuring Member States retain flexibility to pursue ambitious waste prevention measures and that the legal basis of the regulation supports environmental objectives — concerns related to Article 4 on Free Movement and the tension with waste prevention targets. The amendment tweaks the waste hierarchy reference and clarifies that departures from the hierarchy are permissible for specific waste streams, which touches on the same regulatory framework but does not clearly move in the direction the org advocates (stronger harmonised prevention measures or opening clauses for Member States). It is genuinely unclear whether this clarification helps or hinders the org's goal of enabling more ambitious Member State action."
+  },
+  "113b991174dae145cfdd_amd_246": {
+    "provision_effect": "The amendment changes the reference from Article 4(2) to Article 4(1) of the Waste Framework Directive and adds explicit language clarifying that specific waste streams may depart from the hierarchy where justified by life-cycle thinking, while also adding \"and recycling\" alongside re-use as a goal.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's position focuses on ensuring Member States retain flexibility to pursue ambitious waste prevention measures and that the legal basis of the regulation supports environmental objectives — concerns related to Article 4 of the PPWR on Free Movement, not the recital's reference to the Waste Framework Directive hierarchy. While the amendment touches on the waste hierarchy framing (Article 4(1) vs 4(2) of Directive 2008/98/EC) and introduces flexibility for waste streams to depart from the hierarchy, it is genuinely unclear whether this directional change satisfies, contradicts, or is simply orthogonal to the org's specific advocacy for stronger Member State flexibility and more ambitious prevention targets."
+  },
+  "8db70e50073d7706ad29_amd_502": {
+    "provision_effect": "The amendment replaces the original's escalating reduction targets (5% by 2030, 10% by 2035, 15% by 2040) with a single 5% reduction target applicable only to packaging materials where waste has consistently increased and is not highly recyclable, and delays further target-setting pending a Commission review report.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly advocates for a more ambitious 15% reduction target by 2030 (instead of the Commission's proposed 5%), and calls for material-specific sub-targets to avoid substitution between materials. The amendment moves in the opposite direction — it weakens the original targets by limiting the 5% reduction to only certain non-recyclable materials where waste has increased, and defers future targets pending a review, which is far less ambitious than what the organisation demanded."
+  },
+  "d0d0755e299264c4c1c7_amd_1412": {
+    "provision_effect": "The amendment expands the exemption from packaging minimisation rules by adding intellectual property rights (patents, licences, trademarks, designs or models) as additional grounds for exemption, alongside the existing geographical indications of origin exemption, and also extends the exemption to cover the products packaged (not just the packaging design), while adding a 2030 start date.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly opposes exemptions for products subject to geographical indications of origin, arguing they create loopholes that undermine packaging minimisation rules. The amendment moves in the opposite direction by broadening the exemption further — adding intellectual property rights as additional grounds and extending it to the products themselves — which directly contradicts the organisation's stated position against such exemptions."
+  },
+  "d0d0755e299264c4c1c7_amd_1421": {
+    "provision_effect": "The amendment adds a specific application date of 1 January 2030 to the prohibition on unnecessary/deceptive packaging, while leaving the rest of the provision — including the geographical indications exemption — unchanged.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly opposes the geographical indications of origin exemption that remains intact in the amended text, and more broadly advocates for stronger, more enforceable packaging minimisation rules without loopholes. The amendment only adds a delayed implementation date (2030), which weakens the provision's immediate effect rather than strengthening it — the opposite of what the organisation advocates for. Furthermore, the organisation's opposition to the GI exemption is not addressed by this amendment at all."
+  },
+  "d0d0755e299264c4c1c7_amd_1424": {
+    "provision_effect": "The amendment rephrases the prohibition on unnecessary/deceptive packaging from \"shall not be placed on the market\" to \"the placing on the market … shall be prohibited,\" while retaining the same geographical indications exemption that the original contained.",
+    "label": "OPPOSING",
+    "reasoning": "The amendment preserves the geographical indications of origin exemption unchanged, while the organisation explicitly opposes this very exemption, arguing that giving such products a \"free pass\" on packaging optimisation is contradictory and undermines the regulation's effectiveness. The amendment does nothing to remove or narrow the exemption the org objects to, and the org's position is specific and directional on this point."
+  },
+  "d0d0755e299264c4c1c7_amd_1418": {
+    "provision_effect": "The amendment broadens the exemption from packaging minimisation rules by adding intellectual property rights alongside geographical indications of origin as grounds for exemption from the prohibition on deceptive packaging.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly opposes exemptions for products subject to geographical indications of origin, arguing such exemptions undermine packaging minimisation rules. The amendment moves in the opposite direction by expanding the exemption further to also cover intellectual property rights, which directly contradicts the organisation's stated position against such carve-outs."
+  },
+  "fcfbbbaeb53e9d831306_amd_401": {
+    "provision_effect": "The amendment adds a clarification distinguishing reusable from refillable packaging, replaces a reference to \"detailed technical specifications\" with \"design for reusable packaging guidelines,\" and extends requirements for systems for re-use to also cover refill systems.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's matched position focuses specifically on ensuring that systems for re-use include incentives to return packaging (e.g. deposits) and that return rates are embedded as a requirement — a directional stance that is not addressed by this amendment. The amendment instead clarifies the reusable/refillable distinction and extends system requirements to refill, which is a related but different direction. There is a genuine connection to the reuse systems topic, but it is unclear whether these specific textual changes satisfy, contradict, or simply bypass the org's advocacy."
+  },
+  "fcfbbbaeb53e9d831306_amd_402": {
+    "provision_effect": "The amendment adds the phrase \"without prejudice to Article 4(2) Directive 2008/98/EC\" to the recital promoting reusable packaging and re-use systems, subordinating the incentivisation of reuse to the waste hierarchy priority established in that Directive.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on the definition of 'systems for re-use' and the need for return incentives and deposit systems within reuse schemes — not on the relationship between reuse incentivisation and the waste hierarchy under Directive 2008/98/EC. The amendment's sole change is a cross-reference to Article 4(2) of the Waste Framework Directive, a legal qualification that the org's position does not address in any directional way."
+  },
+  "fcfbbbaeb53e9d831306_amd_403": {
+    "provision_effect": "The amendment adds the qualifier \"while preserving food safety and food quality\" to the incentivisation of reusable packaging and re-use systems in the recital.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on strengthening reuse systems through return incentives, higher targets, and better definitions — not on the food safety/food quality qualifier added by this amendment. The org's position does not address whether food safety caveats should or should not be inserted into the reuse incentive recital, so there is no substantive directional stance relevant to this specific change."
+  },
+  "fcfbbbaeb53e9d831306_amd_400": {
+    "provision_effect": "The amendment adds a sentence to recital 43 calling for a comprehensive Commission impact assessment (covering water use, costs for operators and consumers, and health impacts) before re-use targets are proposed for sectors, effectively conditioning or delaying the introduction of re-use targets.",
+    "label": "OPPOSING",
+    "reasoning": "Rethink Plastic explicitly advocates for more ambitious and expanded re-use targets, higher return-rate requirements, and broader sectoral coverage — pushing for stronger and faster action on reuse. The amendment moves in the opposite direction by inserting a precautionary call for a comprehensive impact assessment before re-use targets are even proposed, which would delay or weaken the ambition of reuse targets that the organisation specifically wants strengthened."
+  },
+  "c4947e8124fe3071566e_amd_449": {
+    "provision_effect": "The amendment adds clarifying sentences specifying that only refill occurring via a 'system for refill' counts toward reuse and refill targets, and provides examples of such systems (refill stations, product dispensers).",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly argues that \"refill\" (i.e., consumer-owned \"bring your own\" containers) should be counted as a waste prevention measure rather than toward reuse/refill targets, and that reuse targets should be achieved only through 'systems for reuse.' The amendment directly responds to this by clarifying that only refill happening via a 'system for refill' counts toward the targets, effectively distinguishing structured refill systems from informal consumer-owned container use — aligning with the organisation's position that the two concepts should not be mixed."
+  },
+  "c4947e8124fe3071566e_amd_452": {
+    "provision_effect": "The amendment expands the exclusion from \"packaging\" to cover consumer-owned containers that perform a kitchenware or tableware function (in addition to a packaging function) during refill, and clarifies that this exclusion applies even when the containers were originally placed on the market as food packaging.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly argues that in a refill (\"bring your own\") scenario, the consumer-owned container is not packaging but a consumer-owned product, and therefore should be treated as a waste prevention measure rather than packaging. The amendment strengthens and clarifies exactly this position by broadening the exclusion to cover containers with a kitchenware/tableware function and explicitly stating the exclusion applies even when originally sold as food packaging — directly responding to the org's advocacy that consumer-owned containers used for refill should not be classified as packaging."
+  },
+  "c4947e8124fe3071566e_amd_450": {
+    "provision_effect": "The amendment adds that only refill happening via a 'system for refill' (e.g., a dispenser in an operator's premises or a product dispenser for home consumption) counts toward reuse and refill targets, clarifying that simply pouring a bottled drink into a glass does not qualify as refill under this regulation.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates that 'refill' (which it prefers to call 'bring your own') should be counted as a waste prevention measure distinct from reuse, and that the concept needs clearer definitional boundaries to avoid confusion with reusable packaging systems. The amendment directly responds to this by introducing the concept of a 'system for refill' to demarcate what qualifies as refill for target purposes, aligning with the organisation's call for clearer differentiation and structured definitions around refill activities."
+  },
+  "c4947e8124fe3071566e_amd_663": {
+    "provision_effect": "The amendment revises the definition of 'refill' by introducing the phrase \"entailing a system for refill\" and replacing \"offered by the final distributor in the context of a commercial transaction\" with \"purchased through a final distributor,\" subtly reframing refill as part of a system rather than a standalone operation.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation explicitly argues that 'refill' (bring-your-own) should be clearly distinguished from reuse systems and advocates for renaming it \"bring your own\" rather than \"refill,\" emphasising that the consumer-owned container is not packaging. The amendment modifies the definition by inserting \"entailing a system for refill,\" which partially moves toward the org's concern about distinguishing refill from reuse systems, but it does not rename the concept or fully adopt the org's \"bring your own\" framing — making it genuinely unclear whether this directional change satisfies, contradicts, or merely partially addresses the org's specific advocacy."
+  },
+  "6e91fbc5092871d8d83b_amd_457": {
+    "provision_effect": "The amendment adds a new obligation requiring economic operators selling food and beverages for take-away to offer consumers the option to purchase in refillable or reusable packaging, and ensures consumers can always bring their own containers at no less favourable conditions than single-use packaging.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates that economic operators preparing beverages and food for immediate consumption \"should by default enable consumption by 'bring your own' containers,\" with exceptions needing justification. The amendment directly codifies this position by mandating that operators offer refillable/reusable packaging options and that consumers can always use their own containers at no less favourable conditions — precisely the \"bring your own\" default the organisation called for."
+  },
+  "3f7115a46e186e54b1eb_amd_463": {
+    "provision_effect": "The amendment inserts \"without prejudice to Article 4(2) of Directive 2008/98/EC\" into the recital establishing re-use and refill targets, adding a reference to the waste hierarchy principle without otherwise changing the substance of the targets.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation explicitly argues that reuse and refill target different levels of the waste hierarchy and should not be conflated, which is directly related to the waste hierarchy reference (Article 4(2) of Directive 2008/98/EC) inserted by the amendment. However, it is genuinely unclear whether this cross-reference satisfies the org's concern — the org wants reuse and refill to be treated as distinct hierarchy levels in the targets themselves, while the amendment merely adds a \"without prejudice\" clause that preserves the hierarchy principle without separating the targets."
+  },
+  "3f7115a46e186e54b1eb_amd_461": {
+    "provision_effect": "The amendment removes the specific reference to \"single use\" packaging and the food/beverages take-away sector from the reuse/refill targets, drops the HORECA ban on single-use packaging for on-premises consumption, and replaces it with an exemption clause allowing single-use packaging where it delivers a better overall environmental outcome justified by life-cycle thinking.",
+    "label": "OPPOSING",
+    "reasoning": "The Rethink Plastic alliance advocates strongly for robust reuse and refill targets for take-away food and beverages, including in the HORECA sector, and warns against loopholes that could allow single-use packaging to undermine those targets. The amendment moves in the opposite direction by removing the HORECA single-use ban and introducing a broad life-cycle-based exemption for single-use packaging, which directly contradicts the organisation's position against weakening reuse obligations."
+  },
+  "3f7115a46e186e54b1eb_amd_458": {
+    "provision_effect": "The amendment removes \"food and beverages for take-away\" from the list of sectors subject to quantitative re-use and refill targets, limits transport packaging targets to only \"some\" transport packaging, and adds a derogation allowing single-use packaging when it delivers a better overall environmental, economic, and health outcome justified by life cycle thinking.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation's position strongly advocates for robust reuse and refill targets for take-away food and beverages (including \"bring your own\" container requirements and clear reuse system obligations), and warns against weakening or confusing these targets. The amendment moves in the opposite direction by removing take-away food and beverages from the sectors subject to reuse/refill targets and introducing a broad life-cycle-based derogation for single-use packaging, which directly undermines the ambition the organisation was pushing for."
+  },
+  "3f7115a46e186e54b1eb_amd_459": {
+    "provision_effect": "The amendment conditions the introduction of re-use and refill targets on them representing the best environmental option based on whole life-cycle impact assessments, rather than simply basing targets on the listed factors as in the original.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation advocates strongly for ambitious, clearly defined re-use and refill targets and raises concerns about measurement reliability and data robustness — implying targets should be strengthened and clarified, not made conditional. The amendment weakens the original by adding a prerequisite that targets only apply when they represent the \"best environmental option\" based on life-cycle impact assessments, which could be used to delay or avoid targets — the opposite direction from what the organisation advocates."
+  },
+  "f38c610e1d520e317b3c_amd_274": {
+    "provision_effect": "The amendment strengthens the original by explicitly linking substances of concern to the REACH regulation, replacing \"minimised\" with \"avoided during all life cycle stages of packaging, including the production and waste phases,\" and adding \"used in the manufacture of packaging\" to the scope.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly called for a clear link to the REACH restrictions process and for substances of concern to be addressed across all life cycle stages including the waste phase — precisely what the amendment introduces. The amendment also strengthens \"minimised\" to \"avoided,\" which aligns with the org's criticism that the original proposal was \"too vague on substances of concern and does not incentivise the elimination of harmful chemicals in packaging.\""
+  },
+  "f38c610e1d520e317b3c_amd_836": {
+    "provision_effect": "The amendment changes the recyclability requirements so that they shall \"in addition\" restrict substances for chemical safety reasons where there is an unacceptable risk to human health or the environment, reversing the original prohibition on such restrictions and adding language about substances harmful to human health and the environment.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticised the original proposal for prohibiting chemical safety-based restrictions on substances in recyclability requirements, and called for a clear link to the REACH restrictions process \"when there is an unacceptable risk to human health or the environment\" — language that appears almost verbatim in the amendment. The amendment directly responds to the org's specific advocacy by reversing the prohibition and enabling chemical safety restrictions under exactly the conditions the org demanded."
+  },
+  "f38c610e1d520e317b3c_amd_275": {
+    "provision_effect": "The amendment strengthens the original text by replacing \"minimised\" with \"avoided wherever possible, unless their use is essential and no safer materials are available,\" and adds \"protection of human health and the environment\" as a primary consideration, moving from a minimisation approach to a near-prohibition approach for substances of concern in packaging.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticises the original proposal as \"too vague on substances of concern\" and calls for the \"elimination of harmful chemicals in packaging,\" stating that \"all substances recognised in the EU as substances of concern and very high concern should be restricted from use in packaging.\" The amendment moves precisely in this direction by replacing \"minimised\" with \"avoided wherever possible\" and introducing an essentiality exception — a stronger, near-prohibitory stance that directly responds to the organisation's call to go beyond mere minimisation toward elimination."
+  },
+  "f38c610e1d520e317b3c_amd_838": {
+    "provision_effect": "The amendment adds an exception to the prohibition on restricting substances for chemical safety reasons — allowing such restrictions when there is an unacceptable risk to human health or the environment — and expands the scope of substances of concern to include those negatively affecting sorting in addition to reuse and recycling.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly called for \"a clear link to REACH restrictions process when there is an unacceptable risk to human health or the environment identified, arising from the use of a substance in the manufacture of packaging,\" and criticised the original proposal for prohibiting regulation of substances for chemical safety reasons within recyclability requirements. The amendment directly introduces this exact carve-out language, moving the text precisely in the direction the organisation advocated for."
+  },
+  "d6c785db2110a449d609_amd_287": {
+    "provision_effect": "The amendment replaces the original text's exclusion of chemical safety as a basis for substance restrictions with a positive obligation to end the use of substances of concern in packaging unless their use is essential and no safer alternatives exist, while also adding delegated powers to the Commission for derogations.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly calls for \"more ambitious measures in the PPWR regarding the restriction on the use of substances of concern in packaging,\" criticises the original proposal's failure to align with the EU Chemicals Strategy for Sustainability, and advocates for phasing out the most harmful substances — precisely the direction the amendment takes by replacing the exclusion of chemical safety grounds with a proactive obligation to end the use of substances of concern. The amendment directly responds to the organisation's specific demand for a holistic, preventive approach to chemicals in packaging beyond circularity concerns alone."
+  },
+  "5773ed943337014fb9a7_amd_1299": {
+    "provision_effect": "The amendment adds a specific power for the Commission to adopt delegated acts granting derogations from the scope, timing, or level of minimum recycled content percentages for specific plastic packaging types where suitable recycling technologies are unavailable, not authorised, not sufficiently efficient, or not cost-effective.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly calls for limiting derogations from recycled content requirements (including via delegated acts) as much as possible, warning that such broad derogations create loopholes and undermine enforceability. The amendment moves in the opposite direction by introducing or expanding a delegated act power to grant derogations from minimum recycled content requirements, which is precisely what the organisation argued against."
+  },
+  "5773ed943337014fb9a7_amd_1320": {
+    "provision_effect": "The amendment expands the grounds for derogating from minimum recycled content requirements by adding \"legally approved recycling methodologies and the lack of availability of sufficient collection and sorting infrastructure\" as additional justifications for adjusting the minimum percentages via delegated act.",
+    "label": "OPPOSING",
+    "reasoning": "Rethink Plastic explicitly criticises the existing derogation in Article 10 (point V in their list) as a broad and unnecessary loophole that undermines enforceability, and calls for such derogations to be \"limited as much as possible.\" The amendment moves in the opposite direction by widening the grounds for derogation, adding new justifications beyond those already in the original text."
+  },
+  "5773ed943337014fb9a7_amd_1325": {
+    "provision_effect": "The amendment narrows the trigger for derogating from recycled content minimums by replacing \"may have adverse effects\" with \"may directly lead to adverse effects,\" making the derogation condition stricter and harder to invoke.",
+    "label": "ALIGNED",
+    "reasoning": "Rethink Plastic explicitly criticises the derogation in Article 10 as a \"broad derogation\" that could undermine recycled content requirements and calls for such derogations to be \"limited as much as possible.\" The amendment tightens the derogation by requiring a direct causal link to adverse effects rather than a mere possibility, which moves in exactly the direction the organisation advocated — restricting the scope of the exemption."
+  },
+  "5773ed943337014fb9a7_amd_1322": {
+    "provision_effect": "The amendment adds the phrase \"in close cooperation with the Member States\" to the Commission's power to adopt delegated acts adjusting minimum recycled content percentages, but otherwise leaves the derogation mechanism intact.",
+    "label": "OPPOSING",
+    "reasoning": "Rethink Plastic explicitly opposes the derogation mechanism in Article 10 that allows delegated acts to lower minimum recycled content requirements, calling it a broad and unnecessary loophole that should be \"limited as much as possible.\" The amendment does not restrict or remove this derogation — it merely adds a procedural requirement for Member State cooperation — leaving the derogation power the organisation opposes fully in place, and thus moves in the opposite direction from what the organisation advocated."
+  },
+  "2b07d3d1e576132b7d78_amd_399": {
+    "provision_effect": "The amendment adds qualifications to the incentivisation of reusable packaging — conditioning it on the waste hierarchy (Article 4(2) of Directive 2008/98/EC) and food safety concerns — and appends new text calling for Member State flexibility on re-use due to water usage concerns and requiring a Commission risk assessment on reusable packaging versus water management targets.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation's position strongly advocates for ambitious reuse targets and robust reuse systems (including DRS accommodating reusable packaging), reflecting a clear directional stance in favour of strengthening reuse incentives. The amendment moves in the opposite direction by adding caveats that limit or condition the incentivisation of reusable packaging (food safety carve-outs, water usage concerns, Member State flexibility, and a risk assessment requirement), which weakens the reuse ambition the organisation supports."
+  },
+  "2b07d3d1e576132b7d78_amd_445": {
+    "provision_effect": "The amendment adds a cross-reference to Article 4(2) of Directive 2008/98/EC (the waste hierarchy) as a caveat to the recital's aim of limiting risks that reusable packaging is not re-used in practice, without otherwise changing the substance of the recital.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text discusses standards for reusable packaging systems and DRS requirements, but does not express any directional position on whether the recital on reuse systems should include a cross-reference to the waste hierarchy directive. The amendment's specific change — inserting \"without prejudice to Article 4(2) Directive 2008/98/EC\" — is not addressed in any way by the organisation's advocacy, making this a subject mismatch rather than a directional one."
+  },
+  "de5bc92328315d65775b_amd_535": {
+    "provision_effect": "The amendment weakens the obligation for deposit and return systems (DRS) for single-use plastic beverage bottles and metal beverage containers, changing the language from \"obligatory\" to \"promoted.\"",
+    "label": "OPPOSING",
+    "reasoning": "Rethink Plastic explicitly supports the obligation to establish DRS for single-use plastic bottles and beverage cans, stating it \"will drastically reduce environmental litter\" and arguing that the possibility to derogate from setting DRS \"should therefore be deleted.\" The amendment moves in the opposite direction by replacing the mandatory requirement with a mere promotion, directly contradicting the organisation's advocacy for a strong, binding DRS obligation."
+  },
+  "de5bc92328315d65775b_amd_534": {
+    "provision_effect": "The amendment removes the condition that DRS accommodation of reusable packaging is only required where \"technically and economically feasible,\" making it a straightforward requirement that DRS systems also accommodate reusable packaging when Member States choose to include other packaging formats.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates that \"new DRS must be set-up to accommodate reusable packaging from the outset,\" arguing that if the regulation obliges the beverage sector to implement DRS for single-use and to achieve reuse targets, the same system should encompass both options. The amendment moves in exactly this direction by requiring that DRS systems also accommodate reusable packaging (removing the \"technically and economically feasible\" qualifier), directly responding to the organisation's specific position."
+  },
+  "de5bc92328315d65775b_amd_525": {
+    "provision_effect": "The amendment weakens the obligation on Member States to establish deposit and return systems, replacing mandatory language (\"will\", \"shall establish\") with permissive language (\"may\"), making DRS optional rather than required.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly advocates that the obligation to establish DRS should be maintained and that \"the possibility to derogate from setting DRS systems should therefore be deleted,\" reflecting a clear position in favour of mandatory DRS. The amendment moves in the opposite direction by replacing mandatory language with permissive \"may,\" making DRS optional — directly contradicting the organisation's stated position."
+  },
+  "de5bc92328315d65775b_amd_530": {
+    "provision_effect": "The amendment adds a new sentence requiring Member States to mandate producers to use standardised (single-use and reusable) packaging formats to ensure total interoperability between deposit and return system schemes.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation clearly advocates that DRS must accommodate reusable packaging from the outset and that the same system should encompass both single-use and reusable options, which is directionally related to the amendment's push for interoperability. However, the organisation's position focuses on ensuring DRS infrastructure supports reusable packaging, while the amendment specifically mandates standardised packaging formats for total interoperability between DRS schemes — a distinct technical requirement (producer-level format standardisation) that the org does not explicitly advocate for, making it genuinely unclear whether this specific direction satisfies their position."
+  },
+  "113b991174dae145cfdd_amd_506": {
+    "provision_effect": "The amendment adds a specific example of an economic instrument under extended producer responsibility schemes — namely, the creation of a dedicated fund within producer responsibility organisations for packaging prevention, reduction, and reuse.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The EEB advocates for stronger waste prevention measures and more ambitious targets, including ensuring Member States can implement meaningful measures beyond voluntary actions. The amendment adds a specific EPR fund mechanism as an example, which is directionally consistent with stronger prevention tools, but the EEB's position focuses primarily on Member States' autonomy and the ambition of targets — not specifically on EPR fund structures. It is genuinely unclear whether this narrow addition to the EPR framework satisfies or meaningfully responds to the EEB's advocacy."
+  },
+  "113b991174dae145cfdd_amd_509": {
+    "provision_effect": "The amendment replaces \"refill targets\" with \"refill obligations\" in the list of parallel measures, making refill requirements mandatory rather than aspirational targets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on Member States' ability to adopt more ambitious waste prevention measures and the legal basis of the regulation, not on the specific distinction between \"refill targets\" and \"refill obligations.\" While the EEB broadly supports stronger reuse and refill measures, their position is not specific enough to the directional change this amendment makes (strengthening refill from targets to obligations), and an organisation with the opposite view could equally cite the EEB's general language without contradiction."
+  },
+  "2b07d3d1e576132b7d78_amd_1389": {
+    "provision_effect": "The amendment inserts a new obligation requiring the Commission to request European standardisation organisations to update the harmonised standard on composting and biodegradation (EN 13432), specifically to reflect actual conditions in bio-waste treatment facilities including anaerobic digestion, composting times, and admissible contamination levels.",
+    "label": "ALIGNED",
+    "reasoning": "The EEB explicitly identifies EN 13432:2000 (Compostability) as a standard that needs revision to align with the proposed regulation, and argues that technical specifications such as the duration of decomposition processes of compostable packaging should be clearly specified. The amendment directly mandates the Commission to request an update to that exact standard, incorporating real-world conditions like composting times and anaerobic digestion — precisely the kind of revision the EEB advocated for."
+  },
+  "10c13881ba9a1c40b4d2_amd_354": {
+    "provision_effect": "The amendment adds \"resource- and cost-effectiveness\" as an additional criterion to be assessed when reviewing recycling technology availability for non-PET contact sensitive plastic packaging, and clarifies the scope to explicitly focus on contact sensitive packaging made from materials other than PET.",
+    "label": "ALIGNED",
+    "reasoning": "Haleon explicitly raises concerns about the limited availability of recycled plastic suitable for non-PET contact sensitive packaging and advocates for conditioning the recycled content targets on whether recycling processes have been authorised and are practically viable. The amendment strengthens the reassessment criteria by adding resource- and cost-effectiveness alongside technological availability, directly responding to Haleon's concern that suitable recycling solutions are not commercially available at scale — a position specific enough to align with the amendment's direction of making the derogation review more robust for non-PET contact sensitive packaging."
+  },
+  "10c13881ba9a1c40b4d2_amd_333": {
+    "provision_effect": "The amendment extends the exclusion from minimum recycled content obligations to contact sensitive packaging for foods (covered by Regulation (EC) No 1935/2004 and Regulation (EU) No 609/2013), in addition to the already-excluded medical packaging categories.",
+    "label": "NOISE",
+    "reasoning": "Haleon's position specifically supports mandatory recycled content targets \"including contact sensitive packaging (with the exclusion of medicines and medical devices)\" — meaning they explicitly accept the recycled content obligation for food contact packaging. The amendment expands exclusions to food contact packaging, which is outside the scope of Haleon's advocacy (a consumer healthcare/pharmaceutical company). Haleon's concerns about supply availability and sector-specific legislation relate to their own product categories, not food packaging, so their text does not constitute a specific directional stance on whether food contact packaging should be excluded."
+  }
+}

@@ -1,0 +1,892 @@
+{
+  "cc4c112db48314f688aa_amd_363": {
+    "provision_effect": "The amendment replaces the reference to specific international conventions listed in the Annex (with a catch-all for unlisted rights) with references to the OECD Due Diligence Guidelines for Multinational Enterprises and UN Guiding Principles as the basis for human rights and environmental due diligence obligations.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly welcomes that the proposal draws from the UNGPs and OED Guidelines, but its specific concern about material scope is that the Annex-based presentation of rights deviates from conventional international human rights instruments and may create interpretive gaps — implying it wants the Annex to be better aligned with those instruments, not replaced. More critically, the amendment removes the broader catch-all coverage for rights not specifically listed in the Annex, which the original text provided; the organisation's position advocates for comprehensive material scope aligned with international frameworks, whereas the amendment narrows the textual basis and eliminates the catch-all provision, moving in the opposite direction from the organisation's call for broader, more robust coverage."
+  },
+  "8733ac23e8a001a3587d_amd_369": {
+    "provision_effect": "The amendment adds \"prioritise\" and \"remedy\" to the list of due diligence steps companies must take regarding adverse human rights and environmental impacts, strengthening the obligations beyond the original text.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation advocates for stronger due diligence requirements aligned with UNGPs, including stakeholder involvement and policy commitments, and mentions the \"need to ensure prioritisation of action\" in passing. However, the org's matched text focuses primarily on policy commitment, public disclosure, and stakeholder involvement in policy development — not specifically on adding \"prioritise\" or \"remedy\" as explicit due diligence steps. While there is a genuine thematic connection (the org supports stronger due diligence obligations), it is genuinely unclear whether this specific directional change — inserting \"prioritise\" and \"remedy\" into the recital — directly responds to the org's stated advocacy positions."
+  },
+  "8733ac23e8a001a3587d_amd_367": {
+    "provision_effect": "The amendment changes \"value chains\" to \"supply chains,\" narrows the scope of adverse impacts to those companies \"cause or contribute to,\" replaces \"complaints procedure\" with \"notification procedure,\" and adds a competition law caveat to public communication on due diligence.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly advocates for making the due diligence policy public and for broad stakeholder involvement, whereas the amendment introduces a competition law caveat that limits what companies must disclose publicly — directly contradicting the org's position that the due diligence policy should be made public. Additionally, replacing \"complaints procedure\" with \"notification procedure\" weakens the mechanism for affected stakeholders to raise concerns, which runs counter to the org's emphasis on stakeholder engagement and robust due diligence processes."
+  },
+  "8733ac23e8a001a3587d_amd_368": {
+    "provision_effect": "The amendment replaces \"potential\" adverse impacts with \"foreseeable, based on the state of knowledge\" adverse impacts, narrowing the scope of impacts companies must address from all potential impacts to only those that are foreseeable given current knowledge.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on stakeholder involvement in due diligence policy development, public disclosure of the policy, and the identification of actual and potential impacts broadly — it does not take any directional stance on whether the threshold for adverse impacts should be \"potential\" versus \"foreseeable based on the state of knowledge.\" The org's position is not specific enough to determine whether it would support or oppose this narrowing of scope."
+  },
+  "cc4c112db48314f688aa_amd_316": {
+    "provision_effect": "The amendment replaces \"potential\" adverse impacts with \"foreseeable\" adverse impacts (based on the state of knowledge) in step 3 of the due diligence process, narrowing the scope of impacts companies must prevent, cease, or minimise.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text is an executive summary providing general commentary on the proposal's scope, personal coverage, and alignment with international frameworks (UNGPs, OECD Guidelines), with no specific directional stance on whether \"potential\" versus \"foreseeable\" impacts should be used in step 3 of the due diligence process. The org text does not address this specific distinction at all, making it impossible to determine whether they would support or oppose this narrowing change."
+  },
+  "16941e33a5b3ee8b91b5_amd_676": {
+    "provision_effect": "The amendment replaces the definition of 'adverse human rights impact' from one referencing a specific list of rights/prohibitions in an Annex to one referencing the principles set out in the OECD Due Diligence Guidelines and UN Guiding Principles, removing the enumerated Annex-based approach.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly recommended aligning the definition of adverse impacts with the UNGPs and OED Guidelines, and moving away from the enumeration of individual rights in an Annex (the \"one right\" approach). The amendment does exactly this — it replaces the Annex-based enumeration with a reference to the OECD Due Diligence Guidelines and UN Guiding Principles, directly responding to the organisation's specific advocacy."
+  },
+  "5814fc402b792fb9f969_amd_1653": {
+    "provision_effect": "The amendment replaces the word \"company\" with \"undertaking\" in point 21 of the Annex, while also updating the cross-reference from points \"1 to 20\" to \"1 to 20a\".",
+    "label": "NOISE",
+    "reasoning": "The amendment makes only a terminological substitution (\"company\" → \"undertaking\") and a minor cross-reference update, neither of which is addressed by the organisation's position. The org's text focuses on the substantive scope of rights covered in the annex, not on the legal terminology used to describe the obligated entity. There is no directional advocacy position that corresponds to this change."
+  },
+  "f48526a68facc0d8f017_amd_677": {
+    "provision_effect": "The amendment broadens the definition of 'adverse human rights impact' by replacing 'adverse impact on protected persons resulting from the violation of one of the rights or prohibitions' with 'any negative impact on the enjoyment of rights,' removing the 'violation' threshold and expanding coverage beyond the listed rights to include those enshrined in international conventions more broadly.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly warned that introducing the concept of 'violation' risks raising the threshold for when an impact is covered, potentially narrowing the scope of due diligence obligations. The amendment directly responds to this concern by removing the 'violation' framing and replacing it with 'any negative impact on the enjoyment of rights,' lowering the threshold in exactly the direction the organisation advocated for."
+  },
+  "eaaa6e2045c11dfe549b_amd_678": {
+    "provision_effect": "The amendment replaces the reference to a listed annex of rights with direct reference to the EU Charter of Fundamental Rights and internationally ratified conventions, removing the separate annex-based list of rights while retaining the annex reference for the conventions.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticised the original approach of listing rights in one annex while using a limited 'catch all' for instruments in another, and specifically flagged the omission of the EU Charter of Fundamental Rights as a key gap. The amendment directly responds to this by replacing the annex-listed rights with a reference to the EU Charter of Fundamental Rights and ratified international conventions, moving in the direction the organisation advocated for."
+  },
+  "f48526a68facc0d8f017_amd_1652": {
+    "provision_effect": "The amendment removes the requirement that the company \"could have reasonably established the risk of such impairment and any appropriate measures to be taken\" and replaces it with a simpler \"foreseeable risk\" standard, while also dropping the reference to considering \"all relevant circumstances of their operations, such as the sector and operational context.\"",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation expresses concern that introducing the concept of \"violation\" risks raising the threshold for when an impact is covered by due diligence obligations, implying they want a lower or clearer threshold. The amendment simplifies the catch-all provision by replacing the detailed \"reasonably established\" standard with a \"foreseeable risk\" test, which could be seen as either lowering or raising the threshold depending on interpretation. It is genuinely unclear whether this directional change satisfies the organisation's concern about thresholds being set too high."
+  },
+  "0f774e7f8ed597c27ca7_amd_846": {
+    "provision_effect": "The amendment expands the due diligence policy description requirement by adding \"concrete measures,\" extending scope explicitly \"across the value chain,\" requiring inclusion of policies on own business models and purchasing practices, and mandating a comprehensive third-party audit report for the previous three years when independent verification is referenced.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation advocates for stronger, more substantive due diligence requirements aligned with UNGPs, including greater transparency, accountability, and broader value chain coverage — directions the amendment moves toward. However, the org's specific critiques focus on the absence of a human rights policy commitment, lack of public disclosure requirements, and missing stakeholder involvement in policy development, none of which are directly addressed by this amendment. The amendment strengthens process and transparency elements, which partially aligns with the org's concerns, but it is genuinely unclear whether this specific direction satisfies or is orthogonal to the org's primary advocacy positions."
+  },
+  "a6d3fd3aec788a91a9ad_amd_845": {
+    "provision_effect": "The amendment expands the due diligence description requirement to explicitly cover the full value chain, integration into business models and procurement practices, and replaces the narrow \"code of conduct\" verification with broader monitoring and compliance with the Directive itself.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation specifically criticised the original text's reliance on codes of conduct and contractual verification as risking \"checkbox compliance,\" and advocated for a genuine value chain approach beyond \"established business relationships.\" The amendment directly responds to both concerns by removing the \"code of conduct\" framing, broadening due diligence to cover the full value chain including procurement and business practices, and replacing narrow verification with broader monitoring — precisely the direction the organisation advocated for."
+  },
+  "a6d3fd3aec788a91a9ad_amd_865": {
+    "provision_effect": "The amendment inserts a new paragraph requiring that companies' due diligence policies be proportionate and commensurate to the likelihood and severity of impacts and their specific circumstances, including sector, location, supply chain size, company size, capacity, resources, and leverage.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on the scope of due diligence (value chain coverage, 'established business relationship' definition, and risks of checkbox compliance), not on whether due diligence obligations should be proportionate or scaled to company circumstances. The amendment introduces a proportionality/commensurateness principle, which the organisation neither advocates for nor opposes in its expressed position. The organisation's concerns are directionally distinct from what the amendment adds."
+  },
+  "a6d3fd3aec788a91a9ad_amd_330": {
+    "provision_effect": "The amendment narrows the scope from \"value chain\" (including downstream activities) to \"supply chain\" (upstream only), removes the \"established\" qualifier from business relationships, limits indirect relationships to cases of substantiated knowledge, and restricts coverage to relationships outside the EU that are directly necessary to the company's activities.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly welcomed the proposal's application to the \"full value chain,\" including downstream impacts (use of goods and services), and criticised the \"established business relationship\" limitation as creating uncertainty and perverse incentives. The amendment moves in the opposite direction on both counts: it removes downstream coverage entirely (reverting to \"supply chain\") and, while it drops the \"established\" qualifier, it introduces new restrictions (substantiated knowledge for indirect relationships, EU-external limitation) that further narrow scope rather than broadening it as the organisation advocated."
+  },
+  "221c50ead2f5282c0d9b_amd_850": {
+    "provision_effect": "The amendment narrows the scope of due diligence application from \"established business relationships\" to only \"direct business relationships,\" reducing the reach of the due diligence obligation along the value chain.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly flags uncertainty around the concept of 'established commercial relationship' and its impact on the scope of due diligence, advocating for clear guidance and a broader, more meaningful engagement with due diligence across the value chain in line with the UNGPs. The amendment moves in the opposite direction by narrowing the scope from \"established\" to only \"direct\" business relationships, which would reduce rather than strengthen the reach of due diligence obligations the organisation sought to clarify and expand."
+  },
+  "fa325cd35223e8a7a396_amd_744": {
+    "provision_effect": "The amendment changes 'value chain' to 'supply chain' and replaces 'auditor' with 'a company' in the definition of independent third-party verification, narrowing the scope of the chain covered and broadening who can conduct verification.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text mentions third-party verification only as an example of a 'low hanging fruit' compliance tool, without taking any directional stance on how the definition of independent third-party verification should be worded, who should conduct it, or whether it should cover the value chain versus the supply chain. There is no specific advocacy position that aligns with or opposes the technical definitional changes made by this amendment."
+  },
+  "72cef4e5d4491ee527c0_amd_261": {
+    "provision_effect": "The amendment inserts a reference to Article 191 TFEU on environmental policy and adds \"environmental\" rights alongside \"human\" rights as core values guiding the Union's international action.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on ensuring the due diligence directive aligns with UNGPs and OECD Guidelines, and advocates for strengthening human rights protections in corporate due diligence law. While they mention climate change and environmental degradation in passing, they do not express a specific directional stance on whether environmental rights should be elevated to the same level as human rights in the foundational recital, or whether Article 191 TFEU should be referenced there. Their text is too general and focused on a different aspect of the proposal to constitute a specific advocacy position on this amendment's direction."
+  },
+  "72cef4e5d4491ee527c0_amd_492": {
+    "provision_effect": "The amendment adds \"good governance\" to the list of areas where the Directive is without prejudice to other Union legislative acts, and appends a non-exhaustive list of specific EU acts (timber/deforestation, posting of workers, forced labour) to which the lex specialis rule applies.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses broadly on ensuring the CSRD/CSDDD aligns with UNGPs and OECD Guidelines, and advocates for strengthening human rights due diligence requirements generally. It does not express any specific directional stance on adding \"good governance\" to the without-prejudice clause or on enumerating specific EU legislative acts (timber, posting of workers, forced labour) in that clause. The matched text is general introductory framing with no advocacy position on this specific amendment's changes."
+  },
+  "72cef4e5d4491ee527c0_amd_290": {
+    "provision_effect": "The amendment inserts a new recital establishing the 2030 climate mitigation objective and linking the Directive to the 8th EAP's goal of phasing out environmentally harmful subsidies, including fossil fuel subsidies, with a binding Union monitoring framework.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses on human rights due diligence, the UNGPs, OECD Guidelines, and corporate sustainability obligations under the CSRD/CSDDD — it does not express any specific directional stance on fossil fuel subsidy phase-out, climate mitigation objectives, or the 8th EAP. The references to climate change and just transition in the org's text are only general background framing, not substantive advocacy positions on the specific content of this amendment."
+  },
+  "54ef14c5d5e5ecd8fef5_amd_274": {
+    "provision_effect": "The amendment makes no substantive change to the original text — both the original and amended versions are identical footnote references to the UN Guiding Principles on Business and Human Rights.",
+    "label": "NOISE",
+    "reasoning": "The original and amended texts are identical, meaning there is no substantive change to evaluate. The organisation's matched chunk is simply an endnotes/references section citing the same UN Guiding Principles document, with no directional advocacy position expressed on any specific provision."
+  },
+  "54ef14c5d5e5ecd8fef5_amd_273": {
+    "provision_effect": "The amendment leaves the footnote text identical to the original, with the justification noting the importance of grounding the Directive in international standards like the OECD Guidelines that refer to the supply chain.",
+    "label": "NOISE",
+    "reasoning": "The amendment makes no substantive change to the text — the original and amended versions are identical. The matched org chunk is merely an endnote citation listing the UNGPs and OECD Guidelines, with no directional advocacy position on any specific provision. There is no substantive change to evaluate the org's position against."
+  },
+  "e69fd15a9bd3d2931bc2_amd_802": {
+    "provision_effect": "The amendment inserts the word \"risk-based\" before \"human rights and environmental due diligence,\" qualifying the due diligence obligation to reflect differentiation in risks.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is an analytical briefing that examines the proposal's elements and asks how they can be strengthened, but it does not express a specific directional stance on whether due diligence should or should not be qualified as \"risk-based.\" The matched chunk contains no substantive advocacy position on this particular modification — it is descriptive and methodological in nature, not a directional advocacy claim about risk-based framing."
+  },
+  "221c50ead2f5282c0d9b_amd_1048": {
+    "provision_effect": "The amendment replaces the original contractual cascading obligation with a broader requirement to obtain contractual and other assurances, adds that contractual terms must be reasonable and non-discriminatory, introduces sector-specific assurance requirements for high-impact sectors, and clarifies that obtaining contractual assurances does not exempt an undertaking from further obligations or liability.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation specifically critiques the proposal's heavy reliance on contractual assurances, arguing it may not create the right balance of incentives for companies to go beyond contract and certification and meaningfully engage with due diligence. The amendment both broadens the assurance mechanism (adding \"other assurances,\" sector-specific requirements, and non-discrimination terms) and clarifies that contractual assurances do not exempt companies from further obligations or liability — the latter element partially addresses the org's concern. However, it is genuinely unclear whether the amendment as a whole satisfies or contradicts the org's position, since it still centres on contractual assurances while adding only partial safeguards against over-reliance on them."
+  },
+  "221c50ead2f5282c0d9b_amd_1051": {
+    "provision_effect": "The amendment replaces \"seek contractual assurances\" with \"obtain assurances,\" removes the reference to a \"code of conduct,\" replaces \"corrective action plan\" with \"prevention action plan,\" and removes the explicit \"contractual cascading\" mechanism and the reference to paragraph 5 on contractual assurances.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly critiques the proposal's heavy reliance on contractual assurances, arguing it does not create the right balance of incentives for companies to go beyond contract and certification and meaningfully engage with due diligence as envisaged in the UNGPs. The amendment moves in exactly this direction by removing the explicit \"contractual assurances\" framing and the \"contractual cascading\" mechanism, replacing them with broader \"assurances\" language — reducing the proposal's dependence on contractual mechanisms the organisation flagged as insufficient."
+  },
+  "221c50ead2f5282c0d9b_amd_1052": {
+    "provision_effect": "The amendment weakens the contractual cascading obligation by making it optional (\"may seek, where appropriate\"), limiting it to partners outside the EU, removing the requirement to cascade assurances through the value chain, and adding a clause that general due diligence duty prevails over contractual assurances.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly criticises the proposal's heavy reliance on contractual assurances as insufficient to ensure meaningful due diligence engagement in line with the UNGPs, implying they want companies to go *beyond* contractual assurances — not that the contractual assurance obligation should be weakened or made optional. The amendment moves in the opposite direction by making contractual assurances discretionary and geographically limited, further reducing the substantive due diligence obligation the organisation wanted strengthened."
+  },
+  "111a3aa4d3c050155ca6_amd_1054": {
+    "provision_effect": "The amendment removes the word \"established\" from \"established business relationship,\" broadening the scope of contractual assurances to apply to any business relationship, not just established ones.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text merely describes what the proposal says about contractual assurances without taking a directional stance on whether the \"established\" qualifier should be retained or removed. The surrounding context focuses on financial sector scope and due diligence alignment, not on the specific question of whether the business relationship threshold should be \"established\" or simply any relationship. There is no specific advocacy position on this directional change."
+  },
+  "240fc204b773157bda77_amd_536": {
+    "provision_effect": "The amendment replaces the original multi-condition scope (covering companies with 500+ employees and €150m turnover, plus medium companies in high-impact sectors) with a single, much higher threshold of 3000+ employees and €900m+ turnover, significantly narrowing the personal scope of the Directive.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights explicitly criticises the proposal's already \"reduced personal scope\" as a departure from the UNGPs, which hold that all companies have a responsibility to respect human rights regardless of size, and notes the inadequacy of a 'trickle down' approach. The amendment moves in the opposite direction — dramatically raising the threshold and narrowing the scope even further — which directly contradicts the organisation's advocacy for broader coverage."
+  },
+  "240fc204b773157bda77_amd_555": {
+    "provision_effect": "The amendment lowers the employee threshold from 250 to 50 and the turnover threshold from EUR 40 million to EUR 8 million for the second-tier category of companies subject to due diligence obligations, while also renaming the sector designation from 'high impact' to 'high risk'.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The Danish Institute for Human Rights criticises the proposal's reduced personal scope as a departure from the UNGPs (which apply to all companies regardless of size), and notes increased focus on encouraging SMEs to undertake proportionate due diligence — suggesting they favour broader coverage. The amendment does expand coverage by significantly lowering the thresholds, which moves in the direction the org advocates. However, the org's position is framed around the principle that all companies should be covered regardless of size, and it is genuinely unclear whether this partial threshold reduction (still limited to high-risk sectors) satisfies their concern or whether they would view it as still insufficient relative to the UNGP standard they invoke."
+  },
+  "240fc204b773157bda77_amd_592": {
+    "provision_effect": "The amendment inserts a new paragraph extending the Directive's scope to EU companies that don't meet the standard thresholds if they belong to a group whose third-country parent company exceeds 5,000 employees or EUR 900 million net worldwide turnover.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation critiques the proposal's reduced personal scope as a departure from the UNGPs (which apply to all companies regardless of size) and expresses concern that the thresholds are too narrow, suggesting a preference for broader coverage. The amendment does expand scope by capturing additional companies via their third-country parent group, which directionally aligns with the org's call for wider coverage. However, the org's position focuses on the overall threshold framework and the 'trickle-down' approach rather than specifically advocating for this particular group-based extension mechanism, making it genuinely unclear whether this specific amendment satisfies their advocacy."
+  },
+  "240fc204b773157bda77_amd_556": {
+    "provision_effect": "The amendment changes the turnover threshold for medium EU companies in high-impact sectors from \"net worldwide turnover of more than EUR 40 million\" to \"net EU turnover of more than EUR 40 million in the Union,\" narrowing the geographic scope of the turnover calculation.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes the personal scope thresholds in the proposal (including the EUR 40 million turnover figure) but does not take any directional stance on whether the turnover calculation should be worldwide or EU-only. Their advocacy focuses on the overall scope being too narrow relative to the UNGPs and the trickle-down approach, not on the geographic basis of the turnover metric. No specific position on this directional change can be identified."
+  },
+  "240fc204b773157bda77_amd_595": {
+    "provision_effect": "The amendment replaces the original threshold conditions for third-country companies with a single turnover threshold of EUR 8 million, and explicitly includes large as well as listed SMEs, broadening the scope of covered non-EU undertakings.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation critiques the proposal's reduced personal scope as a departure from the UNGPs (which apply to all companies regardless of size) and notes concern about the 'trickle down' approach, suggesting they favour broader coverage. The amendment does expand scope by including listed SMEs and lowering the turnover threshold, which partially aligns with the org's direction. However, the org's position is specifically about the inadequacy of excluding smaller companies and the reliance on contractual assurances rather than direct obligations — it is genuinely unclear whether this particular amendment's formulation (large + listed SMEs with an EUR 8m turnover threshold) satisfies or falls short of what the org advocates, making the directional fit ambiguous."
+  },
+  "41ef9792131352da9d97_amd_357": {
+    "provision_effect": "The amendment removes the financial sector's exclusion from the high-impact category and instead includes the provision of financial services (loans, credits, insurance, investment services, etc.) as a high-impact sector alongside textiles, agriculture, and extractives.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly notes that \"the financial sector is excluded from the high-impact category despite being the subject of OECD guidance,\" implying this exclusion is inconsistent and problematic. The amendment directly corrects this by including financial services in the high-impact sector list, which is precisely the direction the organisation's critique points toward."
+  },
+  "41ef9792131352da9d97_amd_356": {
+    "provision_effect": "The amendment expands the list of high-impact sectors by adding wearing apparel, retail trade, marketing/advertising of food, animal products, energy, construction, financial services, ICT/digital services, and tourism/hospitality to the original narrower list.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation notes that the financial sector is excluded from the high-impact category despite being covered by OECD guidance, implying a concern about the narrowness of the high-impact sector list. The amendment does expand the list significantly, including adding financial services. However, the organisation's matched text does not clearly advocate for expanding the high-impact sector list in this direction — it focuses more on the reduced personal scope and SME issues rather than specifically calling for the addition of these sectors. There is a genuine connection (the org flags the financial sector exclusion, which the amendment partially addresses), but it is unclear whether the amendment's broader expansion satisfies the org's position."
+  },
+  "41ef9792131352da9d97_amd_354": {
+    "provision_effect": "The amendment removes the enumerated list of high-impact sectors from recital 22 and changes the language describing the financial sector's coverage from \"potential\" adverse impacts to \"foreseeable\" adverse impacts (based on the state of knowledge).",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text describes and critiques the high-impact sector designations and the financial sector's exclusion from that category, but does not take a specific directional stance on either the removal of the enumerated sector list from the recital or the substitution of \"potential\" with \"foreseeable\" adverse impacts in the financial sector context — which are the two concrete changes the amendment makes. The org's position is descriptive and broadly critical of the proposal's personal scope, without advocating specifically for or against the direction of either change introduced by this amendment."
+  },
+  "41ef9792131352da9d97_amd_355": {
+    "provision_effect": "The amendment significantly expands the list of high-impact sectors beyond the original three (textiles, agriculture, extractives) to include energy, chemicals, plastics, construction, transportation, electronics, waste management, financial services, technology, weapons, and others, while also broadening the basis for sector designation beyond OECD guidance alone.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text describes and critiques the existing high-impact sector list (textiles, agriculture, extractives) and notes the financial sector's exclusion, but does not advocate for expanding or contracting the list of high-impact sectors in any specific directional way. Their concern is primarily about the reduced personal scope relative to the UNGPs and the treatment of SMEs, not about which sectors qualify as high-impact. There is no specific directional stance on adding or removing sectors that the amendment could be said to respond to."
+  },
+  "41ef9792131352da9d97_amd_558": {
+    "provision_effect": "The amendment expands the definition of the textiles/leather high-impact sector to include wearing apparel, articles of fur, and retail trade (in addition to the original manufacture and wholesale trade of textiles, clothing, and footwear).",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and critiques the personal scope of the proposal (thresholds, SME exclusions, financial sector treatment) without taking any directional stance on whether the textiles/leather sector definition should be broadened or narrowed. Their mention of textiles is purely descriptive background, not a specific advocacy position on the scope of that sector's definition."
+  },
+  "80a16c83727432e53e84_amd_1065": {
+    "provision_effect": "The amendment replaces \"targeted and proportionate support for an SME\" with \"necessary support such as loans or financing for business partners, in particular for SMEs,\" broadening both the type of support specified (adding concrete examples like loans/financing) and the scope of beneficiaries (from SMEs only to all business partners).",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticised the original provision for lacking clarity on what support would be provided and when it would be triggered, noting it was insufficient to encourage SMEs to meaningfully engage in due diligence. The amendment directly responds to this by specifying concrete forms of support (loans or financing), which addresses the organisation's concern about the lack of clarity on what assistance means in practice and strengthens the support obligation beyond the vague \"targeted and proportionate\" framing."
+  },
+  "80a16c83727432e53e84_amd_1064": {
+    "provision_effect": "The amendment removes the conditional clause \"where compliance with the code of conduct or the corrective action plan would jeopardise the viability of the SME,\" making the obligation to provide targeted and proportionate support to SMEs unconditional rather than triggered only when the SME's viability is at risk.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation specifically criticised the original text's conditionality, noting it was \"unclear on what this means in practice and therefore what the threshold for the provision of assistance may be\" and that the lack of clarity around when \"the viability of the SME would be jeopardised\" would fail to drive meaningful SME engagement. The amendment directly responds to this concern by removing that conditional threshold entirely, making support unconditional — precisely the direction the organisation's critique pointed toward."
+  },
+  "80a16c83727432e53e84_amd_1281": {
+    "provision_effect": "The amendment removes the word \"established\" from the phrase \"established business relationships,\" making a minor editorial/grammatical correction without changing the substance of the provision on Member State support portals for SMEs.",
+    "label": "NOISE",
+    "reasoning": "The amendment makes only a minor textual/editorial change (removing \"established\" before \"business relationships\") with no substantive policy effect. The organisation's position discusses concerns about the adequacy of SME support and due diligence incentives, but this does not relate to the direction of this purely editorial amendment. There is no meaningful advocacy position that aligns with or opposes this trivial wording change."
+  },
+  "80a16c83727432e53e84_amd_1280": {
+    "provision_effect": "The amendment removes the word \"established\" from the phrase \"established business relationships,\" making a minor editorial/grammatical correction without changing the substance of the provision on Member State support portals for SMEs.",
+    "label": "NOISE",
+    "reasoning": "The amendment makes only a minor textual/editorial change (removing \"established\" before \"business relationships\") with no substantive policy effect. While the organisation has a specific position on SME support and due diligence obligations, this amendment does not move the provision in any meaningful direction that could be aligned with or opposed to the organisation's advocacy. The organisation's concerns about sufficiency of SME support incentives are not addressed by this purely grammatical correction."
+  },
+  "80a16c83727432e53e84_amd_987": {
+    "provision_effect": "The amendment adds a sentence allowing companies to use a verification system based on self-declarations or predetermined forms when verifying SME compliance.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation expresses concern that the proposal may already insufficiently incentivise SMEs to engage in meaningful, independent due diligence, and risks a \"step back from good practices.\" The amendment weakens verification rigour further by permitting self-declarations or predetermined forms instead of robust independent verification — moving in the opposite direction from the org's advocacy for stronger, more meaningful SME due diligence engagement."
+  },
+  "c6e4116fa1fea07d485c_amd_449": {
+    "provision_effect": "The amendment adds new text incentivizing SMEs to voluntarily apply due diligence frameworks, including through public procurement rating systems and labelling schemes for out-of-scope companies that comply with due diligence obligations.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation specifically called for \"sufficient incentives\" to encourage SMEs to engage in due diligence and recommended ensuring \"the right balance of incentives to encourage SMEs to engage in their own due diligence.\" The amendment directly responds to this by introducing concrete incentive mechanisms (public procurement ratings and labelling systems) for SMEs that voluntarily adopt due diligence, moving the text in exactly the direction the organisation advocated."
+  },
+  "c6e4116fa1fea07d485c_amd_448": {
+    "provision_effect": "The amendment strengthens the language around SME support by adding \"heavily\" and \"immense\" to describe the burden, making Member State financial support mandatory (\"should\" instead of \"could\"), and adding specificity around platform information provision, while also making it obligatory for business partners to support SMEs.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation specifically called for clearer guidance on the circumstances in which SMEs receive support from business partners and for sufficient incentives to encourage SME engagement in due diligence. The amendment responds to this by strengthening the obligation on Member States to financially support SMEs (changing \"could\" to \"should\") and making it mandatory for business partners to support SMEs (\"should also\" instead of \"are also encouraged to\"), which directly addresses the org's concern about insufficient incentives and lack of clarity around SME support mechanisms."
+  },
+  "c6e4116fa1fea07d485c_amd_447": {
+    "provision_effect": "The amendment removes the condition that SME support is triggered only when \"the viability of the SME would be jeopardised,\" removes the qualifier \"fair\" from the requirements vis-à-vis SMEs, and removes the framing that SMEs are excluded from scope — streamlining the recital to focus on mitigating burden and encouraging support without the viability threshold.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation specifically criticised the lack of clarity around the \"viability of the SME would be jeopardised\" trigger for assistance, calling it an insufficient incentive. The amendment removes precisely that condition, which directly responds to the organisation's stated concern about the unclear and narrow trigger for SME support."
+  },
+  "c6e4116fa1fea07d485c_amd_1269": {
+    "provision_effect": "The amendment adds \"organisations of enterprises and representing the interests of SMEs\" as explicit consultees when the Commission issues due diligence guidelines.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation advocates for clearer guidance and better support mechanisms for SMEs in the due diligence framework, but its specific recommendations focus on expanding the personal scope of the directive and ensuring incentives for larger companies to engage SME partners — not on who should be consulted when the Commission drafts guidelines. While there is a thematic connection to SMEs, the organisation's position does not clearly advocate for or against including SME representative organisations as consultees in the guideline-drafting process, making the directional alignment genuinely ambiguous."
+  },
+  "c6e4116fa1fea07d485c_amd_1267": {
+    "provision_effect": "The amendment adds \"organisations representing SMEs' interests\" and \"employers' organisations\" as explicit consultees alongside Member States and stakeholders when the Commission drafts due diligence guidelines.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on expanding the personal scope of the due diligence proposal to cover more SMEs and ensuring SMEs receive adequate support and incentives — not on who should be consulted when the Commission drafts guidelines. The amendment's specific change (adding SME representative organisations and employers' organisations as named consultees) is not a direction the organisation advocated for or against, making the connection too tenuous to be substantive."
+  },
+  "0ab32a1157425e22ef5e_amd_1639": {
+    "provision_effect": "The amendment adds a reference to Article 23.3 of the Universal Declaration of Human Rights alongside the existing reference to Article 7 of the ICESCR in the definition of the right to just and favourable conditions of work.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text simply lists the rights already covered in the annex, including the right to just and favourable conditions of work, without advocating for any specific directional change such as adding or removing particular treaty references. Their position is descriptive/background rather than a specific advocacy stance calling for the inclusion of the UDHR Article 23.3 reference."
+  },
+  "0ab32a1157425e22ef5e_amd_1638": {
+    "provision_effect": "The amendment replaces \"fair wage\" and \"decent living\" with \"remuneration that provides for a decent living\" and explicitly extends the right to a living wage to employees and adds a new right to a living income for self-employed workers and smallholders.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text merely lists the rights as they appear in the annex of the Commission proposal, describing the existing content without advocating for any specific directional change — such as expanding coverage to self-employed workers or smallholders, or reframing \"fair wage\" as \"living wage/income.\" This is descriptive background, not a directional advocacy position, so the counterfactual test fails: an organisation with the opposite view could produce the same text."
+  },
+  "0ab32a1157425e22ef5e_amd_1640": {
+    "provision_effect": "The amendment inserts a new entry into the annex explicitly listing the violation of the right to an adequate standard of living (including food, clothing, housing, and continuous improvement of living conditions) as a covered human rights violation under the directive.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org's text describes the existing annex and notes it already includes a prohibition on restricting workers' access to adequate housing, food, clothing, and water in the workplace — but this is a narrower, employment-context restriction, not the broader standalone right to an adequate standard of living being inserted by the amendment. The org is descriptively cataloguing what is already in the annex rather than explicitly advocating for the addition of this specific right, making it genuinely unclear whether their position supports or is indifferent to this particular new insertion."
+  },
+  "0ab32a1157425e22ef5e_amd_1641": {
+    "provision_effect": "The amendment inserts a new right — the right to an adequate standard of living (including food, clothing, housing, and continuous improvement of living conditions per ICESCR Article 11) — into the list of rights subject to due diligence obligations.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org's text describes the existing annex rights and notes a prohibition on restricting workers' access to adequate housing, food, clothing, and water in the workplace — which is narrower and employment-context-specific compared to the broader ICESCR Article 11 right to an adequate standard of living being inserted. While there is a genuine thematic connection, it is unclear whether the org was specifically advocating for this broader, standalone ICESCR Article 11 right to be added, or whether the existing workplace-specific prohibition they referenced was considered sufficient coverage."
+  },
+  "0ab32a1157425e22ef5e_amd_1642": {
+    "provision_effect": "The amendment inserts a new violation category covering obstruction of persons' ability to earn a living income, referencing Article 11 of the ICESCR and Article 25 of the UDHR, into the list of covered human rights violations.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation's position explicitly lists \"prohibition of withholding an adequate living wage\" and \"right to enjoy just and favourable conditions of work including a fair wage, a decent living\" as rights that should be covered in the Annex. The amendment adds a new provision specifically protecting the right to earn a living income (ICESCR Art. 11 / UDHR Art. 25), which directly corresponds to the organisation's advocacy for including adequate living wage and living standard protections in the scope of covered violations."
+  },
+  "5814fc402b792fb9f969_amd_1650": {
+    "provision_effect": "The amendment inserts a new entry into the annex explicitly listing violation of indigenous peoples' right to free, prior, and informed consent (FPIC) as a covered harm, referencing specific UNDRIP articles and ILO Convention 169.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation's matched text explicitly advocates for including \"indigenous peoples' right to the lands, territories and resources which they have traditionally owned, occupied or otherwise used or acquired\" in the annex, and the broader context shows they support a comprehensive listing of indigenous peoples' rights. The amendment adds a specific FPIC-based right for indigenous peoples to the annex, directly expanding indigenous peoples' protections in the direction the organisation advocated for."
+  },
+  "54ef14c5d5e5ecd8fef5_amd_275": {
+    "provision_effect": "The amendment makes no substantive change to the original text — the footnote referencing the UN Guiding Principles on Business and Human Rights remains identical.",
+    "label": "NOISE",
+    "reasoning": "The original and amended texts are identical, meaning there is no directional change to evaluate. The organisation's matched chunk is simply an endnote citation of the same UN Guiding Principles document, with no substantive advocacy position expressed on any specific provision."
+  },
+  "54ef14c5d5e5ecd8fef5_amd_276": {
+    "provision_effect": "The amendment makes no substantive change — the original and amended texts are identical, both being a footnote citation to the UN Guiding Principles on Business and Human Rights.",
+    "label": "NOISE",
+    "reasoning": "The original and amended texts are identical, meaning there is no actual change to evaluate. The organisation's matched chunk is simply an endnotes/references section citing the same UN Guiding Principles document, with no directional advocacy position expressed on any specific provision."
+  },
+  "16941e33a5b3ee8b91b5_amd_503": {
+    "provision_effect": "The amendment narrows the scope of due diligence obligations by limiting covered impacts to those on fundamental rights in the EU Charter (especially children's rights) and the environment, restricting operations to those linked to sole or main corporate purposes, and replacing \"established business relationship\" with \"direct contractual relationship\" in the supply chain.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly advocates for a broad, holistic approach to human rights due diligence covering the full spectrum of rights across the value chain, warns against a \"one right\" approach, and calls for extending obligations to the full value chain rather than narrowing business relationships. The amendment moves in the opposite direction by limiting covered rights to those in the EU Charter (especially children's rights), restricting the scope to sole/main corporate purposes, and narrowing \"established business relationship\" to \"direct contractual relationship\" — all of which the organisation specifically argued against."
+  },
+  "16941e33a5b3ee8b91b5_amd_1047": {
+    "provision_effect": "The amendment inserts a new obligation requiring companies to establish a prioritisation strategy for addressing adverse impacts based on UNGP Principle 17, considering severity, likelihood, urgency, scale, and irremediability, with severity as the predominant factor.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on the definition of adverse impacts, the scope of rights covered, and alignment with UNGP/OECD definitions — not on how companies should prioritise their responses to identified risks. The amendment introduces a prioritisation strategy mechanism, which is a distinct procedural obligation that the organisation's position does not address with any directional stance."
+  },
+  "16941e33a5b3ee8b91b5_amd_502": {
+    "provision_effect": "The amendment narrows the scope of due diligence obligations by limiting covered impacts to those on fundamental rights in the EU Charter (especially children's rights) and the environment, and restricting the value chain scope to the company's own operations and subsidiaries linked to their sole or main corporate purpose, removing the broader \"established business relationship\" coverage and the general reference to human rights adverse impacts.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly advocates for expanding the scope of due diligence obligations — calling for coverage of the full spectrum of rights under international human rights instruments, avoiding a \"one right\" approach, and including the broader value chain including established business relationships. The amendment moves in the opposite direction by narrowing the rights covered to those in the EU Charter (with emphasis on children's rights), removing the \"established business relationship\" tier, and restricting operations to those linked to the company's sole or main corporate purpose."
+  },
+  "3dc5ea2583c0b1c024ae_amd_715": {
+    "provision_effect": "The amendment narrows the definition of 'established business relationship' from one that can be direct or indirect and considers both intensity and duration, to one that is limited to direct contractual relationships and considers only duration, while also replacing 'value chain' with 'supply chain'.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights advocates for extending due diligence obligations across the full value chain and aligning the proposal with UNGPs and OECD Guidelines, which encompass both direct and indirect business relationships. The amendment moves in the opposite direction by restricting the definition to only direct contractual relationships and replacing 'value chain' with the narrower 'supply chain', thereby reducing the scope of coverage the organisation explicitly sought to expand."
+  },
+  "3dc5ea2583c0b1c024ae_amd_712": {
+    "provision_effect": "The amendment replaces the subjective criteria of \"intensity or duration\" and \"not negligible or ancillary part of the value chain\" with an objective threshold of more than one year's duration and significance to the company's operations or turnover as determined and disclosed by the company itself.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text merely describes and summarises what the proposal says about \"established business relationship\" without expressing any directional advocacy position on how the definition should be changed. The preceding and following context focuses on rights enumeration and international instruments, not on the scope or criteria of the \"established business relationship\" definition. There is no specific stance advocating for narrowing, broadening, or otherwise redirecting the definition in the way the amendment does."
+  },
+  "3dc5ea2583c0b1c024ae_amd_944": {
+    "provision_effect": "The amendment changes the requirement from seeking \"contractual assurances\" that a partner will comply with the company's \"code of conduct\" to obtaining assurances that a partner will \"respect human rights, the environment and good governance,\" and removes the explicit \"contractual cascading\" label and the reference to paragraph 4.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched chunk is purely descriptive, summarising what the proposal says about business relationships without taking any directional stance on the specific mechanism of contractual assurances or their framing. The preceding and following context addresses the definition of adverse impacts and alignment with international human rights instruments, which is a related but distinct issue from the specific change the amendment makes (replacing \"contractual assurances tied to a code of conduct\" with broader assurances on \"human rights, environment and good governance\"). There is no specific advocacy position expressed on the direction this amendment takes."
+  },
+  "3dc5ea2583c0b1c024ae_amd_695": {
+    "provision_effect": "The amendment expands the definition of 'business relationship' to explicitly include subsidiaries and clarifies that the relationship covers entities \"within their value chain,\" whether governmental or otherwise, whereas the original only referred to contractors, subcontractors, or other legal entities.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's matched chunk describes the existing definition of 'business relationship' and notes that subsidiaries are addressed separately in the proposal, but does not take a specific directional stance on whether subsidiaries should be folded into the 'business relationship' definition itself. While the organisation broadly advocates for coverage across the full value chain, it is genuinely unclear whether this specific structural change — merging subsidiaries into the 'business relationship' definition — is what the organisation was advocating for, or whether it would be indifferent to or even concerned about the implications of such a merger."
+  },
+  "3dc5ea2583c0b1c024ae_amd_876": {
+    "provision_effect": "The amendment narrows the scope of due diligence from 'established business relationships' across the full value chain to direct business relationships generally, and limits indirect business relationships outside the EU to cases of 'substantiated knowledge', while adding a circumvention clause.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation advocates for extending due diligence obligations across the full value chain without limitations, aligning with UNGPs/OECD Guidelines and covering the full spectrum of rights. The amendment moves in the opposite direction by restricting the scope — replacing 'established business relationships' (which included indirect relationships) with a narrower framework that limits indirect business relationships outside the EU to cases of 'substantiated knowledge', thereby weakening the breadth of coverage the organisation explicitly called for."
+  },
+  "909ceea6d8fac4d5b794_amd_703": {
+    "provision_effect": "The amendment narrows the definition of \"business relationship\" by adding the qualifier \"that constitute its sole or main activity\" to the second prong, limiting it to partners whose business operations for the company are their primary or exclusive activity.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights criticises the \"established business relationship\" concept as too narrow and ambiguous, arguing that due diligence should follow a risk-based approach covering the full value chain (including deeper tiers) rather than being limited by closeness of relationship. The amendment further restricts the second prong of the \"business relationship\" definition by adding a \"sole or main activity\" qualifier, which narrows the scope of covered relationships — the opposite direction from what the organisation advocates."
+  },
+  "909ceea6d8fac4d5b794_amd_702": {
+    "provision_effect": "The amendment removes the phrase \"for or on behalf of the company\" from the second prong of the \"business relationship\" definition, broadening its scope by no longer limiting it to operations performed specifically for or on behalf of the company.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text merely describes and quotes the original \"for or on behalf of the company\" language as part of explaining the Commission's proposal, without taking a specific directional stance on whether that phrase should be retained or removed. There is no advocacy position expressed for or against the removal of this qualifier, making it impossible to determine whether the amendment aligns with or opposes the organisation's position."
+  },
+  "56bfbd23dd7b566b0373_amd_837": {
+    "provision_effect": "The amendment expands the description of the due diligence approach to explicitly cover short, medium and long-term horizons and to encompass all operations, products and services, rather than only mentioning the long-term approach.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates for an \"expansive view of the scope of due diligence\" and alignment with the UNGPs' risk-based approach, warning that a \"narrow scope may unduly limit the extent of the due diligence obligation.\" The amendment directly broadens the scope of the due diligence description by adding short and medium-term horizons and explicitly covering all operations, products and services, which responds to the organisation's call for a wider, more comprehensive due diligence scope."
+  },
+  "56bfbd23dd7b566b0373_amd_838": {
+    "provision_effect": "The amendment replaces \"company's approach, including in the long term, to due diligence\" with \"undertaking's due diligence strategy, including in the short, medium and long term,\" adding short- and medium-term timeframes to the reporting requirement.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on the scope of due diligence obligations (value chain approach, financial sector inclusion, severity-based risk assessment) rather than on the temporal framing of the due diligence description in reporting. The amendment's specific change — adding short- and medium-term horizons alongside the long term — is not a direction the organisation advocated for, and their general call for clear guidance and expansive scope does not constitute a specific directional stance on this temporal dimension."
+  },
+  "111a3aa4d3c050155ca6_amd_946": {
+    "provision_effect": "The amendment removes the explicit \"contractual cascading\" mechanism and the reference to paragraph 4, replacing it with a narrower purpose clause tied to avoiding harmful fallout described in Article 3(b) and (c), thereby weakening the cascading obligation on business partners.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text merely describes what the proposal says about contractual assurances without expressing a directional advocacy position on whether the cascading mechanism should be strengthened, weakened, or removed. The surrounding context focuses on financial sector scope and due diligence alignment, not on the specific cascading clause being amended. There is no specific stance that can be evaluated against the amendment's direction."
+  },
+  "111a3aa4d3c050155ca6_amd_1050": {
+    "provision_effect": "The amendment adds a requirement that contractual agreements and assurances obtained from business relationships for preventing adverse impacts must be fair and equitable, taking into account the resources of the business partner, replacing a cross-reference to paragraph 5.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text is purely descriptive, summarising what the proposal says about contractual assurances without expressing any directional advocacy position on whether such agreements should be fair, equitable, or resource-sensitive. The surrounding context focuses on financial sector scope and due diligence alignment, not on the fairness/equity of contractual assurances themselves. There is no specific stance that maps onto the direction of this amendment."
+  },
+  "111a3aa4d3c050155ca6_amd_947": {
+    "provision_effect": "The amendment replaces the reference to paragraph 4 applying when contractual assurances are obtained with a new requirement that agreements and assurances with business partners regarding prevention of adverse impacts must be fair and equitable, taking into account the resources of the business partner.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text merely describes what the proposal says about contractual assurances without expressing a specific directional advocacy position on whether such agreements should be fair, equitable, or resource-sensitive. The surrounding context focuses on financial sector scope and due diligence alignment, not on the fairness or equity of contractual assurance terms. There is no substantive stance that maps onto the direction of this amendment."
+  },
+  "111a3aa4d3c050155ca6_amd_1053": {
+    "provision_effect": "The amendment replaces \"established\" with \"monitored\" to describe the type of business relationship required before a company must seek contractual assurances from a direct partner.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes what the proposal says about contractual assurances but does not take a specific directional stance on whether the qualifying business relationship should be \"established\" versus \"monitored.\" Their advocacy focuses on financial sector scope, alignment with UNGPs/OECD Guidelines, and the general role of contractual assurances — not on the specific qualifier used to define the triggering business relationship. No counterfactual test is needed because there is simply no directional position expressed on this particular change."
+  },
+  "7922c9f7ad8697456905_amd_406": {
+    "provision_effect": "The amendment removes the final paragraph about collaboration with other companies when preventing adverse impacts at the level of indirect business relationships, while making a minor wording change (\"in the value chain\" removed), but otherwise retains the same termination/suspension framework.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on the concern that termination rights (even as a last resort) may perversely discourage engagement with business partners, and advocates for stronger incentives to engage rather than terminate. The amendment's substantive change is the removal of the collaboration paragraph regarding indirect business relationships — a direction the org text does not specifically address. The org's general concern about engagement vs. termination balance is too broad to be directionally matched to this specific deletion, and an organisation with the opposite view could equally be indifferent to this amendment."
+  },
+  "f7d1c535846f1cdbaba1_amd_403": {
+    "provision_effect": "The amendment replaces \"potential\" impacts with \"foreseeable impacts, based on the state of knowledge\" in recital 35, narrowing the scope of impacts that trigger the contractual assurance mechanism for indirect business partners.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text discusses the general role and effectiveness of contractual assurances in the proposal, raising concerns about checkbox compliance and practicality, but does not take any directional stance on whether the threshold for triggering these mechanisms should be \"potential\" versus \"foreseeable based on the state of knowledge.\" The org's position is descriptive and critical of the contractual assurance approach broadly, not specifically advocating for or against the narrowing of the impact threshold made by this amendment."
+  },
+  "d7aa90b489c84a771c4f_amd_423": {
+    "provision_effect": "The amendment adds \"where appropriate\" to the option of concluding a contract with an indirect business partner, making this approach conditional rather than presenting it as a straightforward option.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly questioned the practicality of requiring companies to seek contractual arrangements with indirect business partners, noting \"real questions around how practical this approach would be\" and warning against over-reliance on contractual assurances leading to checkbox compliance. The amendment's insertion of \"where appropriate\" directly responds to this concern by qualifying and limiting the contractual route to indirect partners, moving the text in the direction the organisation advocated for."
+  },
+  "d7aa90b489c84a771c4f_amd_404": {
+    "provision_effect": "The amendment changes \"indirect business partner\" to \"direct business partner,\" limiting the contractual compliance mechanism to direct rather than indirect business relationships.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly questioned the practicality of requiring companies to seek contractual arrangements with indirect business partners, noting real questions about how workable this approach would be and what incentives an indirect partner would have to enter such arrangements. The amendment directly responds to this concern by replacing \"indirect\" with \"direct,\" restricting the contractual compliance mechanism to direct business relationships only."
+  },
+  "7922c9f7ad8697456905_amd_425": {
+    "provision_effect": "The amendment narrows the condition for terminating a business relationship by adding that termination is only permissible if it is in the best interest of those impacted (responsible disengagement), thereby making termination harder and reinforcing engagement as the preferred approach.",
+    "label": "ALIGNED",
+    "reasoning": "The Danish Institute for Human Rights specifically warned that robust termination rights risk encouraging companies to disengage from business partners rather than engage to improve human rights performance, undermining the proposal's core logic. The amendment directly responds to this concern by conditioning termination on it being in the best interest of those affected (responsible disengagement), making termination harder and reinforcing the engagement-first approach the organisation advocated for."
+  },
+  "fa325cd35223e8a7a396_amd_980": {
+    "provision_effect": "The amendment changes the obligation from requiring that contractual assurances be accompanied by compliance verification measures to merely requiring the company to \"endeavour to include\" such measures within the contract, weakening the verification requirement from mandatory to best-efforts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation specifically criticises contract clauses and third-party verification as \"low hanging fruit\" likely to lead to \"checkbox compliance,\" and advocates for incentivising a broader range of tools. The amendment weakens the mandatory verification requirement, which could be seen as reducing reliance on this \"low hanging fruit\" mechanism — but the org's concern is about over-reliance on such tools, not about making them optional. It is genuinely unclear whether weakening the verification obligation satisfies the org's position (reducing checkbox compliance) or contradicts it (removing even a baseline safeguard the org might still want retained)."
+  },
+  "352e9efac132117b4381_amd_461": {
+    "provision_effect": "The amendment removes the phrase \"correct implementation\" and \"proper enforcement\" from the recital's framing of supervisory authorities' purpose, narrowing the stated role to overseeing compliance with due diligence process obligations rather than ensuring correct implementation and enforcement of the Directive broadly.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text is largely descriptive, summarising what the proposal says about supervisory authorities without taking a specific directional stance on the precise framing of their mandate in the recital. The organisation's recommendations focus on incentivising meaningful engagement with due diligence tools, not on whether the recital should reference \"correct implementation and enforcement\" versus \"compliance with due diligence processes.\" There is no specific advocacy position that maps onto the direction of this amendment."
+  },
+  "352e9efac132117b4381_amd_460": {
+    "provision_effect": "The amendment removes the final sentence from the original text that allowed Member States to designate authorities supervising regulated financial undertakings also as supervisory authorities for the purposes of this Directive.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and broadly welcomes the supervisory authority framework but does not take any specific directional stance on whether financial sector supervisors should or should not be designated as supervisory authorities under this Directive. The matched chunk is purely descriptive of the proposal's provisions, with no advocacy position on the specific sentence removed by the amendment."
+  },
+  "352e9efac132117b4381_amd_1351": {
+    "provision_effect": "The amendment inserts a new provision requiring Member States to guarantee the independence of supervisory authorities, ensuring impartiality, transparency, professional secrecy, freedom from conflicts of interest, and functional independence from companies within the directive's scope.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched chunk describes what the proposal already says about supervisory authority independence and impartiality, without advocating for any specific directional change to those provisions. The surrounding context focuses on incentivising companies to engage with due diligence tools, not on strengthening or modifying supervisory authority independence requirements. There is no specific directional stance that aligns with or opposes what this new insertion adds."
+  },
+  "9c594c4972ede792820b_amd_1433": {
+    "provision_effect": "The amendment adds two new factors to be considered when determining sanctions: the severity and duration of the company's infringement, and the cumulative effects of different measures and sanctions already imposed on the company; it also changes \"value chains\" to \"supply chains\".",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and analyses the existing sanctioning framework — noting that supervisory authorities take into account a company's efforts, investments, and collaboration — but does not advocate for any specific directional change to the sanctions criteria, such as adding severity/duration of infringement or cumulative effects of sanctions as additional factors. The org's position is descriptive and analytical rather than expressing a specific directional stance on what the sanctions provision should add or remove."
+  },
+  "352e9efac132117b4381_amd_1439": {
+    "provision_effect": "The amendment replaces the phrase \"as the case may be\" with a new factor — penalties imposed for the same infringement in other Member States — that supervisory authorities must consider when determining sanctions.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and broadly welcomes the supervisory authority framework, including the sanctions provisions, but does not take any specific directional stance on how cross-border penalty coordination should factor into sanction determinations. The matched chunk and surrounding context are descriptive summaries of the proposal rather than advocacy for or against the specific change the amendment introduces (adding consideration of penalties imposed in other Member States)."
+  },
+  "9c594c4972ede792820b_amd_1435": {
+    "provision_effect": "The amendment replaces the \"as the case may be\" qualifier with a new factor — the degree to which the undertaking has dealt with complaints or proposals raised by stakeholders (including under Article 9) — as an additional consideration when determining sanctions.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and analyses the existing sanction-mitigating factors (investments, targeted support, collaboration) in the original provision, but does not advocate for adding stakeholder complaint-handling as a further mitigating factor in sanctions decisions. The matched chunk merely notes what supervisory authorities are to take into account under the original text, without expressing any directional stance on whether stakeholder engagement with complaints should be added to that list."
+  },
+  "9c594c4972ede792820b_amd_1437": {
+    "provision_effect": "The amendment replaces the \"as the case may be\" qualifier with a new factor — any previous infringements by the undertaking — that supervisory authorities must also consider when determining sanctions.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and summarises the existing factors considered in sanctioning (remedial action, investments, targeted support, collaboration) without taking any directional stance on whether previous infringements should be added as an additional factor. The matched chunk merely notes what the proposal already contains regarding sanctions, with no advocacy position on expanding or restricting the list of considerations. There is no specific directional stance that aligns with or opposes the amendment's addition of prior infringements as a sanctioning factor."
+  },
+  "9c594c4972ede792820b_amd_1434": {
+    "provision_effect": "The amendment adds \"the severity and duration of the undertaking's infringement, or the severity of any potential or actual adverse impact\" as additional factors to be considered when determining sanctions, alongside the existing factors of remedial efforts, investments, targeted support, and collaboration.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and analyses the existing sanction-related provisions (noting that supervisory authorities take into account remedial efforts, investments, and collaboration) but does not express any specific directional advocacy position on whether severity/duration of infringement or severity of adverse impact should be added as sanctioning criteria. The matched chunk is descriptive/analytical rather than advocating for or against this specific change."
+  },
+  "9c594c4972ede792820b_amd_1436": {
+    "provision_effect": "The amendment replaces the \"as the case may be\" qualifier with a new factor for determining sanctions: the financial benefits gained or losses avoided by the undertaking due to the infringement (if data are available).",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and summarises the existing sanction-related provisions (efforts to comply, investments, targeted support, collaboration) without taking any directional stance on whether financial benefits gained from infringement should be added as a sanctioning factor. The matched chunk merely notes what supervisory authorities are to take into account under the original proposal, with no advocacy position on expanding or restricting those factors. There is no specific position that either supports or opposes the amendment's addition of a \"financial benefit/loss avoided\" criterion."
+  },
+  "625903d1be7b2fa7b3fd_amd_1402": {
+    "provision_effect": "The amendment narrows the scope of substantiated concerns that can be submitted to supervisory authorities, limiting them to concerns about non-compliance with Articles 4 to 14 specifically, rather than all national provisions adopted pursuant to the Directive.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on ensuring that the burden of monitoring compliance does not fall too heavily on civil society, and on the role of NHRIs — it does not take any directional stance on whether the scope of substantiated concerns should be broad (covering the whole Directive) or narrow (limited to specific articles). Their advocacy is about the balance of responsibility between supervisory authorities and civil society actors, not about the substantive scope of which provisions can trigger a concern. An organisation with the opposite view on the amendment's narrowing could produce equally matching text."
+  },
+  "625903d1be7b2fa7b3fd_amd_1401": {
+    "provision_effect": "The amendment narrows the scope of substantiated concerns submissions from covering all national provisions adopted pursuant to the Directive to only those adopted pursuant to Articles 4 and 14 specifically.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on ensuring supervisory authorities bear primary responsibility for monitoring compliance and that civil society is not overburdened — it does not take any directional stance on which specific articles of the Directive should be covered by the substantiated concerns mechanism. The narrowing of scope introduced by the amendment is not something the org advocates for or against."
+  },
+  "f6e8a6085b9458bf2a70_amd_468": {
+    "provision_effect": "The amendment extends civil liability to cover damages resulting from adverse impacts caused by subsidiaries, in addition to the company's own due diligence failures, and replaces \"companies\" with \"undertakings\" throughout.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text describes and analyses the existing civil liability framework in the proposal but does not express a specific directional stance on extending liability to subsidiaries or on the terminology change from \"companies\" to \"undertakings.\" The surrounding context focuses on supervisory authority roles and NHRIs, not on the scope of civil liability for subsidiary conduct. There is no advocacy position that specifically calls for the direction of change the amendment makes."
+  },
+  "f6e8a6085b9458bf2a70_amd_897": {
+    "provision_effect": "The amendment replaces a sector-specific derogation for identifying severe adverse impacts with a general permission for all companies to prioritise adverse impacts using a risk-based approach considering severity and likelihood.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on supervisory authority roles, civil liability pathways, and the burden on civil society for monitoring compliance — not on the scope or prioritisation of due diligence obligations. There is no substantive directional stance expressed regarding whether companies should be allowed to prioritise impacts via a risk-based approach, making this unrelated to the amendment's change."
+  },
+  "f6e8a6085b9458bf2a70_amd_505": {
+    "provision_effect": "The amendment replaces \"companies\" with \"undertakings,\" adds \"products and services\" to the scope of obligations, replaces \"value chain operations carried out by entities with whom the company has an established business relationship\" with simply \"entities in their value chain,\" thereby removing the \"established business relationship\" qualifier and broadening the scope of due diligence obligations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on civil liability, supervisory authority mechanisms, and the role of NHRIs — not on the scope of due diligence obligations regarding value chains, the \"established business relationship\" qualifier, or the inclusion of products and services. While the following context briefly mentions \"established business relationship\" in the context of a quasi-defence for civil liability, this is a different provision and context from the amendment's change to the scope of obligations. The organisation expresses no specific directional stance on whether the \"established business relationship\" qualifier should be removed from the scope-defining article or whether \"products and services\" should be added."
+  },
+  "f6e8a6085b9458bf2a70_amd_679": {
+    "provision_effect": "The amendment inserts a new definition of 'adverse good governance impact' covering violations of listed international conventions and harms to public administration, rule of law, democratic systems, and freedom of expression, including bribery, corruption, and tax evasion.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses on the supervisory authority framework, the role of NHRIs, civil liability pathways, and the definition of 'adverse human rights impact' — not on good governance as a distinct category. There is no specific directional advocacy position expressed regarding the inclusion or scope of a 'good governance' definition in the directive."
+  },
+  "5f128565912c0b2ff8f9_amd_949": {
+    "provision_effect": "The amendment adds \"child impact assessments\" as an additional element that must be included in the contractual assurances sought from direct business partners, alongside the existing code of conduct and prevention action plan requirements.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text discusses contractual cascading in the context of liability scope and effectiveness of due diligence, but does not express any specific directional position on child impact assessments or on expanding the content of contractual assurances to include them. The org's advocacy is focused on the breadth of the liability mechanism and the limitations of codes-of-conduct-based approaches generally, which is too broad and unrelated to the specific insertion of \"child impact assessments\" to constitute a directional stance on this amendment."
+  },
+  "5f128565912c0b2ff8f9_amd_948": {
+    "provision_effect": "The amendment removes the phrase \"compliance with the company's code of conduct and\" from the contractual assurances requirement, leaving only the reference to a prevention action plan.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation explicitly criticises the central role of codes of conduct in the liability framework, stating \"the proposal should reconsider placing such approaches at the centre of its approach to liability,\" which could suggest alignment with removing the code-of-conduct reference. However, the amendment appears to be a drafting artefact or truncation rather than a deliberate policy removal, and the organisation's position focuses on broadening due diligence scope and reforming liability principles rather than specifically advocating for removing the code-of-conduct reference from contractual cascading obligations — making the directional relationship genuinely ambiguous."
+  },
+  "a329130d287909fd94e7_amd_313": {
+    "provision_effect": "The amendment replaces \"established direct and indirect business relationships\" with \"monitored business relationships\" and adds a clarification that when determining which relationships to monitor, account should be taken of the company's power to influence or effectively control its direct and indirect business relationships.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly recommends clarifying the scope of due diligence \"to ensure that it is as broad as possible based on severity of risk to rightsholders, rather than the nature and proximity of a business relationship.\" The amendment narrows the scope by replacing \"established direct and indirect business relationships\" with \"monitored business relationships,\" effectively limiting coverage to a subset of relationships rather than broadening it — the opposite of what the organisation advocated for."
+  },
+  "a329130d287909fd94e7_amd_311": {
+    "provision_effect": "The amendment expands the scope of due diligence to explicitly cover produced goods and services throughout their life cycle, clarifies that obligations extend beyond the first tier of the value chain, and reframes the main obligation from an 'obligation of means' to a 'standard of conduct' with a proportionality requirement linked to the significance and scale of adverse impacts.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly recommended clarifying the scope of due diligence to be \"as broad as possible\" and noted the importance of a full value chain approach including downstream impacts. The amendment directly responds to this by expanding scope to cover goods and services throughout their life cycle and explicitly extending obligations beyond the first tier of the value chain, aligning with the org's advocacy for broader coverage."
+  },
+  "a329130d287909fd94e7_amd_341": {
+    "provision_effect": "The amendment narrows the scope of due diligence obligations from the full \"value chain\" (including indirect established business relationships) to primarily direct business relationships outside the EU in the \"supply chain,\" with indirect relationships only included on an ad-hoc basis when there is substantiated knowledge of adverse impacts.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly recommends that the \"scope of the due diligence requirement\" be \"as broad as possible based on severity of risk to rightsholders, rather than the nature and proximity of a business relationship,\" and positively notes the original proposal's full value chain approach as an \"important recognition.\" The amendment moves in the opposite direction by narrowing the scope to direct business relationships and limiting indirect ones to ad-hoc cases, contradicting the organisation's advocacy for broad, risk-based coverage regardless of proximity."
+  },
+  "8733ac23e8a001a3587d_amd_366": {
+    "provision_effect": "The amendment expands the due diligence framework by adding good governance and climate dimensions, requiring stakeholder consultation in policy development, and introducing short-, medium- and long-term measures, among other strengthening changes.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly recommended that \"stakeholders be involved in [the due diligence policy's] development,\" which is precisely what the amendment adds by requiring companies to \"after consultation with stakeholders, integrate due diligence into corporate policies.\" The org's position is specific and directional, and the amendment moves the original text in exactly that direction."
+  },
+  "0f774e7f8ed597c27ca7_amd_372": {
+    "provision_effect": "The amendment narrows the scope of due diligence integration from \"all\" corporate policies to \"relevant\" ones, limits the extension of the code of conduct to \"direct\" business relationships \"outside the EU\" (rather than all \"established\" business relationships), and replaces the mandatory annual update with a flexible update \"when relevant\" after a significant change.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights criticises the proposal for already being too process-based and insufficiently aligned with the UNGPs, expressing concern that companies are given too much discretion (e.g., obligations exercised only \"when relevant\") and that the framework lacks transparency, stakeholder involvement, and a clear commitment to respect human rights. The amendment moves in the opposite direction — further narrowing the scope (from \"all\" to \"relevant\" policies), restricting coverage to \"direct\" business relationships outside the EU, and replacing the mandatory annual update with a discretionary one triggered only by significant changes — all of which increase company discretion and weaken the due diligence obligations the organisation wanted strengthened."
+  },
+  "0f774e7f8ed597c27ca7_amd_371": {
+    "provision_effect": "The amendment adds \"short-, medium- and long-term measures and targets\" to the due diligence policy requirement, expands the code of conduct's scope to include trading and pricing practices, and removes the word \"established\" before \"business relationships.\"",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and critiques the structure of the due diligence policy requirement (e.g., missing stakeholder involvement, lack of publication requirement, departure from UNGPs), but does not advocate specifically for adding short/medium/long-term targets, expanding the code of conduct to trading and pricing practices, or removing the \"established\" qualifier from business relationships. The org's concerns are about transparency, public communication, and UNGP alignment — none of which are addressed by the specific directional changes this amendment makes."
+  },
+  "0f774e7f8ed597c27ca7_amd_373": {
+    "provision_effect": "The amendment replaces \"established business relationships\" with \"monitored business relationships\" in the description of the due diligence policy's scope of application.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and critiques the due diligence policy requirements in general terms — focusing on the lack of a human rights commitment, transparency, stakeholder involvement, and alignment with UNGPs — but does not express any directional position on whether the policy should apply to \"established\" versus \"monitored\" business relationships. The matched chunk simply summarises what the proposal says without advocating for or against this specific terminological distinction."
+  },
+  "0f774e7f8ed597c27ca7_amd_374": {
+    "provision_effect": "The amendment removes the word \"established\" before \"business relationships,\" broadening the scope of due diligence application from only established business relationships to all business relationships.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text discusses the structure and adequacy of the due diligence policy requirements (e.g., lack of a human rights commitment, transparency, stakeholder involvement) but does not express any specific directional position on whether the scope of due diligence should extend to \"established\" versus all business relationships. The matched chunk merely describes what the proposal says without advocating for or against this specific textual distinction."
+  },
+  "8733ac23e8a001a3587d_amd_370": {
+    "provision_effect": "The amendment adds \"children's rights\" alongside \"human rights\" in the recital describing the scope of due diligence obligations, explicitly recognising children's rights as a distinct category within the due diligence framework.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on stakeholder involvement in due diligence policy development, public disclosure of due diligence policies, and alignment with UNGPs — none of which relate to the specific addition of \"children's rights\" as a distinct category in the recital. The org text contains no advocacy position on whether children's rights should be explicitly named or distinguished from human rights in the directive's scope."
+  },
+  "47b4319d77a14c83f4cf_amd_376": {
+    "provision_effect": "The amendment narrows the definition of 'appropriate measures' by removing references to the company's influence over business relationships, leverage, prioritisation of action, and the specific business relationship characteristics, replacing them with a simplified formulation that only references sector characteristics and company size.",
+    "label": "ALIGNED",
+    "reasoning": "The Danish Institute for Human Rights explicitly criticised the original definition of 'appropriate measures' for including 'influence' and leverage as limiting considerations in the identification of impacts, arguing this placed \"an undue limitation on the scope of the identification exercise\" inconsistent with the UNGPs. The amendment removes precisely those limiting factors (influence, leverage, business relationship characteristics, prioritisation) from the definition, moving in the direction the organisation advocated for."
+  },
+  "47b4319d77a14c83f4cf_amd_377": {
+    "provision_effect": "The amendment narrows the due diligence obligation to adverse impacts that the company \"caused or contributed to,\" and replaces the term \"influence\" with \"leverage\" in describing the company's relationship to business partners.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation explicitly discusses the concept of \"leverage\" (from the UNGPs) versus \"influence\" (as used in the proposal), noting that leverage is the appropriate UNGP concept for assessing what action a company should take when directly linked to an impact — which aligns with the amendment's substitution of \"leverage\" for \"influence.\" However, the amendment also adds a limiting qualifier (\"that it caused or contributed to\"), which could narrow the scope of due diligence in a way the organisation's position does not clearly endorse. The org's position is genuinely connected to the terminological direction of change but the overall directional effect of the amendment — particularly the narrowing qualifier — makes it ambiguous whether the amendment fully satisfies or partially contradicts the org's advocacy."
+  },
+  "47b4319d77a14c83f4cf_amd_785": {
+    "provision_effect": "The amendment replaces \"reasonably available to the company\" and \"the company's influence thereof\" with \"proportionate to the size, resources and capacities of the company\" and \"the company's leverage in that relationship,\" and adds a clarification that due diligence is an obligation of means, not result.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly criticised the original definition's use of \"influence\" as placing an \"undue limitation on the scope of the identification exercise,\" arguing it was misapplied from the UNGPs framework. The amendment replaces \"influence\" with \"leverage\" — a concept the org notes is \"broadly analogous to 'influence'\" — and adds further limiting language (proportionality to company size/resources, and an explicit obligation-of-means disclaimer), which moves the definition in the opposite direction from what the org advocated: rather than broadening the scope of the identification exercise, the amendment introduces additional constraints that further limit company obligations."
+  },
+  "47b4319d77a14c83f4cf_amd_392": {
+    "provision_effect": "The amendment weakens the prevention/mitigation obligation by adding qualifiers (\"proportionate and commensurate,\" \"within their means,\" \"can be reasonably expected\") and introduces a distinction between companies causing/contributing to impacts versus those \"directly linked,\" limiting the latter to using influence rather than being obligated to prevent or mitigate.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights explicitly criticises the use of \"leverage/influence\" as a limiting consideration on due diligence obligations, arguing it is only appropriate when assessing action on directly-linked impacts and that applying it more broadly places \"undue limitation\" on the scope of the exercise. The amendment does precisely what the org warns against: it formally embeds leverage/influence as a limiting factor and weakens the obligation for companies \"directly linked\" to impacts to merely using influence, rather than requiring prevention or mitigation. The org's position thus directly opposes the direction of this amendment."
+  },
+  "6a1147aacc5b4100ad8b_amd_418": {
+    "provision_effect": "The amendment weakens obligations on companies addressing actual adverse impacts by making stakeholder consultation a prerequisite for seeking contractual assurances, making those assurances optional (\"may\") rather than required (\"should\"), and removing the mandatory nature of verification measures accompanying assurances.",
+    "label": "OPPOSING",
+    "reasoning": "The Danish Institute for Human Rights explicitly advocates for strengthening stakeholder consultation requirements, making them a \"core rather than discretionary element,\" and for robust due diligence obligations. The amendment moves in the opposite direction by making contractual assurances optional (\"may also, where possible\"), conditioning them on stakeholder engagement rather than mandating them, and weakening verification requirements from mandatory to discretionary (\"may be, where appropriate\"), directly contradicting the org's position that these obligations should be strengthened."
+  },
+  "b50a5a94ef7220837219_amd_398": {
+    "provision_effect": "The amendment replaces \"potential\" adverse impacts with \"actual and, based on the state of knowledge, foreseeable adverse impacts\" in the context of comprehensive prevention obligations, narrowing the scope from broadly \"potential\" to what is \"foreseeable\" based on current knowledge.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and summarises the existing provisions on addressing actual and potential impacts but does not take a specific directional stance on whether the standard for prevention should be \"potential\" versus \"foreseeable\" adverse impacts. The org's position focuses on other concerns (scope for SMEs, stakeholder consultation, appropriate measures guidance) and does not advocate for or against the specific terminological shift this amendment makes."
+  },
+  "b50a5a94ef7220837219_amd_401": {
+    "provision_effect": "The amendment removes the word \"established\" from \"established business relationship,\" broadening the scope of contractual assurance obligations to apply to any business relationship, not just established ones.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and summarises the existing provisions around contractual assurances and business relationships but does not take a specific directional stance on whether the qualifier \"established\" should be removed or retained. Their advocacy focuses on other aspects (stakeholder consultation, SME support, scope of due diligence for medium-sized companies), not on the \"established\" qualifier in the definition of business relationships."
+  },
+  "b50a5a94ef7220837219_amd_400": {
+    "provision_effect": "The amendment replaces \"established business relationship\" with \"monitored business relationship\" in the context of seeking contractual assurances and providing SME support, narrowing the scope of partners covered by these obligations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text describes and summarises the existing provisions on contractual assurances and SME support but does not take a specific directional stance on whether the trigger for these obligations should be an \"established\" versus a \"monitored\" business relationship. The org's advocacy focuses on broader issues like stakeholder consultation, scope of due diligence for SMEs, and the adequacy of \"appropriate measures,\" not on the specific definitional threshold of what type of business relationship triggers these obligations."
+  },
+  "b50a5a94ef7220837219_amd_399": {
+    "provision_effect": "The amendment changes SME support from a mandatory obligation (\"provide\") to an optional one (\"may provide\"), and replaces \"value chain\" with \"supply chain\" in the context of cascading contractual assurances.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation's text describes and summarises the existing SME support provision (Art 7(2)(d)) without taking a clear directional stance on whether it should be mandatory or optional. While the organisation generally advocates for strengthening due diligence obligations, its matched chunk does not specifically argue that SME support must remain mandatory rather than discretionary, making it genuinely unclear whether the weakening of this obligation (from mandatory to optional) contradicts their position or falls outside their specific advocacy focus."
+  },
+  "b50a5a94ef7220837219_amd_397": {
+    "provision_effect": "The amendment weakens the obligation to seek contractual assurances by changing \"should seek\" to \"may seek,\" limiting it to direct business relationships outside the EU, making verification measures optional (\"may be, where appropriate\"), and narrowing the cascading obligation to \"where possible.\"",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text largely describes and summarises what the Commission proposal already says about contractual assurances, without expressing a clear directional advocacy position on whether those assurance requirements should be strengthened or weakened. The organisation does not specifically argue that contractual assurances should be made mandatory, optional, broader, or narrower — it is descriptive rather than prescriptive on this point, making it impossible to determine whether the amendment's weakening direction aligns with or opposes the org's stance."
+  },
+  "1eb521fec2c8295c559e_amd_416": {
+    "provision_effect": "The amendment removes the word \"established\" before \"business relationships,\" broadening the scope of the minimisation obligation to all business relationships rather than only established ones.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on conceptual concerns about the language of \"neutralising,\" \"bringing impacts to an end,\" and \"minimising their extent\" relative to UNGP terminology, and on the balance between checkbox compliance and more substantive due diligence measures. It does not take any directional stance on whether the minimisation obligation should apply to \"established\" business relationships specifically or to all business relationships more broadly — the precise change made by this amendment."
+  },
+  "9c4728a2a88026733b9b_amd_1218": {
+    "provision_effect": "The amendment extends the minimum interval for periodic due diligence assessments from every 12 months to every 24 months.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly welcomed the annual assessment requirement as \"in keeping with the ongoing nature of the process of due diligence as set out in the UNGPs\" and called for strengthening — not weakening — the monitoring provisions. The amendment moves in the opposite direction by halving the frequency of required assessments, which contradicts the organisation's advocacy for robust, ongoing monitoring."
+  },
+  "9c4728a2a88026733b9b_amd_1219": {
+    "provision_effect": "The amendment weakens the periodic assessment requirement by extending the minimum interval from every 12 months to every 24 months.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly welcomed the annual assessment requirement as \"in keeping with the ongoing nature of the process of due diligence\" and called for strengthening the monitoring provisions. The amendment moves in the opposite direction by halving the frequency of required assessments from annually to every two years, directly contradicting the organisation's advocacy for robust and frequent monitoring."
+  },
+  "9c4728a2a88026733b9b_amd_1215": {
+    "provision_effect": "The amendment changes the scope from \"value chains\" to \"supply chains\" and extends the minimum assessment frequency from every 12 months to every 24 months.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly welcomed the annual assessment requirement as \"in keeping with the ongoing nature of the process of due diligence\" and called for strengthening the monitoring provisions, not weakening them. The amendment reduces the frequency of mandatory assessments from at least every 12 months to every 24 months, which moves in the opposite direction from the organisation's advocacy for robust, ongoing monitoring."
+  },
+  "9c4728a2a88026733b9b_amd_435": {
+    "provision_effect": "The amendment replaces \"established\" with \"monitored\" when describing the business relationships subject to periodic assessments, narrowing the scope of relationships covered.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position on monitoring focuses on strengthening stakeholder consultation, broadening the use of assessment findings, and clarifying action plan development — not on the terminology used to describe which business relationships fall within scope. The specific change from \"established\" to \"monitored\" business relationships is entirely unaddressed by the org's advocacy, and the org's general support for robust monitoring requirements does not constitute a directional stance on this terminological distinction."
+  },
+  "9c4728a2a88026733b9b_amd_1217": {
+    "provision_effect": "The amendment replaces \"established\" with \"monitored\" when describing the business relationships subject to periodic assessments, narrowing the scope of relationships covered.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position on monitoring focuses on strengthening stakeholder consultation requirements and clarifying that assessment findings should inform action plans beyond just the due diligence policy — it does not take any stance on whether the business relationships subject to assessment should be described as \"established\" or \"monitored.\" The single word substitution made by the amendment is entirely unaddressed by the org's advocacy, making this a subject mismatch rather than a directional one."
+  },
+  "5e65ea9b4bce84339ea9_amd_1213": {
+    "provision_effect": "The amendment adds a requirement to consult with all stakeholders when carrying out periodic assessments, and expands the scope of what must be updated based on assessment outcomes to include the prevention action plan and corrective action plan, not just the due diligence policy.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly recommended strengthening stakeholder consultation requirements during periodic assessments and clarifying that assessment findings should be used to update not only the due diligence policy but also action plans (preventative and corrective). The amendment directly responds to both of these specific advocacy positions by adding mandatory stakeholder consultation and extending the update obligation to the prevention and corrective action plans."
+  },
+  "5e65ea9b4bce84339ea9_amd_432": {
+    "provision_effect": "The amendment adds a requirement to carry out periodic assessments \"in consultation with stakeholders,\" which was not present in the original text.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly recommended that the proposal \"strengthen the requirements to consult with stakeholders when undertaking periodic assessments,\" which is precisely what the amendment adds by inserting \"in consultation with stakeholders\" into the assessment requirement. The org's position is specific and directional, and the amendment responds directly to it."
+  },
+  "6a5963ab64ce8840e283_amd_438": {
+    "provision_effect": "The amendment replaces \"actual or potential adverse impacts\" with \"actual adverse impacts or impacts that could be anticipated in line with existing knowledge,\" narrowing the concept of potential impacts by tying it to existing knowledge rather than using the broader term \"potential.\"",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on the adequacy of disclosure requirements relative to the UNGPs and CSRD alignment, not on the specific wording of \"potential\" versus \"anticipated in line with existing knowledge.\" The org does not take any directional stance on how potential impacts should be defined or scoped in the communication obligation, making its position too general to be responsive to this specific textual change."
+  },
+  "6a5963ab64ce8840e283_amd_437": {
+    "provision_effect": "The amendment replaces \"companies\" with \"undertakings\" throughout the recital and adds a new sentence requiring that reporting be accessible, comparable, and sufficiently detailed to demonstrate the adequacy of an undertaking's due diligence process.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly called for strengthening disclosure requirements to ensure they are adequate to meet UNGP expectations and that companies communicate externally about how they address human rights impacts. The amendment's addition — that reporting must be \"accessible, comparable, and sufficiently detailed to demonstrate the adequacy\" of the due diligence process — directly responds to the organisation's recommendation to ensure CSRD disclosure requirements are \"fit for purpose\" and meet UNGP expectations, moving the text in the direction the organisation advocated for."
+  },
+  "6a5963ab64ce8840e283_amd_439": {
+    "provision_effect": "The amendment changes the required language for the annual statement published on the website by companies not covered by Directive 2013/34/EU from \"a language customary in the sphere of international business\" (i.e., English) to \"one of the official languages of the Union.\"",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on ensuring CSRD disclosure requirements are adequate for UNGP compliance, aligning reporting for companies not covered by CSRD with CSRD standards, and clarifying obligations for financial institutions — none of which address the language in which the annual statement must be published. The organisation expresses no directional stance on whether the statement should be in an international business language versus an official EU language."
+  },
+  "6a5963ab64ce8840e283_amd_891": {
+    "provision_effect": "The amendment inserts a new provision allowing companies to self-declare compliance by publishing a statement that they have no adverse impacts, effectively creating a safe harbour from due diligence obligations if direct suppliers perform due diligence.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation advocates for strengthening due diligence obligations — including stronger stakeholder consultation, more robust action plans, and ensuring disclosure requirements are fit for purpose under the UNGPs. The amendment moves in the opposite direction by creating a self-certification safe harbour that allows companies to declare compliance with minimal substantive due diligence, which directly undermines the rigorous, stakeholder-informed approach the organisation advocates for."
+  },
+  "e389f121ee37ffd2155e_amd_429": {
+    "provision_effect": "The amendment adds the qualifier \"well-founded\" before \"complaints\" in the sentence granting complainants the right to request follow-up and meet with company representatives, restricting that entitlement to well-founded complaints only.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly criticises the complaint mechanism as \"weak and falls far short of the expectations of the UNGPs,\" advocating for a stronger, broader grievance mechanism. Adding \"well-founded\" as a qualifier narrows the entitlement to follow-up and meetings, further weakening the mechanism — the opposite direction from what the organisation advocates for."
+  },
+  "e389f121ee37ffd2155e_amd_428": {
+    "provision_effect": "The amendment replaces \"potential\" adverse impacts with \"foreseeable (based on the state of knowledge)\" adverse impacts in the context of complaints and follow-up meetings, narrowing the temporal/epistemic scope of covered impacts.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on the weakness of the complaints mechanism relative to UNGP grievance mechanism standards, the lack of links to remediation, and the absence of effectiveness criteria — not on the specific question of whether \"potential\" or \"foreseeable based on the state of knowledge\" impacts should trigger complaints. The org text does not take any directional stance on this particular terminological/scope change, making it substantively unrelated to the amendment's specific direction."
+  },
+  "e389f121ee37ffd2155e_amd_427": {
+    "provision_effect": "The amendment expands the scope of who can submit complaints (adding groups, communities, entities, human rights defenders, environmental rights defenders, and other legal/natural persons with statutory purposes related to human rights, climate, environment, or good governance) and broadens the subject matter of complaints to include good governance and climate impacts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation welcomes the broad complaints mechanism and advocates for it to be strengthened to better align with UNGP expectations (e.g., calling it a grievance rather than complaint mechanism, adding effectiveness criteria, linking it to remedy). While the amendment does expand the scope of eligible complainants and subject matter — a directional strengthening — the org's specific advocacy focuses on the mechanism's quality, effectiveness criteria, and linkage to remedy rather than on broadening who can submit complaints or what topics they cover. There is a genuine connection but it is unclear whether this particular expansion satisfies the org's specific directional concerns."
+  },
+  "e389f121ee37ffd2155e_amd_1030": {
+    "provision_effect": "The amendment expands the description of remediation to include a non-exhaustive list of substantive forms (apologies, restitution, rehabilitation, financial and non-financial compensation, environmental restoration, and guarantees of non-repetition), going beyond the original text's focus on financial damages and compensation.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly criticised the original provision for being \"a rather more limited approach\" to remediation than the UNGPs require, noting that \"forms of remediation may be broader than purely financial compensation.\" The amendment directly responds to this concern by enumerating a broader, non-exhaustive range of remediation forms (apologies, restitution, rehabilitation, non-financial compensation, environmental restoration, guarantees of non-repetition), moving the text in exactly the direction the organisation advocated for."
+  },
+  "5ebf94d263506717cbbf_amd_468": {
+    "provision_effect": "The amendment extends civil liability to cover damages resulting from adverse impacts caused by subsidiaries, adding an explicit sentence holding the undertaking liable for harms that should have been identified, prevented, or mitigated by its subsidiaries.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly calls for strengthening civil liability and corporate accountability, arguing the directive falls short and needs significant improvements to ensure judicial remedy. The amendment expands liability to cover subsidiary-caused harms, which directly responds to ECCJ's advocacy for broader and more robust civil liability — particularly their concern that the proposal is riddled with shortcomings that limit its positive impact on human rights and the environment. This is a specific directional strengthening of liability that aligns with ECCJ's stated push for stronger corporate accountability mechanisms."
+  },
+  "2d6252c47deaafa7487e_amd_311": {
+    "provision_effect": "The amendment expands the scope of due diligence to explicitly cover produced goods and services throughout their life cycle and clarifies that obligations extend beyond the first tier of the value chain, while also removing the \"established\" qualifier from business relationships and replacing \"obligations of means\" with \"a standard of conduct.\"",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ specifically criticised the original proposal's limitation to \"established business relationships,\" arguing it risks leaving out short, unstable, or informal relationships and that due diligence should adopt a risk-based approach not tied to the characteristics of business relationships. The amendment directly responds to this by removing the \"established\" qualifier and explicitly extending obligations beyond the first tier of the value chain, which is precisely the directional change ECCJ advocated for."
+  },
+  "2d6252c47deaafa7487e_amd_313": {
+    "provision_effect": "The amendment replaces \"established direct and indirect business relationships\" with \"monitored business relationships\" and adds \"or effectively control\" to the factors for determining which relationships to monitor, narrowing the scope of covered relationships from all established direct and indirect ones to a risk-based \"monitored\" subset.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly criticised the Commission proposal for limiting due diligence to \"established business relationships,\" arguing this risks leaving out short, unstable, or informal relationships where severe impacts are more likely, and called for a risk-based approach prioritising severity and likelihood rather than the characteristics of business relationships. The amendment moves in the opposite direction by replacing \"established direct and indirect business relationships\" with \"monitored business relationships,\" which further narrows the scope rather than broadening it as ECCJ advocated."
+  },
+  "2d6252c47deaafa7487e_amd_342": {
+    "provision_effect": "The amendment narrows the scope of due diligence obligations from \"established business relationships\" across the full \"value chain\" to \"direct contractual business relationships\" within the \"supply chain,\" requiring a legal contract to link both parties and removing the reassessment periodicity and indirect relationship provisions.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly criticised the original \"established business relationships\" approach as too narrow, arguing the directive should adopt a risk-based approach prioritising severity and likelihood of impacts rather than the characteristics of business relationships, and should not leave out short, unstable or informal relationships. The amendment moves in the opposite direction — further restricting scope to only \"direct contractual\" relationships with a legal contract requirement — which is even more limiting than what ECCJ opposed in the original text. Additionally, ECCJ specifically warned against over-reliance on \"contractual assurances,\" yet the amendment makes a legal contract the defining criterion for inclusion in scope."
+  },
+  "2d6252c47deaafa7487e_amd_346": {
+    "provision_effect": "The amendment removes the qualifier \"established\" from the phrase \"established business relationships\" in the operative limitation clause, broadening the scope of due diligence obligations beyond only lasting/established relationships.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the original text's limitation to \"established business relationships,\" arguing it risks leaving out short, unstable, or informal relationships where severe impacts are more likely, and called for a risk-based approach not tied to the duration or intensity of business relationships. The amendment removes the word \"established\" from the operative limitation, directly responding to ECCJ's advocacy for a broader scope."
+  },
+  "2d6252c47deaafa7487e_amd_312": {
+    "provision_effect": "The amendment adds \"products and services\" to the scope of due diligence measures and introduces a requirement to terminate business relationships where State intervention leaves no reasonable prospect of change, while removing the qualifier \"established\" from business relationships.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the original proposal's limitation to \"established business relationships,\" arguing it risks leaving out short, unstable, or informal relationships and that the directive should adopt a risk-based approach not tied to the characteristics of business relationships. The amendment removes the \"established\" qualifier, directly responding to this concern. Additionally, ECCJ's broader push for stronger, more effective due diligence obligations aligns with the amendment's new requirement to terminate business relationships where there is no reasonable prospect of change due to State intervention, strengthening the overall obligation."
+  },
+  "24151c0264ac153b839c_amd_354": {
+    "provision_effect": "The amendment removes the specific list of high-impact sectors (textiles, agriculture, minerals) from recital 22 and changes the language regarding financial sector adverse impacts from \"actual and potential\" to \"actual and, based on the state of knowledge, foreseeable.\"",
+    "label": "UNDETECTABLE",
+    "reasoning": "ECCJ explicitly criticises the narrow list of high-impact sectors and argues the financial sector should be included (not excluded), yet the amendment removes the sector list entirely rather than expanding it, and the financial sector exclusion is retained. The org's position is directionally specific (expand the list, include finance), but the amendment's removal of the list and the minor rewording on \"foreseeable\" impacts neither clearly satisfies nor clearly contradicts ECCJ's advocacy — the removal of the list could be read as a step toward a broader approach or simply as a recital restructuring, making the directional relationship genuinely ambiguous."
+  },
+  "24151c0264ac153b839c_amd_356": {
+    "provision_effect": "The amendment expands the list of high-impact sectors by adding construction, energy, financial services, ICT/digital services, tourism and hospitality, retail trade, and other activities that were absent from the original Commission proposal's narrow list.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the Commission's narrow list of high-impact sectors for leaving out \"construction, infrastructures, energy, transport, logistics, electronics\" and even the financial sector, and called for a broader understanding of high impacts. The amendment directly responds to this by adding construction, energy, financial services, ICT/electronics, and other sectors that ECCJ identified as missing, moving the text precisely in the direction ECCJ advocated."
+  },
+  "24151c0264ac153b839c_amd_357": {
+    "provision_effect": "The amendment removes the exclusion of the financial sector from the high-impact sectors list and instead includes financial services (loans, credits, insurance, investment services, etc.) as a high-impact sector subject to the Directive's full due diligence obligations.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the Commission proposal for failing to cover the financial sector, noting that \"it even fails to cover the financial sector, for which an OECD sectoral guidance does exist.\" The amendment directly responds to this by removing the financial sector's exclusion and adding it to the high-impact sectors list, which is precisely the direction ECCJ advocated for."
+  },
+  "8e8ec5dde04099d396fc_amd_364": {
+    "provision_effect": "The amendment expands the scope of human rights coverage from a closed list of conventions to \"any internationally recognised human right,\" and broadens environmental impacts beyond specific convention violations to include general environmental and climate damage (planetary boundaries, ecosystem elements, etc.), while also adding a governance dimension.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly advocated for a non-limitative list of human rights instruments and criticised the original's reliance on a closed list of conventions, which is precisely what the amendment addresses by covering \"any internationally recognised human right.\" Similarly, ECCJ argued that defining environmental impacts by reference to specific conventions was insufficient and called for targeting environmental damage in general (as the French law does) — the amendment directly responds to this by expanding coverage to general environmental and climate impacts beyond the listed conventions."
+  },
+  "0bd4cc15e085f16f0798_amd_876": {
+    "provision_effect": "The amendment narrows the value chain scope by limiting due diligence to direct business relationships outside the EU (with indirect relationships only triggered by \"substantiated knowledge\"), replacing the broader \"established business relationships\" concept and adding a \"within their means\" qualifier.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly advocates for expanding the value chain scope to cover less stable, informal, and indirect relationships — warning that limiting due diligence to \"established business relationships\" risks leaving out short or informal relationships where severe impacts are more likely. The amendment moves in the opposite direction by restricting the scope to direct business relationships outside the EU and conditioning coverage of indirect relationships on \"substantiated knowledge,\" which is precisely the kind of narrowing ECCJ argued against."
+  },
+  "e4254bc884c555aefe60_amd_377": {
+    "provision_effect": "The amendment narrows the scope of appropriate measures to adverse impacts \"that it caused or contributed to,\" and replaces \"influence\" with \"leverage\" in describing the company's relationship to business partners.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly argued that both actual leverage (influence) AND the ability/potential to influence (potential leverage) must be taken into account, and that companies must seek to increase their leverage when they lack it — advocating for a broader, not narrower, scope. The amendment's addition of \"that it caused or contributed to\" restricts the due diligence obligation to impacts causally linked to the company, which contradicts ECCJ's push for broader coverage. Furthermore, replacing \"influence\" with \"leverage\" narrows the concept in a way that conflicts with ECCJ's call to include both actual and potential leverage as distinct considerations aligned with international standards."
+  },
+  "d6a9aee5de5448721bba_amd_418": {
+    "provision_effect": "The amendment weakens corrective action obligations by removing \"clearly defined\" timelines and \"qualitative and quantitative\" indicators, making contractual assurances optional (\"may\") rather than required (\"should\"), and adding qualifiers like \"within their means\" and \"where possible,\" while also narrowing the scope from \"value chain\" to \"supply chain.\"",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly advocates that action plans should always be developed and effectively implemented whenever impacts are identified, and that companies must use and increase their leverage to bring impacts to an end. The amendment moves in the opposite direction by making corrective action plans more conditional, weakening the obligation to obtain contractual assurances (from \"should\" to \"may\"), removing clearly defined timelines and quantitative indicators, and adding limiting qualifiers like \"within their means\" — all of which contradict ECCJ's position for stronger, unconditional obligations."
+  },
+  "d6a9aee5de5448721bba_amd_1030": {
+    "provision_effect": "The amendment expands the remediation provision by adding a non-exhaustive list of substantive forms remedy may take, including apologies, restitution, rehabilitation, financial or non-financial compensation, environmental restoration, and guarantees of non-repetition, beyond the original text's sole mention of financial damages and compensation.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the original proposal for failing to mention forms of remedy beyond financial compensation, and specifically called for the inclusion of apologies, restitution, rehabilitation, non-financial compensation, and guarantees of non-repetition — precisely the elements the amendment adds. The amendment directly responds to ECCJ's stated advocacy position."
+  },
+  "d6a9aee5de5448721bba_amd_421": {
+    "provision_effect": "The amendment removes the qualifier \"established\" from \"established business relationship,\" broadening the scope of companies from which contractual assurances must be sought to include any business relationship, not just established ones.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ advocates for stronger and broader due diligence obligations, including that companies must use and increase their leverage over business partners to address impacts. Removing the \"established\" qualifier expands the scope of the contractual assurance obligation to all business relationships, which aligns with ECCJ's position that due diligence obligations should not be unreasonably narrowed or watered down, and that companies must seek to increase their leverage even where it is currently lacking."
+  },
+  "d6a9aee5de5448721bba_amd_420": {
+    "provision_effect": "The amendment replaces \"established business relationship\" with \"monitored business relationship\" in two places within the recital, narrowing the scope of partners from whom companies must seek contractual assurances and to whom they must provide SME support.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ advocates for expanding and strengthening due diligence obligations, including increasing leverage over business partners and ensuring robust monitoring of impacts across the value chain. The amendment narrows the scope of covered business relationships from \"established\" to \"monitored,\" which restricts the range of partners subject to contractual assurance requirements — the opposite of the broader, more comprehensive coverage ECCJ advocates for."
+  },
+  "0a648203715bd3e56439_amd_413": {
+    "provision_effect": "The amendment adds a qualification that companies are only required to act on adverse impacts they \"caused or contributed to,\" introduces \"could be reasonably required to take within their means\" (softening the obligation), and adds a new sentence specifying that companies \"directly linked\" to adverse impacts (but not causing/contributing) must use their influence to bring impacts to an end or minimise them.",
+    "label": "OPPOSING",
+    "reasoning": "ECCJ explicitly advocates that companies should be obliged to use and increase their leverage to bring impacts to an end, and that obligations should not be watered down. The amendment weakens the general obligation by limiting it to impacts companies \"caused or contributed to,\" softens the language to \"could be reasonably required to take within their means,\" and relegates the \"directly linked\" scenario to a weaker influence-based obligation — all of which run counter to ECCJ's position that companies should face strong, unqualified obligations to end or minimise adverse impacts regardless of their level of involvement."
+  },
+  "0a648203715bd3e56439_amd_388": {
+    "provision_effect": "The amendment adds conditions for disengagement (only in cases of severe or repeated misconduct, after repeated attempts have failed, and only if in the best interest of those impacted — \"responsible disengagement\"), adds guidance on prioritising impacts by severity/likelihood, and adds consideration of supply chain disruption impacts.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly argued that the original proposal \"over-simplifies this question and opens the door to irresponsible disengagement,\" and that companies should only consider termination after exhausting leverage and taking into account additional human rights consequences of termination. The amendment directly responds to this by tightening the conditions for disengagement — requiring repeated failed attempts, severe/repeated misconduct, and a best-interest-of-those-impacted test — which aligns with ECCJ's advocacy for more stringent, responsible disengagement standards rather than a simple \"cut and run\" approach."
+  },
+  "0a648203715bd3e56439_amd_425": {
+    "provision_effect": "The amendment adds a condition that termination of a business relationship is only permissible if it is \"in the best interest of those impacted (responsible disengagement),\" and changes \"value chain\" to \"supply chain\" and \"commercial relationships\" to \"business relationships.\"",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly warned that the original proposal \"opens the door to irresponsible disengagement\" and argued that companies should only consider termination after exhausting leverage and must \"take into account any additional human rights consequences of such termination.\" The amendment directly responds to this concern by conditioning termination on it being \"in the best interest of those impacted (responsible disengagement),\" moving the text in precisely the direction ECCJ advocated."
+  },
+  "0a648203715bd3e56439_amd_406": {
+    "provision_effect": "The amendment removes the final paragraph about collaboration with other companies to prevent adverse impacts at the level of indirect business relationships, while making a minor wording change (\"in the value chain\" removed from the prioritization clause).",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org's matched chunk specifically addresses the conditions under which companies should consider terminating business relationships, arguing the proposal \"over-simplifies this question and opens the door to irresponsible disengagement\" and that companies should only terminate after exhausting leverage options and considering human rights consequences of termination. The amendment's main structural change is the deletion of the collaboration paragraph regarding indirect business relationships — a topic the org does not directly address in its position. While the org's concern about irresponsible disengagement is tangentially related to the overall recital, it is genuinely unclear whether removing the indirect-relationship collaboration clause satisfies, contradicts, or is neutral to the org's advocacy."
+  },
+  "0a648203715bd3e56439_amd_390": {
+    "provision_effect": "The amendment adds \"directly and\" before \"adversely impacted\" and appends a new sentence requiring companies to ensure that suspending or terminating a commercial relationship does not result in a more severe impact than the one it intends to mitigate.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly advocates that companies should \"take into account any additional human rights consequences of such termination\" and warns against \"irresponsible disengagement,\" arguing that termination should only occur when leverage is exhausted and severe impacts leave no other option. The amendment's new sentence directly responds to this concern by requiring companies to ensure that suspension or termination does not result in a more severe impact than the one being mitigated — precisely the safeguard ECCJ called for."
+  },
+  "566393005f16cf573291_amd_409": {
+    "provision_effect": "The amendment shifts assessment of industry schemes/multi-stakeholder initiatives from an optional company-led exercise to a mandatory Member State responsibility, makes Commission guidance obligatory rather than discretionary, and clarifies that scheme membership complements but does not replace company due diligence.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses exclusively on stakeholder consultation requirements — its quality, scope, and timing within the due diligence process — and does not express any directional position on who should assess industry schemes/multi-stakeholder initiatives or whether Commission guidance on such schemes should be mandatory. The surrounding context similarly addresses severity thresholds and financial sector scope, not the governance of industry schemes. There is no substantive advocacy position that maps onto the direction of this amendment."
+  },
+  "d0a6ac953fe9c3a790f8_amd_427": {
+    "provision_effect": "The amendment broadens the categories of complainants eligible to submit complaints to include groups, communities, entities, human rights and environmental rights defenders, and any legal or natural persons with a statutory purpose of defending human rights, climate, environment, or good governance, while also expanding the scope of adverse impacts to include good governance and climate.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocated for broadening standing to submit complaints, noting that the original restriction to civil society organisations \"active in the areas related to the value chain concerned\" could be interpreted restrictively and that \"standing should thus be broadened.\" It also called for more explicit recognition of NGOs and human rights and environmental defenders. The amendment directly responds to this by expanding the list of eligible complainants to include human rights and environmental rights defenders and any persons with a statutory purpose of defending human rights, climate, environment, or good governance — precisely the direction the organisation advocated for."
+  },
+  "447a49b40758f0dbdd33_amd_487": {
+    "provision_effect": "The amendment adds a clarification that, since 'director' covers members of administrative, management, or supervisory bodies, Member States must ensure the duty of care does not undermine workers' representatives on boards, while also replacing 'company' with 'undertaking' throughout.",
+    "label": "UNDETECTABLE",
+    "reasoning": "ECCJ's position specifically calls for strengthening directors' duties, further specifying the obligation to oversee due diligence, and assigning a more proactive role to boards — but their advocacy does not address the specific addition the amendment makes, which is a carve-out protecting workers' representatives on boards from having the duty of care undermine their responsibilities. There is a genuine connection to the directors' duties topic, but it is unclear whether this particular clarification satisfies, contradicts, or is simply orthogonal to ECCJ's directional advocacy for stronger and more specified directors' obligations."
+  },
+  "396bd9161beaf165b3da_amd_437": {
+    "provision_effect": "The amendment replaces \"companies\" with \"undertakings\" throughout the recital and adds a new sentence requiring that reporting be accessible, comparable, and sufficiently detailed to demonstrate the adequacy of an undertaking's due diligence process.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on directors' duties, board oversight, variable remuneration, and climate obligations — not on the accessibility, comparability, or detail of due diligence reporting. The org does not express a specific directional stance on the reporting quality standards added by this amendment, making the connection substantively absent."
+  },
+  "396bd9161beaf165b3da_amd_438": {
+    "provision_effect": "The amendment replaces \"actual or potential adverse impacts\" with \"actual adverse impacts or impacts that could be anticipated in line with existing knowledge,\" refining the language around the scope of potential impacts that must be communicated as part of due diligence reporting.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on directors' duties, board oversight, reporting regularity, transition plans, and variable remuneration — not on the specific wording used to define the scope of adverse impacts (actual vs. potential/anticipatable) in due diligence communication obligations. The org text contains no directional stance on how \"potential adverse impacts\" should be defined or framed in reporting requirements, making this a subject mismatch rather than an ambiguous directional one."
+  },
+  "396bd9161beaf165b3da_amd_439": {
+    "provision_effect": "The amendment changes the required language for the annual statement published on the website by companies in scope but not covered by Directive 2013/34/EU, from \"a language customary in the sphere of international business\" (i.e., English) to \"one of the official languages of the Union.\"",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on directors' duties, board oversight, variable remuneration, and climate obligations — not on the language requirements for annual statements published by companies outside the CSRD scope. The org text contains no substantive advocacy position on the language in which companies should publish their due diligence statements, making this a subject mismatch."
+  },
+  "396bd9161beaf165b3da_amd_458": {
+    "provision_effect": "The amendment removes the conditionality (\"if variable remuneration is linked to...\") and broadens the scope from \"emission reduction plan\" to \"climate targets and transition plan,\" making the link between directors' variable remuneration and climate/transition obligations mandatory rather than conditional.",
+    "label": "ALIGNED",
+    "reasoning": "ECCJ explicitly criticised the original provision as \"voluntary and non-binding,\" warning it would \"have little effect in practice\" because companies not already linking variable remuneration to sustainability targets would not be required to do so. The amendment directly addresses this by removing the conditionality and making the remuneration link obligatory, which is precisely the direction ECCJ advocated for."
+  },
+  "5c5868bf37d7bb5d095b_amd_467": {
+    "provision_effect": "The amendment extends civil liability to cover failures by companies under the parent company's control (subsidiaries), defines what \"control\" means, and adds remediation as an obligation, strengthening the liability regime relative to the original.",
+    "label": "ALIGNED",
+    "reasoning": "Friends of the Earth Europe explicitly advocates that \"the inclusion of civil liability on parent and lead companies for harms by their subsidiaries and in their global value chains is an indispensable provision,\" and further states that \"for cases involving subsidiaries, the liability should be absolute\" with parent companies automatically held responsible. The amendment directly responds to this by extending liability to failures by companies under the parent's control and defining the scope of that control, moving the text precisely in the direction the organisation advocated for."
+  },
+  "e6c0729d1f7349c7db28_amd_356": {
+    "provision_effect": "The amendment expands the list of high-impact sectors by adding construction, ICT/digital services, financial services, retail trade, energy, and other sectors beyond those in the original Commission proposal.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocated for expanding the high-risk sector list beyond the OECD-based definition, specifically citing construction (18% of forced labour victims), manufacturing including electronics, accommodation/food services, and wholesale trade as internationally recognised high-risk sectors that were missing. The amendment directly adds construction, ICT/digital services, financial services, and other sectors to the high-impact list, responding precisely to the organisation's call to broaden sector coverage to reflect real forced labour risks."
+  },
+  "e6c0729d1f7349c7db28_amd_357": {
+    "provision_effect": "The amendment removes the financial sector exclusion from the high-impact sectors list and instead adds financial services (loans, credits, insurance, investment services, etc.) as a high-impact sector, alongside the existing listed sectors.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Anti-Slavery International explicitly advocates for expanding the list of high-impact sectors beyond those covered by existing OECD Guidance, arguing that sectors like construction, electronics, and accommodation are internationally recognised as high-risk for forced labour but are excluded. The amendment expands the high-impact sector list by adding financial services — a direction consistent with the org's general call to expand the list. However, the org's specific examples of missing sectors (construction, electronics, accommodation, food services) do not include financial services, making it genuinely unclear whether this particular expansion satisfies their advocacy position."
+  },
+  "b2df4fa1846c72d13b32_amd_354": {
+    "provision_effect": "The amendment removes the enumerated list of high-impact sectors (textiles, agriculture, minerals, etc.) from recital 22 and changes the qualifier for adverse impacts in the financial sector from \"potential\" to \"foreseeable\" (based on the state of knowledge), while retaining the financial sector's exclusion from high-impact sector classification.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Anti-Slavery International advocates strongly for removing exemptions on financial sector due diligence obligations and expanding the scope of high-risk sectors beyond OECD guidance — positions that relate to the subject matter of recital 22. However, the amendment's key changes are (1) deleting the enumerated high-impact sector list and (2) substituting \"potential\" with \"foreseeable\" adverse impacts for financial undertakings, neither of which clearly satisfies or contradicts the org's specific demands (removing financial sector exemptions, expanding high-risk sectors to include ICT/construction/hospitality, and requiring ongoing value-chain due diligence). The org's position is directionally related but it is genuinely ambiguous whether these textual changes advance or ignore their advocacy."
+  },
+  "417ef6481693ab534e6e_amd_366": {
+    "provision_effect": "The amendment adds a requirement for stakeholder consultation before integrating due diligence into corporate policies, expanding the scope and stages at which stakeholder engagement is mandated.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocates for mandatory stakeholder engagement throughout all due diligence stages, criticising the original text for limiting consultation to select activities. The amendment directly responds to this by inserting \"after consultation with stakeholders\" into the core due diligence obligations, moving the text in the direction the organisation advocated for."
+  },
+  "417ef6481693ab534e6e_amd_409": {
+    "provision_effect": "The amendment shifts assessment of industry schemes and multi-stakeholder initiatives from a voluntary company-led exercise to a mandatory Member State responsibility, clarifies that such schemes complement rather than replace company due diligence, and makes Commission guidance and information dissemination mandatory rather than optional.",
+    "label": "NOISE",
+    "reasoning": "Anti-Slavery International's matched text focuses specifically on mandating meaningful stakeholder engagement throughout all stages of due diligence, not on the governance or assessment of industry schemes and multi-stakeholder initiatives. The amendment's core changes — shifting scheme assessment to Member States, making Commission guidance mandatory, and clarifying that schemes complement rather than replace due diligence — do not correspond to any directional advocacy position expressed by the organisation. The org's position on leverage (in the preceding context) is too general to be specifically responsive to this amendment's direction."
+  },
+  "417ef6481693ab534e6e_amd_446": {
+    "provision_effect": "The amendment inserts a new recital requiring undertakings to engage stakeholders — including workers and rights defenders — effectively, meaningfully, and structurally throughout the entire due diligence process, with attention to intersecting vulnerabilities, gender-responsive approaches, and Indigenous Peoples' rights including FPIC.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocated for mandatory, meaningful stakeholder engagement across all stages of the due diligence process — not just \"where relevant\" — arguing it must be \"a fundamental part of due diligence, and be made mandatory throughout the entire due diligence process.\" The amendment directly responds to this by inserting a recital requiring structural, meaningful engagement with workers and rights defenders throughout the entire due diligence process, which is precisely the directional change the organisation called for."
+  },
+  "417ef6481693ab534e6e_amd_408": {
+    "provision_effect": "The amendment replaces optional/discretionary language around assessing industry schemes and Commission guidance with mandatory obligations, and introduces a requirement to reference the EU accreditation framework (Regulation (EC) No 765/2008) before allowing such schemes to play a role in due diligence implementation.",
+    "label": "NOISE",
+    "reasoning": "Anti-Slavery International's matched text focuses specifically on mandating meaningful stakeholder engagement throughout all stages of due diligence, not on the role or assessment of industry schemes and multi-stakeholder initiatives. The organisation's position does not express any directional stance on whether the Commission's guidance on industry schemes should be mandatory or optional, nor on the use of an accreditation framework to assess such schemes — the subjects are substantively unrelated to the amendment's changes."
+  },
+  "0e141418ecea0ff2182d_amd_1264": {
+    "provision_effect": "The amendment changes the Commission's issuance of guidelines from discretionary (\"may issue\") to mandatory (\"shall issue\"), expands consultation to include social partners and the European Labour Authority, requires guidelines to be ready before the Directive enters into force, and mandates regular review and updates.",
+    "label": "NOISE",
+    "reasoning": "The organisation's matched text focuses on support for stakeholders in third countries (civil society, trade unions, workers) to understand and exercise their rights under the Directive — not on the Commission's obligation to issue guidelines, the consultation process for drafting them, or their timing and sectoral specificity. The organisation's recommendations target Articles 14, 19, and 21, not the guideline-issuing provision. There is no substantive directional stance on what the amendment actually changes."
+  },
+  "88f9ee114a2b97c90e7f_amd_390": {
+    "provision_effect": "The amendment adds a sentence requiring companies to ensure that any temporary suspension or termination of a commercial relationship does not result in a more severe human rights or environmental impact than the one it intends to mitigate, and also inserts \"directly and\" before \"adversely impacted.\"",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly recommended introducing language defining \"responsible disengagement,\" including requirements to take into account the potential adverse social and economic impacts of disengagement and to consult affected stakeholders before disengaging. The amendment's new sentence directly operationalises this by mandating that companies ensure suspension or termination does not result in a more severe impact than the one being mitigated — precisely the kind of responsible disengagement safeguard the organisation advocated for."
+  },
+  "88f9ee114a2b97c90e7f_amd_389": {
+    "provision_effect": "The amendment adds language clarifying that disengagement should be avoided where its impact would be greater than the adverse impact being prevented, and mandates that companies terminate business relationships where state-imposed forced labour is systemic.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International specifically advocated for language addressing state-imposed forced labour (e.g., Uyghur forced labour, Turkmenistan cotton) where engagement and mitigation are not possible, arguing that the \"last resort\" framing was being misused to justify continued sourcing. The amendment directly responds to this by mandating termination where state-imposed forced labour is systemic, aligning with the organisation's position that disengagement should be required in such circumstances. The amendment also adds the proportionality clause on disengagement impacts, which mirrors the org's recommendation to take into account the social and economic adverse impacts of disengagement."
+  },
+  "ebed1998ad34ac1e8d92_amd_1100": {
+    "provision_effect": "The amendment restricts termination of business relationships to a last resort, adds conditions for when termination is appropriate (severe, systematic, or state-sponsored impacts), requires meaningful stakeholder engagement before disengagement, mandates consideration of whether termination's negative impacts outweigh the harm being addressed, and introduces disclosure obligations around disengagement decisions.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocated for disengagement to be treated as a \"last resort\" (aligning with OECD Guidance), for companies to consider the adverse human rights impacts of exiting relationships, and for meaningful engagement with trade unions and affected stakeholders before deciding to disengage — all of which the amendment directly incorporates. The amendment responds specifically to the organisation's critique that the original text risked enabling companies to \"cut and run\" without responsible disengagement procedures."
+  },
+  "ebed1998ad34ac1e8d92_amd_425": {
+    "provision_effect": "The amendment narrows the scope from \"value chain\" to \"supply chain\" and adds a condition that termination of business relationships is only permissible if it is \"in the best interest of those impacted (responsible disengagement).\"",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocated for \"responsible disengagement,\" warning that the original text created a \"high risk that companies will 'cut and run'\" and stressing that companies must consider the adverse human rights impacts of exiting relationships before doing so. The amendment directly responds to this by adding the condition that termination is only permissible \"if this is in the best interest of those impacted (responsible disengagement),\" and the justification explicitly references avoiding a \"cut and run policy\" — precisely the concern the organisation raised."
+  },
+  "88f9ee114a2b97c90e7f_amd_388": {
+    "provision_effect": "The amendment adds conditions for \"responsible disengagement\" — limiting disengagement to cases of severe/repeated misconduct after repeated failed attempts, requiring it to be in the best interest of those impacted, and mandating consideration of impacts on those depending on the product or affected by supply chain disruptions — while also adding a prioritisation framework based on severity and likelihood of adverse impacts.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly recommended introducing language defining \"responsible disengvement\" and requiring companies to take into account potential social and economic adverse impacts of disengagement, including through consultation with affected stakeholders — precisely what the amendment adds by conditioning disengagement on it being in the best interest of those impacted and accounting for impacts on those depending on the product. The amendment directly responds to the organisation's specific call for responsible disengagement language and stakeholder-centred conditions."
+  },
+  "02a9c2dde3917ac0a8c4_amd_427": {
+    "provision_effect": "The amendment broadens the scope of who can submit complaints (adding groups, communities, entities, human rights and environmental rights defenders, and other legal/natural persons with relevant statutory purposes) and expands the subject matter of complaints to include good governance and climate impacts, beyond the original's human rights and environmental adverse impacts.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International specifically advocates for amending the complaints mechanism to be more accessible and effective, criticising the original's \"narrow formulation\" as too focused on complaint submission rather than effective remedy and failing to align with UNGP effectiveness criteria. The amendment directly responds to this by broadening the categories of eligible complainants (adding human rights defenders, communities, and other persons with relevant statutory purposes) and expanding the scope of covered impacts, moving the text in the direction of a more accessible and inclusive grievance mechanism as the organisation advocated for."
+  },
+  "02a9c2dde3917ac0a8c4_amd_1132": {
+    "provision_effect": "The amendment replaces the original narrow \"complaints submission\" mechanism with a broader requirement for undertakings to establish or participate in effective operational-level grievance mechanisms (developed in consultation with stakeholders) that function as both early-warning and remediation systems, and expands the scope to include good governance, climate impacts, and products/services.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly criticised the original text's \"narrow formulation of a 'complaints mechanism'\" as focused solely on complaint submission rather than effective remedy, and called for alignment with UNGP effectiveness criteria (including stakeholder engagement and dialogue) and OHCHR recommendations on non-State grievance mechanisms. The amendment directly responds to this by replacing the passive complaints-submission model with a requirement to establish effective grievance mechanisms in consultation with stakeholders that serve both early-warning and remediation functions — precisely the direction the organisation advocated for."
+  },
+  "02a9c2dde3917ac0a8c4_amd_428": {
+    "provision_effect": "The amendment replaces \"potential\" adverse impacts with \"foreseeable, based on the state of knowledge\" adverse impacts as the trigger for complaints and discussions, narrowing the scope from broadly \"potential\" to epistemically qualified \"foreseeable\" impacts.",
+    "label": "NOISE",
+    "reasoning": "Anti-Slavery International's position focuses on strengthening the complaints mechanism to align with UNGP effectiveness criteria, improve remedy, and ensure accessibility — not on the specific wording distinction between \"potential\" and \"foreseeable based on the state of knowledge.\" Their advocacy does not express a directional stance on this particular terminological change, making their position too general to be matched to this specific amendment."
+  },
+  "02a9c2dde3917ac0a8c4_amd_429": {
+    "provision_effect": "The amendment adds the qualifier \"well-founded\" before \"complaints\" in the sentence granting complainants the right to request follow-up and meet with company representatives, thereby restricting that right to complaints deemed well-founded rather than all complaints.",
+    "label": "OPPOSING",
+    "reasoning": "Anti-Slavery International explicitly advocates for strengthening and broadening the complaints mechanism, calling for alignment with UNGP effectiveness criteria and better access to remedy for workers. The amendment narrows complainants' rights by restricting follow-up and meeting entitlements to \"well-founded\" complaints only, which moves in the opposite direction from the organisation's position of expanding and strengthening access to grievance mechanisms."
+  },
+  "02a9c2dde3917ac0a8c4_amd_1133": {
+    "provision_effect": "The amendment replaces the original narrow \"possibility to submit complaints\" with a requirement for companies to establish or participate in effective operational-level grievance mechanisms that function as both early-warning and remediation systems, explicitly enabling persons to raise grievances and request remedy.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly criticised the original text's \"narrow formulation of a 'complaints mechanism'\" as being \"focused solely on the submission of complaints, rather than the provision of effective remedy,\" and called for alignment with UNGP effectiveness criteria and OHCHR recommendations on operational-level grievance mechanisms. The amendment directly responds to this by replacing the passive \"provide the possibility to submit complaints\" with a requirement to establish effective grievance mechanisms at operational level that include both early-warning and remediation functions, and explicitly allow persons to \"request remedy\" — precisely the direction the organisation advocated for."
+  },
+  "c0a89079022f855adced_amd_468": {
+    "provision_effect": "The amendment extends civil liability to cover damages resulting from adverse impacts caused by subsidiaries, in addition to the company's own due diligence failures.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly advocates for removing loopholes in civil liability and closing gaps that allow companies to evade responsibility, including through indirect relationships. The amendment's extension of liability to cover subsidiary-caused adverse impacts directly responds to the organisation's concern that companies can evade liability through structural arrangements, strengthening the civil liability regime in the direction the organisation advocates for."
+  },
+  "c0a89079022f855adced_amd_467": {
+    "provision_effect": "The amendment extends civil liability to cover failures by companies under a company's control, adds \"provide remediation\" as an obligation, clarifies that the company \"caused or contributed to\" the adverse impact, and defines what constitutes \"control\" over another company (including through franchise, license, subcontracting, and outsourcing agreements).",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly called for removing loopholes in civil liability, arguing that companies could evade liability through weak due diligence methods and indirect partner exclusions. The amendment directly addresses this by extending liability to companies under the parent's control, adding remediation obligations, and clarifying causation standards — all of which close the loopholes the organisation identified, particularly around indirect/controlled entities and the risk of evasion through contractual or third-party arrangements."
+  },
+  "723e16a9fe53a946ddeb_amd_472": {
+    "provision_effect": "The amendment adds a sentence to recital 56 placing the burden of proof of compliance on the respondent company, rather than leaving it on the claimant.",
+    "label": "ALIGNED",
+    "reasoning": "Anti-Slavery International explicitly recommended that \"the burden of proof [be placed] on the defendant company to clarify its connection to the violation and harm and demonstrate that it took all appropriate measures,\" directly advocating for the change the amendment introduces. The amendment responds precisely to this specific directional ask by shifting the evidentiary burden to the respondent company."
+  }
+}

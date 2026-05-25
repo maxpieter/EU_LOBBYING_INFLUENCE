@@ -1,0 +1,957 @@
+{
+  "4e63c058eb3bcd9fb550_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before the Commission adopts decisions, including access to the file and a minimum 14-day period to submit observations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text contains only general endorsements of the Commission's initiative, support for a European approach, and broad statements about legal certainty and avoiding fragmentation — no specific advocacy position on procedural rights, the right to be heard, or access to the file. This is boilerplate support without any directional stance that could be evaluated against the provision."
+  },
+  "4e63c058eb3bcd9fb550_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules including written procedure termination, communication of opinions, and applicable regulatory framework.",
+    "label": "NOISE",
+    "reasoning": "The Danish Government's submission contains only general endorsements of EU-level action on digital markets and support for avoiding regulatory fragmentation, with no specific advocacy position on the creation or structure of an advisory committee. The org text expresses broad support for a European approach without any directional stance on the governance or procedural mechanisms such as the Digital Markets Advisory Committee."
+  },
+  "cbd3141f4ee01d182270_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to ensure contestable and fair markets in the digital sector where gatekeepers are present, including provisions on the relationship with national rules and other EU law.",
+    "label": "NOISE",
+    "reasoning": "The org text expresses general support for the Commission's initiative to develop an ex ante regulatory instrument for large online gatekeeper platforms, but does not take a specific directional stance on the scope, exclusions, or jurisdictional provisions established in Article 1. The position amounts to a broad endorsement of the initiative rather than a specific advocacy position on what the scope should or should not include."
+  },
+  "cbd3141f4ee01d182270_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, with Commission powers to specify measures if compliance is insufficient, and procedural timelines for such decisions.",
+    "label": "NOISE",
+    "reasoning": "The org text expresses only general support for the EU Commission's initiative to develop an ex ante regulatory instrument for large online gatekeeper platforms, without taking any specific stance on compliance mechanisms, Commission enforcement powers, or procedural timelines. This is a broad endorsement of the overall initiative rather than a directional advocacy position on the specific compliance and enforcement framework established by Article 7."
+  },
+  "cbd3141f4ee01d182270_article_3": {
+    "provision_effect": "Establishes the criteria and quantitative thresholds for designating providers of core platform services as gatekeepers, including a notification and assessment procedure.",
+    "label": "NOISE",
+    "reasoning": "The org's text expresses general support for an ex ante regulatory instrument for large gatekeeper platforms and describes market characteristics (lock-in, network effects, etc.) that justify regulation, but does not take any specific directional stance on how gatekeepers should be defined, what thresholds should apply, or how the designation procedure should work. This is a general endorsement of the initiative without a specific position that can be evaluated against the provision's concrete designation mechanism."
+  },
+  "cbd3141f4ee01d182270_article_5": {
+    "provision_effect": "Establishes specific behavioural obligations for gatekeepers, including restrictions on combining personal data, requirements to allow business users to offer products on third-party services, and prohibitions on tying practices.",
+    "label": "NOISE",
+    "reasoning": "The org text expresses only general support for the EU Commission's proposal to develop an ex ante regulatory instrument for large online gatekeeper platforms, without taking any specific directional stance on the particular obligations listed in Article 5 (e.g., data combination restrictions, parity clauses, tying prohibitions). This is a broad endorsement of the initiative as a whole, not a specific advocacy position on any of the concrete obligations the provision establishes."
+  },
+  "cbd3141f4ee01d182270_article_2": {
+    "provision_effect": "Defines key terms used throughout the Digital Markets Act regulation, including 'gatekeeper', 'core platform service', 'end user', 'business user', and other relevant concepts.",
+    "label": "NOISE",
+    "reasoning": "The provision is purely definitional, establishing the meaning of terms used in the regulation without taking any concrete regulatory action or stance. The org's position is a general endorsement of the ex ante regulatory instrument for large online gatekeepers, with no specific advocacy position on how key terms should be defined — making this a case of general support without a directional stance on the provision's subject matter."
+  },
+  "69433e1821d8d31a3412_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, with the Commission empowered to specify measures if compliance is insufficient.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses only a general call for bold EU action and endorsement of ex-ante regulation policy options to address gatekeeper platforms, without taking any specific directional stance on compliance mechanisms, Commission enforcement powers, or the procedural details established in Article 7. This is a general endorsement of EU initiative rather than a specific advocacy position that can be evaluated against the provision's concrete compliance and enforcement framework."
+  },
+  "69433e1821d8d31a3412_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines and preliminary findings requirements.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses only a general call for bold EU action and endorses ex-ante regulation policy options to address gatekeeper platforms, without taking any specific stance on the market investigation procedure, designation timelines, or preliminary findings mechanisms that Article 15 establishes. This is a general endorsement of EU initiative without a directional position specific enough to evaluate against this provision."
+  },
+  "69433e1821d8d31a3412_article_3": {
+    "provision_effect": "Establishes the criteria and quantitative thresholds for designating providers of core platform services as gatekeepers, including a notification and Commission designation procedure.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly calls for bold EU-level ex-ante regulation targeting gatekeeper platforms to address the insufficiency of current competition rules, advocating for policy options 3a and 3b. Article 3 directly delivers this by creating a concrete gatekeeper designation mechanism — the very regulatory instrument the organisation advocated for — making this a clear case of alignment under path (b)."
+  },
+  "69433e1821d8d31a3412_article_11": {
+    "provision_effect": "Requires gatekeepers to ensure full and effective compliance with their obligations, prohibiting circumvention through any contractual, commercial, or technical behaviour, and preventing degradation of services for users exercising their rights.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses only a general call for bold EU action and endorsement of ex-ante regulation to address gatekeeper platforms, without taking any specific directional stance on anti-circumvention mechanisms or the particular obligations established in Article 11. This is a broad endorsement of regulatory initiative rather than a specific advocacy position that can be evaluated against this provision's concrete requirements."
+  },
+  "69433e1821d8d31a3412_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations based on market investigations, addressing practices that limit contestability or are unfair in digital markets.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly calls for bold and decisive EU-level action to ensure fair and contestable digital markets, advocating for ex-ante regulation (policy options 3a and 3b) to address gatekeeper platforms. The provision directly responds to this by establishing a mechanism for the Commission to update gatekeeper obligations to address unfair or contestability-limiting practices — concrete regulatory action in exactly the direction the org advocated for."
+  },
+  "5e4621443ab8f9bd23ec_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations (beyond Articles 5 and 6) based on market investigations, targeting new unfair or contestability-limiting practices.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly advocates for a combination of blacklisted (per se prohibited) practices and tailor-made, case-by-case remedies, emphasising the need for proactive rules and robust enforcement against unfair gatekeeper practices. Article 10 directly delivers on the case-by-case/tailor-made dimension (policy option 3b) by empowering the Commission to add new obligations through market investigations targeting unfair or contestability-limiting practices — acting in the same direction the org advocated for."
+  },
+  "5e4621443ab8f9bd23ec_article_23": {
+    "provision_effect": "Establishes a commitments mechanism whereby gatekeepers can offer binding commitments to ensure compliance with obligations, allowing the Commission to close proceedings if commitments are accepted, with provisions for reopening proceedings if circumstances change or commitments are breached.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org advocates for a combination of blacklisted practices (3a) and tailor-made case-by-case remedies (3b), emphasising robust enforcement to effectively terminate harmful practices. The commitments mechanism in Article 23 could be seen as part of the case-by-case remedy toolbox (aligned with 3b), but the org's emphasis on \"proactive rules and robust enforcement\" raises a question of whether a commitments-based closure of proceedings — which may fall short of a full enforcement decision — satisfies their demand for robust action. The connection to the org's position is real but the direction (does this mechanism constitute the robust enforcement they sought, or does it undermine it?) is genuinely ambiguous."
+  },
+  "5e4621443ab8f9bd23ec_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt non-compliance decisions against gatekeepers who fail to meet obligations, measures, or commitments, and orders them to cease and desist.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly calls for \"proactive rules and robust enforcement\" to terminate harmful practices by gatekeeper platforms, arguing that mere information collection is insufficient. Article 25 establishes a concrete enforcement mechanism — non-compliance decisions with cease-and-desist orders — which directly delivers the robust enforcement the organisation advocated for, complementing the blacklisted obligations (Art. 5/6) and tailor-made remedies (Art. 7/16) the org also supported."
+  },
+  "5e4621443ab8f9bd23ec_article_36": {
+    "provision_effect": "Establishes implementing provisions empowering the Commission to adopt acts concerning procedural and technical details for notifications, investigations, hearings, and cooperation arrangements under the Digital Markets Act.",
+    "label": "NOISE",
+    "reasoning": "The org's position advocates for a combination of blacklisted practices (policy option 3a) and tailor-made case-by-case remedies (policy option 3b) with robust enforcement, which is a substantive policy stance on the regulatory framework. The provision, however, deals purely with procedural implementing acts (forms, deadlines, practical arrangements) and does not address the substantive question of which policy options or enforcement mechanisms should be adopted. There is no meaningful connection between the org's advocacy and this procedural provision."
+  },
+  "5e4621443ab8f9bd23ec_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules for opinions and their communication alongside individual decisions.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on advocating for a combination of blacklisted practices and case-by-case remedies for gatekeeper platforms, with robust enforcement. Article 32 is a procedural provision establishing an advisory committee and its operating rules, which has no substantive connection to the org's specific policy advocacy on enforcement approaches and prohibited practices."
+  },
+  "2114f9421e90c7827d96_article_16": {
+    "provision_effect": "Establishes a market investigation mechanism allowing the Commission to impose behavioural or structural remedies on gatekeepers that have systematically infringed obligations (at least three non-compliance decisions within five years) and further strengthened their gatekeeper position.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org's position discusses the downsides of relying solely on individual case-based enforcement (option 3b) versus a blacklist-based approach (option 3a), advocating for a combination of both rather than either alone. Article 16's systematic non-compliance mechanism is a form of case-based enforcement with structural/behavioural remedies, which the org acknowledges has flexibility advantages but criticises for being too slow. However, the org does not explicitly oppose this mechanism — it opposes adopting it in isolation. It is genuinely unclear whether this provision, as part of a broader regulation that also includes blacklist-style obligations (Articles 5 and 6), satisfies the org's concern about combining both approaches, making the direction of alignment ambiguous."
+  },
+  "2114f9421e90c7827d96_article_6": {
+    "provision_effect": "Establishes a list of specific behavioural obligations (blacklist) for gatekeepers, including data use restrictions, interoperability requirements, and non-discrimination rules, that are susceptible of being further specified.",
+    "label": "NOISE",
+    "reasoning": "The org text discusses the general pros and cons of a blacklist-based approach versus an individual enforcement mechanism, without taking a specific directional stance on any of the concrete obligations listed in Article 6. The org's commentary is meta-level policy design analysis (e.g., warning that blacklisted practices may be too narrowly worded), not a specific advocacy position for or against any particular obligation established in this article."
+  },
+  "2114f9421e90c7827d96_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt a non-compliance decision against a gatekeeper that fails to meet its obligations, including ordering the gatekeeper to cease and desist.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org's position discusses the trade-offs between a blacklist-based approach and an individual case-based enforcement mechanism, expressing concern that case-by-case enforcement can take too long to have meaningful impact. Article 25 establishes a non-compliance decision procedure, which is part of the enforcement mechanism, but the org's text does not take a clear directional stance on whether this specific non-compliance procedure is adequate or inadequate — it only discusses the general design choices at a higher level. A genuine connection exists (enforcement mechanisms for gatekeepers), but it is genuinely unclear whether this provision satisfies or contradicts the org's concerns."
+  },
+  "2114f9421e90c7827d96_article_26": {
+    "provision_effect": "Establishes fines of up to 10% of total turnover for gatekeepers that fail to comply with obligations, and up to 1% for procedural infringements such as failing to provide information.",
+    "label": "NOISE",
+    "reasoning": "The org's text discusses the relative merits and downsides of different policy options (blacklist-based vs. individual case enforcement) at a high level, without taking a specific directional stance on the level, structure, or existence of fines. The org does not advocate for or against any particular fine regime, so there is no specific advocacy position that can be evaluated against this provision on fines."
+  },
+  "2114f9421e90c7827d96_article_22": {
+    "provision_effect": "Empowers the Commission to order interim measures against a gatekeeper on the basis of a prima facie infringement finding, in cases of urgency due to risk of serious and irreparable damage to business or end users.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly warns that enforcement mechanisms based on individual cases can \"take an unacceptably long time to have any meaningful impact on the market while harm to competition and consumers persists.\" Article 22's interim measures provision directly addresses this concern by allowing the Commission to act swiftly — before a full non-compliance decision — when there is urgency and risk of serious, irreparable damage, thereby mitigating the very delay problem the org identified as a key downside of case-by-case enforcement."
+  },
+  "445788c1af8c0a307233_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt non-compliance decisions against gatekeepers that fail to meet obligations, including ordering them to cease and desist and provide compliance plans.",
+    "label": "ALIGNED",
+    "reasoning": "The vzbv explicitly advocates for a combined approach featuring a blacklist of prohibited practices (obligations) alongside a case-by-case enforcement mechanism to stop unfair gatekeeper practices. Article 25 establishes the concrete enforcement/non-compliance mechanism that operationalises exactly this — enabling the Commission to act against gatekeepers that breach the obligations laid down in Articles 5 and 6 (the blacklist) or case-specific measures, ordering them to cease and desist. This directly responds to the org's call for effective enforcement action against unfair gatekeeper practices."
+  },
+  "445788c1af8c0a307233_article_36": {
+    "provision_effect": "Establishes the Commission's power to adopt implementing acts specifying procedural and technical details for notifications, investigations, deadlines, and cooperation arrangements under the Digital Markets Act.",
+    "label": "NOISE",
+    "reasoning": "The org's position advocates for a combined policy approach (blacklist of prohibited practices plus case-by-case remedies) and discusses enforcement by existing authorities, but does not take any specific stance on the Commission's power to adopt implementing acts covering procedural/technical details. The provision is purely procedural in nature and does not relate to the substantive policy design choices the org is advocating for."
+  },
+  "732f581c00f31dad83fc_article_36": {
+    "provision_effect": "Empowers the Commission to adopt implementing acts specifying procedural and technical details for notifications, investigations, deadlines, and cooperation arrangements under the Digital Markets Act.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on enforcement architecture (national authorities, blacklist approach, policy options 3a/3b) and conditions for effective ex ante regulation, not on the procedural implementing acts that Article 36 establishes. There is no specific advocacy position on the Commission's power to adopt implementing acts covering forms, notifications, or procedural arrangements."
+  },
+  "e19ccf72971b6bb2b840_article_16": {
+    "provision_effect": "Establishes a mechanism for the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations under Articles 5 and 6, following a market investigation.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly advocates for EU-level enforcement of ex ante regulation by a European regulatory authority with the power to impose and enforce rules on large online platforms. Article 16 directly delivers on this by empowering the Commission (an EU-level authority) to conduct market investigations and impose binding remedies — including structural ones — on gatekeepers for systematic non-compliance, which is a concrete enforcement mechanism at EU level consistent with what the org called for."
+  },
+  "e19ccf72971b6bb2b840_article_7": {
+    "provision_effect": "Establishes a compliance specification mechanism whereby the Commission can assess and, by decision, specify the measures gatekeepers must implement to effectively comply with their obligations under Article 6, including procedural timelines and proportionality requirements.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly advocates for EU-level enforcement of Ex Ante Regulation by a European regulatory authority, arguing that large online platforms operating at European/global scale require centralized enforcement. Article 7 directly operationalizes this by granting the Commission (an EU-level authority) the power to assess and specify compliance measures for gatekeepers, which is a concrete step in the direction the org advocated for — EU-level regulatory enforcement of ex ante obligations."
+  },
+  "e19ccf72971b6bb2b840_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, including harmonised rules for gatekeepers, exclusions for certain electronic communications services, a prohibition on Member States imposing further obligations on gatekeepers for the same purpose, and a requirement for close cooperation between the Commission and Member States in enforcement.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates for an EU-level approach to avoid fragmentation of the single market through inconsistent rules and enforcement, and calls for coordinated enforcement between EU and national authorities. Article 1(5) directly establishes harmonised rules by preventing Member States from imposing additional obligations on gatekeepers for the same purpose, and Article 1(7) mandates close cooperation and coordination between the Commission and Member States in enforcement — both directly responding to the org's specific asks for EU-level harmonisation and coordinated enforcement."
+  },
+  "e19ccf72971b6bb2b840_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses specifically on EU-level enforcement structures, a European regulatory body, and avoiding fragmentation — not on periodic review or evaluation mechanisms. The provision establishes a review/evaluation cycle, which is not addressed by the org's advocacy, making the subjects effectively unrelated for classification purposes."
+  },
+  "e19ccf72971b6bb2b840_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on advocating for EU-level enforcement of ex ante regulation, avoiding fragmentation, and establishing a European regulatory body — it does not express any specific stance on suspension mechanisms for gatekeepers. There is no substantive advocacy position in the org text that relates to the suspension procedure established by this provision."
+  },
+  "fda47d3f906d74749e55_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, with the Commission empowered to specify measures if compliance is insufficient, and sets procedural timelines and proportionality requirements.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on two distinct topics: enforcement coordination with national authorities and criteria for identifying gatekeeper platforms. Neither of these positions directly addresses the compliance mechanism, Commission decision-making powers, or procedural timelines established in Article 7. The org text contains no substantive advocacy position on the specific compliance specification and enforcement mechanism that Article 7 creates."
+  },
+  "fda47d3f906d74749e55_article_12": {
+    "provision_effect": "Requires gatekeepers to notify the Commission of any intended concentration involving another provider of core platform services or digital sector services, including details on turnover, user numbers, and rationale, regardless of whether it meets standard merger notification thresholds.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on criteria for identifying gatekeeper platforms and enforcement coordination with national authorities, not on merger/concentration notification obligations. While both relate to the broader DMA/ex-ante regulation framework, the org text expresses no specific advocacy position on the obligation to inform the Commission about concentrations, making the connection too remote to constitute substantive alignment or opposition."
+  },
+  "0d5753af2b84759c3c65_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to ensure contestable and fair markets where gatekeepers are present, covering core platform services provided to users in the Union, while preempting additional Member State obligations and preserving existing competition law frameworks.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates for a horizontal, principles-based ex ante regulation targeting gatekeeper platforms operating across markets and sectors — precisely what Article 1 establishes as the subject matter and scope of the Regulation. The org's call for a broad horizontal rule covering all sectors and addressing gatekeeper conduct in multi-sided markets directly corresponds to the provision's establishment of harmonised rules applicable to gatekeepers across the Union's digital sector."
+  },
+  "0d5753af2b84759c3c65_article_5": {
+    "provision_effect": "Establishes a list of specific obligations (blacklist) that gatekeepers must comply with, including prohibitions on combining personal data without consent, restrictions on self-preferencing, and requirements for transparency in advertising.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly advocates for a \"blacklist-based policy approach\" (policy option 3a.) with clear, enumerated obligations and prohibitions on unfair conduct by gatekeeper platforms, including specific mention of advertising rules and self-preferencing. Article 5 directly delivers this by establishing a concrete blacklist of prohibited and required conduct for gatekeepers, acting precisely in the direction the org advocated for."
+  },
+  "0d5753af2b84759c3c65_article_3": {
+    "provision_effect": "Establishes the criteria and thresholds for designating providers of core platform services as \"gatekeepers\" under the Digital Markets Act, including quantitative presumptions and a qualitative assessment procedure.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on the substantive obligations and conduct rules for gatekeepers (principles-based approach, self-preferencing prohibitions, blacklist of conduct), not on the criteria or thresholds used to designate gatekeepers. The org text does not express a specific advocacy position on how gatekeepers should be identified or what thresholds should apply, making it unrelated to the concrete action of Article 3."
+  },
+  "0d5753af2b84759c3c65_article_6": {
+    "provision_effect": "Article 6 establishes a list of specific behavioural obligations for gatekeepers, including prohibitions on self-preferencing, data use restrictions, interoperability requirements, data portability, and access obligations for business users and third parties.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly advocates for a principles-based approach with a clear blacklist of prohibited conduct for gatekeepers, specifically calling for the prohibition of intra-platform self-preferencing and sector-specific rules for advertising, operating systems, and app stores. Article 6 directly delivers this by establishing a concrete list of obligations and prohibitions for gatekeepers — including self-preferencing bans (Art. 6(1)(d)), app store access rules (Art. 6(1)(k)), and operating system interoperability (Art. 6(1)(c)) — acting squarely in the direction the organisation advocated for."
+  },
+  "0d5753af2b84759c3c65_article_11": {
+    "provision_effect": "Requires gatekeepers to fully and effectively comply with their obligations under Articles 5 and 6, prohibiting circumvention through any contractual, commercial, technical or other behaviour, and preventing degradation of services for users who exercise their rights.",
+    "label": "ALIGNED",
+    "reasoning": "The vzbv explicitly advocates for a principles-based approach that prohibits unfair conduct by gatekeeper platforms and covers all relevant behaviour across markets, including a \"blacklist\" of prohibited conduct broad enough to catch all relevant conduct. Article 11's anti-circumvention provision directly operationalises this by ensuring that gatekeeper obligations cannot be undermined through any form of behaviour (contractual, commercial, technical or otherwise), which aligns with the org's call for comprehensive, effective prohibitions on gatekeeper conduct that cannot be evaded."
+  },
+  "d7138c3d63e36901eb13_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, and empowers the Commission to specify those measures if they are found to be ineffective, ensuring proportionality.",
+    "label": "NOISE",
+    "reasoning": "The org's position expresses general support for ex ante regulation of large online platforms and advocates for a well-scoped definition of gatekeepers, but does not take any specific stance on the compliance mechanism, Commission enforcement powers, or proportionality standards established in Article 7. The org's advocacy is too broad and high-level to constitute a specific position on this provision's concrete compliance and enforcement procedures."
+  },
+  "d7138c3d63e36901eb13_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "NOISE",
+    "reasoning": "The org's position expresses general support for ex ante regulation of large online platforms and advocates for a well-scoped definition of gatekeepers, but takes no specific stance on whether suspension mechanisms for gatekeepers should or should not exist. The org text contains no directional advocacy position that can be evaluated against this specific suspension provision."
+  },
+  "d7138c3d63e36901eb13_article_3": {
+    "provision_effect": "Establishes the criteria and quantitative thresholds for designating providers of core platform services as \"gatekeepers\" subject to ex ante regulatory obligations under the Digital Markets Act.",
+    "label": "ALIGNED",
+    "reasoning": "EU Travel Tech explicitly advocates for a new ex ante regulatory framework targeting large online platforms acting as gatekeepers, and calls for a definition of \"Systemic Digital Platforms\" that is neither under- nor over-inclusive — capturing only those platforms whose systemic role threatens fairness and openness. Article 3 directly responds to this by establishing specific quantitative thresholds (turnover, market capitalisation, active users) and qualitative criteria to designate gatekeepers in a targeted manner, precisely the kind of calibrated, neither under- nor over-inclusive definition the organisation requested."
+  },
+  "d7138c3d63e36901eb13_article_11": {
+    "provision_effect": "Requires gatekeepers to ensure full and effective compliance with core platform obligations, prohibiting circumvention through any contractual, commercial, or technical behaviour, and preventing degradation of services for users exercising their rights.",
+    "label": "NOISE",
+    "reasoning": "The org's position expresses general support for ex ante regulation of large online platforms acting as gatekeepers and advocates for a well-scoped definition of which platforms should be covered, but does not take any specific stance on anti-circumvention mechanisms or the enforcement of compliance obligations. This is a general endorsement of the regulatory framework without a directional position on the specific content of Article 11."
+  },
+  "d7138c3d63e36901eb13_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and assess whether additional rules or obligations are needed to ensure digital markets remain contestable and fair, with the possibility of follow-up legislative proposals.",
+    "label": "ALIGNED",
+    "reasoning": "EU Travel Tech explicitly advocates for a new ex ante regulatory framework that keeps EU markets \"fair and contestable\" and calls for a well-calibrated definition of covered platforms that avoids over- or under-inclusion. Article 38's review mechanism directly serves this goal by mandating periodic reassessment of whether the scope (including the list of core platform services) and obligations remain appropriately targeted — precisely the kind of ongoing calibration the org advocates for to ensure the framework captures the right platforms without imposing unnecessary burdens."
+  },
+  "26e28a1dbb3ec2a1fe25_article_36": {
+    "provision_effect": "Establishes implementing provisions empowering the Commission to adopt implementing acts covering procedural and technical details for various articles of the regulation, including notifications, technical compliance measures, investigation proceedings, and cooperation arrangements.",
+    "label": "NOISE",
+    "reasoning": "Orange's position is a general endorsement of the ex ante regulatory framework for gatekeepers and a preference for specific policy options (3a and 3b), with no specific stance on implementing acts or procedural arrangements. The provision deals with technical/procedural implementing measures, which Orange's text does not address at all."
+  },
+  "7856b390473f85872ca7_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules including written procedures, communication of opinions, and applicable regulatory framework.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a general concluding statement expressing broad support for EU digital single market ambitions and recommending a cautious, case-by-case regulatory approach, with no specific position on the creation or functioning of an advisory committee. This is boilerplate advocacy language with no directional stance on the specific mechanism established by Article 32."
+  },
+  "0f1191221ab9cad092e8_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to ensure contestable and fair markets where gatekeepers are present, while preserving existing competition law frameworks and limiting Member States from imposing additional gatekeeper-specific obligations.",
+    "label": "ALIGNED",
+    "reasoning": "Yelp explicitly advocates for an ex ante regulatory framework to complement antitrust rules, citing the need for timely and effective intervention against gatekeeper behaviour such as Google's self-favouring. Article 1 directly establishes exactly such a framework — harmonised ex ante rules targeting gatekeepers — while also preserving existing competition law (Articles 101/102 TFEU), which aligns with Yelp's position that competition law should continue to apply alongside the new instrument."
+  },
+  "623333f42e57b7133b64_article_6": {
+    "provision_effect": "Establishes a set of behavioural obligations for gatekeepers, including prohibitions on self-preferencing in ranking, data access requirements, interoperability mandates, and restrictions on using business users' data for competition against them.",
+    "label": "ALIGNED",
+    "reasoning": "Yelp explicitly advocates for an ex ante regulatory framework targeting large platforms with gatekeeper power that can self-preference and starve competing specialised/local search providers of traffic — directly referencing Google's ranking behaviour. Article 6(1)(d) specifically requires gatekeepers to refrain from self-preferencing their own services in ranking and to apply fair and non-discriminatory ranking conditions, which directly addresses the harm Yelp describes. The provision takes concrete action in exactly the direction Yelp advocated for."
+  },
+  "7d6b8028bd6cb4a0c390_article_22": {
+    "provision_effect": "Empowers the Commission to order interim measures against a gatekeeper on the basis of a prima facie infringement finding, in cases of urgency due to risk of serious and irreparable damage to business or end users.",
+    "label": "ALIGNED",
+    "reasoning": "Yelp explicitly advocates for interim measures as a useful tool to prevent imminent, irreparable damage to competition — precisely the rationale and mechanism that Article 22 establishes. The provision directly delivers what the org argued for: a formal interim measures power triggered by urgency and risk of serious, irreparable harm."
+  },
+  "8b65e94650013f4a7ae8_article_22": {
+    "provision_effect": "Empowers the Commission to adopt interim measures against gatekeepers on the basis of a prima facie finding of infringement, in cases of urgency due to risk of serious and irreparable damage, without the full procedural requirements previously required.",
+    "label": "ALIGNED",
+    "reasoning": "Yelp explicitly advocates for the Commission to make proactive use of interim measures to prevent irreparable harm, and criticises the high procedural burden that has historically made interim measures rare. Article 22 directly responds to this by establishing a streamlined interim measures mechanism based on a prima facie finding of infringement, without requiring the full procedural steps (statement of objections, file access, hearing, advisory committee) that Yelp identified as obstacles — aligning squarely with Yelp's specific ask for lower procedural requirements and more effective use of interim measures."
+  },
+  "be880c6c9022a8755b26_article_22": {
+    "provision_effect": "Empowers the Commission to adopt interim measures against gatekeepers on the basis of a prima facie finding of infringement, in cases of urgency due to risk of serious and irreparable damage to business or end users.",
+    "label": "ALIGNED",
+    "reasoning": "Yelp explicitly advocates for competition authorities, including the European Commission, to have the ability to act quickly through interim measures as soon as abuse is detected, without waiting for complaints. Article 22 directly delivers this by granting the Commission the power to impose interim measures swiftly on a prima facie finding of infringement, which is precisely the mechanism Yelp argued for."
+  },
+  "9a3d98c7870fdcc0c2e8_article_2": {
+    "provision_effect": "Defines key terms used throughout the Digital Markets Act regulation, including 'gatekeeper', 'core platform services', and related concepts.",
+    "label": "NOISE",
+    "reasoning": "The org text is a general introductory statement expressing broad support for a safe and competitive online ecosystem, without taking any specific directional stance on how gatekeepers or core platform services should be defined. The provision is purely definitional and the org text contains no specific advocacy position on the scope or content of these definitions."
+  },
+  "9a3d98c7870fdcc0c2e8_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to gatekeepers providing core platform services in the Union, while preempting additional Member State obligations and preserving existing competition law frameworks.",
+    "label": "NOISE",
+    "reasoning": "The org text is largely introductory and background-setting, expressing general support for a safe and competitive online ecosystem and acknowledging the role of online intermediaries, without taking any specific directional stance on the scope, gatekeeper designation criteria, preemption of national rules, or other concrete elements established by this provision. There is no specific advocacy position that can be evaluated against what Article 1 actually does."
+  },
+  "9a3d98c7870fdcc0c2e8_article_11": {
+    "provision_effect": "Requires gatekeepers to ensure full and effective compliance with their obligations, prohibits circumvention through any means, and prevents degradation of services for users exercising their rights.",
+    "label": "NOISE",
+    "reasoning": "The org text contains only general background statements about ITI's identity, broad support for a safe and competitive online ecosystem, and the role of online intermediaries — with no specific advocacy position on anti-circumvention mechanisms, gatekeeper compliance obligations, or the degradation of services. There is no directional stance that can be evaluated against the provision's concrete requirements."
+  },
+  "9a3d98c7870fdcc0c2e8_article_12": {
+    "provision_effect": "Requires gatekeepers to notify the Commission of any intended concentration involving another provider of core platform services or digital sector services, regardless of whether it meets standard merger notification thresholds, including detailed information about turnover, users, and rationale.",
+    "label": "NOISE",
+    "reasoning": "The org text contains only general background statements about ITI's identity, broad support for a safe and competitive online ecosystem, and the role of online intermediaries — it expresses no specific advocacy position on merger notification obligations for gatekeepers. There is no directional stance on whether such a notification requirement should or should not exist, making this boilerplate/general endorsement text with no substantive connection to Article 12."
+  },
+  "9a3d98c7870fdcc0c2e8_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before the Commission adopts decisions, including access to the file, minimum time limits for observations, and full respect of rights of defence.",
+    "label": "NOISE",
+    "reasoning": "The org text contains only general background statements about ITI's identity, broad support for a safe and competitive online environment, and the role of online intermediaries — it expresses no specific advocacy position on procedural rights, rights of defence, or access to file in Commission proceedings. There is no directional stance that can be evaluated against this provision."
+  },
+  "c3888afa7b07a0568e0a_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation every three years and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The org text does not express a specific advocacy position on periodic review mechanisms or evaluation clauses. It makes a general call to consider existing legislation when assessing gaps, but this is broad background context and a general endorsement of thorough impact assessment rather than a directional stance on whether or how the Commission should conduct reviews of the Regulation itself."
+  },
+  "1d558195ff682787ace3_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation every three years and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "ALIGNED",
+    "reasoning": "The org explicitly welcomes plans to gather robust stakeholder input and advocates for assessing existing legislation before introducing new obligations, urging policymakers to review existing laws (like P2B) before layering on new requirements. The provision establishes a periodic review mechanism that evaluates whether additional rules are needed — directly institutionalising the kind of evidence-based, assess-before-acting approach the org advocates for. This aligns with the org's position that new obligations should only follow proper evaluation of existing frameworks."
+  },
+  "61dfdb46fcd7c5a98dc5_article_9": {
+    "provision_effect": "Establishes a mechanism by which the Commission may exempt a gatekeeper, in whole or in part, from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including the possibility of provisional suspension.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses only general support for carefully considered and appropriately targeted ex ante regulation, with broad references to protecting public interests and consumer welfare. It does not take any specific directional stance on exemption mechanisms, public interest carve-outs, or the grounds under which gatekeepers should be relieved of obligations — making it impossible to evaluate whether the provision responds to any specific advocacy position."
+  },
+  "61dfdb46fcd7c5a98dc5_article_11": {
+    "provision_effect": "Requires gatekeepers to fully and effectively comply with core platform obligations, prohibits circumvention through any contractual, commercial, or technical behaviour, ensures consent processes are not made more burdensome for business users, and prohibits degrading service quality for users exercising their rights.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses only general support for carefully considered and appropriately targeted ex ante regulation, without taking any specific directional stance on anti-circumvention mechanisms, consent obligations, or service quality degradation rules. This is broad background commentary and general endorsement language that does not constitute a specific advocacy position that can be evaluated against the provision's concrete requirements."
+  },
+  "24c862aa2b6886996684_article_33": {
+    "provision_effect": "Establishes a mechanism by which three or more Member States can request the Commission to open a market investigation into whether a provider of core platform services should be designated as a gatekeeper.",
+    "label": "OPPOSING",
+    "reasoning": "ITI explicitly argues that the scope of gatekeeper designation should focus on specific conduct and actions rather than on companies or platform characteristics, and warns against automatically treating platform size or nature as harmful. Article 33 creates a mechanism that expands the reach of gatekeeper designation by allowing Member States to trigger investigations based on the size/nature of a provider's core platform services — precisely the company-centric, status-based approach ITI argues against, rather than the conduct-focused intervention ITI advocates for."
+  },
+  "473af615364a2559ebf4_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for Articles 5 and 6 obligations, with Commission power to specify measures and a requirement that such measures be proportionate to the gatekeeper's specific circumstances.",
+    "label": "ALIGNED",
+    "reasoning": "ITI explicitly urges that any limitations on gatekeeper behavior be \"narrowly focused\" and that the Commission's proposal \"reflect the importance of proportionality\" tailored to the specific conduct deemed inappropriate. Article 7(5) directly responds to this by requiring that Commission-specified measures be \"effective in achieving the objectives of the relevant obligation and proportionate in the specific circumstances of the gatekeeper and the relevant service,\" which aligns with ITI's specific ask for proportionality and narrowly tailored requirements."
+  },
+  "473af615364a2559ebf4_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "ALIGNED",
+    "reasoning": "ITI explicitly urges the Commission to ensure proportionality, avoid overbroad instruments, and carefully consider the economic impact of obligations on gatekeepers — positions that align with the suspension mechanism, which provides a safety valve precisely when compliance would threaten a gatekeeper's economic viability. The provision directly responds to ITI's call for narrowly tailored, proportionate requirements by creating a relief mechanism tied to economic harm and exceptional circumstances."
+  },
+  "473af615364a2559ebf4_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for designating gatekeepers, including timelines, preliminary findings, and the application of proportionate obligations to providers not yet entrenched but foreseeably so.",
+    "label": "ALIGNED",
+    "reasoning": "ITI explicitly urges the Commission to ensure proportionality, narrow tailoring of obligations, and legal certainty for companies including gatekeepers. Article 15(4) directly reflects this by limiting the obligations applicable to providers not yet entrenched to only those that are \"appropriate and necessary,\" which is a concrete expression of the proportionality principle ITI advocated for. The provision's built-in proportionality safeguard aligns with ITI's specific ask that any limitations be narrowly focused and proportionate to the conduct deemed inappropriate."
+  },
+  "473af615364a2559ebf4_article_16": {
+    "provision_effect": "Establishes that the Commission may impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations, with structural remedies only permitted where no equally effective behavioural remedy exists, and requires proportionality between the remedy and the infringement.",
+    "label": "ALIGNED",
+    "reasoning": "ITI explicitly urges that any limitations on behaviour or business practices be \"narrowly focused\" and that the Commission's proposal \"reflect the importance of proportionality for a regulation based on the action or conduct deemed inappropriate.\" Article 16 directly embeds proportionality requirements — structural remedies are only permitted where no equally effective behavioural remedy exists, and all remedies must be \"proportionate to the infringement committed\" — which responds to ITI's specific advocacy for proportionality and narrowly tailored remedies."
+  },
+  "473af615364a2559ebf4_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations based on market investigations, targeting practices that limit contestability or are unfair, with criteria for unfairness including disproportionate advantage or weakened contestability.",
+    "label": "OPPOSING",
+    "reasoning": "ITI explicitly urges that any limitations on gatekeeper behavior be \"narrowly focused,\" proportionate, and carefully tailored to avoid overbroad instruments — warning against unintended consequences for innovation and business growth. Article 10 creates a broad, open-ended mechanism allowing the Commission to expand gatekeeper obligations via delegated acts based on relatively general criteria (unfairness, contestability), which runs counter to ITI's specific advocacy for narrow, proportionate, and legally certain regulatory instruments."
+  },
+  "b7fbf04bd161ba3ff631_article_16": {
+    "provision_effect": "Establishes that the Commission may impose behavioural or structural remedies on a gatekeeper found to have systematically infringed obligations, with structural remedies only permitted where no equally effective behavioural remedy exists.",
+    "label": "OPPOSING",
+    "reasoning": "ITI explicitly argues against the imposition of behavioural and structural remedies without a requirement to demonstrate dominance, calling such options \"particularly problematic\" and questioning their proportionality. Article 16 does exactly what ITI opposed — it creates a mechanism for the Commission to impose both behavioural and structural remedies on gatekeepers based on systematic non-compliance, without any dominance requirement."
+  },
+  "b7fbf04bd161ba3ff631_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt non-compliance decisions against gatekeepers who fail to meet obligations, including ordering them to cease and desist and provide compliance explanations.",
+    "label": "OPPOSING",
+    "reasoning": "ITI explicitly argues against the Commission applying behavioural and structural remedies without a requirement to demonstrate dominance, and raises concerns about the proportionality of broad ex ante and ex post regulatory interventions targeting gatekeepers. Article 25 establishes a non-compliance enforcement mechanism that can be triggered without any dominance finding, directly contrary to ITI's position that such remedies are unjustified absent a demonstrated infringement and dominance requirement."
+  },
+  "b7fbf04bd161ba3ff631_article_22": {
+    "provision_effect": "Empowers the Commission to order interim measures against a gatekeeper on the basis of a prima facie finding of infringement, without a full finding of non-compliance, in cases of urgency.",
+    "label": "NOISE",
+    "reasoning": "The ITI text focuses on concerns about ex ante/ex post remedies under the NCT framework and the lack of a dominance requirement, without expressing a specific directional stance on interim measures as a mechanism. The org's position is too general and contextually distinct (NCT roadmap, not DMA interim measures) to constitute specific advocacy for or against this provision."
+  },
+  "070a691eb05816c763aa_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules including written procedure termination, communication of opinions alongside individual decisions, and the applicable comitology procedure under Regulation (EU) No 182/2011.",
+    "label": "NOISE",
+    "reasoning": "The org text contains only general endorsements of EU-level action to prevent regulatory fragmentation and support for the Commission's policy objectives, with no specific advocacy position on the creation, composition, powers, or procedures of an advisory committee. The org's text does not address institutional governance mechanisms like the Digital Markets Advisory Committee in any directional way."
+  },
+  "8e183b5d4069bd52686a_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines and preliminary findings requirements.",
+    "label": "NOISE",
+    "reasoning": "The org text discusses R&D spending levels, innovation in large ecosystems, and the Platform-to-Business Regulation's relevance to the Commission's analysis — it does not express any specific advocacy position on the market investigation procedure, timelines, or gatekeeper designation process established in Article 15. The content is background context and a general methodological critique with no directional stance on this provision's subject matter."
+  },
+  "8e183b5d4069bd52686a_article_33": {
+    "provision_effect": "Establishes a mechanism whereby three or more Member States can jointly request the Commission to open a market investigation into whether a provider of core platform services should be designated as a gatekeeper, with the Commission required to examine the request within four months.",
+    "label": "NOISE",
+    "reasoning": "The org text discusses R&D spending by large platforms, innovation levels, and the Platform-to-Business Regulation's relevance to the Commission's analysis — it does not express any specific advocacy position on the mechanism of Member States requesting market investigations or gatekeeper designation procedures. The text contains no directional stance on Article 33's subject matter."
+  },
+  "91d8c3e1ca2e3eb0150f_article_17": {
+    "provision_effect": "Establishes a mechanism for the Commission to conduct market investigations to add new services to the list of core platform services or detect new unfair/anti-competitive practices not covered by the Regulation, with a report due within 24 months.",
+    "label": "NOISE",
+    "reasoning": "The org text expresses only general support for ex-ante regulation and complementary competition tools to benefit consumers, without taking any specific directional stance on market investigation mechanisms, timelines, or the process for expanding the scope of core platform services. The position is too broad and general — any provision in the DMA could plausibly be said to serve the org's stated goal of open, competitive, and fair markets."
+  },
+  "4aec99de13b9ac780351_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, with Commission powers to specify measures if compliance is insufficient, and procedural timelines for doing so.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly advocates for ex-ante regulation of gatekeepers with \"strong, effective, timely and consistent rules and enforcement,\" including \"comprehensive, enforceable\" obligations. Article 7 directly delivers on this by establishing a concrete enforcement and compliance mechanism — requiring effective implementation of gatekeeper obligations and empowering the Commission to specify measures and set procedural timelines — which aligns with BEUC's call for effective and timely enforcement of obligations on large online platforms acting as gatekeepers."
+  },
+  "a68f34c6857f1eadc211_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings, either by simple request or by decision, for the purpose of monitoring, implementing and enforcing the regulation.",
+    "label": "NOISE",
+    "reasoning": "The org text discusses structural design questions around lists of regulated entities, prohibited practices, enforcement consistency, and references to other EU legislation as inspiration — it does not express any specific advocacy position on the Commission's information-gathering powers or access to databases and algorithms. There is no substantive directional stance in the org text that relates to what Article 19 establishes."
+  },
+  "1742189769472847a043_article_9": {
+    "provision_effect": "Establishes a mechanism by which the Commission may exempt a gatekeeper, in whole or in part, from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including the possibility of provisional suspension of obligations.",
+    "label": "NOISE",
+    "reasoning": "BEUC's position focuses on advocating for a strong ex-ante regulatory framework with a 'blacklist' of obligations/prohibitions for gatekeepers and does not express any specific stance on exemption mechanisms or grounds for suspending obligations. The org text contains no directional advocacy position regarding exemptions from gatekeeper obligations, making it impossible to assess alignment or opposition with this specific provision."
+  },
+  "1742189769472847a043_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations, and requires regular reviews at least every 2 years to assess whether gatekeepers continue to meet designation criteria.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly advocates for a 'blacklist' (list of gatekeepers/obligations) accompanied by a procedure to update it following new market developments, emphasising legal certainty and immediate market effect. Article 4 directly establishes the review and update mechanism for gatekeeper designations and the published list, which corresponds to BEUC's specific ask for a regularly updated list that reflects new market developments."
+  },
+  "6b476a419da5cc5ff5d1_article_16": {
+    "provision_effect": "Establishes a mechanism for the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations, defining the conditions and procedures for such market investigations.",
+    "label": "ALIGNED",
+    "reasoning": "BEUC explicitly advocates for the Commission to have powers to impose both behavioural and structural remedies through market investigations, and the provision directly establishes exactly such a mechanism — including the ability to impose structural remedies where appropriate. The org's specific ask for a market investigation tool with the power to impose behavioural and structural remedies is directly delivered by this article."
+  },
+  "0c6c673c4cd99acdf069_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to gatekeepers providing core platform services to users in the Union, while preempting additional Member State obligations and preserving existing competition law frameworks.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is largely introductory and background-descriptive, expressing a general desire for a regulatory framework that supports retailers and ensures a level playing field, but it does not take a specific directional stance on the scope, preemption rules, or jurisdictional provisions established in Article 1. The text cuts off mid-sentence and contains no concrete advocacy position that can be evaluated against what the provision specifically does."
+  },
+  "0c6c673c4cd99acdf069_article_2": {
+    "provision_effect": "Defines key terms used throughout the Regulation, including 'gatekeeper', 'core platform service', 'business user', 'end user', and other related concepts.",
+    "label": "NOISE",
+    "reasoning": "The provision is purely definitional, establishing no concrete obligations or actions. The org's text raises a general concern about legal certainty and the unclear definition of 'gatekeeper', but this is framed as background context and a question rather than a specific directional advocacy position — it does not advocate for any particular definition or scope of the term."
+  },
+  "0c6c673c4cd99acdf069_article_38": {
+    "provision_effect": "Requires the Commission to evaluate the Regulation every three years and report on whether additional rules or obligations are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses general support for a regulatory framework that ensures a level playing field and legal certainty, but does not take any specific advocacy position on the review mechanism or its periodicity. The text is largely introductory and background in nature, with no directional stance on whether or how the Regulation should be reviewed or evaluated."
+  },
+  "0c6c673c4cd99acdf069_article_12": {
+    "provision_effect": "Requires gatekeepers to notify the Commission of any intended concentration involving another provider of core platform services or digital sector services, including details on turnover, users, and rationale, prior to implementation.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text contains only general advocacy for a level playing field, legal certainty, and enforcement of EU rules against large online platforms, with no specific position on merger notification or concentration reporting obligations for gatekeepers. The text is largely introductory and does not express any directional stance on the subject matter of Article 12."
+  },
+  "0c6c673c4cd99acdf069_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before the Commission adopts decisions, including access to the file and a minimum 14-day period to submit observations on preliminary findings.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text contains only general advocacy for a level playing field, legal certainty, and enforcement of EU rules, with no specific position on procedural rights such as the right to be heard, access to the file, or defence rights in Commission proceedings. The text appears to be cut off and does not address the subject matter of Article 30 at all."
+  },
+  "2c85e56f29256ac95096_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines, preliminary findings, and conditions for early-stage gatekeeper designation.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation explicitly calls for clarity on what constitutes a \"platform acting as a gatekeeper,\" which is directly related to the designation process established in Article 15. However, the org's position is focused on definitional clarity and coordination with competition law, not on the specific procedural mechanics (timelines, preliminary findings, early-stage designation) that Article 15 establishes — making it genuinely unclear whether the provision satisfies, contradicts, or ignores the org's concern."
+  },
+  "2c85e56f29256ac95096_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations in Articles 5 and 6 based on market investigations identifying new unfair or contestability-limiting practices.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The org expresses caution about revising the Platform-to-Business Regulation prematurely and recommends waiting to assess its effectiveness before updating the framework — a position that could be read as opposing hasty updates to gatekeeper obligations. However, Article 10 establishes a structured, evidence-based mechanism (market investigation + delegated acts) for updating obligations, which partially addresses the org's concern about premature revision. It is genuinely unclear whether the org would view this safeguarded update mechanism as satisfying or contradicting their call for restraint."
+  },
+  "2c85e56f29256ac95096_article_3": {
+    "provision_effect": "Establishes the criteria and quantitative thresholds for designating providers of core platform services as \"gatekeepers,\" including a notification and designation procedure by the Commission.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly called for clarity on what constitutes a \"platform acting as a gatekeeper,\" and Article 3 directly responds to this by laying out specific, detailed criteria and quantitative thresholds for gatekeeper designation. This is a clear case where the org's specific ask — define what a gatekeeper is — is delivered by the provision."
+  },
+  "2c85e56f29256ac95096_article_2": {
+    "provision_effect": "Defines key terms used throughout the regulation, including 'gatekeeper', 'core platform service', and related digital sector concepts.",
+    "label": "ALIGNED",
+    "reasoning": "The organisation explicitly called for clarity on what is meant by a \"platform acting as a gatekeeper,\" and Article 2 directly responds by providing precise legal definitions of 'gatekeeper', 'core platform service', and related terms. This is a clear case where the org made a specific ask (definitional clarity) and the provision delivers it."
+  },
+  "2c85e56f29256ac95096_article_11": {
+    "provision_effect": "Establishes anti-circumvention obligations requiring gatekeepers to fully comply with Articles 5 and 6, prohibiting degradation of services for users exercising their rights, and setting rules on consent for data processing.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses on definitional clarity of \"gatekeeper,\" coordination with competition law, and concerns about premature revision of the Platform-to-Business Regulation — none of which constitute a specific advocacy position on anti-circumvention obligations, data consent mechanisms, or the prohibition on degrading service quality. The org text does not address the subject matter of Article 11 in any directional way."
+  },
+  "dd65cc6002faf53f0314_article_17": {
+    "provision_effect": "Empowers the Commission to conduct market investigations into new digital services and practices, potentially expanding the list of core platform services or adding new obligations via delegated acts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "EuroCommerce expresses concern that regulatory interventions should be clearly focused, proportionate, and evidence-based, and asks the Commission to explain how proposed measures avoid going beyond what is necessary. Article 17 creates a market investigation mechanism that could expand the regulation's scope — which could be seen as either aligned (evidence-based, targeted expansion) or opposing (broad new powers that may go beyond what is necessary). The org's position is specific enough to connect to this provision, but it is genuinely ambiguous whether the investigation mechanism — with its 24-month timeline and public report — satisfies or contradicts EuroCommerce's proportionality and focus concerns."
+  },
+  "c68310c1e501dbd6cad6_article_19": {
+    "provision_effect": "Grants the Commission broad powers to request information, access to databases and algorithms from undertakings, either by simple request or by decision, for monitoring, implementing and enforcing the regulation.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses on advocating for a risk-based, case-by-case approach to B2B trading practices regulation and limiting regulatory intervention, with no specific stance on the Commission's information-gathering or investigative powers. There is no substantive advocacy position in the org text that relates to the provision's subject of information requests and access to databases/algorithms."
+  },
+  "2c93f2d75d27d0aee184_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, with Commission powers to specify measures if compliance is insufficient, and procedural requirements including timelines and proportionality assessments.",
+    "label": "NOISE",
+    "reasoning": "The org text does not express a specific advocacy position on compliance mechanisms, Commission enforcement powers, or procedural timelines for gatekeepers. The passage is largely background context about the scope of the ex ante instrument and references to other submissions, with no directional stance on what Article 7 establishes."
+  },
+  "dbe57335a97897de6929_article_17": {
+    "provision_effect": "Empowers the Commission to conduct market investigations to add new services to the list of core platform services or detect new unfair/anti-competitive practices, with a report due within 24 months and potential amendments to the Regulation.",
+    "label": "NOISE",
+    "reasoning": "The org text expresses general concerns about proportionality, evidence-based approaches, and the diversity of online platforms, but does not take a specific directional stance on whether the Commission should or should not have the power to conduct market investigations into new services or practices. The position is too broad and general — focused on overarching principles rather than the specific mechanism established in Article 17 — and any organisation with a general interest in digital regulation could produce a similarly worded text regardless of their stance on this provision."
+  },
+  "8cfc4ecb41205be064c7_article_17": {
+    "provision_effect": "Authorises the Commission to conduct market investigations into whether new digital services should be added to core platform services or whether new practices limiting contestability or fairness should be addressed, with a report due within 24 months and potential follow-up legislative or delegated acts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "EuroCommerce advocates for effects-based analysis before imposing prohibitions, technology neutrality, and investigating whether existing instruments (like P2B) suffice — all of which relate to how the Commission should assess and regulate digital market practices. Article 17 establishes a market investigation mechanism that could in principle serve as the kind of prior effects analysis EuroCommerce calls for, but the provision does not specify that investigations must be effects-based or that prohibitions require such analysis first. It is genuinely unclear whether this mechanism satisfies, contradicts, or simply ignores EuroCommerce's specific asks about effects tests and due process safeguards."
+  },
+  "488faacf3a5e55852217_article_2": {
+    "provision_effect": "Defines key terms used throughout the regulation, including 'gatekeeper', 'core platform service', 'data', 'business user', and others.",
+    "label": "NOISE",
+    "reasoning": "The org text is an introductory/administrative passage that describes the Center for Data Innovation's identity and general purpose, with no specific advocacy position on any of the definitions established in Article 2. It contains no directional stance on how any term should or should not be defined."
+  },
+  "488faacf3a5e55852217_article_12": {
+    "provision_effect": "Requires gatekeepers to notify the Commission of any intended concentration involving providers of core platform services or digital sector services, including details on turnover, active users, and rationale, regardless of whether it meets standard merger notification thresholds.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is purely introductory and administrative — it describes who the Center for Data Innovation is and what it does, without expressing any specific advocacy position on merger notification obligations or concentration reporting requirements for gatekeepers. There is no directional stance that can be evaluated against this provision."
+  },
+  "1d90993f3aee7b11b727_article_17": {
+    "provision_effect": "Establishes a mechanism for the Commission to conduct market investigations to add new services to the list of core platform services or detect new unfair/anti-contestability practices, with a report due within 24 months and potential follow-up legislative or delegated acts.",
+    "label": "NOISE",
+    "reasoning": "The org text is purely background/contextual description of the EU policy landscape around digital platforms and competition law — it contains no specific advocacy position for or against market investigation mechanisms, ex-ante rules, or the expansion of core platform service lists. There is no directional stance that can be evaluated against this provision."
+  },
+  "1d90993f3aee7b11b727_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, including procedures for written opinions and public communication of committee opinions alongside individual decisions.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is largely background description of EU digital market policy debates and regulatory trends, with no specific advocacy position on the creation or functioning of an advisory committee. There is no directional stance expressed regarding the Digital Markets Advisory Committee or any comparable institutional mechanism."
+  },
+  "ced9be9caeec03fd6ab1_article_7": {
+    "provision_effect": "Establishes a compliance framework requiring gatekeepers to implement effective measures for obligations under Articles 5 and 6, and empowers the Commission to specify measures if compliance is found to be insufficient.",
+    "label": "OPPOSING",
+    "reasoning": "The org's position fundamentally challenges the premise of ex-ante gatekeeper regulation, arguing that large platforms do not harm EU businesses and consumers and questioning the need for such a regulatory mechanism. Article 7 operationalises and enforces exactly the kind of ex-ante obligations the org argues should not exist, making the org's stance directly opposed to the provision's establishment of a compliance and enforcement framework for gatekeepers."
+  },
+  "ced9be9caeec03fd6ab1_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "NOISE",
+    "reasoning": "The org's text is largely background description of the Commission's proposal and a general critique that ex-ante regulation assumes large platforms harm consumers and businesses, without expressing any specific advocacy position on suspension mechanisms or viability exemptions. There is no directional stance on whether such a suspension clause should or should not exist, making it impossible to evaluate alignment with this specific provision."
+  },
+  "ced9be9caeec03fd6ab1_article_9": {
+    "provision_effect": "Establishes a mechanism by which the Commission may exempt a gatekeeper, in whole or in part, from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is largely background description of the Commission's proposed ex-ante regulation and a general critique of its underlying assumptions (that large platforms harm consumers and businesses), without expressing any specific advocacy position on exemptions for overriding reasons of public interest. There is no directional stance on the exemption mechanism established in Article 9 that could be evaluated against the provision."
+  },
+  "ced9be9caeec03fd6ab1_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines for preliminary findings and final decisions, and provisions for early-stage gatekeepers.",
+    "label": "NOISE",
+    "reasoning": "The org text provides background context on the Commission's gatekeeper proposal and expresses a general skepticism about the assumption that large platforms harm consumers and businesses, but does not take a specific directional stance on the market investigation procedure, its timelines, or the designation mechanism established in Article 15. The org's position is a broad critique of the regulatory rationale rather than a specific advocacy position on the investigation and designation process itself."
+  },
+  "ced9be9caeec03fd6ab1_article_5": {
+    "provision_effect": "Establishes specific behavioural obligations for gatekeepers, including restrictions on combining personal data, requirements to allow business users to offer services on third-party platforms, and transparency obligations for advertising services.",
+    "label": "OPPOSING",
+    "reasoning": "The organisation explicitly argues against the premise of ex-ante regulation targeting large platforms, contending that the Commission's assumption that large platforms harm consumers and businesses is unfounded and that such regulation is detrimental to innovation. Article 5 directly instantiates the very ex-ante obligations (data combination restrictions, self-preferencing prohibitions, interoperability/access requirements) that the organisation opposes as a regulatory mechanism."
+  },
+  "ffb1ff701d72392cfdc1_article_9": {
+    "provision_effect": "Establishes an exemption mechanism allowing the Commission to relieve gatekeepers from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including provisional suspension of obligations pending a full decision.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is largely background description and footnotes referencing Commission documents about the Digital Markets Act framework, with no specific advocacy position on exemptions or public interest carve-outs for gatekeepers. There is no directional stance expressed regarding whether such an exemption mechanism should or should not exist, making it impossible to evaluate alignment with the provision."
+  },
+  "ffb1ff701d72392cfdc1_article_8": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to suspend, on a gatekeeper's reasoned request, specific obligations under Articles 5 and 6 where compliance would endanger the gatekeeper's economic viability due to exceptional circumstances beyond its control.",
+    "label": "NOISE",
+    "reasoning": "The org text is largely background description and citations about the Commission's Digital Markets Act initiative, referencing self-preferencing rules and gatekeeper obligations in general terms, without expressing any specific advocacy position on suspension mechanisms or viability exemptions. There is no directional stance that can be evaluated against the provision's specific suspension procedure."
+  },
+  "ffb1ff701d72392cfdc1_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to ensure contestable and fair markets where gatekeepers are present, covering core platform services provided to users in the Union.",
+    "label": "NOISE",
+    "reasoning": "The org text is largely descriptive background material — it quotes and summarises the Commission's own roadmap and intentions regarding ex-ante gatekeeper rules, without expressing a specific directional advocacy position of its own (e.g., supporting, opposing, or proposing modifications to the scope or subject matter). There is no specific stance that can be evaluated against what the provision establishes."
+  },
+  "ffb1ff701d72392cfdc1_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations based on market investigations identifying new unfair or contestability-limiting practices.",
+    "label": "NOISE",
+    "reasoning": "The org text is largely composed of footnotes and background descriptions of the Commission's existing plans and proposals (e.g., quoting Commission roadmaps and referencing legislative initiatives), with no specific directional advocacy position on whether the Commission should or should not have delegated powers to update gatekeeper obligations. There is no substantive stance expressed for or against the updating mechanism established in Article 10."
+  },
+  "ffb1ff701d72392cfdc1_article_2": {
+    "provision_effect": "Defines key terms used throughout the regulation, including 'gatekeeper,' 'core platform service,' and related concepts, without imposing any obligations or taking any regulatory action.",
+    "label": "NOISE",
+    "reasoning": "The provision is purely definitional, establishing no obligations or regulatory actions. The org text references the gatekeeper regulation concept in background/contextual terms (citing Commission documents and describing anticipated rules), without expressing a specific directional advocacy position on how these terms should be defined."
+  },
+  "243742eb7dbf19aa83e7_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a general welcome of the Commission's initiative and a broad framing of large platforms as \"fundamental rights gatekeepers,\" without expressing any specific advocacy position on periodic review mechanisms or evaluation clauses. There is no directional stance on whether or how the Regulation should be reviewed that could be evaluated against this provision."
+  },
+  "243742eb7dbf19aa83e7_article_9": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to exempt gatekeepers from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including provisional suspension of obligations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general concern that large online platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression, but does not take any specific stance on exemption mechanisms or the grounds for suspending gatekeeper obligations. The org's position is a broad framing argument about the scope of the regulation, not a directional advocacy position on the exemption procedure established by Article 9."
+  },
+  "243742eb7dbf19aa83e7_article_23": {
+    "provision_effect": "Establishes a commitments mechanism whereby gatekeepers can offer binding commitments to ensure compliance with their obligations, and the Commission may reopen proceedings if circumstances change or commitments are breached.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's regulatory initiative and argues that large platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression — but it takes no specific stance on whether a commitments mechanism should or should not exist, nor on how such a mechanism should be designed. The org's position is too general and thematic to constitute a specific advocacy position that can be evaluated against this provision."
+  },
+  "243742eb7dbf19aa83e7_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations, and requires regular reviews at least every two years to assess whether designated gatekeepers continue to meet the criteria.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's initiative and argues that large platforms act as \"fundamental rights gatekeepers\" beyond mere economic gatekeepers, but it does not take any specific stance on the review mechanism for gatekeeper designations established in Article 4. The org's position is a broad framing argument about the scope of the regulation, not a directional advocacy position on the periodic review or amendment of gatekeeper status decisions."
+  },
+  "243742eb7dbf19aa83e7_article_30": {
+    "provision_effect": "Establishes procedural rights for gatekeepers and undertakings to be heard, submit observations, access the Commission's file, and have their rights of defence respected before the Commission adopts certain decisions.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's regulatory initiative and argues that large online platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression — it does not take any specific position on procedural rights of defence, access to file, or the right to be heard in Commission proceedings. The org's advocacy is entirely unrelated to the subject matter of Article 30."
+  },
+  "08fdd8ac3b9ba77d20de_article_15": {
+    "provision_effect": "Establishes the procedure and timeline for the Commission to conduct market investigations to designate providers of core platform services as gatekeepers.",
+    "label": "NOISE",
+    "reasoning": "Access Now's position is a general endorsement of the Commission's initiative and a broad argument that large platforms act as \"fundamental rights gatekeepers\" beyond mere economic gatekeepers — it does not express any specific stance on the procedural mechanics of market investigations, timelines, or designation criteria established in Article 15. The org text contains no directional advocacy position on the specific content of this provision."
+  },
+  "08fdd8ac3b9ba77d20de_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and consider whether additional rules or obligations are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a general welcome of the Commission's initiative and a broad framing of platforms as \"fundamental rights gatekeepers,\" without any specific advocacy position on the review/evaluation mechanism established in Article 38. The org does not address periodic reviews, evaluation timelines, or the scope of such reviews, so there is no substantive directional stance that can be matched against this provision."
+  },
+  "08fdd8ac3b9ba77d20de_article_9": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to exempt gatekeepers from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including provisional suspension of obligations.",
+    "label": "NOISE",
+    "reasoning": "Access Now's position is a general advocacy statement arguing that large online platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression, with no specific stance on exemption mechanisms or the grounds for suspending gatekeeper obligations. The org text contains no directional position on whether such exemptions should or should not exist, making it impossible to evaluate alignment or opposition with this specific provision."
+  },
+  "08fdd8ac3b9ba77d20de_article_5": {
+    "provision_effect": "Establishes specific behavioural obligations for gatekeepers, including restrictions on combining personal data without consent, allowing business users to offer services on third-party platforms, and prohibiting certain tying and bundling practices.",
+    "label": "ALIGNED",
+    "reasoning": "Access Now explicitly advocates for treating large online platforms as \"fundamental rights gatekeepers\" that set standards on privacy and data protection, and calls for regulatory action to address this. Article 5(a) directly responds to this by prohibiting gatekeepers from combining personal data across services without GDPR-compliant consent, which is a concrete regulatory action in the direction of protecting users' privacy and data protection rights that Access Now specifically highlighted as a concern."
+  },
+  "08fdd8ac3b9ba77d20de_article_23": {
+    "provision_effect": "Establishes a commitments mechanism whereby gatekeepers can offer binding commitments to ensure compliance with obligations, and the Commission can reopen proceedings if facts change, commitments are breached, or information was misleading.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's regulatory initiative and argues that large platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression — but it takes no specific stance on the commitments mechanism established in Article 23. The org's position is a broad framing argument about the scope of the regulation, not a directional advocacy position on whether or how commitments should be made binding or reopened."
+  },
+  "7e07e22473ac48ae66e8_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a general welcoming statement supporting EU regulatory action on large online platforms, with a broad argument that platforms act as \"fundamental rights gatekeepers\" — but it does not express any specific advocacy position regarding periodic review mechanisms or evaluation clauses. The org's position lacks a directional stance on the subject matter of Article 38 (review and evaluation procedures), making it too general to constitute specific alignment or opposition."
+  },
+  "7e07e22473ac48ae66e8_article_9": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to exempt gatekeepers from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, including provisional suspension of obligations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general position that large online platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression, but does not take any specific stance on exemption mechanisms or grounds for suspending gatekeeper obligations. The org text is a broad framing statement welcoming the Commission's initiative, with no directional advocacy position on the subject matter of Article 9."
+  },
+  "7e07e22473ac48ae66e8_article_23": {
+    "provision_effect": "Establishes a commitments mechanism whereby gatekeepers may offer binding commitments to ensure compliance with obligations, and sets conditions for reopening proceedings or rejecting insufficient commitments.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's regulatory initiative and advocates for recognising platforms as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression — it takes no specific position on a commitments mechanism. The org's advocacy is too broad and thematically unrelated to the specific procedural commitments framework established in Article 23 to constitute a directional stance on it."
+  },
+  "7e07e22473ac48ae66e8_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations, and requires regular reviews at least every two years to assess whether designated gatekeepers continue to meet the criteria.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's initiative and argues that large online platforms act as \"fundamental rights gatekeepers\" beyond mere economic gatekeepers — but it does not take any specific stance on the review mechanism for gatekeeper designations established in Article 4. The org's position is a broad framing argument about the scope of the problem, not a directional advocacy position on how or whether gatekeeper status should be periodically reviewed or revised."
+  },
+  "8c6fb8b1379cfab94e1d_article_5": {
+    "provision_effect": "Article 5 imposes specific behavioural obligations on gatekeepers, including restrictions on combining personal data, prohibitions on self-preferencing through tying/bundling, requirements to allow business users to offer services on third-party platforms, and transparency obligations for advertising services.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates for ex ante regulation targeting gatekeeper conduct such as leveraging dominant positions, exclusionary practices, forcing advertising spend, and self-preferencing — all of which Article 5 directly addresses through concrete behavioural obligations. The provision takes action in the same direction Amadeus advocated for, including restrictions on data combination (addressing data-leveraging concerns), prohibitions on tying/bundling (addressing forced registration/advertising), and transparency in advertising (addressing the forced advertising spend issue)."
+  },
+  "8c6fb8b1379cfab94e1d_article_6": {
+    "provision_effect": "Article 6 establishes a set of behavioural obligations for gatekeepers, including prohibitions on self-preferencing, data misuse against business users, and requirements for data portability, interoperability, and non-discriminatory access to platform services.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates for ex ante obligations targeting self-preferencing (addressed in Art. 6(d)), leveraging data against competitors (addressed in Art. 6(a)), data access/portability obligations (addressed in Art. 6(h) and 6(i)), and interoperability requirements (addressed in Art. 6(f)) — all of which are concretely delivered by Article 6. The org's specific asks map directly onto multiple sub-provisions of this article, making this a clear case of alignment under path (a)."
+  },
+  "8c6fb8b1379cfab94e1d_article_26": {
+    "provision_effect": "Establishes fines of up to 10% of total turnover for gatekeepers that fail to comply with obligations under the Digital Markets Act, and up to 1% for procedural non-compliance such as failing to provide information.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on advocating for ex ante regulation to address anticompetitive conduct by gatekeepers (self-preferencing, leveraging dominance, data access obligations, interoperability), but does not express any specific stance on the fine levels or enforcement mechanisms. The org text contains no directional advocacy regarding the fine structure or penalty regime established in Article 26."
+  },
+  "266b77ee87f9931acd83_article_16": {
+    "provision_effect": "Establishes a mechanism for the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations under Articles 5 and 6, subject to proportionality requirements and procedural timelines.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates that remedies under the ex ante regulatory framework should be \"proportionate\" and \"addressed to the company on which they would be imposed for review and amendments,\" and that companies' rights of defence must be respected. Article 16 directly responds to these positions by requiring that remedies be \"proportionate to the infringement committed,\" setting out procedural steps including communicating objections to the gatekeeper, and conditioning structural remedies on the absence of equally effective behavioural alternatives — all concrete actions in the direction Amadeus advocated."
+  },
+  "266b77ee87f9931acd83_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates that proposed remedies under the ex ante regulatory framework should be proportionate and subject to review and amendments by the company on which they are imposed. Article 8's suspension mechanism directly responds to this by providing gatekeepers a formal avenue to seek relief from specific obligations when compliance would threaten their economic viability, embedding a proportionality safeguard into the regulation. This aligns with Amadeus's call for proportionate remedies and procedural rights for the regulated company."
+  },
+  "266b77ee87f9931acd83_article_9": {
+    "provision_effect": "Establishes a mechanism by which the Commission may exempt a gatekeeper, in whole or in part, from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security, and may provisionally suspend such obligations pending a full decision.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Amadeus advocates that remedies under the ex ante regulatory framework should be proportionate and subject to procedural safeguards (rights of defence, judicial review, market testing), which has a tangential connection to the exemption mechanism in Article 9. However, the provision specifically concerns exemptions on public interest grounds (morality, health, security), while Amadeus's position focuses on proportionality of remedies and procedural rights more broadly — it is genuinely unclear whether this exemption mechanism satisfies, contradicts, or is simply orthogonal to Amadeus's specific advocacy concerns."
+  },
+  "266b77ee87f9931acd83_article_6": {
+    "provision_effect": "Establishes a list of specific behavioural obligations for gatekeepers regarding data use, interoperability, portability, access, and non-discrimination across their core platform services.",
+    "label": "OPPOSING",
+    "reasoning": "Amadeus explicitly argues that remedies under the ex ante regulatory framework should be proportionate and subject to review, and questions the added value of layering additional regulation on top of existing frameworks — implying scepticism toward broad, prescriptive gatekeeper obligations. Article 6 does the opposite by imposing a wide-ranging set of specific, mandatory behavioural obligations on gatekeepers without the proportionality review or stakeholder consultation process Amadeus advocates for."
+  },
+  "266b77ee87f9931acd83_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before Commission decisions, to submit observations, and to access the Commission's file, ensuring full respect of rights of defence in proceedings.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates that \"companies' rights of defense during Commission proceedings should be respected,\" which directly corresponds to Article 30's establishment of the right to be heard, the right to submit observations, and the right to access the Commission's file with full respect for rights of defence. The provision concretely delivers what the organisation specifically requested."
+  },
+  "7433a64a130ce5a2ad9e_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings, either by simple request or by decision, including prior to opening formal investigations.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Amadeus advocates for companies' rights of defence and full judicial review of Commission decisions, and also comments on policy options — notably dismissing \"Policy option 2\" (collect information from large online platforms) as ineffective. Article 19 creates broad information-gathering powers for the Commission, which partially resembles what Amadeus called ineffective under Policy option 2, yet the article also includes a right to judicial review (paragraph 4), which aligns with Amadeus's defence rights position. The connection is real but the direction is genuinely ambiguous: the provision both embodies something Amadeus criticised (information collection as a standalone tool) and something Amadeus supported (judicial review safeguards)."
+  },
+  "26de1c974e9d9a6043ec_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings by simple request or decision, including prior to opening a market investigation or proceedings.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Amadeus advocates for clear and well-defined criteria governing Commission intervention powers, binding timelines, proportionality, and respect for companies' rights of defence — all of which relate to the scope and procedural safeguards around Commission investigative powers. Article 19 grants the Commission broad information-gathering powers (including access to databases and algorithms) with some procedural requirements (stating purpose, time-limits, penalties), but it is genuinely unclear whether these procedural requirements satisfy Amadeus's demand for sufficiently clear criteria and adequate safeguards, or whether Amadeus would view the broad powers granted as the kind of unclear intervention criteria it explicitly opposes."
+  },
+  "26de1c974e9d9a6043ec_article_26": {
+    "provision_effect": "Establishes fines of up to 10% of total turnover for gatekeepers failing to comply with obligations, and up to 1% for procedural infringements such as providing incorrect information or refusing inspections.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Amadeus advocates for proportionate remedies, clear criteria, companies' rights of defence, and full judicial review of Commission decisions — positions that are broadly relevant to enforcement mechanisms like fines. However, the org text does not specifically address the level, structure, or appropriateness of financial penalties, so it is genuinely unclear whether the provision's fine regime satisfies, contradicts, or ignores Amadeus's advocacy."
+  },
+  "26de1c974e9d9a6043ec_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before Commission decisions, to submit observations within a minimum 14-day period, and to access the Commission's file, with full respect for rights of defence.",
+    "label": "ALIGNED",
+    "reasoning": "Amadeus explicitly advocates that \"companies' rights of defense during Commission proceedings should be respected,\" which directly corresponds to Article 30's concrete establishment of rights of defence, the right to be heard, and access to the file. The provision takes specific action in exactly the direction Amadeus advocated for."
+  },
+  "de5f2ba43854c150054b_article_38": {
+    "provision_effect": "Establishes a periodic review mechanism requiring the Commission to evaluate the Regulation every three years and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position specifically advocates for recognising platform workers' rights and employer responsibilities within the DSA framework, with no substantive stance on the review/evaluation mechanism itself. The provision establishes a periodic review process focused on market contestability and fairness, which does not engage with the worker dimension UNI Europa advocates for."
+  },
+  "17c63ef384026cb14083_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules including written procedures, communication of opinions, and applicable regulation.",
+    "label": "NOISE",
+    "reasoning": "The EPC's position focuses on advocating for a combination of prohibited practices and tailor-made remedies under the ex ante regulatory framework, with no mention of or stance on an advisory committee structure. The org text contains no substantive advocacy position related to the establishment or functioning of the Digital Markets Advisory Committee."
+  },
+  "adf138ff12d31c01a0eb_article_16": {
+    "provision_effect": "Establishes a mechanism for the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations under Articles 5 and 6, defined as at least three non-compliance or fining decisions within five years.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Booking.com advocates for a narrowly constructed gatekeeper regulation focused on enforcement efficiencies and recurring harmful practices, and explicitly states that remedies should apply ex nunc with no retroactive fines. Article 16 establishes a systematic non-compliance mechanism with structural and behavioural remedies, which partially aligns with the org's acceptance of a targeted gatekeeper regulation, but it is genuinely unclear whether the provision's specific threshold (three decisions in five years) and remedy scope satisfy or contradict Booking.com's call for a \"very narrow\" and targeted instrument — the connection is real but the direction of alignment is ambiguous."
+  },
+  "adf138ff12d31c01a0eb_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt non-compliance decisions against gatekeepers who fail to meet obligations, including ordering them to cease and desist and provide compliance plans.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Booking.com advocates for a narrowly constructed gatekeeper regulation focused on enforcement efficiencies, with remedies applying ex nunc and no retroactive fines. Article 25 establishes the non-compliance decision mechanism but does not explicitly address retroactivity of fines or the scope of the regulation's obligations — those are governed elsewhere. There is a real connection (the org's procedural concerns about enforcement relate to this enforcement mechanism), but it is genuinely unclear whether this provision satisfies, contradicts, or ignores the org's specific asks about ex nunc application and no retroactive fines."
+  },
+  "ab22e89d1fac784846aa_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings by simple request or decision, including prior to opening formal investigations.",
+    "label": "NOISE",
+    "reasoning": "The organisation's position focuses on proportionality of remedies, burden of proof, limits on the New Competition Tool (NCT), and judicial review of Commission decisions — not on information-gathering powers. The provision deals specifically with the Commission's investigative information request powers, which is a distinct subject not addressed in the org's submission. There is no substantive advocacy position in the org text that relates to this provision's subject matter."
+  },
+  "c0d92fac8375a5892727_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines and conditions for applying obligations to providers not yet entrenched.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Booking.com advocates that gatekeeper designation should be limited to platforms that will remain gatekeepers for the foreseeable future and that DG Competition should be the sole designating authority. The provision establishes a Commission-led market investigation procedure for gatekeeper designation, which partially aligns with the idea of a centralised Commission role, but also includes provisions for designating platforms not yet entrenched (Article 15(4)), which runs counter to Booking.com's position that only platforms that \"will remain\" gatekeepers should be covered. The connection is real but the direction is genuinely ambiguous — the provision both partially satisfies and partially contradicts the org's stated position."
+  },
+  "c0d92fac8375a5892727_article_3": {
+    "provision_effect": "Establishes the criteria and thresholds for designating providers of core platform services as gatekeepers, including quantitative presumptions and a Commission-led designation process.",
+    "label": "ALIGNED",
+    "reasoning": "Booking.com explicitly advocates that gatekeeper designation should apply only to platforms meeting specific criteria (market power, non-contestable markets, foreseeable durability), and the provision directly establishes a criteria-based designation framework with quantitative thresholds and qualitative factors — including entrenchment and durability — that mirrors this advocacy. While Booking.com also argues for DG Competition as sole designating authority (which the provision does not fully address), the core ask for a rigorous, criteria-driven gatekeeper designation process is clearly reflected in what Article 3 establishes."
+  },
+  "c0d92fac8375a5892727_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations under Articles 5 and 6 based on market investigations identifying new unfair or contestability-limiting practices.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Booking.com advocates for a narrow gatekeeper designation limited to platforms in non-contestable markets, with DG Competition as the sole designating authority, and raises concerns about the criteria used to define gatekeepers and the conduct to be regulated. Article 10 establishes a mechanism for the Commission to expand gatekeeper obligations via delegated acts based on market investigations — touching on contestability and unfairness criteria that Booking.com discusses. However, while Booking.com's position is broadly skeptical of over-broad regulation and favors stricter criteria, it is genuinely unclear whether this specific updating mechanism satisfies, contradicts, or ignores their advocacy: the provision does reference contestability as a criterion (which aligns with Booking.com's framing), but the broader enforcement architecture (Commission-led, not DG Competition-sole authority) and the expansive delegated power could equally be seen as contrary to their position."
+  },
+  "c0d92fac8375a5892727_article_12": {
+    "provision_effect": "Requires gatekeepers to notify the Commission of any intended concentration involving another provider of core platform services or digital sector services, regardless of whether it meets merger notification thresholds.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses on the criteria for designating gatekeepers and which authority (DG Competition vs. NCAs) should have jurisdiction over gatekeeper designation and obligations — it does not express any specific stance on merger/concentration notification obligations for gatekeepers. There is no substantive advocacy position in the org text that relates to the concentration reporting mechanism established in Article 12."
+  },
+  "2a3041849714d64ebffe_article_3": {
+    "provision_effect": "Establishes the criteria and thresholds for designating providers of core platform services as gatekeepers, including quantitative presumptions based on turnover, market capitalisation, active users, and qualitative factors such as entrenchment and gateway function.",
+    "label": "ALIGNED",
+    "reasoning": "Booking.com explicitly advocates for three cumulative criteria for gatekeeper designation — significant internal market impact, sway over a significant share of users who primarily single-home, and ability/incentive to expand market power — which closely mirrors the three cumulative criteria in Article 3(1): significant impact on the internal market, serving as an important gateway for business users to reach end users, and an entrenched and durable position. The provision directly implements the kind of multi-criteria, cumulative gatekeeper designation framework the organisation proposed, acting in the same direction as its specific advocacy."
+  },
+  "2a3041849714d64ebffe_article_15": {
+    "provision_effect": "Establishes the procedure and timelines for the Commission to conduct market investigations to designate providers of core platform services as gatekeepers, including preliminary findings and obligations applicable to emerging gatekeepers.",
+    "label": "NOISE",
+    "reasoning": "The org's position focuses specifically on the substantive criteria that should define a gatekeeper (three cumulative conditions relating to market span, user dependency, and ability to expand market power), not on the procedural mechanics of how market investigations are conducted or timed. Article 15 deals exclusively with investigation procedures and timelines, not with the definitional criteria for gatekeeper designation, so the org's advocacy position has no substantive bearing on what this provision establishes."
+  },
+  "2a3041849714d64ebffe_article_8": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to suspend, on a gatekeeper's reasoned request, specific obligations under Articles 5 and 6 where compliance would endanger the gatekeeper's economic viability due to exceptional circumstances beyond its control.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses exclusively on advocating for specific cumulative criteria to define which platforms qualify as gatekeepers, with no mention of suspension mechanisms or economic viability exemptions. There is no substantive advocacy position in the org text that relates to the suspension procedure established by Article 8."
+  },
+  "2a3041849714d64ebffe_article_5": {
+    "provision_effect": "Establishes specific behavioural obligations for gatekeepers, including prohibitions on combining personal data without consent, restrictions on tying practices, and requirements to allow business users to operate freely across platforms.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses exclusively on advocating for a specific definition/criteria for identifying which platforms qualify as gatekeepers (three cumulative criteria related to market size, user dependency, and expansion ability), not on what obligations should be imposed on gatekeepers once identified. The provision, by contrast, establishes concrete behavioural obligations for already-identified gatekeepers. There is no substantive advocacy position in the org text regarding the specific obligations listed in Article 5."
+  },
+  "2a3041849714d64ebffe_article_11": {
+    "provision_effect": "Requires gatekeepers to ensure full and effective compliance with Articles 5 and 6 obligations, prohibiting circumvention through any contractual, commercial, or technical behaviour, and preventing degradation of services for users exercising their rights.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses exclusively on advocating for specific cumulative criteria to define which platforms qualify as gatekeepers (market size, user dependency, and ability to expand market power). It does not express any position on anti-circumvention mechanisms, compliance obligations, or the degradation of services — the subjects of Article 11. The org's position is therefore unrelated to what this provision establishes."
+  },
+  "35eb2869758debe5d8b0_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations upon request or on its own initiative, and mandates regular reviews at least every two years to assess whether gatekeepers continue to meet designation requirements.",
+    "label": "ALIGNED",
+    "reasoning": "Booking.com explicitly advocates that prohibitions imposed by the Commission should be time-limited and that the Commission should be obligated to re-assess them if market conditions have changed. Article 4 directly responds to this by establishing a formal review mechanism — both on request and periodically (at least every 2 years) — allowing gatekeeper designations and their associated obligations to be reconsidered when facts change, which aligns with the org's specific ask for reassessment obligations tied to changing market conditions."
+  },
+  "6d142475ff7cd13e5176_article_17": {
+    "provision_effect": "Empowers the Commission to conduct market investigations to add new services to the core platform services list or detect new unfair/anti-contestability practices not covered by the Regulation, with a report due within 24 months.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly advocates that notions of 'gatekeeper', 'platform', and 'digital' need to be \"robust and flexible\" to account for future innovation, and that new regulations should address issues important for digital markets to function fairly. Article 17's market investigation mechanism directly operationalises this flexibility by creating a dynamic process to expand the scope of the Regulation to new services and new practices — precisely the kind of adaptable, forward-looking framework Google called for."
+  },
+  "6e2f02a1d43b706081d9_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard and access the Commission's file before decisions are adopted, including minimum time limits for submitting observations and full respect for rights of defence.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly raised the question of \"the extent to which affected undertakings would be given access to file and the right to be heard\" as a key design consideration for the new competition tool. Article 30 directly delivers on this by codifying the right to be heard, access to the file, and full respect for rights of defence — precisely the procedural rights Google flagged as warranting consideration. The provision acts in the direction Google advocated for."
+  },
+  "6e2f02a1d43b706081d9_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings by simple request or decision, including prior to formal investigations, with specified procedural requirements and penalties.",
+    "label": "NOISE",
+    "reasoning": "Google's text raises general procedural considerations about the NCT design (deadlines, access to file, rights to be heard, role of courts) without taking a specific directional stance on the Commission's information-gathering powers or access to databases and algorithms. The position is framed as preliminary questions for the Commission to consider rather than a concrete advocacy stance for or against the mechanism established in Article 19."
+  },
+  "6e2f02a1d43b706081d9_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt a non-compliance decision against a gatekeeper, including preliminary findings, cease-and-desist orders, and closure of investigations.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly advocates for procedural safeguards in the NCT regime, including defined review phases, the right to be heard, access to file, and the role of EU courts — all of which relate to due process in enforcement proceedings. Article 25 responds to these concerns by establishing a formal non-compliance procedure that includes communicating preliminary findings to the gatekeeper, giving it the opportunity to explain compliance plans, and requiring a formal decision before action is taken, reflecting the procedural protections Google called for."
+  },
+  "6e2f02a1d43b706081d9_article_36": {
+    "provision_effect": "Establishes implementing acts empowering the Commission to define procedural arrangements for investigations, notifications, deadlines, and rights to be heard under the Digital Markets Act.",
+    "label": "ALIGNED",
+    "reasoning": "Google explicitly advocates for consideration of procedural rights including \"the right to be heard,\" defined review phases, statutory deadlines, and the role of courts — all of which are directly addressed by Article 36's implementing provisions covering practical arrangements for proceedings, extensions of deadlines, and rights to be heard (Articles 30, 16, 15, etc.). The provision concretely establishes the framework for these procedural elements that Google specifically called for the Commission to design carefully."
+  },
+  "6e2f02a1d43b706081d9_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, defining its procedural rules including written procedure, communication of opinions, and applicable regulatory framework.",
+    "label": "NOISE",
+    "reasoning": "Google's position focuses on procedural design elements such as statutory deadlines, access to file, rights to be heard, and the role of EU courts — not on the creation or functioning of an advisory committee. The org text contains no substantive advocacy position on the establishment or operation of a Digital Markets Advisory Committee, making this a subject mismatch rather than a genuine connection."
+  },
+  "4bb37adc46030a61441b_article_38": {
+    "provision_effect": "Requires the Commission to periodically evaluate the Regulation and consider whether additional rules or legislative proposals are needed to ensure contestable and fair digital markets.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text is a general welcome of the Commission's initiative and a broad framing of gatekeeper platforms as \"fundamental rights gatekeepers,\" without expressing any specific advocacy position on the review/evaluation mechanism established in Article 38. There is no directional stance on periodic reviews, their frequency, scope, or follow-up measures that could be evaluated against this provision."
+  },
+  "4bb37adc46030a61441b_article_9": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to exempt gatekeepers from specific obligations under Articles 5 and 6 on grounds of public morality, public health, or public security.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general concern that large online platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression, but does not take any specific advocacy position on exemption mechanisms or the grounds for exempting gatekeepers from obligations. The text is a broad framing statement welcoming the Commission's initiative without directional advocacy on this specific provision."
+  },
+  "4bb37adc46030a61441b_article_23": {
+    "provision_effect": "Establishes a commitment mechanism whereby gatekeepers may offer binding commitments to ensure compliance with obligations, and allows the Commission to reopen proceedings if circumstances change or commitments are breached.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses a general welcome for the Commission's regulatory initiative and argues that large platforms act as \"fundamental rights gatekeepers\" affecting privacy, data protection, and freedom of expression — but it takes no specific stance on the commitment mechanism established in Article 23. There is no directional advocacy position regarding whether or how gatekeepers should be able to offer binding commitments to avoid further proceedings."
+  },
+  "4bb37adc46030a61441b_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations, and requires regular biennial reviews of whether designated gatekeepers continue to meet the criteria in Article 3.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text expresses general support for the Commission's initiative to regulate large online platforms as gatekeepers and broadens the framing to include fundamental rights concerns, but it does not take any specific stance on the review or re-designation mechanism established in Article 4. The position contains no directional advocacy regarding how or when gatekeeper status should be reviewed, amended, or repealed."
+  },
+  "2156918816173c50b921_article_2": {
+    "provision_effect": "Establishes definitions for key terms used in the regulation, including 'gatekeeper', 'core platform services', and related concepts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "MEDEF explicitly raises the question of how 'gatekeepers' and large platforms should be defined, warning that the definition conditions both the effectiveness of measures and the risk of negative side effects on European companies. The provision directly addresses this concern by establishing the definitions of 'gatekeeper' and 'core platform services'. However, MEDEF does not specify what the definition should or should not include, making it genuinely unclear whether the provision's specific definitional choices satisfy, contradict, or ignore MEDEF's concerns."
+  },
+  "2156918816173c50b921_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, applying harmonised rules to gatekeepers providing core platform services, while preempting additional Member State obligations and preserving existing competition law frameworks.",
+    "label": "UNDETECTABLE",
+    "reasoning": "MEDEF raises a specific concern about the definition of \"gatekeepers\" as a prerequisite condition for effective regulation, warning that an overly broad definition could negatively affect European companies. Article 1 establishes the scope of the regulation (applying to gatekeepers of core platform services) but does not itself define who qualifies as a gatekeeper — that definition appears elsewhere. Additionally, MEDEF's text references the P2B Regulation (2019/1150) and its broader perimeter, which Article 1(6) explicitly preserves, suggesting partial alignment; however, it is genuinely unclear whether the scope as drawn in Article 1 satisfies or contradicts MEDEF's concern about avoiding negative side-effects on European companies through an overly wide definition."
+  },
+  "2156918816173c50b921_article_3": {
+    "provision_effect": "Establishes the criteria and quantitative thresholds for designating providers of core platform services as 'gatekeepers', including the notification procedure and the Commission's designation powers.",
+    "label": "ALIGNED",
+    "reasoning": "MEDEF explicitly raises the definition of \"grandes plateformes - gatekeepers\" as a prerequisite condition for any regulation, warning that an overly broad definition risks negative side effects on European companies. Article 3 directly responds to this concern by establishing specific, quantitative thresholds (turnover, market capitalisation, active users) and qualitative criteria to define and designate gatekeepers, thereby scoping the regulation to large platforms rather than applying it broadly — which is precisely the directional ask MEDEF was making."
+  },
+  "253c07ad9cd787a12e00_article_4": {
+    "provision_effect": "Establishes a mechanism for the Commission to review, amend, or repeal gatekeeper designations, including a mandatory review at least every 2 years, and requires publication of an updated list of gatekeepers and their core platform services.",
+    "label": "ALIGNED",
+    "reasoning": "MEDEF explicitly advocates that regulation should target only pre-defined \"grandes plateformes – gatekeepers\" and criticises broader approaches that would burden platforms not posing competition problems. Article 4's review mechanism directly serves this goal by ensuring gatekeeper designations are regularly reassessed and can be repealed when facts change, thereby limiting the regulation's scope to those who genuinely qualify. MEDEF also criticises a revision timeline tied to a fixed date (January 2022) as misaligned with the need to act quickly, and Article 4's ongoing and at-least-biennial review process provides a more dynamic, continuous reassessment — consistent with MEDEF's directional preference for a targeted, regularly updated designation framework."
+  },
+  "67fb4f6a344afdffd798_article_2": {
+    "provision_effect": "Defines key terms for the regulation, including 'gatekeeper', 'core platform services', and related concepts used throughout the legislative framework.",
+    "label": "UNDETECTABLE",
+    "reasoning": "MEDEF explicitly advocates that the 'gatekeeper' notion must be sufficiently and strictly defined to cover only the most structurally significant actors, without applying to innovative platforms. The provision does define 'gatekeeper' and 'core platform services', which is directly relevant to MEDEF's concern. However, it is genuinely unclear whether the definitions as drafted are narrow enough to satisfy MEDEF's call for strict scoping — the provision lists a broad range of core platform services (including advertising, cloud, OS, etc.) which could be seen as either appropriately targeted or overly broad, making the direction of alignment ambiguous."
+  },
+  "17cbb06a8d889c345736_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "NOISE",
+    "reasoning": "Microsoft's submission expresses general support for the Commission's initiative and endorses Option 3 (targeted ex ante regulation of gatekeepers), but does not take any specific position on suspension mechanisms or viability-based exemptions from obligations. The org text contains no directional stance on whether such a suspension mechanism should or should not exist, making it impossible to evaluate alignment or opposition."
+  },
+  "17cbb06a8d889c345736_article_2": {
+    "provision_effect": "Defines key terms used throughout the regulation, including 'gatekeeper', 'core platform service', and various digital service categories.",
+    "label": "NOISE",
+    "reasoning": "The provision is purely definitional, establishing the meaning of terms used in the regulation without taking any concrete regulatory action. Microsoft's position expresses general support for the Commission's initiative and for Option 3 targeting gatekeepers specifically, but does not advocate for any specific definitional choices that this article could be said to satisfy or contradict."
+  },
+  "17cbb06a8d889c345736_article_22": {
+    "provision_effect": "Empowers the Commission to order interim measures against a gatekeeper on the basis of a prima facie finding of infringement, in cases of urgency due to risk of serious and irreparable damage.",
+    "label": "ALIGNED",
+    "reasoning": "Microsoft explicitly supports \"Option 3, which allows for immediate action against problematic practices,\" which directly corresponds to the interim measures mechanism in Article 22 that enables the Commission to act swiftly against gatekeepers. The provision delivers the kind of targeted, immediate enforcement action Microsoft advocated for, as opposed to slower or broader alternatives."
+  },
+  "0714d27ba8b397374715_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts to update gatekeeper obligations in Articles 5 and 6 based on market investigations identifying new unfair or contestability-limiting practices.",
+    "label": "ALIGNED",
+    "reasoning": "Microsoft explicitly advocated that the regulation must be \"capable of adapting and changing over time to keep pace with innovation in technologies and business practices in digital markets,\" and Article 10 establishes a concrete mechanism for updating gatekeeper obligations over time via delegated acts. Additionally, Microsoft favoured clearly defined \"blacklisted\" practices (rather than case-by-case remedies), which aligns with the provision's approach of updating a defined set of obligations in Articles 5 and 6 through a structured, criteria-based process rather than ad hoc enforcement."
+  },
+  "fac20a6605f9cdb2785a_article_17": {
+    "provision_effect": "Establishes a market investigation mechanism allowing the Commission to examine whether new services should be added to core platform services or detect new unfair/anti-contestability practices, with a report due within 24 months and potential follow-up legislative or delegated acts.",
+    "label": "ALIGNED",
+    "reasoning": "Microsoft explicitly advocates for appropriate procedural safeguards in investigations, including separation of investigative and remedial phases, rights of defence, and guidelines to determine the type of process to follow (e.g., legislative proposal or imposition of remedies). Article 17 establishes a structured market investigation process with a distinct investigative phase (culminating in a public report) before any remedial action (legislative proposal or delegated act), which directly reflects Microsoft's ask for separation of investigative and remedial phases and a process-driven approach to determining outcomes."
+  },
+  "5000657d69c1716e1a5c_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines and preliminary findings requirements.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Vodafone expresses concern that user-number thresholds are too blunt for gatekeeper designation and recommends a harm-based test instead, while also asking questions about how designation would be conducted. The provision establishes a market investigation procedure for gatekeeper designation but does not clearly address whether the designation criteria are harm-based or threshold-based in the way Vodafone advocates. There is a genuine connection to the designation process, but it is unclear whether this procedural mechanism satisfies, contradicts, or ignores Vodafone's specific ask for a harm-focused designation test."
+  },
+  "5000657d69c1716e1a5c_article_8": {
+    "provision_effect": "Establishes a mechanism allowing gatekeepers to request suspension of specific obligations under Articles 5 and 6 where compliance would endanger their economic viability due to exceptional circumstances beyond their control.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's position focuses on the design of the gatekeeper designation framework, the flexibility of regulatory approaches, and criteria for defining gatekeepers — it does not express any specific stance on suspension mechanisms for gatekeeper obligations. The org text contains no substantive advocacy position related to the suspension procedure established in Article 8."
+  },
+  "5000657d69c1716e1a5c_article_16": {
+    "provision_effect": "Establishes a mechanism for the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations under Articles 5 and 6, defining the conditions and procedures for such market investigations.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's text expresses general support for a flexible ex ante regulatory framework targeting gatekeepers and raises procedural questions (e.g., who designates gatekeepers, how remedies are set and enforced), but does not take a specific directional stance on the mechanism of systematic non-compliance investigations or the imposition of structural/behavioural remedies. The comments are largely exploratory questions and broad endorsements of a framework concept, without a specific advocacy position that can be evaluated against this provision's concrete action."
+  },
+  "5000657d69c1716e1a5c_article_23": {
+    "provision_effect": "Establishes a commitments mechanism whereby gatekeepers can offer binding commitments to ensure compliance with obligations, and sets conditions under which the Commission may reopen proceedings or decline to make commitments binding.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's pre-proposal text focuses on the scope and definition of gatekeepers, the flexibility of regulatory frameworks, and the blacklist approach — it does not express any specific advocacy position on a commitments mechanism or the procedural rules for how gatekeepers can offer remedies. There is no substantive stance in the org text that relates to what Article 23 establishes."
+  },
+  "5000657d69c1716e1a5c_article_36": {
+    "provision_effect": "Establishes the Commission's power to adopt implementing acts specifying procedural and technical details for notifications, investigations, deadlines, and cooperation arrangements under the Digital Markets Act.",
+    "label": "NOISE",
+    "reasoning": "Vodafone's pre-proposal text focuses on the definition of gatekeepers, the appropriateness of a blacklist approach, and the structure of an ex ante regulatory framework — it does not express any specific advocacy position on the Commission's power to adopt implementing acts or the procedural arrangements covered by Article 36. The org text contains no substantive stance that can be evaluated against this provision."
+  },
+  "7139b1476d62a5569aec_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard, submit observations, access the Commission's file, and have their rights of defence fully respected before the Commission adopts decisions under the DMA.",
+    "label": "NOISE",
+    "reasoning": "Oracle's submission expresses general support for the Commission's proposals to address structural competition problems and endorses the need for additional powers, but contains no specific advocacy position regarding procedural rights such as the right to be heard, access to the file, or rights of defence. The org text is a general endorsement without any directional stance on the procedural safeguards established by Article 30."
+  },
+  "990719636acbb97598ab_article_15": {
+    "provision_effect": "Establishes a market investigation procedure for the Commission to designate providers of core platform services as gatekeepers, including timelines, preliminary findings, and conditions for applying obligations to providers not yet entrenched.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Oracle advocates for a clear set of objective criteria for gatekeeper designation, rather than pure case-by-case discretion, and wants the scope limited to companies with exceptional market power. Article 15 establishes a market investigation procedure that involves Commission discretion in designating gatekeepers under Article 3(6), which could be seen as the case-by-case approach Oracle was cautious about — but the provision also operates within the framework of thresholds and criteria set elsewhere (Article 3(2)), making it genuinely unclear whether this satisfies or contradicts Oracle's position on objective criteria versus discretionary designation."
+  },
+  "d8a1a4a0a7e0ea342bab_article_16": {
+    "provision_effect": "Establishes a market investigation mechanism allowing the Commission to impose behavioural or structural remedies on gatekeepers found to have systematically infringed obligations, with structural remedies only permitted where no equally effective behavioural remedy exists.",
+    "label": "OPPOSING",
+    "reasoning": "Oracle explicitly states a preference for a \"blacklist ex ante regulatory framework\" over a framework based on \"tailor-made remedies adopted following a prior assessment of the conduct of the gatekeeper,\" arguing the latter would unduly extend Commission powers. Article 16 establishes precisely the kind of tailor-made remedy mechanism (behavioural or structural) following a market investigation that Oracle argues against as less preferable and potentially overreaching."
+  },
+  "d8a1a4a0a7e0ea342bab_article_25": {
+    "provision_effect": "Establishes the procedure for the Commission to adopt non-compliance decisions against gatekeepers who fail to meet obligations, including ordering them to cease and desist and provide compliance plans.",
+    "label": "ALIGNED",
+    "reasoning": "Oracle explicitly advocates for a blacklist ex ante regulatory framework that is more straightforward to enforce, with EU-level enforcement ensuring consistency and speed of intervention. The provision establishes a concrete enforcement mechanism (non-compliance decisions, cease-and-desist orders) against gatekeepers, which aligns with Oracle's advocacy for robust, active EU-level enforcement of the regulatory framework for gatekeeper platforms."
+  },
+  "d8a1a4a0a7e0ea342bab_article_22": {
+    "provision_effect": "Establishes the Commission's power to order interim measures against a gatekeeper on the basis of a prima facie finding of infringement, in cases of urgency due to risk of serious and irreparable damage.",
+    "label": "ALIGNED",
+    "reasoning": "Oracle explicitly endorses the use of interim measures as a tool to achieve speed of intervention in fast-moving digital markets, stating that \"the need for speed could partially be achieved by more aggressive antitrust enforcement and by making use of tools already available to the Commission, such as interim measures.\" The provision directly establishes exactly this mechanism — Commission-ordered interim measures — which Oracle advocated for as a means of rapid intervention to prevent irreversible harm."
+  },
+  "090b7de8bec3a3894d50_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings, either by simple request or by decision, including prior to opening a market investigation or proceedings.",
+    "label": "NOISE",
+    "reasoning": "Oracle's position focuses on procedural fairness, speed of investigations, standard of proof, and the added value of the NCT over traditional sector inquiries — it does not express any specific stance on the Commission's information-gathering powers or requests for access to databases and algorithms. The org text contains only general support for the Commission's competition goals and broad procedural concerns, with no directional advocacy position on the subject matter of Article 19."
+  },
+  "8bbfd7d90adf7f949874_article_8": {
+    "provision_effect": "Establishes a mechanism allowing the Commission to suspend, on a gatekeeper's request, specific obligations under Articles 5 and 6 where compliance would endanger the gatekeeper's economic viability due to exceptional circumstances beyond its control.",
+    "label": "NOISE",
+    "reasoning": "The EBF's text expresses only a general welcome of the Commission's initiative to regulate large online platforms and acknowledges both their benefits and concerns about fair competition, without taking any specific stance on suspension mechanisms or the conditions under which gatekeepers should be relieved of obligations. There is no directional advocacy position that can be evaluated against this provision."
+  },
+  "8bbfd7d90adf7f949874_article_12": {
+    "provision_effect": "Requires gatekeepers to inform the Commission of any intended concentration involving providers of core platform services or digital sector services, regardless of whether it meets standard merger notification thresholds.",
+    "label": "NOISE",
+    "reasoning": "The EBF's text contains only a general welcome of the Commission's initiative and broad support for addressing gatekeeper issues, with no specific advocacy position on merger notification obligations or concentration reporting requirements. There is no directional stance that can be evaluated against this specific provision."
+  },
+  "89ff5633bafc6fa9c37e_article_3": {
+    "provision_effect": "Establishes the criteria and thresholds for designating providers of core platform services as 'gatekeepers' under the Digital Markets Act, including quantitative presumptions and a Commission-led designation procedure.",
+    "label": "NOISE",
+    "reasoning": "The EBF's text expresses general agreement that large platforms have outsized effects on the digital economy and raises concerns about data access, but does not take any specific directional stance on the gatekeeper designation criteria, thresholds, or procedure established in Article 3. The position is a general endorsement of the Commission's concern about platform power and a framing of data issues, without advocating for or against any specific element of the designation mechanism."
+  },
+  "fc2e9aeb20f8c19c46e5_article_6": {
+    "provision_effect": "Establishes a set of obligations for gatekeepers including data portability for end users, interoperability requirements for third-party software and ancillary services, and restrictions on commercial use of business user data not publicly available.",
+    "label": "ALIGNED",
+    "reasoning": "The EFF explicitly advocates for ex ante interoperability obligations, data portability rights, and restrictions on commercial use of data shared for interoperability purposes. The provision directly delivers on all three: Article 6(f) mandates interoperability with operating system/hardware features, Article 6(h) requires effective data portability tools for end users, and Article 6(a) prohibits gatekeepers from using business users' non-public data for their own competitive purposes — closely mirroring EFF's call that interoperability data should not be available for commercial use."
+  },
+  "fc2e9aeb20f8c19c46e5_article_5": {
+    "provision_effect": "Article 5(1) establishes a set of specific behavioural obligations for gatekeepers, including restrictions on combining personal data without consent, allowing business users to operate outside gatekeeper platforms, and prohibiting forced bundling of services.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The EFF specifically advocates for mandatory interoperability obligations and data portability rights for platforms with significant market power, which is a related but distinct ask from what Article 5 delivers. While Article 5(a) touches on data combination restrictions (partially resonant with EFF's \"no commercial use of data\" position) and Article 5(e)-(f) address some bundling/forced sign-in issues, the provision does not establish the affirmative interoperability mandates or technical interface obligations that EFF explicitly calls for. There is a genuine thematic connection, but it is unclear whether the provision satisfies, contradicts, or simply falls short of EFF's specific advocacy for ex ante interoperability obligations."
+  },
+  "fc2e9aeb20f8c19c46e5_article_10": {
+    "provision_effect": "Empowers the Commission to adopt delegated acts updating gatekeeper obligations (Articles 5 and 6) based on market investigations identifying new unfair or contestability-limiting practices.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The EFF specifically advocates for ex ante interoperability obligations and data portability rights for platforms with significant market power — a concrete directional ask. Article 10 creates a mechanism to update gatekeeper obligations to address unfair or contestability-limiting practices, which could in principle encompass interoperability requirements, but the provision itself does not establish or reference interoperability obligations. It is genuinely unclear whether this updating mechanism would be used to deliver what EFF advocates for, making the direction of alignment ambiguous rather than clear."
+  },
+  "fc2e9aeb20f8c19c46e5_article_11": {
+    "provision_effect": "Requires gatekeepers to ensure full and effective compliance with core platform obligations, prohibits circumvention through any means, prevents degradation of services for users exercising their rights, and addresses consent requirements for data processing in compliance contexts.",
+    "label": "UNDETECTABLE",
+    "reasoning": "The EFF specifically advocates for interoperability obligations and data portability rights for platforms with significant market power, which overlaps with the subject matter of Article 11 (which addresses anti-circumvention of Articles 5 and 6, including data portability and interoperability obligations). However, Article 11 is an anti-circumvention enforcement mechanism rather than a provision that creates or expands interoperability obligations themselves — it prevents gatekeepers from undermining existing obligations. While EFF's position is directionally related (ensuring interoperability and data rights are effective), it is genuinely unclear whether this provision satisfies, contradicts, or simply falls short of EFF's specific asks, as EFF's advocacy focuses on the substance of interoperability mandates rather than their anti-circumvention enforcement."
+  },
+  "405b3045134ef0e640b0_article_32": {
+    "provision_effect": "Establishes the Digital Markets Advisory Committee to assist the Commission, including procedures for obtaining opinions and communicating them alongside individual decisions.",
+    "label": "NOISE",
+    "reasoning": "Facebook's position expresses general support for advancing knowledge among regulators and welcomes dialogue at a technical expert level, but does not take any specific stance on the creation, structure, or functioning of an advisory committee. The org text contains no directional advocacy position that can be evaluated against this specific provision."
+  },
+  "6827bddd575bb49d876d_article_19": {
+    "provision_effect": "Establishes the Commission's power to request information, access to databases and algorithms from undertakings by simple request or decision, including prior to opening formal investigations, with specified procedural requirements.",
+    "label": "UNDETECTABLE",
+    "reasoning": "Facebook's position advocates for rights of defence, judicial recourse, proportionality tests, and necessity requirements as safeguards in the regulatory framework. Article 19 grants the Commission broad information-gathering powers including access to databases and algorithms, which touches on Facebook's concerns about proportionality and judicial oversight — the provision does include some procedural safeguards (stating purpose, time-limits, right to Court of Justice review) but also grants expansive powers. It is genuinely unclear whether the provision's balance of powers and safeguards satisfies, contradicts, or ignores Facebook's specific advocacy for stronger rights of defence and proportionality constraints."
+  },
+  "6827bddd575bb49d876d_article_30": {
+    "provision_effect": "Establishes the right of gatekeepers and undertakings to be heard before Commission decisions, to submit observations, and to access the Commission's file, ensuring full respect of rights of defence in proceedings.",
+    "label": "ALIGNED",
+    "reasoning": "Facebook explicitly advocates that \"rights of defence and recourse to an independent judicial authority are cornerstones of frameworks\" and that \"it will be of paramount importance to guarantee such safeguards.\" Article 30 directly delivers on this by codifying the right to be heard, the right to submit observations, and full respect of rights of defence — concrete action in exactly the direction Facebook advocated for."
+  },
+  "78c3ac03252acbd3a363_article_1": {
+    "provision_effect": "Establishes the subject matter and scope of the Digital Markets Act, defining that it lays down harmonised rules for contestable and fair markets where gatekeepers are present, and delimiting its application to core platform services while preserving the application of competition law (Articles 101 and 102 TFEU).",
+    "label": "UNDETECTABLE",
+    "reasoning": "The organisation specifically calls for greater precision regarding the range of policy objectives the initiative seeks to address — including what \"fairness\" means and whether concerns beyond competition policy (e.g. diversity of information exposure) are in scope. Article 1 does establish the scope and objectives of the regulation (contestable and fair markets, relationship to competition law), which directly responds to the subject of the org's concern. However, it is genuinely unclear whether the provision's level of specificity satisfies the org's call for more precision, or whether the org would find it still insufficiently defined — making the direction of alignment ambiguous."
+  },
+  "78c3ac03252acbd3a363_article_2": {
+    "provision_effect": "Establishes definitions for key terms used in the Regulation, including 'gatekeeper', 'core platform service', and various digital service categories.",
+    "label": "NOISE",
+    "reasoning": "The org's position calls for greater precision in the policy objectives of the initiative (e.g., clarifying what \"fairness\" means and the range of harms addressed), but does not advocate for any specific definitional choices. The provision is a purely definitional article listing terms and their meanings, and the org text contains no directional stance on how any of these terms should be defined."
+  },
+  "78c3ac03252acbd3a363_article_17": {
+    "provision_effect": "Empowers the Commission to conduct market investigations to add new services to the list of core platform services or detect new unfair/anti-contestability practices not covered by the Regulation, with a report due within 24 months.",
+    "label": "NOISE",
+    "reasoning": "The org text calls for greater precision in defining the policy objectives (e.g., fairness, diversity) of the initiative, but does not take any specific directional stance on whether market investigations into new services or practices should exist, how they should be structured, or what their scope should be. The commentary is general and contextual, asking for clarification rather than advocating for or against any concrete mechanism like the one established in Article 17."
+  },
+  "e992f8ae3dd4d9997083_article_7": {
+    "provision_effect": "Establishes a compliance framework where gatekeepers must implement effective measures to meet their obligations, and grants the Commission power to specify those measures by decision if they are found insufficient, including proportionality and effectiveness requirements.",
+    "label": "NOISE",
+    "reasoning": "The organisation's text focuses on enforcement model questions (centralised vs. decentralised, national authorities, competition law immunity thresholds) rather than on the specific compliance specification mechanism that Article 7 establishes. While there is a broad thematic overlap with regulatory design, the org does not take a specific directional stance on whether the Commission should have the power to specify compliance measures by decision or on the proportionality/effectiveness criteria in Article 7 — making the connection too general to constitute specific alignment or opposition."
+  }
+}
