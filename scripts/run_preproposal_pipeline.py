@@ -704,11 +704,23 @@ def run_preproposal_pipeline(
 
     lm_enriched = load_lobbying_meetings(supabase, proc_id, proposal_date)
 
-    if PROCEDURE_ALIASES:
-        print("\nSearching for procedure-alias meetings (unlinked)...")
+    # Pull procedure aliases from DB (procedure_aliases table)
+    db_aliases = [
+        r["alias"] for r in (
+            supabase.table("procedure_aliases")
+            .select("alias")
+            .eq("procedure_id", proc_id)
+            .execute()
+            .data or []
+        )
+    ]
+    effective_aliases = db_aliases or PROCEDURE_ALIASES
+
+    if effective_aliases:
+        print(f"\nSearching for procedure-alias meetings (unlinked)... aliases={effective_aliases}")
         already_linked = {m["id"] for m in cm_rows}
         alias_cm_rows, alias_cm_org_map = find_procedure_alias_meetings(
-            supabase, proposal_date, already_linked, PROCEDURE_ALIASES
+            supabase, proposal_date, already_linked, effective_aliases
         )
         cm_rows    = cm_rows + alias_cm_rows
         cm_org_map = {**cm_org_map, **alias_cm_org_map}

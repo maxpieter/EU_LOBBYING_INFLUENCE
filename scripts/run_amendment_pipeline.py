@@ -510,6 +510,9 @@ def run_amendment_pipeline(
     proc_id: str,
     output_dir: Path,
     rate_limit_sleep: float = 0.4,
+    k: int = K,
+    min_score: float = MIN_SCORE,
+    k_recip: int = K_RECIP,
 ) -> pd.DataFrame:
     supabase = create_client(
         os.environ["SUPABASE_URL"],
@@ -576,8 +579,8 @@ def run_amendment_pipeline(
     src_embs  = load_or_embed(model, src_texts, QUERY_PREFIX, emb_cache_dir, "sources_post")
 
     # ── Reciprocal matching ───────────────────────────────────────────────────
-    print(f"\nRunning reciprocal matching (K={K}, min_score={MIN_SCORE}, K_recip={K_RECIP})...")
-    all_matches = reciprocal_match(src_embs, amd_embs, amd_meta, K, MIN_SCORE, K_RECIP)
+    print(f"\nRunning reciprocal matching (K={k}, min_score={min_score}, K_recip={k_recip})...")
+    all_matches = reciprocal_match(src_embs, amd_embs, amd_meta, k, min_score, k_recip)
     n_pairs     = sum(len(m) for m in all_matches)
     print(f"  Surviving pairs: {n_pairs}")
 
@@ -724,9 +727,9 @@ def run_amendment_pipeline(
         "embedding_model":         MODEL_ID,
         "llm_model":               LLM_MODEL,
         "llm_temperature":         TEMPERATURE,
-        "k":                       K,
-        "k_recip":                 K_RECIP,
-        "min_score":               MIN_SCORE,
+        "k":                       k,
+        "k_recip":                 k_recip,
+        "min_score":               min_score,
         "generated":               today,
         "orgs_with_meetings":       len(total_counts),
         "total_pairs":             len(pairs),
@@ -781,12 +784,30 @@ def main() -> None:
         "--rate-limit-sleep", type=float, default=0.4,
         help="Seconds to sleep between LLM API calls (default: 0.4)",
     )
+    parser.add_argument(
+        "--k", type=int, default=K,
+        help=f"Top-K amendments per source text in forward retrieval (default: {K}). "
+             f"Lower → fewer matches.",
+    )
+    parser.add_argument(
+        "--min-score", type=float, default=MIN_SCORE,
+        help=f"Minimum cosine similarity for a pair to survive (default: {MIN_SCORE}). "
+             f"Higher → fewer matches.",
+    )
+    parser.add_argument(
+        "--k-recip", type=int, default=K_RECIP,
+        help=f"Top-K sources per amendment in reverse retrieval (default: {K_RECIP}). "
+             f"Lower → fewer matches (stricter reciprocity).",
+    )
     args = parser.parse_args()
 
     run_amendment_pipeline(
         proc_id=args.procedure,
         output_dir=Path(args.output_dir),
         rate_limit_sleep=args.rate_limit_sleep,
+        k=args.k,
+        min_score=args.min_score,
+        k_recip=args.k_recip,
     )
 
 
