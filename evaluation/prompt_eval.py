@@ -2,9 +2,13 @@
 """LLM classification evaluation for ALIGNED / OPPOSING / NOISE labels.
 
 Tests the classifier against an annotated ground truth CSV across:
-  - Prompt variant A: current prompt, includes organisation name
+  - Prompt variant A: baseline, includes organisation name
   - Prompt variant B: organisation name stripped
   - Prompt variant C: explicit instruction to default to NOISE when uncertain
+  - Prompt variant D: chain-of-thought step-by-step
+  - Prompt variant G: D + explicit NOISE gate before matching
+  - Prompt variant H: two-path ALIGNED (specific ask OR clear directional tie) + UNDETECTABLE as fallback
+  - Prompt variant I: amendment pipeline — direction-first CoT (original→amended direction, then org alignment)
   - Temperatures: 0.0, 0.5, 1.0
 
 Also runs a stability test: 20 matches × 5 independent runs at temp=0.5
@@ -62,10 +66,10 @@ CLASSIFY_TOOL = {
     "input_schema": {
         "type": "object",
         "properties": {
-            "amendment_direction": {
+            "provision_effect": {
                 "type": "string",
                 "description": (
-                    "One sentence describing what the legislative provision does "
+                    "One sentence describing what the legislative provision establishes or requires "
                     "(e.g. 'establishes mandatory safety stock requirements', "
                     "'creates strategic project status for critical medicines', "
                     "'requires procurement criteria beyond price')."
@@ -80,7 +84,7 @@ CLASSIFY_TOOL = {
                 "description": "One or two sentences explaining the classification.",
             },
         },
-        "required": ["amendment_direction", "label", "reasoning"],
+        "required": ["provision_effect", "label", "reasoning"],
     },
 }
 
@@ -90,8 +94,8 @@ _SHARED_INTRO = """\
 You are given a match between a lobbying organisation's pre-proposal feedback and a
 provision in a European legislative proposal (article or recital).
 
-You must assess whether the organisation's expressed position aligns with, opposes,
-or has no clear directional relationship to what the legislative provision says.
+You must assess whether the organisation's expressed position supports, opposes,
+or has no clear relationship to what the legislative provision establishes.
 Base your classification solely on the text provided — do not infer positions or
 connections beyond what is explicitly stated.
 
@@ -101,11 +105,10 @@ You are given:
   • ORG POSITION — what the organisation expressed in their feedback
 
 Classify via the tool:
-  ALIGNED       — the org's position pushes in the same direction as the provision
-  OPPOSING      — the org's position pushes in the opposite direction
+  ALIGNED       — the org's position supports or is consistent with what the provision establishes
+  OPPOSING      — the org's position contradicts or pushes back against what the provision establishes
   UNDETECTABLE  — there is topical overlap between the org's feedback and the
-                  provision, but the org's position does not directionally match
-                  what the provision does
+                  provision, but no clear positional relationship can be established
   NOISE         — use this when the org text contains no substantive advocacy
                   position (e.g. org headers, background descriptions of existing
                   law, administrative text), OR when the subjects are completely
@@ -115,8 +118,8 @@ Classify via the tool:
 _NOISE_BIAS_ADDENDUM = """\
 
 IMPORTANT: Only label ALIGNED or OPPOSING when the org's position clearly and
-specifically points in the same or opposite direction as what the provision does.
-When there is topical overlap but no clear directional match, use UNDETECTABLE.
+specifically supports or contradicts what the provision establishes.
+When there is topical overlap but no clear positional relationship, use UNDETECTABLE.
 When there is no substantive topical connection, use NOISE.\
 """
 
@@ -166,10 +169,118 @@ def build_prompt_D(row: dict) -> str:
         "\n\nBefore classifying, think step by step:\n"
         "  1. What does the legislative provision actually do or require?\n"
         "  2. What specific position does the org express — what do they want?\n"
-        "  3. Do those two things point in the same direction, opposite directions, "
-        "or is there no clear directional relationship?"
+        "  3. Does the org's position support, contradict, or have no clear relationship "
+        "to what the provision establishes?"
     )
     return f"Organisation: {org}\n\n{_SHARED_INTRO}{cot}{_match_body(row)}"
+
+
+def build_prompt_G(row: dict) -> str:
+    """Variant G — D + explicit NOISE gate before matching."""
+    org = (row.get("organisation") or "Unknown Organisation").strip()
+    cot = (
+        "\n\nBefore classifying, think step by step:\n"
+        "  1. What does the legislative provision specifically do or require?\n"
+        "  2. Does the org text express a concrete wish, concern, or position that "
+        "specifically connects to what this provision does — not just the general topic? "
+        "If not, use NOISE.\n"
+        "  3. What is that concrete position, and does it support, contradict, or have "
+        "no clear relationship to what the provision establishes?"
+    )
+    return f"Organisation: {org}\n\n{_SHARED_INTRO}{cot}{_match_body(row)}"
+
+
+_H_INTRO = """\
+You are given a match between a lobbying organisation's pre-proposal text and a
+provision in a European Commission legislative proposal (article or recital).
+
+Your task is to assess whether the provision responds to what the organisation
+advocated for — not merely whether both discuss the same topic.
+Base your classification solely on the text provided. Do not infer positions or
+connections beyond what is explicitly stated.
+
+You are given:
+  • LEGISLATIVE PROVISION — the article or recital as it appears in the proposal
+  • ORG POSITION          — what the organisation expressed before the proposal
+                            was tabled (feedback submission or commissioner meeting)
+
+Classify via the tool:
+  ALIGNED       — there is a clear tie between what the org advocates for and what the
+                  provision does. Two paths to ALIGNED:
+                  (a) The org makes a specific ask and the provision delivers it (or more
+                      of it in the same direction).
+                  (b) The org advocates for action/initiative in a specific direction, and
+                      the provision takes concrete action in that direction — not merely
+                      defines or neutrally describes the area. If you can argue a clear
+                      connection between the org's position and the provision's action,
+                      classify ALIGNED.
+  OPPOSING      — the org explicitly argues against what the provision establishes,
+                  or the provision does the opposite of what the org asked for.
+  UNDETECTABLE  — the org has a specific advocacy position related to the provision's
+                  subject, but it is genuinely unclear whether the provision satisfies,
+                  contradicts, or ignores it. Use this when you can see a real connection
+                  but cannot confidently determine direction. If uncertain → fall back here.
+  NOISE         — the org text contains no substantive advocacy position on this topic:
+                  boilerplate, background descriptions of existing law, administrative text,
+                  general endorsements without a specific stance
+                  (e.g. "we support EU action on medicines", "we welcome the initiative"),
+                  OR the subjects are unrelated.
+
+Critical distinctions:
+  • An org that argues a mechanism should NOT EXIST is OPPOSING the provision that
+    creates it, even if the provision also includes safeguards the org likes.
+  • A provision that merely defines a term, lists background context, or describes
+    the current state of affairs is NOT taking action — path (b) for ALIGNED does not
+    apply to purely definitional or recital provisions that take no concrete stance.
+  • General values ("we support supply chain resilience") with no specific direction
+    → NOISE. A position needs to be specific enough that you can evaluate whether the
+    provision responds to it.
+  • UNDETECTABLE is the fallback when a genuine connection exists but direction is
+    ambiguous — not when the org text is simply vague or general (that is NOISE).\
+"""
+
+_H_COT = (
+    "\n\nBefore classifying, think step by step:\n"
+    "  1. What does the provision specifically establish, require, or do? "
+    "State the concrete action — or note if it only defines/describes.\n"
+    "  2. Does the org text express a specific advocacy position on this subject "
+    "(not just a general value or endorsement)?\n"
+    "     If only general support/concern with no directional stance → NOISE (stop here).\n"
+    "  3. Counterfactual test: could an org with the OPPOSITE general stance on this topic "
+    "produce a text that would also match this provision in the same direction?\n"
+    "     If yes — the org's position is too broad to constitute specific alignment → NOISE.\n"
+    "     Example: 'we support supply chain resilience' would match any supply chain provision "
+    "regardless of the org's actual position, so it fails this test.\n"
+    "  4. Is there a clear and specific tie between the org's position and the provision's action?\n"
+    "     • Clear specific tie, provision acts in the direction the org advocated → ALIGNED\n"
+    "     • The org opposes this mechanism or asks for the opposite → OPPOSING\n"
+    "     • Real connection exists but direction is genuinely ambiguous → UNDETECTABLE"
+)
+
+
+def _match_body_H(row: dict) -> str:
+    """Match body using LEGISLATIVE PROVISION label to match production pipeline wording."""
+    parts = ["\n---"]
+    amended = (row.get("amended_text") or "").strip()
+    parts.append(f"\nLEGISLATIVE PROVISION:\n{amended}")
+
+    context_before = (row.get("context_before") or "").strip()
+    org_text       = (row.get("chunk_text") or row.get("source_text") or "").strip()
+    context_after  = (row.get("context_after") or "").strip()
+
+    if context_before:
+        parts.append(f"\nORG POSITION — PRECEDING CONTEXT:\n{context_before}")
+    parts.append(f"\nORG POSITION — MATCHED CHUNK:\n{org_text}")
+    if context_after:
+        parts.append(f"\nORG POSITION — FOLLOWING CONTEXT:\n{context_after}")
+
+    return "\n".join(parts)
+
+
+def build_prompt_H(row: dict) -> str:
+    """Variant H — two-path ALIGNED (specific ask OR clear directional tie), UNDETECTABLE as fallback."""
+    org = (row.get("organisation") or "Unknown Organisation").strip()
+    return f"Organisation: {org}\n\n{_H_INTRO}{_H_COT}{_match_body_H(row)}"
 
 
 def _match_body_split_context(row: dict) -> str:
@@ -206,6 +317,106 @@ def build_prompt_F(row: dict) -> str:
     return f"Organisation: {org}\n{proc_line}\n{_SHARED_INTRO}{_match_body(row)}"
 
 
+_AMD_INTRO = """\
+You are given a match between a lobbying organisation's pre-proposal text and a
+parliamentary amendment to a European Commission legislative proposal.
+
+Your task is to assess whether the organisation's expressed position advocates
+for the change the amendment makes — not merely whether they discuss the same topic.
+
+You are given:
+  • ORIGINAL TEXT  — the provision as it appeared in the Commission proposal
+                     (omitted if the amendment is a new insertion)
+  • AMENDED TO     — the text as revised by the amendment
+  • JUSTIFICATION  — the amendment's stated rationale (may be absent)
+  • ORG POSITION   — what the organisation expressed before the proposal was tabled
+
+The organisation does not need to mention the specific article. What matters is
+whether their expressed position advocates for the direction of change the amendment
+makes to the original text.
+
+Classify via the tool:
+  ALIGNED       — the amendment moves the original text in the direction the org
+                  advocated for. The org's position must be specific enough that
+                  you can say the amendment responds to it.
+  OPPOSING      — the amendment moves the original text in the opposite direction
+                  from what the org advocated for, or the org explicitly opposes
+                  what the amendment introduces.
+  UNDETECTABLE  — the org has a specific position related to this area, but it is
+                  genuinely unclear whether the amendment's direction satisfies,
+                  contradicts, or ignores it. Use when a real connection exists
+                  but direction is ambiguous. Fall back here when uncertain.
+  NOISE         — the org text contains no substantive advocacy position on this
+                  topic: boilerplate, background descriptions, general endorsements
+                  without a specific directional stance
+                  (e.g. "we support this initiative", "we welcome EU action"),
+                  OR the subjects are unrelated.
+
+Critical distinctions:
+  • The direction of the amendment is what matters — not whether both texts discuss
+    the same subject. Determine first what the amendment ADDS, REMOVES, STRENGTHENS,
+    or WEAKENS relative to the original, then evaluate the org's position against that.
+  • General support for the policy area → NOISE, not UNDETECTABLE.
+  • Counterfactual test: could an org with the OPPOSITE stance produce text that
+    also matches this amendment in the same direction? If yes, the org's position
+    is too broad → NOISE.
+  • UNDETECTABLE is the fallback when a genuine directional connection exists but
+    the relationship is ambiguous. It is NOT the default when the org text is vague.\
+"""
+
+_AMD_COT = (
+    "\n\nBefore classifying, think step by step:\n"
+    "  1. What does the ORIGINAL TEXT establish? If no original, note this is a new insertion.\n"
+    "  2. What does the AMENDMENT change it to? What specifically does it add, remove, "
+    "strengthen, weaken, or clarify?\n"
+    "  3. State the DIRECTION of change in one sentence "
+    "(e.g. 'the amendment makes X mandatory where it was optional', "
+    "'the amendment removes the obligation to Y').\n"
+    "  4. Does the org text express a specific advocacy position on this subject — "
+    "not just general support or concern?\n"
+    "     If only general endorsement with no directional stance → NOISE (stop here).\n"
+    "  5. Counterfactual: could an org with the opposite position also match this amendment "
+    "in the same direction? If yes → NOISE.\n"
+    "  6. Does the org's position advocate for pushing the original text in this direction?\n"
+    "     • Yes, the amendment goes where the org wanted → ALIGNED\n"
+    "     • The org wanted the opposite direction → OPPOSING\n"
+    "     • Real connection but genuinely unclear whether this direction satisfies the org → UNDETECTABLE"
+)
+
+
+def _match_body_amendment(row: dict) -> str:
+    parts = ["\n---"]
+    original = (row.get("original_text") or "").strip()
+    amended  = (row.get("amended_text")  or "").strip()
+    justif   = (row.get("justification") or "").strip()
+
+    if original:
+        parts.append(f"\nORIGINAL TEXT:\n{original}")
+    else:
+        parts.append("\nORIGINAL TEXT:\n(new insertion — no original text)")
+    parts.append(f"\nAMENDED TO:\n{amended}")
+    if justif:
+        parts.append(f"\nJUSTIFICATION:\n{justif}")
+
+    context_before = (row.get("context_before") or "").strip()
+    chunk_text     = (row.get("chunk_text") or row.get("source_text") or "").strip()
+    context_after  = (row.get("context_after") or "").strip()
+
+    if context_before:
+        parts.append(f"\nORG POSITION — PRECEDING CONTEXT:\n{context_before}")
+    parts.append(f"\nORG POSITION — MATCHED CHUNK:\n{chunk_text}")
+    if context_after:
+        parts.append(f"\nORG POSITION — FOLLOWING CONTEXT:\n{context_after}")
+
+    return "\n".join(parts)
+
+
+def build_prompt_I(row: dict) -> str:
+    """Variant I — amendment pipeline: direction-first CoT + noise guards."""
+    org = (row.get("organisation") or "Unknown Organisation").strip()
+    return f"Organisation: {org}\n\n{_AMD_INTRO}{_AMD_COT}{_match_body_amendment(row)}"
+
+
 PROMPT_BUILDERS: dict[str, callable] = {
     "A": build_prompt_A,
     "B": build_prompt_B,
@@ -213,6 +424,9 @@ PROMPT_BUILDERS: dict[str, callable] = {
     "D": build_prompt_D,
     "E": build_prompt_E,
     "F": build_prompt_F,
+    "G": build_prompt_G,
+    "H": build_prompt_H,
+    "I": build_prompt_I,
 }
 
 # ── API call ───────────────────────────────────────────────────────────────────
@@ -329,6 +543,10 @@ def main() -> None:
         help="Prompt variant to use for stability test (default: A)",
     )
     parser.add_argument(
+        "--no-stability", action="store_true",
+        help="Skip the stability test entirely",
+    )
+    parser.add_argument(
         "--output", default="evaluation/results/prompt_eval.json",
         help="Output JSON path",
     )
@@ -418,11 +636,11 @@ def main() -> None:
             pred_labels.append(pred)
 
             rows.append({
-                "idx":               idx,
-                "true_label":        row["true_label"],
-                "pred_label":        pred,
-                "amendment_direction": result.get("amendment_direction") if result else None,
-                "reasoning":         result.get("reasoning") if result else None,
+                "idx":           idx,
+                "true_label":    row["true_label"],
+                "pred_label":    pred,
+                "provision_effect": result.get("provision_effect") if result else None,
+                "reasoning":     result.get("reasoning") if result else None,
             })
 
         metrics = compute_metrics(true_labels, pred_labels)
@@ -439,6 +657,17 @@ def main() -> None:
     print_summary(all_results)
 
     # ── Stability test ─────────────────────────────────────────────────────────
+    if args.no_stability:
+        out_path = Path(args.output)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        output = {
+            "ground_truth_n":      len(gt),
+            "label_distribution":  gt["true_label"].value_counts().to_dict(),
+            "accuracy_evaluation": all_results,
+        }
+        out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False))
+        print(f"\nFull results saved → {out_path}")
+        return
     print(f"\n{'='*64}")
     print(
         f"  STABILITY TEST  "
@@ -497,9 +726,13 @@ def main() -> None:
     # Majority-vote accuracy on the stability sample (using the k runs as the prediction)
     stab_true  = [r["true_label"] for r in stability_rows]
     stab_pred  = [r["majority"]   for r in stability_rows]
-    stab_metrics = compute_metrics(stab_true, stab_pred)
-    print("\n  Majority-vote accuracy on stability sample:")
-    print_metrics(f"stability majority-vote  temp={args.stability_temp}", stab_metrics)
+    if stab_true and stab_pred:
+        stab_metrics = compute_metrics(stab_true, stab_pred)
+        print("\n  Majority-vote accuracy on stability sample:")
+        print_metrics(f"stability majority-vote  temp={args.stability_temp}", stab_metrics)
+    else:
+        stab_metrics = {}
+        print("\n  Stability sample empty — skipped.")
 
     # ── Save output ────────────────────────────────────────────────────────────
     out_path = Path(args.output)
