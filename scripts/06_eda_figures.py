@@ -175,8 +175,8 @@ def gini_table(orgs: pd.DataFrame, out: Path) -> pd.DataFrame:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir",
-                        default=str(Path(__file__).resolve().parent.parent / "images"),
-                        help="Where to write the PDFs/PNGs (default: <repo-root>/images)")
+                        default=str(Path(__file__).resolve().parent / "images"),
+                        help="Where to write the PDFs (default: scripts/images)")
     args = parser.parse_args()
 
     out = Path(args.out_dir)

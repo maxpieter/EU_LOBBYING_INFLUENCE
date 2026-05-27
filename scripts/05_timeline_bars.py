@@ -242,8 +242,8 @@ def plot_timeline_aligned(df: pd.DataFrame, dom: dict[str, str], out: Path) -> N
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir",
-                        default=str(Path(__file__).resolve().parent.parent / "images"),
-                        help="Where to write the PDFs/PNGs (default: <repo-root>/images)")
+                        default=str(Path(__file__).resolve().parent / "images"),
+                        help="Where to write the PDFs (default: scripts/images)")
     parser.add_argument("--from-cutoff", default="2019-09-01",
                         help="Drop meetings before this date (default 2019-09-01)")
     parser.add_argument("--to-cutoff", default="2022-12-31",
