@@ -1,0 +1,19 @@
+procedure,stage,n_orgs,gini_meetings
+AI Act,preproposal,42,0.785
+AI Act,amendment,11,0.594
+DSA,preproposal,80,0.827
+DSA,amendment,39,0.468
+DMA,preproposal,29,0.756
+DMA,amendment,28,0.428
+Digital Euro,preproposal,4,0.0
+Digital Euro,amendment,13,0.501
+ELV,preproposal,42,0.0
+ELV,amendment,36,0.435
+CMA,preproposal,38,0.921
+CMA,amendment,20,0.564
+PPWR,preproposal,68,0.891
+PPWR,amendment,61,0.547
+EMFA,preproposal,17,0.863
+EMFA,amendment,4,0.15
+CSDDD,preproposal,37,0.865
+CSDDD,amendment,43,0.535
