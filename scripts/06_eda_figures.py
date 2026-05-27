@@ -126,7 +126,6 @@ def plot_eda_distributions(orgs: pd.DataFrame, out: Path) -> None:
             ax.spines[spine].set_visible(False)
     fig.tight_layout()
     fig.savefig(out / "eda_distributions.pdf", bbox_inches="tight")
-    fig.savefig(out / "eda_distributions.png", bbox_inches="tight", dpi=150)
     plt.close(fig)
 
 
@@ -154,7 +153,6 @@ def plot_alignment_distribution(orgs: pd.DataFrame, out: Path) -> None:
             ax.spines[spine].set_visible(False)
     fig.tight_layout()
     fig.savefig(out / "eda_alignment_distribution.pdf", bbox_inches="tight")
-    fig.savefig(out / "eda_alignment_distribution.png", bbox_inches="tight", dpi=150)
     plt.close(fig)
 
 

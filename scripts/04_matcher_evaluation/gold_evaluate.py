@@ -1,22 +1,22 @@
 """Evaluate the meeting → procedure matcher against the gold set.
 
-Reads `gold_procedure.csv` (the hand-curated 200-row gold set), substitutes
-the post-relabel `v2_true_label` on rows where the second annotation pass
-disagreed with the first, joins per-row matcher predictions from
-`gold_v2_enrichment.json`, and computes accuracy / precision / recall / F1
-with Wilson 95% CIs (F1 with a percentile bootstrap CI) plus the confusion
-matrix and a per-method precision breakdown.
+Reads `gold_procedure.csv` (the hand-curated 200-row gold set plus two
+columns — `predicted_procedure_id`, `predicted_match_method` — carrying the
+matcher's frozen production decision per row), substitutes the post-relabel
+`v2_true_label` on rows where the second annotation pass disagreed with the
+first, and computes accuracy / precision / recall / F1 with Wilson 95% CIs
+(F1 with a percentile bootstrap CI) plus the confusion matrix and a
+per-method precision breakdown.
 
-The enrichment JSON is a frozen snapshot of what the production matcher
-predicted for each gold row at evaluation time; it is what makes the cited
-F1 numbers reproducible (Supabase has drifted since).
+The frozen `predicted_*` columns are what make the cited F1 numbers
+reproducible — Supabase has drifted since evaluation time, so live lookups
+would return different values.
 
-Outputs (written next to this script):
+Output (written next to this script, overwritten on each run):
     gold_eval.json         — machine-readable metrics
-    gold_eval_report.md    — thesis-paste-ready markdown
 
 Usage:
-    python scripts/gold_evaluate.py
+    python scripts/04_matcher_evaluation/gold_evaluate.py
 """
 
 from __future__ import annotations
@@ -32,10 +32,8 @@ from collections import Counter
 from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
-PROCEDURE_PATH  = _HERE / "gold_procedure.csv"
-ENRICHMENT_PATH = _HERE / "gold_v2_enrichment.json"
-JSON_OUT        = _HERE / "gold_eval.json"
-MD_OUT          = _HERE / "gold_eval_report.md"
+PROCEDURE_PATH = _HERE / "gold_procedure.csv"
+JSON_OUT       = _HERE / "gold_eval.json"
 
 
 # ---------------------------------------------------------------------------
@@ -254,8 +252,6 @@ def _metrics(rows: list[dict], log: logging.Logger) -> dict:
 def _eval_procedure(log: logging.Logger) -> dict:
     if not PROCEDURE_PATH.exists():
         sys.exit(f"{PROCEDURE_PATH} not found")
-    if not ENRICHMENT_PATH.exists():
-        sys.exit(f"{ENRICHMENT_PATH} not found — required for matcher predictions")
 
     with PROCEDURE_PATH.open(newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
@@ -269,22 +265,11 @@ def _eval_procedure(log: logging.Logger) -> dict:
             n_subst += 1
     log.info(f"substituted v2_true_label on {n_subst} diff rows")
 
-    with ENRICHMENT_PATH.open() as f:
-        enrich = json.load(f)
-    preds_full: dict[tuple[str, str], dict] = {}
-    for k, v in enrich["predictions"].items():
-        src, mid = k.split(":", 1)
-        preds_full[(src, mid)] = {
-            "procedure_id": v.get("procedure_id") or "no_match",
-            "match_method": v.get("match_method") or "",
-        }
-    log.info(f"loaded {len(preds_full)} matcher predictions from enrichment")
-
+    # Frozen matcher predictions live in the CSV as columns:
+    #   predicted_procedure_id, predicted_match_method
     for r in rows:
-        key = (r.get("source"), r.get("meeting_id"))
-        info = preds_full.get(key, {"procedure_id": "no_match", "match_method": ""})
-        r["_predicted_label"] = info["procedure_id"]
-        r["_predicted_method"] = info["match_method"]
+        r["_predicted_label"]  = (r.get("predicted_procedure_id") or "").strip() or "no_match"
+        r["_predicted_method"] = (r.get("predicted_match_method") or "").strip()
 
     overall = _metrics(rows, log)
     by_source: dict[str, dict] = {}
@@ -294,126 +279,6 @@ def _eval_procedure(log: logging.Logger) -> dict:
             by_source[src] = _metrics(sub, log)
     overall["by_source"] = by_source
     return overall
-
-
-# ---------------------------------------------------------------------------
-# Markdown report
-# ---------------------------------------------------------------------------
-
-def _fmt_pct_ci(p: float, ci: list[float]) -> str:
-    return f"{p:.1%} (95% CI [{ci[0]:.1%}, {ci[1]:.1%}])"
-
-
-def _build_report(proc: dict) -> str:
-    lines = ["# Gold-standard evaluation of EU lobbying matcher", ""]
-    lines.append(
-        "Methodology: stratified random sample (50% matched / 50% no_match) "
-        "with a two-pass annotation process. In the first pass, Claude Opus 4.7 "
-        "proposed a label given the meeting text and the top-20 fuzzy "
-        "candidates; the researcher accepted, corrected, or rejected each "
-        "proposal. In the second pass, each row was enriched with the matcher's "
-        "production signals (MEP-declared `related_procedure`, predicted "
-        "procedure ID, match method, and matched alias) and Opus 4.7 "
-        "re-evaluated the label with this additional context. The 38 rows where "
-        "the second-pass proposal disagreed with the first-pass label were "
-        "re-reviewed by the researcher, resulting in 35 corrected labels. Final "
-        "labels from the second pass are used throughout."
-    )
-    lines.append("")
-    lines.append(
-        "Reported metrics use Wilson 95% confidence intervals for proportions "
-        "(accuracy, precision, recall) and bootstrap (B=2000) percentile 95% "
-        "confidence intervals for F1, which is non-linear in the underlying "
-        "counts. Rows the researcher marked `uncertain` or `outside_candidates` "
-        "are excluded from the denominator. A wrong-procedure-but-matched row "
-        "counts as both a false positive (matched the wrong file) and a false "
-        "negative (missed the correct one)."
-    )
-    lines.append("")
-
-    for label, m in [("Meeting → Procedure", proc)]:
-        if not m:
-            lines.append(f"## {label}\n\n_Skipped — gold CSV not present._\n")
-            continue
-        lines.append(f"## {label}\n")
-        lines.append(f"- Sample size: {m['n_total_in_gold']}")
-        lines.append(f"- Excluded (uncertain / outside_candidates / unlabeled): {m['n_excluded_uncertain_or_outside']}")
-        lines.append(f"- Evaluated: {m['n_evaluated']}")
-        lines.append("")
-        lines.append("**Confusion matrix:**")
-        lines.append("")
-        lines.append(f"|             | gold = match | gold = no_match |")
-        lines.append(f"|-------------|--------------|-----------------|")
-        lines.append(f"| pred match  | TP={m['tp']}            | FP={m['fp']}             |")
-        lines.append(f"| pred no_m   | FN={m['fn']}            | TN={m['tn']}             |")
-        lines.append("")
-        if m["fp_fn_dual_count"]:
-            lines.append(
-                f"_Note: {m['fp_fn_dual_count']} rows had matcher predicting a "
-                f"DIFFERENT match than gold. Each is counted as both FP and FN._\n"
-            )
-        lines.append("**Headline metrics:**")
-        lines.append(f"- Accuracy: {_fmt_pct_ci(m['accuracy'], m['accuracy_ci'])}")
-        lines.append(f"- Precision: {_fmt_pct_ci(m['precision'], m['precision_ci'])}")
-        lines.append(f"- Recall: {_fmt_pct_ci(m['recall'], m['recall_ci'])}")
-        lines.append(f"- F1: {m['f1']:.3f} (bootstrap 95% CI [{m['f1_ci'][0]:.3f}, {m['f1_ci'][1]:.3f}])")
-        lines.append("")
-
-        if m.get("by_source"):
-            lines.append("**Per-source breakdown:**")
-            lines.append("")
-            lines.append("| source | n | accuracy | precision | recall | F1 (95% CI) |")
-            lines.append("|---|---|---|---|---|---|")
-            for src, sm in m["by_source"].items():
-                lines.append(
-                    f"| {src} | {sm['n_evaluated']} | "
-                    f"{_fmt_pct_ci(sm['accuracy'], sm['accuracy_ci'])} | "
-                    f"{_fmt_pct_ci(sm['precision'], sm['precision_ci'])} | "
-                    f"{_fmt_pct_ci(sm['recall'], sm['recall_ci'])} | "
-                    f"{sm['f1']:.3f} [{sm['f1_ci'][0]:.3f}, {sm['f1_ci'][1]:.3f}] |"
-                )
-            lines.append("")
-
-        if m.get("by_method"):
-            lines.append("**Per-match-method precision:**")
-            lines.append("")
-            lines.append("| match method | n | correct | wrong | precision (95% CI) |")
-            lines.append("|---|---|---|---|---|")
-            for method, mm in m["by_method"].items():
-                label_col = "correct (TN)" if method == "no_match" else "correct (TP)"
-                label_wrong = "wrong (FN)" if method == "no_match" else "wrong (FP)"
-                lines.append(
-                    f"| {method} | {mm['n']} | {mm['correct']} | "
-                    f"{mm['wrong']} | {_fmt_pct_ci(mm['precision'], mm['precision_ci'])} |"
-                )
-            lines.append("")
-
-    lines.append("## Methodology paragraph (paste into thesis)\n")
-    lines.append(
-        "To evaluate the accuracy of the procedure-matching pipeline, a "
-        "gold-standard evaluation set was constructed through stratified random "
-        "sampling of 200 meeting–procedure inputs, drawn equally from rows the "
-        "matcher had classified as matched (n=100) and as no_match (n=100). "
-        "Annotation followed a two-pass design to mitigate labelling bias. In "
-        "the first pass, Claude Opus 4.7 (Anthropic, 2025) proposed a "
-        "ground-truth label for each input given the meeting text and the top-20 "
-        "fuzzy candidate procedures; the researcher then accepted, corrected, or "
-        "rejected each proposal. In the second pass, each row was enriched with "
-        "the matcher's production signals — the MEP-declared related procedure, "
-        "the predicted procedure identifier, the match method, and the matched "
-        "alias — after which Opus 4.7 re-evaluated its proposal with this "
-        "additional context. The 38 rows where the second-pass proposal "
-        "disagreed with the first-pass label were re-reviewed by the researcher, "
-        "resulting in 35 corrected labels. Two inputs that the researcher could "
-        "not resolve confidently were excluded, yielding 198 evaluated rows. "
-        "The matcher's persisted production decision for each input was then "
-        "compared to the final gold label, producing a confusion matrix from "
-        "which precision, recall, and accuracy were computed with Wilson 95% "
-        "confidence intervals; F1 was reported with a non-parametric bootstrap "
-        "percentile interval (B=2,000 resamples)."
-    )
-    lines.append("")
-    return "\n".join(lines)
 
 
 def main() -> None:
@@ -434,10 +299,8 @@ def main() -> None:
         return out
 
     JSON_OUT.write_text(json.dumps({"procedure": _strip(proc)}, indent=2))
-    MD_OUT.write_text(_build_report(proc))
 
     log.info(f"Wrote {JSON_OUT}")
-    log.info(f"Wrote {MD_OUT}")
     print()
     print(
         f"PROCEDURE: precision={proc['precision']:.1%}, recall={proc['recall']:.1%}, "

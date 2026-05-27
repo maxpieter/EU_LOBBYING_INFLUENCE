@@ -210,7 +210,6 @@ def plot_timeline_source(df: pd.DataFrame, out: Path) -> None:
     _milestone_lines(ax)
     fig.tight_layout()
     fig.savefig(out / "timeline_bar_dsa.pdf", bbox_inches="tight")
-    fig.savefig(out / "timeline_bar_dsa.png", bbox_inches="tight", dpi=150)
     plt.close(fig)
 
 
@@ -233,7 +232,6 @@ def plot_timeline_aligned(df: pd.DataFrame, dom: dict[str, str], out: Path) -> N
     _milestone_lines(ax)
     fig.tight_layout()
     fig.savefig(out / "timeline_bar_aligned_dsa.pdf", bbox_inches="tight")
-    fig.savefig(out / "timeline_bar_aligned_dsa.png", bbox_inches="tight", dpi=150)
     plt.close(fig)
 
 
