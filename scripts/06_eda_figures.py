@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
-ANA  = ROOT / "analysis"
+ANA  = ROOT / "analysis_results"
 
 PROCEDURES = {
     "AI Act":        "2021:0106COD",

@@ -48,3 +48,4 @@ supabase/archive/
 # MCP config (contains local paths/keys)
 .mcp.json
 supabase/.temp/
+supabase/

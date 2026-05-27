@@ -31,7 +31,7 @@ from dotenv import load_dotenv
 from supabase import create_client
 
 ROOT = Path(__file__).resolve().parent.parent
-ANA  = ROOT / "analysis"
+ANA  = ROOT / "analysis_results"
 
 DSA_PROCEDURE_ID = "2020/0361(COD)"
 DSA_FOLDER       = "2020:0361COD"
