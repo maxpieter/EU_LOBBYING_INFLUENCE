@@ -41,11 +41,8 @@ chromedriver.log
 .DS_Store
 Thumbs.db
 
-# Generated reports
-org_dedup_report.csv
-
-# Large generated analysis artifacts (exceed GitHub 100MB limit)
-analysis/ai_candidates.json
+# Local archive
+analysis/archive/
 
 # MCP config (contains local paths/keys)
 .mcp.json
