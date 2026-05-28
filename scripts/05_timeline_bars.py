@@ -22,6 +22,7 @@ import os
 from collections import Counter
 from datetime import date
 from pathlib import Path
+from typing import Optional
 
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
@@ -68,6 +69,19 @@ def _paginate(query_fn, page_size: int = 1000) -> list[dict]:
             break
         offset += page_size
     return out
+
+
+def fetch_amendments_tabled_date(client) -> Optional[date]:
+    """Fetch the amendments_tabled_date for the DSA procedure from Supabase."""
+    resp = (client.table("procedures")
+            .select("amendments_tabled_date")
+            .eq("id", DSA_PROCEDURE_ID)
+            .limit(1)
+            .execute())
+    rows = resp.data or []
+    if rows and rows[0].get("amendments_tabled_date"):
+        return date.fromisoformat(rows[0]["amendments_tabled_date"])
+    return None
 
 
 def fetch_dsa_meetings(client) -> pd.DataFrame:
@@ -180,6 +194,17 @@ def _milestone_lines(ax) -> None:
                 rotation=90, va="top", ha="left", fontsize=8, color=colour)
 
 
+def _amendment_marker(ax, amendments_date: Optional[date]) -> None:
+    if amendments_date is None:
+        return
+    ts = pd.Timestamp(amendments_date)
+    ymax = ax.get_ylim()[1]
+    colour = "#d62728"
+    ax.axvline(ts, color=colour, lw=0.7, ls=":", alpha=0.7)
+    ax.text(ts + pd.Timedelta(days=4), ymax * 0.97, "Amendments tabled",
+            rotation=90, va="top", ha="left", fontsize=8, color=colour)
+
+
 def _style_axes(ax, ymax_pad: float = 1.05) -> None:
     """Common cosmetic: monthly ticks every 3 months, ISO Y-m format, y-grid."""
     ax.xaxis.set_major_locator(mdates.MonthLocator(interval=3))
@@ -194,7 +219,8 @@ def _style_axes(ax, ymax_pad: float = 1.05) -> None:
         ax.spines[spine].set_visible(False)
 
 
-def plot_timeline_source(df: pd.DataFrame, out: Path) -> None:
+def plot_timeline_source(df: pd.DataFrame, out: Path,
+                         amendments_date: Optional[date] = None) -> None:
     pv = _monthly_pivot(df, "source")
     for col in ("commission", "lobbying"):
         if col not in pv.columns:
@@ -208,12 +234,14 @@ def plot_timeline_source(df: pd.DataFrame, out: Path) -> None:
     _style_axes(ax)
     ax.legend(frameon=True, loc="upper left", fontsize=9)
     _milestone_lines(ax)
+    _amendment_marker(ax, amendments_date)
     fig.tight_layout()
     fig.savefig(out / "timeline_bar_dsa.pdf", bbox_inches="tight")
     plt.close(fig)
 
 
-def plot_timeline_aligned(df: pd.DataFrame, dom: dict[str, str], out: Path) -> None:
+def plot_timeline_aligned(df: pd.DataFrame, dom: dict[str, str], out: Path,
+                          amendments_date: Optional[date] = None) -> None:
     df = df.copy()
     df["align"] = df["organisation"].str.strip().map(dom)
     df["bucket"] = np.where(df["align"] == "ALIGNED", "ALIGNED", "OTHER")
@@ -230,6 +258,7 @@ def plot_timeline_aligned(df: pd.DataFrame, dom: dict[str, str], out: Path) -> N
     _style_axes(ax)
     ax.legend(frameon=True, loc="upper left", fontsize=9)
     _milestone_lines(ax)
+    _amendment_marker(ax, amendments_date)
     fig.tight_layout()
     fig.savefig(out / "timeline_bar_aligned_dsa.pdf", bbox_inches="tight")
     plt.close(fig)
@@ -259,11 +288,14 @@ def main() -> int:
     print(f"fetched {len(df):,} (meeting × org) rows for DSA between {lo.date()} and {hi.date()}")
     print(df["source"].value_counts().to_string())
 
+    amend_date = fetch_amendments_tabled_date(client)
+    print(f"amendments tabled date: {amend_date}")
+
     dom = dominant_labels()
     print(f"dominant labels for {len(dom):,} DSA orgs")
 
-    plot_timeline_source(df, out)
-    plot_timeline_aligned(df, dom, out)
+    plot_timeline_source(df, out, amendments_date=amend_date)
+    plot_timeline_aligned(df, dom, out, amendments_date=amend_date)
     print(f"wrote → {out}/")
     return 0
 

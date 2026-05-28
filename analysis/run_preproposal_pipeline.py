@@ -66,8 +66,9 @@ LABELS      = ["ALIGNED", "OPPOSING", "UNDETECTABLE", "NOISE"]
 # Leave empty ([]) to disable.
 PROCEDURE_ALIASES: list[str] = [
     # Fill in before running, e.g.:
-    "AI act",
-    "artificial intelligence act",
+    "CMA",
+    "Critical Medicines Act",
+    "critical medicines"
     # "2021/0106",
     # "COM(2021) 206",
 ]
