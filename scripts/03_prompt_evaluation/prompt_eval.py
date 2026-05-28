@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
-"""LLM classification evaluation for ALIGNED / OPPOSING / NOISE labels.
+"""LLM classification evaluation for ALIGNED / OPPOSING / UNDETECTABLE / NOISE labels.
 
 Tests the classifier against an annotated ground truth CSV across:
   - Prompt variant A: baseline, includes organisation name
   - Prompt variant B: organisation name stripped
-  - Prompt variant C: explicit instruction to default to NOISE when uncertain
-  - Prompt variant D: chain-of-thought step-by-step
-  - Prompt variant G: D + explicit NOISE gate before matching
-  - Prompt variant H: two-path ALIGNED (specific ask OR clear directional tie) + UNDETECTABLE as fallback
-  - Prompt variant I: amendment pipeline — direction-first CoT (original→amended direction, then org alignment)
-  - Temperatures: 0.0, 0.5, 1.0
-
-Also runs a stability test: 20 matches × 5 independent runs at temp=0.5
-to measure label consistency.
+  - Prompt variant D: chain-of-thought step-by-step (production pre-proposal prompt)
+  - Prompt variant H: two-path ALIGNED + UNDETECTABLE as fallback
+  - Prompt variant I: amendment pipeline — direction-first CoT (production amendment prompt)
 
 Expected CSV columns (any extra columns are ignored):
-  true_label         — one of ALIGNED, OPPOSING, NOISE
+  true_label         — one of ALIGNED, OPPOSING, UNDETECTABLE, NOISE
   source_text        — the org's meeting/feedback text
   amended_text       — the amendment text (amended_to)
   original_text      — original proposal text (can be blank for new insertions)
@@ -24,14 +18,11 @@ Expected CSV columns (any extra columns are ignored):
   source_type        — e.g. "commission_meeting" or "feedback" (optional)
   source_date        — ISO date string (optional)
 
-Tip: export amend_matches_df from Amendment_influence_test.ipynb, add a
-`true_label` column with your annotations, and pass it to this script.
-
 Usage:
     python evaluation/prompt_eval.py --ground-truth path/to/annotated.csv
 
     # Run only specific variants / temperatures:
-    python evaluation/prompt_eval.py --ground-truth gt.csv --variants A C --temperatures 0.0 0.5
+    python evaluation/prompt_eval.py --ground-truth gt.csv --variants A B --temperatures 0.0
 """
 
 from __future__ import annotations
@@ -115,14 +106,6 @@ Classify via the tool:
                   different\
 """
 
-_NOISE_BIAS_ADDENDUM = """\
-
-IMPORTANT: Only label ALIGNED or OPPOSING when the org's position clearly and
-specifically supports or contradicts what the provision establishes.
-When there is topical overlap but no clear positional relationship, use UNDETECTABLE.
-When there is no substantive topical connection, use NOISE.\
-"""
-
 
 def _match_body(row: dict) -> str:
     parts = ["\n---"]
@@ -156,12 +139,6 @@ def build_prompt_B(row: dict) -> str:
     return f"{_SHARED_INTRO}{_match_body(row)}"
 
 
-def build_prompt_C(row: dict) -> str:
-    """Variant C — with org name, explicit default-to-NOISE instruction."""
-    org = (row.get("organisation") or "Unknown Organisation").strip()
-    return f"Organisation: {org}\n\n{_SHARED_INTRO}{_NOISE_BIAS_ADDENDUM}{_match_body(row)}"
-
-
 def build_prompt_D(row: dict) -> str:
     """Variant D — chain of thought: org name + explicit step-by-step instruction."""
     org = (row.get("organisation") or "Unknown Organisation").strip()
@@ -174,20 +151,6 @@ def build_prompt_D(row: dict) -> str:
     )
     return f"Organisation: {org}\n\n{_SHARED_INTRO}{cot}{_match_body(row)}"
 
-
-def build_prompt_G(row: dict) -> str:
-    """Variant G — D + explicit NOISE gate before matching."""
-    org = (row.get("organisation") or "Unknown Organisation").strip()
-    cot = (
-        "\n\nBefore classifying, think step by step:\n"
-        "  1. What does the legislative provision specifically do or require?\n"
-        "  2. Does the org text express a concrete wish, concern, or position that "
-        "specifically connects to what this provision does — not just the general topic? "
-        "If not, use NOISE.\n"
-        "  3. What is that concrete position, and does it support, contradict, or have "
-        "no clear relationship to what the provision establishes?"
-    )
-    return f"Organisation: {org}\n\n{_SHARED_INTRO}{cot}{_match_body(row)}"
 
 
 _H_INTRO = """\
@@ -282,39 +245,6 @@ def build_prompt_H(row: dict) -> str:
     org = (row.get("organisation") or "Unknown Organisation").strip()
     return f"Organisation: {org}\n\n{_H_INTRO}{_H_COT}{_match_body_H(row)}"
 
-
-def _match_body_split_context(row: dict) -> str:
-    """Match body that shows context_before/after as distinct labelled sections."""
-    parts = ["\n---"]
-
-    amended = (row.get("amended_text") or "").strip()
-    parts.append(f"\nAMENDED TO:\n{amended}")
-
-    context_before = (row.get("context_before") or "").strip()
-    chunk_text     = (row.get("chunk_text") or row.get("source_text") or "").strip()
-    context_after  = (row.get("context_after") or "").strip()
-
-    if context_before:
-        parts.append(f"\nORG POSITION — PRECEDING CONTEXT:\n{context_before}")
-    parts.append(f"\nORG POSITION — MATCHED CHUNK:\n{chunk_text}")
-    if context_after:
-        parts.append(f"\nORG POSITION — FOLLOWING CONTEXT:\n{context_after}")
-
-    return "\n".join(parts)
-
-
-def build_prompt_E(row: dict) -> str:
-    """Variant E — split context: preceding/matched/following shown as separate sections."""
-    org = (row.get("organisation") or "Unknown Organisation").strip()
-    return f"Organisation: {org}\n\n{_SHARED_INTRO}{_match_body_split_context(row)}"
-
-
-def build_prompt_F(row: dict) -> str:
-    """Variant F — includes org name and procedure ID for legislative context."""
-    org       = (row.get("organisation") or "Unknown Organisation").strip()
-    procedure = (row.get("procedure_id") or "").strip()
-    proc_line = f"Procedure: {procedure}\n" if procedure else ""
-    return f"Organisation: {org}\n{proc_line}\n{_SHARED_INTRO}{_match_body(row)}"
 
 
 _AMD_INTRO = """\
@@ -420,11 +350,7 @@ def build_prompt_I(row: dict) -> str:
 PROMPT_BUILDERS: dict[str, callable] = {
     "A": build_prompt_A,
     "B": build_prompt_B,
-    "C": build_prompt_C,
     "D": build_prompt_D,
-    "E": build_prompt_E,
-    "F": build_prompt_F,
-    "G": build_prompt_G,
     "H": build_prompt_H,
     "I": build_prompt_I,
 }
@@ -523,8 +449,8 @@ def main() -> None:
         help="Temperatures to sweep (default: 0.0 0.5 1.0)",
     )
     parser.add_argument(
-        "--variants", nargs="+", default=["A", "B", "C", "D", "E"],
-        help="Prompt variants to run (default: A B C D E)",
+        "--variants", nargs="+", default=["A", "B", "D", "H"],
+        help="Prompt variants to run (default: A B D H)",
     )
     parser.add_argument(
         "--stability-n", type=int, default=20,

@@ -27,7 +27,8 @@ import re
 import time
 import uuid
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
+from dateutil.relativedelta import relativedelta
 from pathlib import Path
 
 import anthropic
@@ -202,7 +203,7 @@ def reciprocal_match(
     return results
 
 
-# ── LLM prompt (Prompt G — chain-of-thought + explicit NOISE gate) ────────────
+# ── LLM prompt (Prompt D — chain-of-thought) ──────────────────────────────────
 CLASSIFY_TOOL = {
     "name": "classify_match",
     "description": (
@@ -231,74 +232,40 @@ CLASSIFY_TOOL = {
 }
 
 _INTRO = """\
-You are given a match between a lobbying organisation's pre-proposal text and a
+You are given a match between a lobbying organisation's pre-proposal feedback and a
 provision in a European Commission legislative proposal (article or recital).
 
-Your task is to assess whether the provision responds to what the organisation
-advocated for — not merely whether both discuss the same topic.
-Base your classification solely on the text provided. Do not infer positions or
+You must assess whether the organisation's expressed position supports, opposes,
+or has no clear relationship to what the legislative provision establishes.
+Base your classification solely on the text provided — do not infer positions or
 connections beyond what is explicitly stated.
 
 You are given:
-  • LEGISLATIVE PROVISION — the article or recital as it appears in the proposal
-  • ORG POSITION          — what the organisation expressed before the proposal
-                            was tabled (feedback submission or commissioner meeting)
+  • LEGISLATIVE PROVISION — the legislative provision text (article or recital) as it
+                            appears in the proposal
+  • ORG POSITION          — what the organisation expressed in their feedback
 
 Classify via the tool:
-  ALIGNED       — there is a clear tie between what the org advocates for and what the
-                  provision does. Two paths to ALIGNED:
-                  (a) The org makes a specific ask and the provision delivers it (or more
-                      of it in the same direction).
-                  (b) The org advocates for action/initiative in a specific direction, and
-                      the provision takes concrete action in that direction — not merely
-                      defines or neutrally describes the area. If you can argue a clear
-                      connection between the org's position and the provision's action,
-                      classify ALIGNED.
-  OPPOSING      — the org explicitly argues against what the provision establishes,
-                  or the provision does the opposite of what the org asked for.
-  UNDETECTABLE  — the org has a specific advocacy position related to the provision's
-                  subject, but it is genuinely unclear whether the provision satisfies,
-                  contradicts, or ignores it. Use this when you can see a real connection
-                  but cannot confidently determine direction. If uncertain → fall back here.
-  NOISE         — the org text contains no substantive advocacy position on this topic:
-                  boilerplate, background descriptions of existing law, administrative text,
-                  general endorsements without a specific stance
-                  (e.g. "we support EU action on medicines", "we welcome the initiative"),
-                  OR the subjects are unrelated.
-
-Critical distinctions:
-  • An org that argues a mechanism should NOT EXIST is OPPOSING the provision that
-    creates it, even if the provision also includes safeguards the org likes.
-  • A provision that merely defines a term, lists background context, or describes
-    the current state of affairs is NOT taking action — path (b) for ALIGNED does not
-    apply to purely definitional or recital provisions that take no concrete stance.
-  • General values ("we support supply chain resilience") with no specific direction
-    → NOISE. A position needs to be specific enough that you can evaluate whether the
-    provision responds to it.
-  • UNDETECTABLE is the fallback when a genuine connection exists but direction is
-    ambiguous — not when the org text is simply vague or general (that is NOISE).\
+  ALIGNED       — the org's position supports or is consistent with what the provision establishes
+  OPPOSING      — the org's position contradicts or pushes back against what the provision establishes
+  UNDETECTABLE  — there is topical overlap between the org's feedback and the
+                  provision, but no clear positional relationship can be established
+  NOISE         — use this when the org text contains no substantive advocacy
+                  position (e.g. org headers, background descriptions of existing
+                  law, administrative text), OR when the subjects are completely
+                  different\
 """
 
 _COT = (
     "\n\nBefore classifying, think step by step:\n"
-    "  1. What does the provision specifically establish, require, or do? "
-    "State the concrete action — or note if it only defines/describes.\n"
-    "  2. Does the org text express a specific advocacy position on this subject "
-    "(not just a general value or endorsement)?\n"
-    "     If only general support/concern with no directional stance → NOISE (stop here).\n"
-    "  3. Counterfactual test: could an org with the OPPOSITE general stance on this topic "
-    "produce a text that would also match this provision in the same direction?\n"
-    "     If yes — the org's position is too broad to constitute specific alignment → NOISE.\n"
-    "     Example: 'we support supply chain resilience' would match any supply chain provision "
-    "regardless of the org's actual position, so it fails this test.\n"
-    "  4. Is there a clear and specific tie between the org's position and the provision's action?\n"
-    "     • Clear specific tie, provision acts in the direction the org advocated → ALIGNED\n"
-    "     • The org opposes this mechanism or asks for the opposite → OPPOSING\n"
-    "     • Real connection exists but direction is genuinely ambiguous → UNDETECTABLE"
+    "  1. What does the legislative provision actually do or require?\n"
+    "  2. What specific position does the org express — what do they want?\n"
+    "  3. Does the org's position support, contradict, or have no clear relationship "
+    "to what the provision establishes?"
 )
 
 
-def build_prompt_G(organisation: str, article_text: str, source_text: str) -> str:
+def build_prompt_D(organisation: str, article_text: str, source_text: str) -> str:
     body = (
         "\n---"
         f"\n\nLEGISLATIVE PROVISION:\n{article_text}"
@@ -457,12 +424,13 @@ def find_procedure_alias_meetings(
     proposal_date: str,
     already_linked_ids: set[str],
     aliases: list[str],
+    lookback_months: int = 18,
 ) -> tuple[list[dict], dict[str, list[dict]]]:
     """Find commission meetings that mention procedure aliases but weren't formally linked.
 
-    Loads all commission meetings before proposal_date, searches their text
-    (subject, points_raised, conclusions) for any alias string, and returns the
-    ones not already in already_linked_ids together with their org associations.
+    Loads commission meetings within lookback_months before proposal_date, searches
+    their text (subject, points_raised, conclusions) for any alias string, and returns
+    the ones not already in already_linked_ids together with their org associations.
 
     These are included in both the source pool and access counts — they represent
     real engagement with this procedure that wasn't captured in meeting_procedure_links.
@@ -472,15 +440,20 @@ def find_procedure_alias_meetings(
 
     lower_aliases = [a.lower() for a in aliases]
 
+    # Compute 18-month lookback window
+    proposal_dt = date.fromisoformat(proposal_date)
+    window_start = (proposal_dt - relativedelta(months=lookback_months)).isoformat()
+
     CM_COLS = "id, commissioner_name, meeting_date, subject, points_raised, conclusions"
     all_meetings: list[dict] = []
     offset, page_size = 0, 1000
 
-    print(f"  Loading all commission meetings before {proposal_date} for alias search...")
+    print(f"  Loading commission meetings {window_start} → {proposal_date} for alias search...")
     while True:
         page = (
             supabase.table("commission_meetings")
             .select(CM_COLS)
+            .gte("meeting_date", window_start)
             .lt("meeting_date", proposal_date)
             .range(offset, offset + page_size - 1)
             .execute()
@@ -734,7 +707,19 @@ def run_preproposal_pipeline(
     n_orgs_with_meetings = len(total_counts)
     print(f"  Orgs with any pre-proposal meetings: {n_orgs_with_meetings}")
 
-    pool = build_source_pool(hys_rows, cm_rows, cm_org_map)
+    # ── Step 2: access-based filtering ───────────────────────────────────────
+    # Only include HYS feedback from orgs with at least one disclosed meeting.
+    # Orgs without meetings are excluded from the alignment analysis by design.
+    hys_rows_filtered = [
+        r for r in hys_rows
+        if (r.get("transparency_reg_id") and r["transparency_reg_id"] in total_counts)
+        or (r.get("organisation_name") and r["organisation_name"].lower().strip() in total_counts)
+    ]
+    n_hys_before = len({r.get("feedback_id") for r in hys_rows})
+    n_hys_after  = len({r.get("feedback_id") for r in hys_rows_filtered})
+    print(f"  HYS feedback submissions: {n_hys_before} total → {n_hys_after} from orgs with meetings")
+
+    pool = build_source_pool(hys_rows_filtered, cm_rows, cm_org_map)
     if not pool:
         raise ValueError("No pre-proposal source texts found.")
 
@@ -824,7 +809,7 @@ def run_preproposal_pipeline(
     def save_cache() -> None:
         cache_path.write_text(json.dumps(cache, indent=2, ensure_ascii=False))
 
-    print(f"\nClassifying {len(pairs)} pairs with {LLM_MODEL} (Prompt G, temp={TEMPERATURE})...")
+    print(f"\nClassifying {len(pairs)} pairs with {LLM_MODEL} (Prompt D, temp={TEMPERATURE})...")
     for i, pair in enumerate(pairs):
         cache_key = make_cache_key(
             pair["source_text"], pair["article_type"], pair["article_number"]
@@ -833,7 +818,7 @@ def run_preproposal_pipeline(
         if cache_key in cache:
             result = cache[cache_key]
         else:
-            prompt = build_prompt_G(
+            prompt = build_prompt_D(
                 organisation=pair["organisation"] or "Unknown Organisation",
                 article_text=pair["article_text"],
                 source_text=pair["source_text"],
