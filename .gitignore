@@ -43,6 +43,7 @@ Thumbs.db
 
 # Local archive
 analysis/archive/
+analysis_results/archive/
 supabase/archive/
 
 # MCP config (contains local paths/keys)
